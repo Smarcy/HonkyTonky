@@ -2,6 +2,7 @@ import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -15,16 +16,24 @@ public class Main {
 
     public static void main(String... args)
     {
-        switch(showIntro())
+        while(true)
         {
-            case 1:
-                addNewEntry();
-            case 2:
-                listEntries();
-            case 3:
-                System.exit(1);
-            default:
-                showIntro();
+            int option = showIntro();
+
+            switch (option)
+            {
+                case 1:
+                    addNewEntry();
+                    break;
+                case 2:
+                    listEntries();
+                    break;
+                case 3:
+                    System.exit(1);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -50,27 +59,26 @@ public class Main {
         name = in.next();
         System.out.println("Straße: ");
         street = in.next();
-        entries.add(name + "." + street);
+        entries.add(name + "," + street);
         showIntro();
     }
 
-    private static String[] listEntries()
+    private static void listEntries()
     {
-        String[] formattedEntries = new String[entries.size()*2];
+        //String[] formattedEntries = new String[2];
         int i = 0;
 
         for(String entry : entries)
         {
-            formattedEntries = entry.split(".");
+            String[] formattedEntries = entry.split(",");
 
-            System.out.println("Name: " + formattedEntries[i]
-                                + "\nStraße: " + formattedEntries[i+1]);
+            List<String> items = Arrays.asList(formattedEntries);
+
+            System.out.println("Name: " + items.get(i) + "\nStraße: " + items.get(i+1));
 
             i += 2;
         }
 
 
-
-        return formattedEntries;
     }
 }
