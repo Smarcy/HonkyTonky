@@ -11,10 +11,20 @@ public class Main {
 
     public static void main(String... args)
     {
-        showIntro();
+        switch(showIntro())
+        {
+            case 1:
+                //addNewEntry();
+            case 2:
+                //listEntries();
+            case 3:
+                System.exit(1);
+            default:
+                showIntro();
+        }
     }
 
-    private static void showIntro()
+    private static int showIntro()
     {
         System.out.flush();
         System.out.println(">>> Willkommen im Adressbuch!\n" +
@@ -24,6 +34,8 @@ public class Main {
                 ">>> " + ANSI_BLUE + "2)" + ANSI_RESET + "Einträge einsehen\n" +
                 ">>> " + ANSI_BLUE + "3)" + ANSI_RESET + "Exit\n");
 
-       input = in.nextInt();
+      return in.nextInt();
     }
+
+    
 }
