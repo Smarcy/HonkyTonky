@@ -1,4 +1,7 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -7,7 +10,7 @@ public class Main {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static Scanner in = new Scanner(System.in);
-    private static int input;
+    private static List<String> entries = new ArrayList<String>();
 
     public static void main(String... args)
     {
@@ -37,5 +40,8 @@ public class Main {
       return in.nextInt();
     }
 
-    
+    private static void addNewEntry()
+    {
+
+    }
 }
