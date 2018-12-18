@@ -17,7 +17,7 @@ public class Main {
         switch(showIntro())
         {
             case 1:
-                //addNewEntry();
+                addNewEntry();
             case 2:
                 //listEntries();
             case 3:
@@ -42,6 +42,13 @@ public class Main {
 
     private static void addNewEntry()
     {
+        String name, street;
 
+        System.out.flush();
+        System.out.println("Gib einen Namen an: ");
+        name = in.next();
+        System.out.println("Gib eine Straße an: ");
+        street = in.next();
+        entries.add(name + "|" + street);
     }
 }
