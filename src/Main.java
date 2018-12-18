@@ -1,3 +1,4 @@
+import javax.sound.midi.SysexMessage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class Main {
             case 1:
                 addNewEntry();
             case 2:
-                //listEntries();
+                listEntries();
             case 3:
                 System.exit(1);
             default:
@@ -45,10 +46,31 @@ public class Main {
         String name, street;
 
         System.out.flush();
-        System.out.println("Gib einen Namen an: ");
+        System.out.println("Name: ");
         name = in.next();
-        System.out.println("Gib eine Straße an: ");
+        System.out.println("Straße: ");
         street = in.next();
-        entries.add(name + "|" + street);
+        entries.add(name + "." + street);
+        showIntro();
+    }
+
+    private static String[] listEntries()
+    {
+        String[] formattedEntries = new String[entries.size()*2];
+        int i = 0;
+
+        for(String entry : entries)
+        {
+            formattedEntries = entry.split(".");
+
+            System.out.println("Name: " + formattedEntries[i]
+                                + "\nStraße: " + formattedEntries[i+1]);
+
+            i += 2;
+        }
+
+
+
+        return formattedEntries;
     }
 }
