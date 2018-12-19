@@ -8,9 +8,9 @@ class Main {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static Scanner in = new Scanner(System.in);
-    private static List<String> entries = new ArrayList<String>();
+    private static List<Entry> entries = new ArrayList<Entry>();
 
-    private Entry entry = new Entry();
+    private static Entry entry;
 
     public static void main(String... args)
     {
@@ -57,18 +57,17 @@ class Main {
         name = in.next();
         System.out.println("Straße: ");
         street = in.next();
-        entries.add(name + "," + street);
+        entry = new Entry(name, street);
+        entries.add(entry);
     }
 
     private static void listEntries()
     {
-        for(String entry : entries)
+        for(Entry entry : entries)
         {
-            String[] formattedEntries = entry.split(",");
 
-            List<String> items = Arrays.asList(formattedEntries);
 
-            System.out.println("Name: " + items.get(0) + "\nStraße: " + items.get(1));
+            System.out.println("Name: " + entries.get(0).getName() + "\nStraße: " + entries.get(0).getStreet()+"\n");
         }
     }
 }
