@@ -3,8 +3,7 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Scanner;
 
-
-public class Main {
+class Main {
 
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_RESET = "\u001B[0m";
@@ -71,7 +70,5 @@ public class Main {
 
             System.out.println("Name: " + items.get(0) + "\nStraße: " + items.get(1));
         }
-
-
     }
 }

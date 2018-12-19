@@ -1,4 +1,4 @@
-public class Entry
+class Entry
 {
     public Entry()
     {
