@@ -1,9 +1,6 @@
-import javax.sound.midi.SysexMessage;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 
@@ -60,23 +57,17 @@ public class Main {
         System.out.println("Straße: ");
         street = in.next();
         entries.add(name + "," + street);
-        showIntro();
     }
 
     private static void listEntries()
     {
-        //String[] formattedEntries = new String[2];
-        int i = 0;
-
         for(String entry : entries)
         {
             String[] formattedEntries = entry.split(",");
 
             List<String> items = Arrays.asList(formattedEntries);
 
-            System.out.println("Name: " + items.get(i) + "\nStraße: " + items.get(i+1));
-
-            i += 2;
+            System.out.println("Name: " + items.get(0) + "\nStraße: " + items.get(1));
         }
 
 
