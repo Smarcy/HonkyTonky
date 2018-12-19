@@ -63,13 +63,11 @@ class Main {
 
     private static void listEntries()
     {
-        for(String entrie : entries)
+        for(Entry entry : entries)
         {
-            String[] formattedEntries = entry.split(",");
 
-            List<String> items = Arrays.asList(formattedEntries);
 
-            System.out.println("Name: " + items.get(0) + "\nStraße: " + items.get(1));
+            System.out.println("Name: " + entries.get(0).getName() + "\nStraße: " + entries.get(0).getStreet()+"\n");
         }
     }
 }
