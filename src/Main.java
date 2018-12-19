@@ -8,7 +8,7 @@ class Main {
     private static final String ANSI_BLUE = "\u001B[34m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static Scanner in = new Scanner(System.in);
-    private static List<String> entries = new ArrayList<String>();
+    private static List<Entry> entries = new ArrayList<Entry>();
 
     private Entry entry = new Entry();
 
