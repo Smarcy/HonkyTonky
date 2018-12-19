@@ -11,6 +11,8 @@ public class Main {
     private static Scanner in = new Scanner(System.in);
     private static List<String> entries = new ArrayList<String>();
 
+    private Entry entry = new Entry();
+
     public static void main(String... args)
     {
         while(true)
