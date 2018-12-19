@@ -10,7 +10,7 @@ class Main {
     private static Scanner in = new Scanner(System.in);
     private static List<Entry> entries = new ArrayList<Entry>();
 
-    private Entry entry = new Entry();
+    private static Entry entry;
 
     public static void main(String... args)
     {
@@ -57,12 +57,13 @@ class Main {
         name = in.next();
         System.out.println("Straße: ");
         street = in.next();
-        entries.add(name + "," + street);
+        entry = new Entry(name, street);
+        entries.add(entry);
     }
 
     private static void listEntries()
     {
-        for(String entry : entries)
+        for(String entrie : entries)
         {
             String[] formattedEntries = entry.split(",");
 
