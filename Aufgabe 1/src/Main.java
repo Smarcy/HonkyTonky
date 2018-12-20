@@ -4,26 +4,23 @@ import java.util.List;
 public class Main
 {
 
-    static private ArrayList<Integer> list = new ArrayList<Integer>();
+    //static private ArrayList<Integer> list = new ArrayList<Integer>();
+
+    static private int[] list = new int[] {5, 3, 101, 100};
 
     public static void main(String[] args)
     {
-        list.add(5);
-        list.add(3);
-        list.add(101);
-        list.add(100);
-
         System.out.println(maximum(list));
     }
 
-    static int maximum(final List<Integer> list)
+    static int maximum(final int[] list)
     {
-        int max = list.get(0);
-        for(int i = list.size()-1; i >= 0; i--)
+        int max = list[0];
+        for(int i = list.length-1; i >= 0; i--)
         {
-            if(list.get(i)  > max)
+            if(list[i]  > max)
             {
-                max = list.get(i);
+                max = list[i];
             }
         }
         return max;
