@@ -21,14 +21,13 @@ public class Main
 
         Iterator<Integer> it = list.iterator();
         int max = it.next();
-        while(it.hasNext())
+        int next = it.next();
+
+        if(max <= it.next())
         {
-            int i = it.next();
-            if(i > max)
-            {
-                max = i;
-            }
+            max = next;
         }
+
         return max;
     }
 }
