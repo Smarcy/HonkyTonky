@@ -16,14 +16,12 @@ public class Main
     static int maximum(final int[] list)
     {
         int max = list[0];
-        int i = list.length-1;
-        while(i >= 0)
+        for(int i : list)
         {
-            if(list[i]  > max)
+            if(i  > max)
             {
-                max = list[i];
+                max = i;
             }
-            i--;
         }
         return max;
     }
