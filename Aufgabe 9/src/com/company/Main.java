@@ -41,21 +41,19 @@ public class Main
     static boolean isHappy(int number)
     {
 
-        while(true)
+        if(isHappy(number))
         {
-        if (number == 1)
-        {
-
             return true;
-
-        } else if (number == 4)
+        }
+        else if(!isHappy(number))
         {
             return false;
-        } else
-        {
+        }else{
             number = sumOfSquaredDigits(number);
-        }}
+            isHappy(number);
+        }
 
+        return false;
     }
 
 }
