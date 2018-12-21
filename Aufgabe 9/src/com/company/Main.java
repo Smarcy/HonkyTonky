@@ -40,22 +40,22 @@ public class Main
 
     static boolean isHappy(int number)
     {
-        if(number != 1 || number != 4)
+
+        while(true)
         {
-            number = sumOfSquaredDigits(number);
-        }
         if (number == 1)
         {
+
             return true;
+
         } else if (number == 4)
         {
             return false;
         } else
         {
-            isHappy(number);
-        }
+            number = sumOfSquaredDigits(number);
+        }}
 
-    return false;
     }
 
 }
