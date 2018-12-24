@@ -37,7 +37,7 @@ class Foerster_in
      */
     boolean bewege()
     {
-        return false; // Hier durch Code der Methode ersetzen
+        return true; // Hier durch Code der Methode ersetzen
     }
 
     /**
