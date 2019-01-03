@@ -7,12 +7,14 @@ import java.util.Scanner;
 public class Main
 {
 
+    static Scanner reader;
     static JavaConsole console = new JavaConsole();
 
     private static Player player = null;
 
     public static void main(String[] args)
     {
+
         showIntro();
 
     }
@@ -29,7 +31,10 @@ public class Main
 
     private static void showIntro()
     {
-        while (player == null)
+        reader = new Scanner(System.in);
+
+        introLoop:
+        while (true)
         {
             console.clear();
 
@@ -40,20 +45,17 @@ public class Main
                 "2) Exit\n"
             );
 
-            Scanner reader = new Scanner(System.in);
             int option = reader.nextInt();
 
             switch (option)
             {
                 case 1:
                     createPlayer();
-                    break;
+                    showIntro();
                 case 2:
                     System.exit(0);
                     break;
             }
-
-            reader.close();
         }
     }
 }
