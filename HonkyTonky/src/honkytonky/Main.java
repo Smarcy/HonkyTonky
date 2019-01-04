@@ -7,29 +7,40 @@ import java.util.Scanner;
 public class Main
 {
 
-    private static final Scanner reader = new Scanner(System.in);
-    private static JavaConsole console = new JavaConsole();
+    private static Main instance;
+
+    private  final Scanner reader = new Scanner(System.in);
+    private  final JavaConsole console = new JavaConsole();
 
     private static Player player = null;
 
     public static void main(String[] args)
     {
-        showIntro();
+        instance = getInstance();
+        instance.showIntro();
     }
 
-    private static void createPlayer()
+    public static Main getInstance() {
+        if (instance == null) {
+            instance = new Main();
+        }
+        return instance;
+    }
+
+    private void createPlayer()
     {
         console.clear();
         System.out.println("Enter your name: ");
         String name = reader.next();
-        player = new Player(name);
+        instance.player = new Player(name);
+        instance.showIntro();
     }
 
-    private static void showIntro()
+    private void showIntro()
     {
-        if(player == null)
+        while(instance.player == null)
         {
-            createPlayer();
+            instance.createPlayer();
         }
 
         while (true)
