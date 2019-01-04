@@ -7,10 +7,11 @@ import java.util.Scanner;
 public class Game
 {
     private final Scanner scanner = new Scanner(System.in);
-    //private final JavaConsole console = new JavaConsole();
 
     private Player player = null;
     private int option = 0;
+
+    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -19,34 +20,51 @@ public class Game
     }
 
 
+    /**
+     * Shows the menu to choose an option
+     *
+     * @throws IOException
+     * @throws InterruptedException
+     */
     private void showIntro() throws IOException, InterruptedException
     {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        while(player == null)
+        {
+            createPlayer();
+        }
+
+        pb.start().waitFor();   // clear screen
 
         System.out.print(
           "Welcome to HonkyTonky!\n" +
           "Please choose an option:\n\n" +
-          "1) Create Player\n" +
-          "2) Start Game\n" +
+          "1) Start Game\n" +
+          "2) Create New Player\n" +
           "3) Exit\n"
         );
 
-        //Integer option = Integer.parseInt(scanner.nextLine());
-        //int option = Integer.parseInt(scanner.nextLine());
-        this.option = this.scanner.nextInt();
-
-        System.out.println(option);
+        option = scanner.nextInt();
 
         switch(option)
         {
             case 1:
-                this.createPlayer();
+
+            case 2:
+                createPlayer();
+                break;
+            case 3:
+                System.exit(0);
         }
     }
 
+    /**
+     * Lets the user create a Player Object
+     * @throws IOException
+     * @throws InterruptedException
+     */
     private void createPlayer() throws IOException, InterruptedException
     {
-        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        pb.start().waitFor();
 
         System.out.println("Enter your name: ");
         player = new Player(scanner.next());
