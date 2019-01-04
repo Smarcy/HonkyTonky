@@ -6,6 +6,7 @@ import honkytonky.objects.Room.exits;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 public class Game
 {
@@ -33,32 +34,38 @@ public class Game
      */
     private void showIntro() throws IOException, InterruptedException
     {
-        while(player == null)
+        while(true)
         {
-            createPlayer();
-        }
+            pb.start().waitFor();   // clear screen
 
-        pb.start().waitFor();   // clear screen
+            System.out.print(
+              "Welcome to HonkyTonky!\n" +
+                "Please choose an option:\n\n" +
+                "1) Start Game\n" +
+                "2) Create New Player\n" +
+                "3) Create Room (DEV)\n"
+            );
 
-        System.out.print(
-          "Welcome to HonkyTonky!\n" +
-          "Please choose an option:\n\n" +
-          "1) Start Game\n" +
-          "2) Create New Player\n" +
-          "3) Create Room (DEV)\n"
-        );
+            option = scanner.nextInt();
 
-        option = scanner.nextInt();
-
-        switch(option)
-        {
-            case 1:
-
-            case 2:
-                createPlayer();
-                break;
-            case 3:
-                createRoom();
+            switch (option)
+            {
+                case 1:
+                    if(player != null)
+                    {
+                        //startGame();
+                    } else {
+                        System.out.println("Please create a new player first!");
+                        TimeUnit.SECONDS.sleep(3);
+                    }
+                    break;
+                case 2:
+                    createPlayer();
+                    break;
+                case 3:
+                    createRoom();
+                    break;
+            }
         }
     }
 
