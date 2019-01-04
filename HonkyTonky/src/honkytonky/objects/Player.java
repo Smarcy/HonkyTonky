@@ -2,8 +2,10 @@ package honkytonky.objects;
 
 public class Player extends Actor
 {
-    public Player(String name)
+
+
+    public Player(String name, int maxHP)
     {
-        super(name, 100);
+        super(name, maxHP);
     }
 }

@@ -1,7 +1,10 @@
 package honkytonky;
 
 import honkytonky.objects.Player;
+import honkytonky.objects.Room;
+import honkytonky.objects.Room.exits;
 import java.io.IOException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Game
@@ -9,6 +12,8 @@ public class Game
     private final Scanner scanner = new Scanner(System.in);
 
     private Player player = null;
+    private Room room = null;
+    private List<Room> rooms = null;
     private int option = 0;
 
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
@@ -40,7 +45,7 @@ public class Game
           "Please choose an option:\n\n" +
           "1) Start Game\n" +
           "2) Create New Player\n" +
-          "3) Exit\n"
+          "3) Create Room (DEV)\n"
         );
 
         option = scanner.nextInt();
@@ -53,7 +58,7 @@ public class Game
                 createPlayer();
                 break;
             case 3:
-                System.exit(0);
+                createRoom();
         }
     }
 
@@ -67,6 +72,15 @@ public class Game
         pb.start().waitFor();
 
         System.out.println("Enter your name: ");
-        player = new Player(scanner.next());
+        player = new Player(scanner.next(), 100);
+    }
+
+    private void createRoom()
+    {
+        System.out.println("Room Name:");
+        String name = scanner.next();
+        System.out.println("Set exits (0 = North, 1 = East, 2 = South, 3 = West");
+        room = new Room(name, exits.NORTH);
+        room = new Room("MyRoom2", exits.SOUTH);
     }
 }

@@ -5,12 +5,13 @@ import java.util.List;
 
 abstract class Actor
 {
-    private int id;
+
+    private final int id;
     private int hp;
     private int maxHP;
-    private String name;
+    private final String name;
 
-    public List<Actor> actors = new ArrayList<Actor>();
+    private List<Actor> actors = new ArrayList<>();
 
     Actor(String name, int maxHP)
     {
