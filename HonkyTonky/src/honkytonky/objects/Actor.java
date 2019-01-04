@@ -1,4 +1,4 @@
-package honkytonky.Objects;
+package honkytonky.objects;
 
 abstract class Actor
 {
