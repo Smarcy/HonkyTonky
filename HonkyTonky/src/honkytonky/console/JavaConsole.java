@@ -24,7 +24,7 @@ public class JavaConsole extends WindowAdapter implements WindowListener, Action
 	public JavaConsole()
 	{
 		// create all components and add them
-		frame=new JFrame("Java Console");
+		frame=new JFrame("Honky Tonky");
 		Dimension screenSize=Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize=new Dimension((int)(screenSize.width/2),(int)(screenSize.height/2));
 		int x=(int)(frameSize.width/2);

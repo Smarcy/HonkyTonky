@@ -7,33 +7,29 @@ import java.util.Scanner;
 public class Main
 {
 
-    static Scanner reader;
-    static JavaConsole console = new JavaConsole();
+    private static final Scanner reader = new Scanner(System.in);
+    private static JavaConsole console = new JavaConsole();
 
     private static Player player = null;
 
     public static void main(String[] args)
     {
-
         showIntro();
-
     }
 
     private static void createPlayer()
     {
         console.clear();
-        Scanner reader = new Scanner(System.in);
         System.out.println("Enter your name: ");
         String name = reader.next();
         player = new Player(name);
-        reader.close();
+        showIntro();
     }
 
     private static void showIntro()
     {
-        reader = new Scanner(System.in);
+        Scanner reader = new Scanner(System.in);
 
-        introLoop:
         while (true)
         {
             console.clear();
@@ -51,7 +47,7 @@ public class Main
             {
                 case 1:
                     createPlayer();
-                    showIntro();
+                    break;
                 case 2:
                     System.exit(0);
                     break;
