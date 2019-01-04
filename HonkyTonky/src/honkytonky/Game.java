@@ -63,7 +63,7 @@ public class Game
                     createPlayer();
                     break;
                 case 3:
-                    createRoom();
+                    createRooms();
                     break;
             }
         }
@@ -82,12 +82,8 @@ public class Game
         player = new Player(scanner.next(), 100);
     }
 
-    private void createRoom()
+    private void createRooms()
     {
-        System.out.println("Room Name:");
-        String name = scanner.next();
-        System.out.println("Set exits (0 = North, 1 = East, 2 = South, 3 = West");
-        room = new Room(name, exits.NORTH);
-        room = new Room("MyRoom2", exits.SOUTH);
+        room = new Room("Entrance", 1, 1, 0, 1);
     }
 }
