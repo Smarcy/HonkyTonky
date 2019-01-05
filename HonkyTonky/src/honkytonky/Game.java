@@ -9,11 +9,17 @@ import java.util.concurrent.TimeUnit;
 
 public class Game
 {
-    private final Scanner scanner = new Scanner(System.in);
-
-    private Player player = null;
-
+    private final Scanner scanner   = new Scanner(System.in);
+    private Player player           = null;
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+
+    private enum exits
+    {
+        north,
+        east,
+        south,
+        west
+    }
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -89,6 +95,30 @@ public class Game
 
     private void startGame()
     {
-        System.out.println("What would you like to do?");
+        System.out.println("Where would you like to go?");
+        System.out.println("\nType west, east, south or north");
+
+        String option = (scanner.next().trim().toLowerCase());
+
+        switch(option)
+        {
+            case "north":
+                move(exits.north);
+                break;
+            case "east":
+                //move(east);
+                break;
+            case "south":
+                //move(south);
+                break;
+            case "west":
+                //move(west);
+                break;
+        }
+    }
+
+    private void move(exits direction)
+    {
+
     }
 }
