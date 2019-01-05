@@ -2,7 +2,6 @@ package honkytonky;
 
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
-import honkytonky.objects.Room.exits;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -13,15 +12,13 @@ public class Game
     private final Scanner scanner = new Scanner(System.in);
 
     private Player player = null;
-    private Room room = null;
-    private List<Room> rooms = null;
-    private int option = 0;
 
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
         Game game = new Game();
+        game.createRooms();
         game.showIntro();
     }
 
@@ -46,14 +43,14 @@ public class Game
                 "3) Create Room (DEV)\n"
             );
 
-            option = scanner.nextInt();
+            int option = scanner.nextInt();
 
             switch (option)
             {
                 case 1:
                     if(player != null)
                     {
-                        //startGame();
+                        startGame();
                     } else {
                         System.out.println("Please create a new player first!");
                         TimeUnit.SECONDS.sleep(3);
@@ -84,6 +81,14 @@ public class Game
 
     private void createRooms()
     {
-        room = new Room("Entrance", 1, 1, 0, 1);
+        new Room("Entrance", 0, 0, true, true, false, false);
+        new Room("Hall", 0, 1, false, false, true, true);
+        new Room("Bedroom", 0, 2, false, true, false, false);
+        new Room("Kitchen", 1, 0, false, false, true, true);
+    }
+
+    private void startGame()
+    {
+        System.out.println("What would you like to do?");
     }
 }

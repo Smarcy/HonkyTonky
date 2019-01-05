@@ -5,24 +5,27 @@ import java.util.List;
 
 public class Room
 {
-    private int id;
-    private String name;
+
+    private final int id;
+    private final String name;
+    private final int x, y;
     private final boolean north, east, south, west;
 
-    private static List<Room> rooms = new ArrayList<>();
+    private static Room[][] rooms = new Room[10][10];
 
-    public Room(String name, int north, int east, int south, int west)
+    public Room(String name, int x, int y, boolean north, boolean east, boolean south, boolean west)
     {
-        this.name = name;
-        this.id = rooms.size();
+        this.name   = name;
+        this.id     = rooms.length;
+        this.x      = x;
+        this.y      = y;
 
-        this.north  = north     == 1;
-        this.east   = east      == 1;
-        this.south  = south     == 1;
-        this.west   = west      == 1;
+        this.north  = north;
+        this.east   = east;
+        this.south  = south;
+        this.west   = west;
 
-        rooms.add(this);
-
+        rooms[x][y] = this;
     }
 
     public String getName()
@@ -30,7 +33,7 @@ public class Room
         return name;
     }
 
-    public List<Room> getRooms()
+    public Room[][] getRooms()
     {
         return rooms;
     }
