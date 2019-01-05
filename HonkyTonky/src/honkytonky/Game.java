@@ -82,7 +82,7 @@ public class Game
         pb.start().waitFor();
 
         System.out.println("Enter your name: ");
-        player = new Player(scanner.next(), 100);
+        player = new Player(scanner.next(), 100, 0, 0);
     }
 
     private void createRooms()
