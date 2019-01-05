@@ -13,12 +13,12 @@ public class Game
     private Player player           = null;
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
-    private enum exits
+    private enum Exits
     {
-        north,
-        east,
-        south,
-        west
+        NORTH,
+        EAST,
+        SOUTH,
+        WEST
     }
 
     public static void main(String[] args) throws IOException, InterruptedException
@@ -37,6 +37,7 @@ public class Game
      */
     private void showIntro() throws IOException, InterruptedException
     {
+        introLoop:
         while(true)
         {
             pb.start().waitFor();   // clear screen
@@ -45,8 +46,7 @@ public class Game
               "Welcome to HonkyTonky!\n" +
                 "Please choose an option:\n\n" +
                 "1) Start Game\n" +
-                "2) Create New Player\n" +
-                "3) Create Room (DEV)\n"
+                "2) Create New Player\n"
             );
 
             int option = scanner.nextInt();
@@ -57,6 +57,7 @@ public class Game
                     if(player != null)
                     {
                         startGame();
+                        break introLoop;
                     } else {
                         System.out.println("Please create a new player first!");
                         TimeUnit.SECONDS.sleep(3);
@@ -64,9 +65,6 @@ public class Game
                     break;
                 case 2:
                     createPlayer();
-                    break;
-                case 3:
-                    createRooms();
                     break;
             }
         }
@@ -95,29 +93,32 @@ public class Game
 
     private void startGame()
     {
-        System.out.println("Where would you like to go?");
-        System.out.println("\nType west, east, south or north");
-
-        String option = (scanner.next().trim().toLowerCase());
-
-        switch(option)
+        while(true)
         {
-            case "north":
-                move(exits.north);
-                break;
-            case "east":
-                //move(east);
-                break;
-            case "south":
-                //move(south);
-                break;
-            case "west":
-                //move(west);
-                break;
+            System.out.println("Where would you like to go?\n");
+            System.out.println("\nType west, east, south or north");
+
+            String option = (scanner.next().trim().toLowerCase());
+
+            switch (option)
+            {
+                case "north":
+                    move(Exits.NORTH);
+                    break;
+                case "east":
+                    //move(east);
+                    break;
+                case "south":
+                    //move(south);
+                    break;
+                case "west":
+                    //move(west);
+                    break;
+            }
         }
     }
 
-    private void move(exits direction)
+    private void move(Exits direction)
     {
 
     }
