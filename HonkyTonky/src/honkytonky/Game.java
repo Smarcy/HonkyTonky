@@ -9,8 +9,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Game
 {
-    private final Scanner scanner   = new Scanner(System.in);
-    private Player player           = null;
+
+    private final Scanner scanner = new Scanner(System.in);
+    private Player player = null;
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     private enum Exits
@@ -31,14 +32,11 @@ public class Game
 
     /**
      * Shows the menu to choose an option
-     *
-     * @throws IOException
-     * @throws InterruptedException
      */
     private void showIntro() throws IOException, InterruptedException
     {
         introLoop:
-        while(true)
+        while (true)
         {
             pb.start().waitFor();   // clear screen
 
@@ -54,11 +52,12 @@ public class Game
             switch (option)
             {
                 case 1:
-                    if(player != null)
+                    if (player != null)
                     {
                         startGame();
                         break introLoop;
-                    } else {
+                    } else
+                    {
                         System.out.println("Please create a new player first!");
                         TimeUnit.SECONDS.sleep(3);
                     }
@@ -72,8 +71,6 @@ public class Game
 
     /**
      * Lets the user create a Player Object
-     * @throws IOException
-     * @throws InterruptedException
      */
     private void createPlayer() throws IOException, InterruptedException
     {
@@ -93,33 +90,34 @@ public class Game
 
     private void startGame()
     {
-        while(true)
-        {
-            System.out.println("Where would you like to go?\n");
-            System.out.println("\nType west, east, south or north");
 
-            String option = (scanner.next().trim().toLowerCase());
-
-            switch (option)
-            {
-                case "north":
-                    move(Exits.NORTH);
-                    break;
-                case "east":
-                    //move(east);
-                    break;
-                case "south":
-                    //move(south);
-                    break;
-                case "west":
-                    //move(west);
-                    break;
-            }
-        }
     }
 
-    private void move(Exits direction)
+    private void move()
     {
+        while (true)
+        {
+            System.out.println("Where would you like to go?\n");
+            System.out.println("\nType west, east, south or north\n");
 
+            String direction = (scanner.next().trim().toLowerCase());
+
+            switch (direction)
+            {
+                case "north":
+                    player.setLocation(player.getX(), player.getY() + 1);
+                    break;
+                case "east":
+                    player.setLocation(player.getX() + 1, player.getY());
+                    break;
+                case "south":
+                    player.setLocation(player.getX(), player.getY() - 1);
+                    break;
+                case "west":
+                    player.setLocation(player.getX() - 1, player.getY());
+                    break;
+            }
+
+        }
     }
 }
