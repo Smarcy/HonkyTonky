@@ -11,16 +11,8 @@ public class Game
 {
 
     private final Scanner scanner = new Scanner(System.in);
-    private Player player = null;
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
-
-    private enum Exits
-    {
-        NORTH,
-        EAST,
-        SOUTH,
-        WEST
-    }
+    private Player player = null;
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -28,7 +20,6 @@ public class Game
         game.createRooms();
         game.showIntro();
     }
-
 
     /**
      * Shows the menu to choose an option
@@ -90,13 +81,29 @@ public class Game
 
     private void startGame()
     {
+        System.out.println("Choose an option:\n\n");
+
+        System.out.println("1) Move");
+        System.out.println("2) Where am I?");
+
+        String option = scanner.next().trim().toLowerCase();
+
+        switch (option)
+        {
+            case 1:
+                move();
+                break;
+            case 2:
+                System.out.println(""
+                  + "x-Coordinate: " + player.getX()
+                  + "y-Coordinate: " + player.getY()
+                  + "Current room: " + );
+        }
 
     }
 
     private void move()
     {
-        while (true)
-        {
             System.out.println("Where would you like to go?\n");
             System.out.println("\nType west, east, south or north\n");
 
@@ -116,8 +123,8 @@ public class Game
                 case "west":
                     player.setLocation(player.getX() - 1, player.getY());
                     break;
+                default:
+                    System.out.println(direction + " is not a valid command!");
             }
-
-        }
     }
 }

@@ -37,4 +37,10 @@ public class Room
     {
         return rooms;
     }
+
+    public int[] getCurrentRoom()
+    {
+        int[] coords = {this.x, this.y};
+        return coords;
+    }
 }
