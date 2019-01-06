@@ -1,5 +1,6 @@
 package honkytonky;
 
+import honkytonky.factories.RoomFactory;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import java.io.IOException;
@@ -12,7 +13,9 @@ public class Game
 
     private final Scanner scanner = new Scanner(System.in);
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+
     private Player player = null;
+    private RoomFactory roomFactory;
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -71,14 +74,6 @@ public class Game
         player = new Player(scanner.next(), 100, 0, 0);
     }
 
-    private void createRooms()
-    {
-        new Room("Entrance", 0, 0, true, true, false, false);
-        new Room("Hall", 0, 1, false, false, true, true);
-        new Room("Bedroom", 0, 2, false, true, false, false);
-        new Room("Kitchen", 1, 0, false, false, true, true);
-    }
-
     private void startGame()
     {
         System.out.println("Choose an option:\n\n");
@@ -86,7 +81,7 @@ public class Game
         System.out.println("1) Move");
         System.out.println("2) Where am I?");
 
-        String option = scanner.next().trim().toLowerCase();
+        int option = scanner.nextInt();
 
         switch (option)
         {
@@ -94,12 +89,22 @@ public class Game
                 move();
                 break;
             case 2:
-                System.out.println(""
-                  + "x-Coordinate: " + player.getX()
-                  + "y-Coordinate: " + player.getY()
-                  + "Current room: " + );
+
+//            case 2:
+//                System.out.println(""
+//                  + "x-Coordinate: " + player.getX()
+//                  + "y-Coordinate: " + player.getY()
+//                  + "Current room: " + );
         }
 
+    }
+
+    public void createRooms()
+    {
+        new Room("Entrance", 0, 0, true, true, false, false);
+        new Room("Hall", 0, 1, false, false, true, true);
+        new Room("Bedroom", 0, 2, false, true, false, false);
+        new Room("Kitchen", 1, 0, false, false, true, true);
     }
 
     private void move()
