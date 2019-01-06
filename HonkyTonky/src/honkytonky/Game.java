@@ -32,7 +32,9 @@ public class Game
         introLoop:
         while (true)
         {
-            pb.start().waitFor();   // clear screen
+            //pb.start().waitFor();   // clear screen
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
 
             System.out.print(
               "Welcome to HonkyTonky!\n" +
@@ -68,7 +70,9 @@ public class Game
      */
     private void createPlayer() throws IOException, InterruptedException
     {
-        pb.start().waitFor();
+        //pb.start().waitFor();
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
 
         System.out.println("Enter your name: ");
         player = new Player(scanner.next(), 100, 0, 0);
