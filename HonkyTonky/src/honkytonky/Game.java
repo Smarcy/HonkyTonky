@@ -84,27 +84,31 @@ public class Game
     {
         roomList = roomFactory.createRooms();
 
-        System.out.println("Choose an option:\n\n");
-
-        System.out.println("1) Move");
-        System.out.println("2) Where am I?");
-
-        int option = scanner.nextInt();
-
-        switch (option)
+        while(true)
         {
-            case 1:
-                move();
-                break;
-            case 2:
 
-//            case 2:
-//                System.out.println(""
-//                  + "x-Coordinate: " + player.getX()
-//                  + "y-Coordinate: " + player.getY()
-//                  + "Current room: " + );
+            System.out.println("Choose an option:\n\n");
+
+            System.out.println("1) Move");
+            System.out.println("2) Where am I?");
+            System.out.println("3) Exit Game");
+
+            int option = scanner.nextInt();
+
+            switch (option)
+            {
+                case 1:
+                    move();
+                    break;
+                case 2:
+                    System.out.println(""
+                      + "x-Coordinate: " + player.getX()
+                      + "\ny-Coordinate: " + player.getY()
+                      + "\nCurrent room: " + roomList[player.getX()][player.getY()].getName());
+                case 3:
+                    System.exit(0);
+            }
         }
-
     }
 
     private void move()

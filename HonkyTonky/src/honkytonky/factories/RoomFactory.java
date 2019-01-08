@@ -1,6 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Room;
+import java.util.Arrays;
 
 public class RoomFactory
 {
@@ -20,5 +21,10 @@ public class RoomFactory
         roomList[1][0] = new Room("Kitchen", 1, 0, false, false, true, true);
 
         return roomList;
+    }
+
+    public String toString(int x, int y)
+    {
+        return roomList[x][y].getName();
     }
 }
