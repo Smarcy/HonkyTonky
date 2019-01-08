@@ -82,7 +82,7 @@ public class Game
 
     private void startGame()
     {
-        roomList = roomFactory.getRoomList();
+        roomList = roomFactory.createRooms();
 
         System.out.println("Choose an option:\n\n");
 
@@ -90,7 +90,7 @@ public class Game
         System.out.println("2) Where am I?");
 
         int option = scanner.nextInt();
-om
+
         switch (option)
         {
             case 1:
