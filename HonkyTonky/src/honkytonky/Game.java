@@ -4,6 +4,7 @@ import honkytonky.factories.RoomFactory;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -15,12 +16,13 @@ public class Game
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     private Player player = null;
-    private RoomFactory roomFactory;
+    private Room[][] roomList = new Room[10][10];
+
+    private RoomFactory roomFactory = new RoomFactory();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
         Game game = new Game();
-        game.createRooms();
         game.showIntro();
     }
 
@@ -80,13 +82,15 @@ public class Game
 
     private void startGame()
     {
+        roomList = roomFactory.getRoomList();
+
         System.out.println("Choose an option:\n\n");
 
         System.out.println("1) Move");
         System.out.println("2) Where am I?");
 
         int option = scanner.nextInt();
-
+om
         switch (option)
         {
             case 1:
@@ -101,14 +105,6 @@ public class Game
 //                  + "Current room: " + );
         }
 
-    }
-
-    public void createRooms()
-    {
-        new Room("Entrance", 0, 0, true, true, false, false);
-        new Room("Hall", 0, 1, false, false, true, true);
-        new Room("Bedroom", 0, 2, false, true, false, false);
-        new Room("Kitchen", 1, 0, false, false, true, true);
     }
 
     private void move()
