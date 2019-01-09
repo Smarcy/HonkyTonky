@@ -36,12 +36,11 @@ public class Game
         {
             clearScreen();
 
-            System.out.print(
-              "Welcome to HonkyTonky!\n" +
-                "Please choose an option:\n\n" +
-                "1) Start Game\n" +
-                "2) Create New Player\n"
-            );
+            System.out.println("Welcome to HonkyTonky!");
+            System.out.println("Please choose an option:\n");
+            System.out.println("1) Start Game");
+            System.out.println("2) Create New Player\n");
+
 
             int option = scanner.nextInt();
 
@@ -84,7 +83,7 @@ public class Game
         while(true)
         {
 
-            System.out.println("Choose an option:\n\n");
+            System.out.println("Choose an option:\n");
 
             System.out.println("1) Move");
             System.out.println("2) Where am I?");
@@ -100,8 +99,8 @@ public class Game
                     break;
                 case 2:
                     clearScreen();
-                    System.out.println(""
-                      + "x-Coordinate: " + player.getX()
+                    System.out.println(
+                      "x-Coordinate: " + player.getX()
                       + "\ny-Coordinate: " + player.getY()
                       + "\nCurrent room: " + roomList[player.getX()][player.getY()]
                       + "\n");
