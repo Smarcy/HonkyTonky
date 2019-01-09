@@ -82,9 +82,7 @@ public class Game
 
         while (true)
         {
-
             System.out.println("Choose an option:\n");
-
             System.out.println("1) Move");
             System.out.println("2) Where am I?");
             System.out.println("3) Exit Game");
