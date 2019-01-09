@@ -22,9 +22,4 @@ public class RoomFactory
 
         return roomList;
     }
-
-    public String toString(int x, int y)
-    {
-        return roomList[x][y].getName();
-    }
 }

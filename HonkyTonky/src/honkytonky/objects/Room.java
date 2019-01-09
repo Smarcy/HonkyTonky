@@ -28,11 +28,6 @@ public class Room
         rooms[x][y] = this;
     }
 
-    public String getName()
-    {
-        return name;
-    }
-
     public Room[][] getRooms()
     {
         return rooms;
