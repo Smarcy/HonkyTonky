@@ -42,7 +42,6 @@ public class Game
             System.out.println("2) Create New Player\n");
             System.out.print("\n> ");
 
-
             int option = scanner.nextInt();
 
             switch (option)
@@ -81,7 +80,7 @@ public class Game
     {
         roomList = roomFactory.createRooms();
 
-        while(true)
+        while (true)
         {
 
             System.out.println("Choose an option:\n");
@@ -101,11 +100,7 @@ public class Game
                     break;
                 case 2:
                     clearScreen();
-                    System.out.println(
-                        "x-Coordinate: " + player.getX()
-                      + "\ny-Coordinate: " + player.getY()
-                      + "\nCurrent room: " + roomList[player.getX()][player.getY()]
-                      + "\n");
+                    System.out.println("You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()] + "\u001B[0m.\n");
                     break;
                 case 3:
                     System.exit(0);
@@ -115,55 +110,58 @@ public class Game
 
     private void move()
     {
-            System.out.println("Where would you like to go?\n");
-            System.out.println("\nType west, east, south or north\n");
+        System.out.println("Where would you like to go?\n");
+        System.out.println("\nType west, east, south or north\n");
 
-            String direction = (scanner.next().trim().toLowerCase());
+        String direction = (scanner.next().trim().toLowerCase());
 
-            if(isValidMove(direction))
+        if (isValidMove(direction))
+        {
+            switch (direction)
             {
-                switch (direction)
-                {
-                    case "north":
-                        player.setLocation(player.getX(), player.getY() + 1);
-                        break;
-                    case "east":
-                        player.setLocation(player.getX() + 1, player.getY());
-                        break;
-                    case "south":
-                        player.setLocation(player.getX(), player.getY() - 1);
-                        break;
-                    case "west":
-                        player.setLocation(player.getX() - 1, player.getY());
-                        break;
-                    default:
-                        System.out.println(direction + " is not a valid command!");
-                }
-            } else {
-                System.out.println("There is no room connected in this direction! (" + direction + ")");
+                case "north":
+                    player.setLocation(player.getX(), player.getY() + 1);
+                    break;
+                case "east":
+                    player.setLocation(player.getX() + 1, player.getY());
+                    break;
+                case "south":
+                    player.setLocation(player.getX(), player.getY() - 1);
+                    break;
+                case "west":
+                    player.setLocation(player.getX() - 1, player.getY());
+                    break;
+                default:
+                    System.out.println(direction + " is not a valid command!");
             }
+        } else
+        {
+            System.out.println("There is no room connected in this direction! (" + direction + ")");
+        }
     }
 
     /**
      * Checks if a requested move is valid
+     *
      * @param direction where the player wants to move
      * @return if the requested move is valid
      */
     private boolean isValidMove(String direction)
     {
-        if(direction.equals("north") && roomList[player.getX()][player.getY()+1] != null)
+        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null)
         {
             return true;
-        } else if(direction.equals("east") && roomList[player.getX()+1][player.getY()] != null)
+        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null)
         {
             return true;
-        } else if(direction.equals("south") && roomList[player.getX()][player.getY()-1] != null)
+        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null)
         {
             return true;
-        } else if(direction.equals("west") && roomList[player.getX()-1][player.getY()] != null)
+        } else if (direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null)
         {
             return true;
-        } else {
+        } else
+        {
             return false;
         }
     }
