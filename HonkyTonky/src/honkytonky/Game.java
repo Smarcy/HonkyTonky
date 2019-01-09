@@ -34,9 +34,7 @@ public class Game
         introLoop:
         while (true)
         {
-            //pb.start().waitFor();   // clear screen
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
+            clearScreen();
 
             System.out.print(
               "Welcome to HonkyTonky!\n" +
@@ -52,6 +50,7 @@ public class Game
                 case 1:
                     if (player != null)
                     {
+                        clearScreen();
                         startGame();
                         break introLoop;
                     } else
@@ -72,9 +71,7 @@ public class Game
      */
     private void createPlayer() throws IOException, InterruptedException
     {
-        //pb.start().waitFor();
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        clearScreen();
 
         System.out.println("Enter your name: ");
         player = new Player(scanner.next(), 100, 0, 0);
@@ -98,13 +95,17 @@ public class Game
             switch (option)
             {
                 case 1:
+                    clearScreen();
                     move();
                     break;
                 case 2:
+                    clearScreen();
                     System.out.println(""
                       + "x-Coordinate: " + player.getX()
                       + "\ny-Coordinate: " + player.getY()
-                      + "\nCurrent room: " + roomList[player.getX()][player.getY()].getName());
+                      + "\nCurrent room: " + roomList[player.getX()][player.getY()]
+                      + "\n");
+                    break;
                 case 3:
                     System.exit(0);
             }
@@ -135,5 +136,11 @@ public class Game
                 default:
                     System.out.println(direction + " is not a valid command!");
             }
+    }
+
+    private void clearScreen()
+    {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }

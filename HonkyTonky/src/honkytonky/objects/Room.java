@@ -38,6 +38,12 @@ public class Room
         return rooms;
     }
 
+    @Override
+    public String toString()
+    {
+        return this.name;
+    }
+
     public int[] getCurrentRoom()
     {
         int[] coords = {this.x, this.y};
