@@ -40,6 +40,7 @@ public class Game
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
             System.out.println("2) Create New Player\n");
+            System.out.print("\n> ");
 
 
             int option = scanner.nextInt();
@@ -88,6 +89,7 @@ public class Game
             System.out.println("1) Move");
             System.out.println("2) Where am I?");
             System.out.println("3) Exit Game");
+            System.out.print("\n> ");
 
             int option = scanner.nextInt();
 
@@ -100,7 +102,7 @@ public class Game
                 case 2:
                     clearScreen();
                     System.out.println(
-                      "x-Coordinate: " + player.getX()
+                        "x-Coordinate: " + player.getX()
                       + "\ny-Coordinate: " + player.getY()
                       + "\nCurrent room: " + roomList[player.getX()][player.getY()]
                       + "\n");
@@ -118,23 +120,52 @@ public class Game
 
             String direction = (scanner.next().trim().toLowerCase());
 
-            switch (direction)
+            if(isValidMove(direction))
             {
-                case "north":
-                    player.setLocation(player.getX(), player.getY() + 1);
-                    break;
-                case "east":
-                    player.setLocation(player.getX() + 1, player.getY());
-                    break;
-                case "south":
-                    player.setLocation(player.getX(), player.getY() - 1);
-                    break;
-                case "west":
-                    player.setLocation(player.getX() - 1, player.getY());
-                    break;
-                default:
-                    System.out.println(direction + " is not a valid command!");
+                switch (direction)
+                {
+                    case "north":
+                        player.setLocation(player.getX(), player.getY() + 1);
+                        break;
+                    case "east":
+                        player.setLocation(player.getX() + 1, player.getY());
+                        break;
+                    case "south":
+                        player.setLocation(player.getX(), player.getY() - 1);
+                        break;
+                    case "west":
+                        player.setLocation(player.getX() - 1, player.getY());
+                        break;
+                    default:
+                        System.out.println(direction + " is not a valid command!");
+                }
+            } else {
+                System.out.println("There is no room connected in this direction! (" + direction + ")");
             }
+    }
+
+    /**
+     * Checks if a requested move is valid
+     * @param direction where the player wants to move
+     * @return if the requested move is valid
+     */
+    private boolean isValidMove(String direction)
+    {
+        if(direction.equals("north") && roomList[player.getX()][player.getY()+1] != null)
+        {
+            return true;
+        } else if(direction.equals("east") && roomList[player.getX()+1][player.getY()] != null)
+        {
+            return true;
+        } else if(direction.equals("south") && roomList[player.getX()][player.getY()-1] != null)
+        {
+            return true;
+        } else if(direction.equals("west") && roomList[player.getX()-1][player.getY()] != null)
+        {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     private void clearScreen()
