@@ -73,7 +73,7 @@ public class Game
         clearScreen();
 
         System.out.println("Enter your name: ");
-        player = new Player(scanner.next(), 100, 0, 0);
+        player = new Player(scanner.next(), 100, 0, 0, null);
     }
 
     private void startGame()
