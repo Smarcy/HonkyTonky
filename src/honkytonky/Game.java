@@ -114,6 +114,9 @@ public class Game
         }
     }
 
+    /**
+     * main game loop
+     */
     private void startGame()
     {
         roomList = roomFactory.createRooms();
@@ -138,7 +141,7 @@ public class Game
                     clearScreen();
                     System.out.println(
                       "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
-                        + "\u001B[0m.\n");
+                        + "\u001B[0m.\n");  // set Console color to green and reset after
                     break;
                 case 3:
                     System.exit(0);
@@ -146,6 +149,9 @@ public class Game
         }
     }
 
+    /**
+     * Lets the player move to a requested direction
+     */
     private void move()
     {
         System.out.println("Where would you like to go?\n");
@@ -201,6 +207,9 @@ public class Game
         }
     }
 
+    /**
+     * Clear the console completely
+     */
     private void clearScreen()
     {
         System.out.print("\033[H\033[2J");
