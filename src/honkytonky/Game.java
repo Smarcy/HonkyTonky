@@ -13,13 +13,13 @@ import java.util.concurrent.TimeUnit;
 public class Game
 {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+    private final Scanner scanner       = new Scanner(System.in);
+    private final ProcessBuilder pb     = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
-    private Player player = null;
-    private Room[][] roomList = new Room[10][10];
+    private Player player               = null;
+    private Room[][] roomList           = new Room[10][10];
 
-    private RoomFactory roomFactory = new RoomFactory();
+    private RoomFactory roomFactory     = new RoomFactory();
     private WeaponFactory weaponFactory = new WeaponFactory();
 
     public static void main(String[] args) throws IOException, InterruptedException
@@ -75,7 +75,40 @@ public class Game
         clearScreen();
 
         System.out.println("Enter your name: ");
-        player = new Player(scanner.next(), 100, 0, 0, weaponFactory.getWeaponList().get(0)); // weaponFactory.getWeaponList().get(0) = "One-Handed Sword"
+        String name = scanner.next();
+
+        clearScreen();
+
+        while(player == null)
+        {
+            System.out.println("Choose a weapon: ");
+            System.out.println("1) One-Handed Sword");
+            System.out.println("2) Two-Handed Sword");
+            System.out.println("3) One-Handed Axe");
+            System.out.println("4) Two-Handed Axe");
+
+            int weapon = scanner.nextInt();
+
+            switch (weapon)
+            {
+                case 1:
+                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(0)); // One-Handed Sword
+                    break;
+                case 2:
+                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(1)); // Two-Handed Sword
+                    break;
+                case 3:
+                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(2)); // One-Handed Axe
+                    break;
+                case 4:
+                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(3)); // Two-Handed Axe
+                    break;
+                default:
+                    clearScreen();
+                    System.out.println(weapon + " is not a valid option!\n");
+                    break;
+            }
+        }
     }
 
     private void startGame()
