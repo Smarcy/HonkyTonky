@@ -163,8 +163,11 @@ public class Game
     {
         System.out.println("Where would you like to go?\n");
         System.out.println("\nType west, east, south or north\n");
+        String direction = new String();
 
-        String direction = (scanner.next().trim().toLowerCase());
+        try
+        {
+            direction = (scanner.next().trim().toLowerCase());
 
         if (isValidMove(direction))
         {
@@ -187,7 +190,11 @@ public class Game
             }
         } else
         {
-            System.out.println("There is no room connected in this direction! (" + direction + ")");
+            System.out.println("There is no place connected in this direction! (" + direction + ")");
+        }
+        } catch (ArrayIndexOutOfBoundsException e)
+        {
+            System.out.println("There is no place connected in this direction!");
         }
     }
 
