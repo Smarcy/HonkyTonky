@@ -44,4 +44,24 @@ public class Room
         int[] coords = {this.x, this.y};
         return coords;
     }
+
+    public boolean hasNorthExit()
+    {
+        return north;
+    }
+
+    public boolean hasEastExit()
+    {
+        return east;
+    }
+
+    public boolean hasSouthExit()
+    {
+        return south;
+    }
+
+    public boolean hasWestExit()
+    {
+        return west;
+    }
 }

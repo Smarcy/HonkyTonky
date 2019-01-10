@@ -206,18 +206,18 @@ public class Game
      */
     private boolean isValidMove(String direction)
     {
-        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null)
+        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null && roomList[player.getX()][player.getY()].hasNorthExit())
         {
             return true;
-        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null)
+        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null && roomList[player.getX()][player.getY()].hasEastExit())
         {
             return true;
-        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null)
+        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null && roomList[player.getX()][player.getY()].hasSouthExit())
         {
             return true;
         } else
         {
-            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null;
+            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null && roomList[player.getX()][player.getY()].hasWestExit();
         }
     }
 
