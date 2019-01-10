@@ -2,7 +2,7 @@ package honkytonky.objects;
 
 public class Weapon extends Item
 {
-    enum WeaponType
+    public enum WeaponType
     {
         SWORD,
         AXE,
@@ -11,17 +11,17 @@ public class Weapon extends Item
 
     private int damage;
     private int durability;
-    private boolean twohanded; // false = onehanded, true = twohanded
+    private boolean twoHanded; // false = onehanded, true = twohanded
     private WeaponType weaponType;
 
-    public Weapon(int id, String name, WeaponType weaponType, int damage, int durability, boolean twohanded)
+    public Weapon(int id, String name, WeaponType weaponType, int damage, int durability, boolean twoHanded)
     {
         super(id, name);
 
         this.weaponType = weaponType;
         this.damage = damage;
         this.durability = durability;
-        this.twohanded = twohanded;
+        this.twoHanded = twoHanded;
 
     }
 }

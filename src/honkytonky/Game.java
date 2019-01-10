@@ -1,6 +1,7 @@
 package honkytonky;
 
 import honkytonky.factories.RoomFactory;
+import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class Game
     private Room[][] roomList = new Room[10][10];
 
     private RoomFactory roomFactory = new RoomFactory();
+    private WeaponFactory weaponFactory = new WeaponFactory();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -73,7 +75,7 @@ public class Game
         clearScreen();
 
         System.out.println("Enter your name: ");
-        player = new Player(scanner.next(), 100, 0, 0, null);
+        player = new Player(scanner.next(), 100, 0, 0, weaponFactory.getWeaponList().get(0)); // weaponFactory.getWeaponList().get(0) = "One-Handed Sword"
     }
 
     private void startGame()
