@@ -4,6 +4,7 @@ import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
+import honkytonky.objects.Weapon;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,13 +14,13 @@ import java.util.concurrent.TimeUnit;
 public class Game
 {
 
-    private final Scanner scanner       = new Scanner(System.in);
-    private final ProcessBuilder pb     = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+    private final Scanner scanner = new Scanner(System.in);
+    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
-    private Player player               = null;
-    private Room[][] roomList           = new Room[10][10];
+    private Player player = null;
+    private Room[][] roomList = new Room[10][10];
 
-    private RoomFactory roomFactory     = new RoomFactory();
+    private RoomFactory roomFactory = new RoomFactory();
     private WeaponFactory weaponFactory = new WeaponFactory();
 
     public static void main(String[] args) throws IOException, InterruptedException
@@ -79,7 +80,7 @@ public class Game
 
         clearScreen();
 
-        while(player == null)
+        while (player == null)
         {
             System.out.println("Choose a weapon: ");
             System.out.println("1) One-Handed Sword");
@@ -89,19 +90,21 @@ public class Game
 
             int weapon = scanner.nextInt();
 
+            Weapon startWeapon = weaponFactory.getWeaponList().get(weapon-1);
+
             switch (weapon)
             {
                 case 1:
-                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(0)); // One-Handed Sword
+                    player = new Player(name, 100, 0, 0, startWeapon); // One-Handed Sword
                     break;
                 case 2:
-                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(1)); // Two-Handed Sword
+                    player = new Player(name, 100, 0, 0, startWeapon); // Two-Handed Sword
                     break;
                 case 3:
-                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(2)); // One-Handed Axe
+                    player = new Player(name, 100, 0, 0, startWeapon); // One-Handed Axe
                     break;
                 case 4:
-                    player = new Player(name, 100, 0, 0, weaponFactory.getWeaponList().get(3)); // Two-Handed Axe
+                    player = new Player(name, 100, 0, 0, startWeapon); // Two-Handed Axe
                     break;
                 default:
                     clearScreen();
@@ -133,7 +136,9 @@ public class Game
                     break;
                 case 2:
                     clearScreen();
-                    System.out.println("You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()] + "\u001B[0m.\n");
+                    System.out.println(
+                      "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
+                        + "\u001B[0m.\n");
                     break;
                 case 3:
                     System.exit(0);
@@ -190,12 +195,9 @@ public class Game
         } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null)
         {
             return true;
-        } else if (direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null)
-        {
-            return true;
         } else
         {
-            return false;
+            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null;
         }
     }
 
