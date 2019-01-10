@@ -20,11 +20,12 @@ public class Game
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     private Player player = null;
-    private Room[][] roomList = new Room[10][10];
 
-    private MonsterFactory monsterFactory = new MonsterFactory();
-    private RoomFactory roomFactory = new RoomFactory();
-    private WeaponFactory weaponFactory = new WeaponFactory();
+    private final MonsterFactory monsterFactory = new MonsterFactory();
+    private final RoomFactory roomFactory = new RoomFactory();
+    private final WeaponFactory weaponFactory = new WeaponFactory();
+
+    private final Room[][] roomList = roomFactory.createRooms();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -93,7 +94,7 @@ public class Game
 
             int weapon = scanner.nextInt();
 
-            Weapon startWeapon = weaponFactory.getWeaponList().get(weapon-1);
+            Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
 
             switch (weapon)
             {
@@ -122,8 +123,6 @@ public class Game
      */
     private void startGame()
     {
-        roomList = roomFactory.createRooms();
-
         while (true)
         {
             System.out.println("Choose an option:\n");
@@ -139,7 +138,7 @@ public class Game
                 case 1:
                     clearScreen();
                     move();
-                    if(roomHasMonster())
+                    if (roomHasMonster())
                     {
                         startBattle();
                     }
@@ -169,29 +168,30 @@ public class Game
         {
             direction = (scanner.next().trim().toLowerCase());
 
-        if (isValidMove(direction))
-        {
-            switch (direction)
+            if (isValidMove(direction))
             {
-                case "north":
-                    player.setLocation(player.getX(), player.getY() + 1);
-                    break;
-                case "east":
-                    player.setLocation(player.getX() + 1, player.getY());
-                    break;
-                case "south":
-                    player.setLocation(player.getX(), player.getY() - 1);
-                    break;
-                case "west":
-                    player.setLocation(player.getX() - 1, player.getY());
-                    break;
-                default:
-                    System.out.println(direction + " is not a valid command!");
+                switch (direction)
+                {
+                    case "north":
+                        player.setLocation(player.getX(), player.getY() + 1);
+                        break;
+                    case "east":
+                        player.setLocation(player.getX() + 1, player.getY());
+                        break;
+                    case "south":
+                        player.setLocation(player.getX(), player.getY() - 1);
+                        break;
+                    case "west":
+                        player.setLocation(player.getX() - 1, player.getY());
+                        break;
+                    default:
+                        System.out.println(direction + " is not a valid command!");
+                }
+            } else
+            {
+                System.out
+                  .println("There is no place connected in this direction! (" + direction + ")");
             }
-        } else
-        {
-            System.out.println("There is no place connected in this direction! (" + direction + ")");
-        }
         } catch (ArrayIndexOutOfBoundsException e)
         {
             System.out.println("There is no place connected in this direction!");
@@ -232,16 +232,18 @@ public class Game
 
     /**
      * Checks after every move if the current room contains a monster
+     *
      * @return true if monster in room, false if no monster in room
      */
     private boolean roomHasMonster()
     {
-        for (Monster monster: monsterFactory.getMonsterList())
+        for (Monster monster : monsterFactory.getMonsterList())
         {
-            if(monster.getX() == player.getX() && monster.getY() == player.getY())
+            if (monster.getX() == player.getX() && monster.getY() == player.getY())
             {
                 return true;
-            } else {
+            } else
+            {
                 return false;
             }
         }
