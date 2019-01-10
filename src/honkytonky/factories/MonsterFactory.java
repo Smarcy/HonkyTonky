@@ -15,4 +15,9 @@ public class MonsterFactory
     {
         monsterList.add(new Monster("Zombie", 15, 1, 1, 2, ZOMBIE));
     }
+
+    public List<Monster> getMonsterList()
+    {
+        return monsterList;
+    }
 }

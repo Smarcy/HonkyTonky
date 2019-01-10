@@ -1,7 +1,9 @@
 package honkytonky;
 
+import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
@@ -20,6 +22,7 @@ public class Game
     private Player player = null;
     private Room[][] roomList = new Room[10][10];
 
+    private MonsterFactory monsterFactory = new MonsterFactory();
     private RoomFactory roomFactory = new RoomFactory();
     private WeaponFactory weaponFactory = new WeaponFactory();
 
@@ -136,6 +139,10 @@ public class Game
                 case 1:
                     clearScreen();
                     move();
+                    if(roomHasMonster())
+                    {
+                        startBattle();
+                    }
                     break;
                 case 2:
                     clearScreen();
@@ -214,5 +221,29 @@ public class Game
     {
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    /**
+     * Checks after every move if the current room contains a monster
+     * @return true if monster in room, false if no monster in room
+     */
+    private boolean roomHasMonster()
+    {
+        for (Monster monster: monsterFactory.getMonsterList())
+        {
+            if(monster.getX() == player.getX() && monster.getY() == player.getY())
+            {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    private void startBattle()
+    {
+
     }
 }
