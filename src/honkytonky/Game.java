@@ -161,6 +161,9 @@ public class Game
         }
     }
 
+    /**
+     * Console output of the current Room or Place
+     */
     private void whereAmI()
     {
         System.out.println(
