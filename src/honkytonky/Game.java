@@ -99,16 +99,16 @@ public class Game
             switch (weapon)
             {
                 case 1:
-                    player = new Player(name, 100, 0, 0, startWeapon); // One-Handed Sword
+                    player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Sword
                     break;
                 case 2:
-                    player = new Player(name, 100, 0, 0, startWeapon); // Two-Handed Sword
+                    player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Sword
                     break;
                 case 3:
-                    player = new Player(name, 100, 0, 0, startWeapon); // One-Handed Axe
+                    player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Axe
                     break;
                 case 4:
-                    player = new Player(name, 100, 0, 0, startWeapon); // Two-Handed Axe
+                    player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Axe
                     break;
                 default:
                     clearScreen();
@@ -162,7 +162,7 @@ public class Game
     {
         System.out.println("Where would you like to go?\n");
         System.out.println("\nType west, east, south or north\n");
-        String direction = new String();
+        String direction;
 
         try
         {
@@ -242,9 +242,6 @@ public class Game
             if (monster.getX() == player.getX() && monster.getY() == player.getY())
             {
                 return true;
-            } else
-            {
-                return false;
             }
         }
 
