@@ -55,19 +55,18 @@ public class Game
             System.out.println("2) Create New Player\n");
             System.out.print("\n> ");
 
-            int option = 0;
+            int option = -1;
+
 
             try
             {
-                option = scanner.nextInt();
+                option = System.in.read();
             } catch (InputMismatchException e)
             {
                 System.out.println("That is not a valid command!");
             }
             switch (option)
             {
-                case 0:
-                    continue;
                 case 1:
                     if (player != null)
                     {
@@ -83,6 +82,8 @@ public class Game
                 case 2:
                     createPlayer();
                     break;
+                default:
+                    continue;
             }
         }
 
