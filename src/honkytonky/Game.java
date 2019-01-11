@@ -164,7 +164,8 @@ public class Game
     private void whereAmI()
     {
         System.out.println(
-          "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()] + "\u001B[0m.\n");  // set Console color to green and reset after
+          "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
+            + "\u001B[0m.\n");  // set Console color to green and reset after
     }
 
     /**
@@ -211,7 +212,8 @@ public class Game
     }
 
     /**
-     * Checks if a requested move is valid by comparing input string & roomList[x][y] != null & Room.has[direction]Exit
+     * Checks if a requested move is valid by comparing input string & roomList[x][y] != null &
+     * Room.has[direction]Exit
      *
      * @param direction where the player wants to move
      * @return if the requested move is valid
@@ -272,9 +274,6 @@ public class Game
 
         System.out.println("You encountered a " + monster.getName() + "!");
 
-        while(true)
-        {
 
-        }
     }
 }
