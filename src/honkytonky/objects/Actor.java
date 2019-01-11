@@ -3,7 +3,7 @@ package honkytonky.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Actor
+public abstract class Actor
 {
 
     private final int id;
@@ -14,7 +14,7 @@ abstract class Actor
 
     private List<Actor> actors = new ArrayList<>();
 
-    Actor(String name, int maxHP, int x, int y)
+    public Actor(String name, int maxHP, int x, int y)
     {
         this.name = name;
         this.maxHP = maxHP;
@@ -51,6 +51,21 @@ abstract class Actor
     public void setX(int x)
     {
         this.x = x;
+    }
+
+    public int getID()
+    {
+        return id;
+    }
+
+    public List<Actor> getActorList()
+    {
+        return actors;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 
 }

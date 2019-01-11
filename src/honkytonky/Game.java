@@ -3,6 +3,7 @@ package honkytonky;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Actor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
@@ -20,12 +21,14 @@ public class Game
     private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
 
     private Player player = null;
+    private int monsterID;
 
     private final MonsterFactory monsterFactory = new MonsterFactory();
     private final RoomFactory roomFactory = new RoomFactory();
     private final WeaponFactory weaponFactory = new WeaponFactory();
 
     private final Room[][] roomList = roomFactory.createRooms();
+    private final List<Actor> actors = monsterFactory.getMonsterList();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -237,10 +240,11 @@ public class Game
      */
     private boolean roomHasMonster()
     {
-        for (Monster monster : monsterFactory.getMonsterList())
+        for (Actor actor : actors)
         {
-            if (monster.getX() == player.getX() && monster.getY() == player.getY())
+            if (actor.getX() == player.getX() && actor.getY() == player.getY())
             {
+                monsterID = actor.getID();
                 return true;
             }
         }
@@ -250,6 +254,10 @@ public class Game
 
     private void startBattle()
     {
+        clearScreen();
 
+        Actor monster = monsterFactory.getMonsterList().get(monsterID);
+
+        System.out.println("You encountered a " + monster.getName() + "!");
     }
 }
