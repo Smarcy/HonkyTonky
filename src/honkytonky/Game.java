@@ -55,35 +55,33 @@ public class Game
             System.out.println("2) Create New Player\n");
             System.out.print("\n> ");
 
-            int option = -1;
-
-
             try
             {
-                option = System.in.read();
-            } catch (InputMismatchException e)
+                int option = Integer.parseInt(scanner.nextLine());
+
+                switch (option)
+                {
+                    case 1:
+                        if (player != null)
+                        {
+                            clearScreen();
+                            startGame();
+                            break introLoop;
+                        } else
+                        {
+                            System.out.println("Please create a new player first!");
+                            TimeUnit.SECONDS.sleep(3);
+                        }
+                        break;
+                    case 2:
+                        createPlayer();
+                        break;
+                    default:
+                        break;
+                }
+            } catch (NumberFormatException e)
             {
-                System.out.println("That is not a valid command!");
-            }
-            switch (option)
-            {
-                case 1:
-                    if (player != null)
-                    {
-                        clearScreen();
-                        startGame();
-                        break introLoop;
-                    } else
-                    {
-                        System.out.println("Please create a new player first!");
-                        TimeUnit.SECONDS.sleep(3);
-                    }
-                    break;
-                case 2:
-                    createPlayer();
-                    break;
-                default:
-                    continue;
+                showIntro();
             }
         }
 
