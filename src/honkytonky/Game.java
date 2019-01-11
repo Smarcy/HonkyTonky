@@ -42,7 +42,7 @@ public class Game
     /**
      * Shows the menu to choose an option
      */
-    private void showIntro() throws IOException, InterruptedException
+    private void showIntro() throws IOException, InterruptedException, NumberFormatException
     {
         introLoop:
         while (true)
@@ -90,7 +90,8 @@ public class Game
     /**
      * Lets the user create a Player Object
      */
-    private void createPlayer() throws IOException, InterruptedException
+    private void createPlayer()
+      throws NumberFormatException, InputMismatchException, IndexOutOfBoundsException
     {
         clearScreen();
 
@@ -101,34 +102,43 @@ public class Game
 
         while (player == null)
         {
+            clearScreen();
+
             System.out.println("Choose a weapon: ");
             System.out.println("1) One-Handed Sword");
             System.out.println("2) Two-Handed Sword");
             System.out.println("3) One-Handed Axe");
             System.out.println("4) Two-Handed Axe");
 
-            int weapon = scanner.nextInt();
-
-            Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
-
-            switch (weapon)
+            try
             {
-                case 1:
-                    player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Sword
-                    break;
-                case 2:
-                    player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Sword
-                    break;
-                case 3:
-                    player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Axe
-                    break;
-                case 4:
-                    player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Axe
-                    break;
-                default:
-                    clearScreen();
-                    System.out.println(weapon + " is not a valid option!\n");
-                    break;
+
+                int weapon = Integer.parseInt(scanner.nextLine());
+
+                Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
+
+                switch (weapon)
+                {
+                    case 1:
+                        player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Sword
+                        break;
+                    case 2:
+                        player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Sword
+                        break;
+                    case 3:
+                        player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Axe
+                        break;
+                    case 4:
+                        player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Axe
+                        break;
+                    default:
+                        clearScreen();
+                        System.out.println(weapon + " is not a valid option!\n");
+                        break;
+                }
+            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e)
+            {
+                // Empty catch Block -> start while loop again!
             }
         }
     }
