@@ -146,7 +146,7 @@ public class Game
     /**
      * main game loop
      */
-    private void startGame()
+    private void startGame() throws InputMismatchException, NumberFormatException
     {
         while (true)
         {
@@ -159,25 +159,34 @@ public class Game
             System.out.println("3) Exit Game");
             System.out.print("\n> ");
 
-            int option = scanner.nextInt();
-
-            switch (option)
+            try
             {
-                case 1:
-                    clearScreen();
-                    move();
-                    if (roomHasMonster())
-                    {
-                        startBattle();
-                    }
-                    break;
-                case 2:
-                    clearScreen();
-                    whereAmI();
-                    break;
-                case 3:
-                    System.exit(0);
+
+                // int option = scanner.nextInt();
+                int option = Integer.parseInt(scanner.nextLine());
+
+                switch (option)
+                {
+                    case 1:
+                        clearScreen();
+                        move();
+                        if (roomHasMonster())
+                        {
+                            startBattle();
+                        }
+                        break;
+                    case 2:
+                        clearScreen();
+                        whereAmI();
+                        break;
+                    case 3:
+                        System.exit(0);
+                }
+            } catch (InputMismatchException | NumberFormatException e)
+            {
+                startGame();
             }
+
         }
     }
 
