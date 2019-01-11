@@ -12,6 +12,7 @@ import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -54,8 +55,14 @@ public class Game
             System.out.println("2) Create New Player\n");
             System.out.print("\n> ");
 
-            int option = scanner.nextInt();
+            int option;
 
+            if(scanner.hasNextInt())
+            {
+                option = scanner.nextInt();
+            } else {
+                continue;
+            }
             switch (option)
             {
                 case 1:
@@ -75,6 +82,7 @@ public class Game
                     break;
             }
         }
+
     }
 
     /**
@@ -223,18 +231,22 @@ public class Game
      */
     private boolean isValidMove(String direction)
     {
-        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null && roomList[player.getX()][player.getY()].hasNorthExit())
+        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null
+          && roomList[player.getX()][player.getY()].hasNorthExit())
         {
             return true;
-        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null && roomList[player.getX()][player.getY()].hasEastExit())
+        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null
+          && roomList[player.getX()][player.getY()].hasEastExit())
         {
             return true;
-        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null && roomList[player.getX()][player.getY()].hasSouthExit())
+        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null
+          && roomList[player.getX()][player.getY()].hasSouthExit())
         {
             return true;
         } else
         {
-            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null && roomList[player.getX()][player.getY()].hasWestExit();
+            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null
+              && roomList[player.getX()][player.getY()].hasWestExit();
         }
     }
 
