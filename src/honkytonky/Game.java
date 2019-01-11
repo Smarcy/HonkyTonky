@@ -1,5 +1,7 @@
 package honkytonky;
 
+import static java.lang.Thread.sleep;
+
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -128,6 +130,9 @@ public class Game
     {
         while (true)
         {
+            clearScreen();
+            whereAmI();
+
             System.out.println("Choose an option:\n");
             System.out.println("1) Move");
             System.out.println("2) Where am I?");
@@ -148,14 +153,18 @@ public class Game
                     break;
                 case 2:
                     clearScreen();
-                    System.out.println(
-                      "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
-                        + "\u001B[0m.\n");  // set Console color to green and reset after
+                    whereAmI();
                     break;
                 case 3:
                     System.exit(0);
             }
         }
+    }
+
+    private void whereAmI()
+    {
+        System.out.println(
+          "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()] + "\u001B[0m.\n");  // set Console color to green and reset after
     }
 
     /**
@@ -252,6 +261,9 @@ public class Game
         return false;
     }
 
+    /**
+     * This method gets called when the player enters a room or place that contains an enemy
+     */
     private void startBattle()
     {
         clearScreen();
@@ -259,5 +271,10 @@ public class Game
         Actor monster = monsterFactory.getMonsterList().get(monsterID);
 
         System.out.println("You encountered a " + monster.getName() + "!");
+
+        while(true)
+        {
+
+        }
     }
 }
