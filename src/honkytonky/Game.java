@@ -211,7 +211,7 @@ public class Game
     {
         clearScreen();
 
-        System.out.println("Your Name Is: " + ANSI_BLUE + player.getName() + ANSI_RESET);
+        System.out.println("Your Name Is: " + ANSI_BLUE + player + ANSI_RESET);
         System.out.println("Your Current Weapon Is: " + ANSI_BLUE + player.getWeapon() + ANSI_RESET);
 
         try
@@ -333,7 +333,7 @@ public class Game
 
         Actor monster = monsterFactory.getMonsterList().get(monsterID);
 
-        System.out.println("You encountered a " + monster.getName() + "!");
+        System.out.println("You encountered a " + monster + "!");
 
 
     }
