@@ -52,7 +52,12 @@ public class Game
             System.out.println("Welcome to HonkyTonky!");
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
-            System.out.println("2) Create New Player\n");
+
+            if (player == null)
+            {
+                System.out.println("2) Create New Player\n");   // Write only, if no player was created yet
+            }
+
             System.out.print("\n> ");
 
             try
@@ -153,7 +158,7 @@ public class Game
 
             System.out.println("Choose an option:\n");
             System.out.println("1) Move");
-            System.out.println("2) Where am I?");
+            System.out.println("2) Character Info");
             System.out.println("3) Exit Game");
             System.out.print("\n> ");
 
@@ -171,8 +176,7 @@ public class Game
                         }
                         break;
                     case 2:
-                        clearScreen();
-                        whereAmI();
+                        showCharacterInfo();
                         break;
                     case 3:
                         System.exit(0);
@@ -193,6 +197,12 @@ public class Game
         System.out.println(
           "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
             + "\u001B[0m.\n");  // set Console color to green and reset after
+    }
+
+    private void showCharacterInfo()
+    {
+        clearScreen();
+
     }
 
     /**
