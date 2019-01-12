@@ -22,6 +22,11 @@ public class Weapon extends Item
         this.damage = damage;
         this.durability = durability;
         this.twoHanded = twoHanded;
+    }
 
+    @Override
+    public String toString()
+    {
+        return this.getName();
     }
 }

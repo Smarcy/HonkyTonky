@@ -1,7 +1,5 @@
 package honkytonky;
 
-import static java.lang.Thread.sleep;
-
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -32,6 +30,16 @@ public class Game
 
     private final Room[][] roomList = roomFactory.createRooms();
     private final List<Actor> actors = monsterFactory.getMonsterList();
+
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_BLACK = "\u001B[30m";
+    private static final String ANSI_RED = "\u001B[31m";
+    private static final String ANSI_GREEN = "\u001B[32m";
+    private static final String ANSI_YELLOW = "\u001B[33m";
+    private static final String ANSI_BLUE = "\u001B[34m";
+    private static final String ANSI_PURPLE = "\u001B[35m";
+    private static final String ANSI_CYAN = "\u001B[36m";
+    private static final String ANSI_WHITE = "\u001B[37m";
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -195,15 +203,25 @@ public class Game
     private void whereAmI()
     {
         System.out.println(
-          "You are currently in: \u001B[32m" + roomList[player.getX()][player.getY()]
-            + "\u001B[0m.\n");  // set Console color to green and reset after
+          "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
+            + ANSI_RESET);  // set Console color to green and reset after
     }
 
     private void showCharacterInfo()
     {
         clearScreen();
 
-    }
+        System.out.println("Your Name Is: " + ANSI_BLUE + player.getName() + ANSI_RESET);
+        System.out.println("Your Current Weapon Is: " + ANSI_BLUE + player.getWeapon() + ANSI_RESET);
+
+        try
+        {
+            System.in.read();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        }
 
     /**
      * Lets the player move to a requested direction

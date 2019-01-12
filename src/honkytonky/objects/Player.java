@@ -23,4 +23,9 @@ public class Player extends Actor
     {
         this.currentRoomID = currentRoomID;
     }
+
+    public Weapon getWeapon()
+    {
+        return weapon;
+    }
 }
