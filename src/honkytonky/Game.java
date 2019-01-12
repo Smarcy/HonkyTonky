@@ -42,7 +42,7 @@ public class Game
     /**
      * Shows the menu to choose an option
      */
-    private void showIntro() throws IOException, InterruptedException, NumberFormatException
+    private void showIntro() throws InterruptedException, NumberFormatException
     {
         introLoop:
         while (true)
@@ -64,7 +64,6 @@ public class Game
                     case 1:
                         if (player != null)
                         {
-                            clearScreen();
                             startGame();
                             break introLoop;
                         } else
@@ -96,7 +95,7 @@ public class Game
         clearScreen();
 
         System.out.println("Enter your name: ");
-        String name = scanner.next();
+        String name = scanner.nextLine();
 
         clearScreen();
 
@@ -112,7 +111,6 @@ public class Game
 
             try
             {
-
                 int weapon = Integer.parseInt(scanner.nextLine());
 
                 Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
@@ -138,7 +136,7 @@ public class Game
                 }
             } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e)
             {
-                // Empty catch Block -> start while loop again!
+                e.printStackTrace();
             }
         }
     }
@@ -161,14 +159,11 @@ public class Game
 
             try
             {
-
-                // int option = scanner.nextInt();
                 int option = Integer.parseInt(scanner.nextLine());
 
                 switch (option)
                 {
                     case 1:
-                        clearScreen();
                         move();
                         if (roomHasMonster())
                         {
@@ -205,13 +200,15 @@ public class Game
      */
     private void move()
     {
+        clearScreen();
+
         System.out.println("Where would you like to go?\n");
         System.out.println("\nType west, east, south or north\n");
         String direction;
 
         try
         {
-            direction = (scanner.next().trim().toLowerCase());
+            direction = (scanner.nextLine().trim().toLowerCase());
 
             if (isValidMove(direction))
             {
