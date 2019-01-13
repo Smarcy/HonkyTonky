@@ -211,10 +211,10 @@ public class Game
     {
         clearScreen();
 
-        System.out.println("Your Name Is: " + ANSI_YELLOW + player + ANSI_RESET);
-        System.out.println("Your Current Weapon Is: " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
-        System.out.println("You Are Currently In: " + ANSI_YELLOW + roomList[player.getX()][player.getY()] + ANSI_RESET);
-        System.out.println("Your Current HP: " + ANSI_YELLOW + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
+        System.out.println("Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player + ANSI_RESET);
+        System.out.println("Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)+ player.getWeapon() + ANSI_RESET);
+        System.out.println("You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30) + roomList[player.getX()][player.getY()] + ANSI_RESET);
+        System.out.println("Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30) + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
 
         try
         {
