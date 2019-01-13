@@ -20,21 +20,6 @@ import java.util.concurrent.TimeUnit;
 public class Game
 {
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
-
-    private Player player = null;
-    private int monsterID;
-
-    private final MonsterFactory monsterFactory = new MonsterFactory();
-    private final RoomFactory roomFactory = new RoomFactory();
-    private final WeaponFactory weaponFactory = new WeaponFactory();
-    private final ArmorFactory armorFactory = new ArmorFactory();
-
-    private final Room[][] roomList = roomFactory.createRooms();
-    private final List<Actor> actors = monsterFactory.getMonsterList();
-    private final Map<ArmorType, Armor> armorMap = armorFactory.getArmorMap();
-
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\u001B[30m";
     private static final String ANSI_RED = "\u001B[31m";
@@ -44,6 +29,17 @@ public class Game
     private static final String ANSI_PURPLE = "\u001B[35m";
     private static final String ANSI_CYAN = "\u001B[36m";
     private static final String ANSI_WHITE = "\u001B[37m";
+    private final Scanner scanner = new Scanner(System.in);
+    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+    private final MonsterFactory monsterFactory = new MonsterFactory();
+    private final RoomFactory roomFactory = new RoomFactory();
+    private final WeaponFactory weaponFactory = new WeaponFactory();
+    private final ArmorFactory armorFactory = new ArmorFactory();
+    private final Room[][] roomList = roomFactory.createRooms();
+    private final List<Actor> actors = monsterFactory.getMonsterList();
+    private final Map<ArmorType, Armor> armorMap = armorFactory.getArmorMap();
+    private Player player = null;
+    private int monsterID;
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -151,6 +147,7 @@ public class Game
             } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e)
             {
                 e.printStackTrace();
+                clearScreen();
             }
         }
     }
@@ -218,16 +215,20 @@ public class Game
         System.out.println(
           "Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player
             + ANSI_RESET);
+
         System.out.println(
           "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
             + player.getWeapon() + ANSI_RESET);
+
         System.out.println(
           "Your Current Armor Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
             + player.getArmor() + ANSI_RESET);
+
         System.out.println(
           "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
             + roomList[player.getX()][player.getY()] + ANSI_RESET);
         System.out.println(
+
           "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
             + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
 
@@ -389,16 +390,25 @@ public class Game
         }
     }
 
+    /**
+     * Is called when the Player is in a battle and chooses to attack the enemy
+     */
     private void playerAttack()
     {
 
     }
 
+    /**
+     * Is called when the Player is in a battle and chooses defend himself
+     */
     private void playerDefend()
     {
 
     }
 
+    /**
+     * Is called when the Player is in a battle and chooses to flee from the fight
+     */
     private void playerFlee()
     {
 
