@@ -1,5 +1,6 @@
 package honkytonky;
 
+import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -27,6 +28,7 @@ public class Game
     private final MonsterFactory monsterFactory = new MonsterFactory();
     private final RoomFactory roomFactory = new RoomFactory();
     private final WeaponFactory weaponFactory = new WeaponFactory();
+    private final ArmorFactory armorFactory = new ArmorFactory();
 
     private final Room[][] roomList = roomFactory.createRooms();
     private final List<Actor> actors = monsterFactory.getMonsterList();

@@ -11,6 +11,8 @@ public class ArmorFactory
 
     public ArmorFactory()
     {
-        armorList.add(new Armor(0, "Leather Armor", 1));
+        armorList.add(new Armor(armorList.size(), "Leather Armor", 1));
+        armorList.add(new Armor(armorList.size(), "Iron Armor", 2));
+        armorList.add(new Armor(armorList.size(), "Steel Armor", 3));
     }
 }
