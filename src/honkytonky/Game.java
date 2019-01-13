@@ -211,10 +211,18 @@ public class Game
     {
         clearScreen();
 
-        System.out.println("Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player + ANSI_RESET);
-        System.out.println("Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)+ player.getWeapon() + ANSI_RESET);
-        System.out.println("You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30) + roomList[player.getX()][player.getY()] + ANSI_RESET);
-        System.out.println("Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30) + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
+        System.out.println(
+          "Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player
+            + ANSI_RESET);
+        System.out.println(
+          "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
+            + player.getWeapon() + ANSI_RESET);
+        System.out.println(
+          "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
+            + roomList[player.getX()][player.getY()] + ANSI_RESET);
+        System.out.println(
+          "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
+            + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
 
         try
         {
@@ -261,13 +269,15 @@ public class Game
             {
                 clearScreen();
                 System.out
-                  .println(ANSI_RED + "There is no place connected in this direction! (" + direction + ")\n" + ANSI_RESET);
+                  .println(ANSI_RED + "There is no place connected in this direction! (" + direction
+                    + ")\n" + ANSI_RESET);
                 startGame();
             }
         } catch (ArrayIndexOutOfBoundsException e)
         {
             clearScreen();
-            System.out.println(ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
+            System.out.println(
+              ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
             startGame();
         }
     }
@@ -330,20 +340,60 @@ public class Game
     /**
      * This method gets called when the player enters a room or place that contains an enemy
      */
-    private void startBattle()
+    private void startBattle() throws InputMismatchException, NumberFormatException
     {
         clearScreen();
 
+        boolean monsterAlive = true;
         Actor monster = monsterFactory.getMonsterList().get(monsterID);
 
-        System.out.println(ANSI_RED + "You encountered a " + monster + "!" + ANSI_RESET);
+        while (monsterAlive)
+        {
+            System.out.println(ANSI_RED + "You encountered a " + monster + "!" + ANSI_RESET);
 
-        System.out.println("What do you want to do this round?\n");
-        System.out.println("1) Attack with your " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
-        System.out.println("2) Defensive Mode");
-        System.out.println("3) Flee from " + ANSI_YELLOW + monster + ANSI_RESET);
-        System.out.print("\n> ");
+            System.out.println("What do you want to do this round?\n");
+            System.out.println(
+              "1) Attack with your " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
+            System.out.println("2) Defensive Mode");
+            System.out.println("3) Flee from " + ANSI_YELLOW + monster + ANSI_RESET);
+            System.out.print("\n> ");
 
-        String option = scanner.nextLine();
+            try
+            {
+                switch (Integer.parseInt(scanner.nextLine()))
+                {
+                    case 1:
+                        playerAttack();
+                        break;
+                    case 2:
+                        playerDefend();
+                        break;
+                    case 3:
+                        playerFlee();
+                        break;
+                    default:
+                        break;
+                }
+            } catch (InputMismatchException | NumberFormatException e)
+            {
+                clearScreen();
+                continue;
+            }
+        }
+    }
+
+    private void playerAttack()
+    {
+
+    }
+
+    private void playerDefend()
+    {
+
+    }
+
+    private void playerFlee()
+    {
+
     }
 }
