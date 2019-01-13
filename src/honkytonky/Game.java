@@ -60,11 +60,7 @@ public class Game
             System.out.println("Welcome to HonkyTonky!");
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
-
-            if (player == null)
-            {
-                System.out.println("2) Create New Player\n");   // Write only, if no player was created yet
-            }
+            System.out.println("2) Create New Player\n");
 
             System.out.print("\n> ");
 
@@ -77,6 +73,7 @@ public class Game
                     case 1:
                         if (player != null)
                         {
+                            clearScreen();
                             startGame();
                             break introLoop;
                         } else
@@ -161,7 +158,6 @@ public class Game
     {
         while (true)
         {
-            clearScreen();
             whereAmI();
 
             System.out.println("Choose an option:\n");
@@ -177,7 +173,9 @@ public class Game
                 switch (option)
                 {
                     case 1:
+                        clearScreen();
                         move();
+                        clearScreen();
                         if (roomHasMonster())
                         {
                             startBattle();
@@ -185,12 +183,14 @@ public class Game
                         break;
                     case 2:
                         showCharacterInfo();
+                        clearScreen();
                         break;
                     case 3:
                         System.exit(0);
                 }
             } catch (InputMismatchException | NumberFormatException e)
             {
+                clearScreen();
                 startGame();
             }
 
@@ -213,6 +213,7 @@ public class Game
 
         System.out.println("Your Name Is: " + ANSI_BLUE + player + ANSI_RESET);
         System.out.println("Your Current Weapon Is: " + ANSI_BLUE + player.getWeapon() + ANSI_RESET);
+        System.out.println("You Are Currently In: " + ANSI_BLUE + roomList[player.getX()][player.getY()] + ANSI_RESET);
 
         try
         {
@@ -221,15 +222,13 @@ public class Game
         {
             e.printStackTrace();
         }
-        }
+    }
 
     /**
      * Lets the player move to a requested direction
      */
     private void move()
     {
-        clearScreen();
-
         System.out.println("Where would you like to go?\n");
         System.out.println("\nType west, east, south or north\n");
         String direction;
@@ -259,12 +258,16 @@ public class Game
                 }
             } else
             {
+                clearScreen();
                 System.out
-                  .println("There is no place connected in this direction! (" + direction + ")");
+                  .println(ANSI_RED + "There is no place connected in this direction! (" + direction + ")\n" + ANSI_RESET);
+                startGame();
             }
         } catch (ArrayIndexOutOfBoundsException e)
         {
-            System.out.println("There is no place connected in this direction!");
+            clearScreen();
+            System.out.println(ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
+            startGame();
         }
     }
 
