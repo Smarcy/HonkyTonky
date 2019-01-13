@@ -1,10 +1,12 @@
 package honkytonky;
 
 import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.ArmorFactory.Armors;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Actor;
+import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
@@ -32,6 +34,7 @@ public class Game
 
     private final Room[][] roomList = roomFactory.createRooms();
     private final List<Actor> actors = monsterFactory.getMonsterList();
+    private final List<Armor> armors = armorFactory.getArmorList();
 
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\u001B[30m";
@@ -130,7 +133,7 @@ public class Game
                 switch (weapon)
                 {
                     case 1:
-                        player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Sword
+                        player = new Player(name, 20, 0, 0, startWeapon, armors.get(armors.indexOf(Armors.LEATHER))); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Sword
