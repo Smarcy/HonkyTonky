@@ -43,24 +43,19 @@ public abstract class Actor
         return y;
     }
 
-    public void setY(int y)
-    {
-        this.y = y;
-    }
-
-    public void setX(int x)
-    {
-        this.x = x;
-    }
-
     public int getID()
     {
         return id;
     }
 
-    public List<Actor> getActorList()
+    public int getHp()
     {
-        return actors;
+        return hp;
+    }
+
+    public int getMaxHP()
+    {
+        return maxHP;
     }
 
     @Override
