@@ -404,6 +404,8 @@ public class Game
 
                 System.out.println("You died!");
 
+                resetGame();
+
                 try
                 {
                     System.in.read();
@@ -426,6 +428,8 @@ public class Game
             else
             {
                 System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
+
+                rewardPlayer();
 
                 try
                 {
@@ -472,5 +476,15 @@ public class Game
     private boolean playerFlees()
     {
         return true;
+    }
+
+    private void rewardPlayer()
+    {
+
+    }
+
+    private void resetGame()
+    {
+
     }
 }
