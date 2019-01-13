@@ -445,6 +445,10 @@ public class Game {
 
     }
 
+    /**
+     * checks if the Player is alive every time he got hit by an enemy
+     * @throws InterruptedException
+     */
     private void isPlayerAlive() throws InterruptedException {
         if (player.getHp() <= 0) {
             clearScreen();
