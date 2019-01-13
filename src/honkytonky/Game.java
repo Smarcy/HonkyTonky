@@ -324,7 +324,6 @@ public class Game
                 return true;
             }
         }
-
         return false;
     }
 
@@ -337,8 +336,14 @@ public class Game
 
         Actor monster = monsterFactory.getMonsterList().get(monsterID);
 
-        System.out.println("You encountered a " + monster + "!");
+        System.out.println(ANSI_RED + "You encountered a " + monster + "!" + ANSI_RESET);
 
+        System.out.println("What do you want to do this round?\n");
+        System.out.println("1) Attack with your " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
+        System.out.println("2) Defensive Mode");
+        System.out.println("3) Flee from " + ANSI_YELLOW + monster + ANSI_RESET);
+        System.out.print("\n> ");
 
+        String option = scanner.nextLine();
     }
 }

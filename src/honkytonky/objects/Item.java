@@ -2,7 +2,7 @@ package honkytonky.objects;
 
 
 
-public class Item
+public abstract class Item
 {
     private int id;
     private String name;
