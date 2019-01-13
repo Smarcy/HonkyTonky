@@ -21,8 +21,8 @@ public class ArmorFactory
     public ArmorFactory()
     {
         armorMap.put(ArmorType.LEATHER, new Armor(armorMap.size(), "Leather Armor", 1, 100, 100));
-        armorMap.put(ArmorType.IRON, new Armor(armorMap.size(), "Iron Armor", 1, 100, 100));
-        armorMap.put(ArmorType.STEEL, new Armor(armorMap.size(), "Steel Armor", 1, 100, 100));
+        armorMap.put(ArmorType.IRON, new Armor(armorMap.size(), "Iron Armor", 2, 100, 100));
+        armorMap.put(ArmorType.STEEL, new Armor(armorMap.size(), "Steel Armor", 3, 100, 100));
     }
 
     public Map<ArmorType, Armor> getArmorMap()

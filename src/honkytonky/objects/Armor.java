@@ -15,6 +15,10 @@ public class Armor extends Item
         this.maxDurability  = maxDurability;
     }
 
+    public int getArmorPoints() {
+        return armorPoints;
+    }
+
     @Override
     public String toString()
     {
