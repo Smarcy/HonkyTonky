@@ -4,6 +4,7 @@ public class Player extends Actor
 {
 
     private int currentRoomID;
+    private int temporaryDefBoost;
     private Weapon weapon;
     private Armor armor;
 
@@ -11,9 +12,10 @@ public class Player extends Actor
     {
         super(name, maxHP, x, y);
 
-        this.currentRoomID  = 0;
-        this.weapon         = weapon;
-        this.armor          = armor;
+        this.currentRoomID      = 0;
+        this.temporaryDefBoost  = 0;
+        this.weapon             = weapon;
+        this.armor              = armor;
     }
 
     public int getCurrentRoomID()

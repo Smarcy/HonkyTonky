@@ -321,6 +321,8 @@ public class Game {
 
     /**
      * This method gets called when the player enters a room or place that contains an enemy
+     *
+     * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
     private void startBattle()
       throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException,
@@ -361,26 +363,9 @@ public class Game {
                 continue;
             }
 
-            if (player.getHp() <= 0) {
-                clearScreen();
-
-                System.out.println("You died!");
-
-                resetGame();
-
-                try {
-                    System.in.read();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                showIntro();
-            }
-
             if (monsterAlive) {
                 int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
-                  .getArmorPoints(); // calculate damage: WeaponDmg + random number (1-2)
-                // + armorPoints
+                  .getArmorPoints();
 
                 if (rng < 0) {
                     rng = 0;
@@ -390,6 +375,8 @@ public class Game {
 
                 System.out.println(
                   ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!\n");
+
+                isPlayerAlive();
             } else {
                 System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
 
@@ -410,23 +397,27 @@ public class Game {
 
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
+     *
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
+     * damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
 
         int wepDMG = player.getWeapon()
-          .getDamage();  // calculate damage: WeaponDmg + random number (1-2)
-        int rng = rnd.nextInt(wepDMG+2) + 1;
+          .getDamage();
+        int rng = rnd.nextInt(wepDMG + 2) + 1;
 
         int dmg = wepDMG + rng;
 
         monster.setHp(monster.getHp() - dmg);
 
-        if ((wepDMG+2) == rng) {
+        if ((wepDMG + 2) == rng) {
             System.out.println(
               "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!" + ANSI_RED + " (Critical Hit!)" + ANSI_RESET);
         } else {
-            System.out.println("You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!");
+            System.out.println(
+              "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!");
         }
 
         return monster.getHp() >= 0;
@@ -452,5 +443,23 @@ public class Game {
 
     private void resetGame() {
 
+    }
+
+    private void isPlayerAlive() throws InterruptedException {
+        if (player.getHp() <= 0) {
+            clearScreen();
+
+            System.out.println("You died!");
+
+            resetGame();
+
+            try {
+                System.in.read();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            showIntro();
+        }
     }
 }
