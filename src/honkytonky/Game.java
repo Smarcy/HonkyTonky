@@ -163,7 +163,7 @@ public class Game
     /**
      * main game loop
      */
-    private void startGame() throws InputMismatchException, NumberFormatException
+    private void startGame() throws InputMismatchException, NumberFormatException, InterruptedException
     {
         while (true)
         {
@@ -252,7 +252,7 @@ public class Game
     /**
      * Lets the player move to a requested direction
      */
-    private void move()
+    private void move() throws InterruptedException
     {
         System.out.println("Where would you like to go?\n");
         System.out.println("\nType west, east, south or north\n");
@@ -356,7 +356,7 @@ public class Game
     /**
      * This method gets called when the player enters a room or place that contains an enemy
      */
-    private void startBattle() throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException
+    private void startBattle() throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException, InterruptedException, NumberFormatException
     {
         clearScreen();
 
@@ -383,6 +383,7 @@ public class Game
                         break;
                     case 2:
                         playerDefends();
+                        clearScreen();
                         break;
                     case 3:
                         playerFlees();
@@ -395,6 +396,23 @@ public class Game
             {
                 clearScreen();
                 continue;
+            }
+
+            if(player.getHp() <= 0)
+            {
+                clearScreen();
+
+                System.out.println("You died!");
+
+                try
+                {
+                    System.in.read();
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                showIntro();
             }
 
             if(monsterAlive)
