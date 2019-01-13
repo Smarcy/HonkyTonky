@@ -1,20 +1,19 @@
 package honkytonky;
 
 import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.ArmorFactory.Armors;
+import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
-import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -34,7 +33,7 @@ public class Game
 
     private final Room[][] roomList = roomFactory.createRooms();
     private final List<Actor> actors = monsterFactory.getMonsterList();
-    private final List<Armor> armors = armorFactory.getArmorList();
+    private final Map<ArmorType, Armor> armorMap = armorFactory.getArmorMap();
 
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_BLACK = "\u001B[30m";
@@ -133,16 +132,16 @@ public class Game
                 switch (weapon)
                 {
                     case 1:
-                        player = new Player(name, 20, 0, 0, startWeapon, armors.get(armors.indexOf(Armors.LEATHER))); // One-Handed Sword
+                        player = new Player(name, 20, 0, 0, startWeapon, armorMap.get(ArmorType.LEATHER)); // One-Handed Sword
                         break;
                     case 2:
-                        player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Sword
+                        player = new Player(name, 20, 0, 0, startWeapon, armorMap.get(ArmorType.LEATHER)); // Two-Handed Sword
                         break;
                     case 3:
-                        player = new Player(name, 20, 0, 0, startWeapon); // One-Handed Axe
+                        player = new Player(name, 20, 0, 0, startWeapon, armorMap.get(ArmorType.LEATHER)); // One-Handed Axe
                         break;
                     case 4:
-                        player = new Player(name, 20, 0, 0, startWeapon); // Two-Handed Axe
+                        player = new Player(name, 20, 0, 0, startWeapon, armorMap.get(ArmorType.LEATHER)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -222,6 +221,9 @@ public class Game
         System.out.println(
           "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
             + player.getWeapon() + ANSI_RESET);
+        System.out.println(
+          "Your Current Armor: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
+            + player.getArmor() + ANSI_RESET);
         System.out.println(
           "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
             + roomList[player.getX()][player.getY()] + ANSI_RESET);

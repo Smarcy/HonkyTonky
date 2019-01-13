@@ -30,4 +30,9 @@ public class Player extends Actor
     {
         return weapon;
     }
+
+    public Armor getArmor()
+    {
+        return armor;
+    }
 }

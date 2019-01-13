@@ -2,29 +2,31 @@ package honkytonky.factories;
 
 import honkytonky.objects.Armor;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class ArmorFactory
 {
 
-    public enum Armors
+    public enum ArmorType
     {
       LEATHER,
       IRON,
       STEEL
     }
 
-    private List<Armor> armorList = new ArrayList<>();
+    private Map<ArmorType, Armor> armorMap = new EnumMap<>(ArmorType.class);
 
     public ArmorFactory()
     {
-        armorList.add(new Armor(armorList.size(), "Leather Armor", 1));
-        armorList.add(new Armor(armorList.size(), "Iron Armor", 2));
-        armorList.add(new Armor(armorList.size(), "Steel Armor", 3));
+        armorMap.put(ArmorType.LEATHER, new Armor(armorMap.size(), "Leather Armor", 1));
+        armorMap.put(ArmorType.IRON, new Armor(armorMap.size(), "Iron Armor", 1));
+        armorMap.put(ArmorType.STEEL, new Armor(armorMap.size(), "Steel Armor", 1));
     }
 
-    public List<Armor> getArmorList()
+    public Map<ArmorType, Armor> getArmorMap()
     {
-        return armorList;
+        return armorMap;
     }
 }
