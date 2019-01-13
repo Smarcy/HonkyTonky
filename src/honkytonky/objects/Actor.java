@@ -57,6 +57,11 @@ public abstract class Actor
         return maxHP;
     }
 
+    public void setHp(int hp)
+    {
+        this.hp = hp;
+    }
+
     @Override
     public String toString()
     {

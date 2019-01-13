@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MonsterFactory
 {
-    private List<Actor> monsterList = new ArrayList<>();
+    private List<Monster> monsterList = new ArrayList<>();
 
     public MonsterFactory()
     {
@@ -19,7 +19,7 @@ public class MonsterFactory
         monsterList.add(new Monster("Butterfly", 10, 2, 2, 1, BUTTERFLY));
     }
 
-    public List<Actor> getMonsterList()
+    public List<Monster> getMonsterList()
     {
         return monsterList;
     }

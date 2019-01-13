@@ -10,36 +10,44 @@ import honkytonky.objects.Armor;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
+import honkytonky.objects.Monster;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 public class Game
 {
 
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_BLACK = "\u001B[30m";
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
-    private static final String ANSI_BLUE = "\u001B[34m";
-    private static final String ANSI_PURPLE = "\u001B[35m";
-    private static final String ANSI_CYAN = "\u001B[36m";
-    private static final String ANSI_WHITE = "\u001B[37m";
-    private final Scanner scanner = new Scanner(System.in);
-    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+    private static final String ANSI_RESET      = "\u001B[0m";
+    private static final String ANSI_BLACK      = "\u001B[30m";
+    private static final String ANSI_RED        = "\u001B[31m";
+    private static final String ANSI_GREEN      = "\u001B[32m";
+    private static final String ANSI_YELLOW     = "\u001B[33m";
+    private static final String ANSI_BLUE       = "\u001B[34m";
+    private static final String ANSI_PURPLE     = "\u001B[35m";
+    private static final String ANSI_CYAN       = "\u001B[36m";
+    private static final String ANSI_WHITE      = "\u001B[37m";
+
+    private final Scanner scanner               = new Scanner(System.in);
+    private final ProcessBuilder pb             = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
     private final MonsterFactory monsterFactory = new MonsterFactory();
-    private final RoomFactory roomFactory = new RoomFactory();
-    private final WeaponFactory weaponFactory = new WeaponFactory();
-    private final ArmorFactory armorFactory = new ArmorFactory();
-    private final Room[][] roomList = roomFactory.createRooms();
-    private final List<Actor> actors = monsterFactory.getMonsterList();
-    private final Map<ArmorType, Armor> armorMap = armorFactory.getArmorMap();
+    private final RoomFactory roomFactory       = new RoomFactory();
+    private final WeaponFactory weaponFactory   = new WeaponFactory();
+    private final ArmorFactory armorFactory     = new ArmorFactory();
+
+    private final Room[][] roomList                 = roomFactory.createRooms();
+    private final List<Monster> monsterList                = monsterFactory.getMonsterList();
+    private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
+
     private Player player = null;
+    private Monster monster = null;
     private int monsterID;
+
+    private Random rnd = new Random();
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
@@ -334,7 +342,7 @@ public class Game
      */
     private boolean roomHasMonster()
     {
-        for (Actor actor : actors)
+        for (Actor actor : monsterList)
         {
             if (actor.getX() == player.getX() && actor.getY() == player.getY())
             {
@@ -348,17 +356,17 @@ public class Game
     /**
      * This method gets called when the player enters a room or place that contains an enemy
      */
-    private void startBattle() throws InputMismatchException, NumberFormatException
+    private void startBattle() throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException
     {
         clearScreen();
 
         boolean monsterAlive = true;
-        Actor monster = monsterFactory.getMonsterList().get(monsterID);
+        monster = monsterFactory.getMonsterList().get(monsterID);
+
+        System.out.println(ANSI_RED + "You encountered a " + monster + "!\n" + ANSI_RESET);
 
         while (monsterAlive)
         {
-            System.out.println(ANSI_RED + "You encountered a " + monster + "!" + ANSI_RESET);
-
             System.out.println("What do you want to do this round?\n");
             System.out.println(
               "1) Attack with your " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
@@ -371,46 +379,80 @@ public class Game
                 switch (Integer.parseInt(scanner.nextLine()))
                 {
                     case 1:
-                        playerAttack();
+                        monsterAlive = playerAttacks();
                         break;
                     case 2:
-                        playerDefend();
+                        playerDefends();
                         break;
                     case 3:
-                        playerFlee();
+                        playerFlees();
                         break;
                     default:
+                        clearScreen();
                         break;
                 }
-            } catch (InputMismatchException | NumberFormatException e)
+            } catch (InputMismatchException | NumberFormatException | ArrayIndexOutOfBoundsException e)
             {
                 clearScreen();
                 continue;
             }
+
+            if(monsterAlive)
+            {
+                int rng = monster.getDamage() + rnd.nextInt(2) + 1; // calculate damage: WeaponDmg + random number (1-2)
+
+                player.setHp(player.getHp() - rng);
+
+                System.out.println(ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!\n");
+            }
+            else
+            {
+                System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
+
+                try
+                {
+                    System.in.read();
+                } catch (Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                clearScreen();
+                break;
+            }
+
         }
     }
 
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      */
-    private void playerAttack()
+    private boolean playerAttacks()
     {
+        clearScreen();
 
+        int rng = player.getWeapon().getDamage() + rnd.nextInt(2) + 1;  // calculate damage: WeaponDmg + random number (1-2)
+
+        monster.setHp(monster.getHp() - rng);
+
+        System.out.println("You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!");
+
+        return monster.getHp() >= 0;
     }
 
     /**
      * Is called when the Player is in a battle and chooses defend himself
      */
-    private void playerDefend()
+    private boolean playerDefends()
     {
-
+        return true;
     }
 
     /**
      * Is called when the Player is in a battle and chooses to flee from the fight
      */
-    private void playerFlee()
+    private boolean playerFlees()
     {
-
+        return true;
     }
 }

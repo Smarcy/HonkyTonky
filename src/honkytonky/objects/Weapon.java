@@ -32,4 +32,9 @@ public class Weapon extends Item
     {
         return this.getName();
     }
+
+    public int getDamage()
+    {
+        return damage;
+    }
 }
