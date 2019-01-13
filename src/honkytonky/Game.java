@@ -222,13 +222,13 @@ public class Game
           "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
             + player.getWeapon() + ANSI_RESET);
         System.out.println(
-          "Your Current Armor: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
+          "Your Current Armor Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
             + player.getArmor() + ANSI_RESET);
         System.out.println(
-          "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
+          "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
             + roomList[player.getX()][player.getY()] + ANSI_RESET);
         System.out.println(
-          "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
+          "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
             + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
 
         try

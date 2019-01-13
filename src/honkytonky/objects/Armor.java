@@ -10,4 +10,10 @@ public class Armor extends Item
         super(id, name);
         this.armorPoints = armorPoints;
     }
+
+    @Override
+    public String toString()
+    {
+        return this.getName();
+    }
 }
