@@ -21,5 +21,4 @@ public class WeaponFactory
     {
         return weaponList;
     }
-
 }
