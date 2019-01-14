@@ -1,5 +1,10 @@
 package honkytonky;
 
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_RED;
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
+
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MonsterFactory;
@@ -21,32 +26,25 @@ import java.util.concurrent.TimeUnit;
 
 public class Game {
 
-    private static final String ANSI_RESET = "\u001B[0m";
-    private static final String ANSI_BLACK = "\u001B[30m";
-    private static final String ANSI_RED = "\u001B[31m";
-    private static final String ANSI_GREEN = "\u001B[32m";
-    private static final String ANSI_YELLOW = "\u001B[33m";
-    private static final String ANSI_BLUE = "\u001B[34m";
-    private static final String ANSI_PURPLE = "\u001B[35m";
-    private static final String ANSI_CYAN = "\u001B[36m";
-    private static final String ANSI_WHITE = "\u001B[37m";
 
-    private final Scanner scanner = new Scanner(System.in);
-    private final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
-    private final MonsterFactory monsterFactory = new MonsterFactory();
-    private final RoomFactory roomFactory = new RoomFactory();
-    private final WeaponFactory weaponFactory = new WeaponFactory();
-    private final ArmorFactory armorFactory = new ArmorFactory();
+    // @formatter:off
+    private final Scanner scanner                   = new Scanner(System.in);
+    private final ProcessBuilder pb                 = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
+    private final MonsterFactory monsterFactory     = new MonsterFactory();
+    private final RoomFactory roomFactory           = new RoomFactory();
+    private final WeaponFactory weaponFactory       = new WeaponFactory();
+    private final ArmorFactory armorFactory         = new ArmorFactory();
 
-    private final Room[][] roomList = roomFactory.createRooms();
-    private final List<Monster> monsterList = monsterFactory.getMonsterList();
-    private final Map<ArmorType, Armor> armorMap = armorFactory.getArmorMap();
+    private final Room[][] roomList                 = roomFactory.createRooms();
+    private final List<Monster> monsterList         = monsterFactory.getMonsterList();
+    private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
 
-    private Player player = null;
+    private Player player   = null;
     private Monster monster = null;
     private int monsterID;
 
     private Random rnd = new Random();
+    // @formatter:on
 
     public static void main(String[] args) throws IOException, InterruptedException {
         Game game = new Game();
@@ -156,7 +154,7 @@ public class Game {
     private void startGame()
       throws InputMismatchException, NumberFormatException, InterruptedException {
         while (true) {
-            whereAmI();
+            printCurrentLocation();
 
             System.out.println("Choose an option:\n");
             System.out.println("1) Move");
@@ -194,7 +192,7 @@ public class Game {
     /**
      * Console output of the current Room or Place
      */
-    private void whereAmI() {
+    private void printCurrentLocation() {
         System.out.println(
           "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
             + ANSI_RESET);  // set Console color to green and reset after
@@ -223,11 +221,7 @@ public class Game {
           "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
             + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
 
-        try {
-            System.in.read();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        scanner.nextLine(); // Stop here until a key is pressed
     }
 
     /**
@@ -382,11 +376,7 @@ public class Game {
 
                 rewardPlayer();
 
-                try {
-                    System.in.read();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                scanner.nextLine(); // Stop here until a key is pressed
 
                 clearScreen();
                 break;
@@ -447,7 +437,6 @@ public class Game {
 
     /**
      * checks if the Player is alive every time he got hit by an enemy
-     * @throws InterruptedException
      */
     private void isPlayerAlive() throws InterruptedException {
         if (player.getHp() <= 0) {
@@ -457,11 +446,7 @@ public class Game {
 
             resetGame();
 
-            try {
-                System.in.read();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            scanner.nextLine(); // Stop here until a key is pressed
 
             showIntro();
         }
