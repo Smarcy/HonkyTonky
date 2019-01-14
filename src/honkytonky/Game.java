@@ -268,8 +268,8 @@ public class Game {
     }
 
     /**
-     * Checks if a requested move is valid by comparing input string & roomList[x][y] != null &
-     * Room.has[direction]Exit
+     * Checks if a requested move is valid by comparing
+     * input string & roomList[x][y] != null & Room.has[direction]Exit
      *
      * @param direction where the player wants to move
      * @return if the requested move is valid

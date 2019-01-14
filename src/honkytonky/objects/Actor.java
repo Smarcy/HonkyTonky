@@ -3,8 +3,7 @@ package honkytonky.objects;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Actor
-{
+public abstract class Actor {
 
     private final int id;
     private final String name;
@@ -14,57 +13,51 @@ public abstract class Actor
 
     private List<Actor> actors = new ArrayList<>();
 
-    public Actor(String name, int maxHP, int x, int y)
-    {
+    public Actor(String name, int maxHP, int x, int y) {
+
+        //@formatter:off
         this.name   = name;
         this.maxHP  = maxHP;
         this.hp     = maxHP;
         this.x      = x;
         this.y      = y;
         this.id     = actors.size();
+        //@formatter:on
 
         actors.add(this);
     }
 
-    public void setLocation(int x, int y)
-    {
+    public void setLocation(int x, int y) {
         this.x = x;
         this.y = y;
     }
 
-    public int getX()
-    {
+    public int getX() {
         return x;
     }
 
-    public int getY()
-    {
+    public int getY() {
         return y;
     }
 
-    public int getID()
-    {
+    public int getID() {
         return id;
     }
 
-    public int getHp()
-    {
+    public int getHp() {
         return hp;
     }
 
-    public int getMaxHP()
-    {
-        return maxHP;
-    }
-
-    public void setHp(int hp)
-    {
+    public void setHp(int hp) {
         this.hp = hp;
     }
 
+    public int getMaxHP() {
+        return maxHP;
+    }
+
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 }

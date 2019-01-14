@@ -1,20 +1,17 @@
 package honkytonky.objects;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Room {
 
-public class Room
-{
-
+    private static Room[][] rooms = new Room[10][10];
     private final int id;
     private final String name;
     private final int x, y;
     private final boolean north, east, south, west;
 
-    private static Room[][] rooms = new Room[10][10];
+    public Room(String name, int x, int y, boolean north, boolean east, boolean south,
+      boolean west) {
 
-    public Room(String name, int x, int y, boolean north, boolean east, boolean south, boolean west)
-    {
+        //@formatter:off
         this.name   = name;
         this.id     = rooms.length;
         this.x      = x;
@@ -26,42 +23,37 @@ public class Room
         this.west   = west;
 
         rooms[x][y] = this;
+        //@formatter:on
+
     }
 
-    public Room[][] getRooms()
-    {
+    public Room[][] getRooms() {
         return rooms;
     }
 
     @Override
-    public String toString()
-    {
+    public String toString() {
         return this.name;
     }
 
-    public int[] getCurrentRoom()
-    {
+    public int[] getCurrentRoom() {
         int[] coords = {this.x, this.y};
         return coords;
     }
 
-    public boolean hasNorthExit()
-    {
+    public boolean hasNorthExit() {
         return north;
     }
 
-    public boolean hasEastExit()
-    {
+    public boolean hasEastExit() {
         return east;
     }
 
-    public boolean hasSouthExit()
-    {
+    public boolean hasSouthExit() {
         return south;
     }
 
-    public boolean hasWestExit()
-    {
+    public boolean hasWestExit() {
         return west;
     }
 }
