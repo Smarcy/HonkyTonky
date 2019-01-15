@@ -49,18 +49,31 @@ public class CharacterInfoPattern {
             + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + ANSI_RESET);
     }
 
+    /**
+     * print info for the current Location (read: room) of the player
+     * @param player the playerobject thats location is printed
+     */
     private void printLocationInfo(Player player) {
         System.out.println(
           "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
             + player.getCurrentRoom() + ANSI_RESET);
     }
 
+    /**
+     * prints info for the current and maximal health of the player
+     * Output pattern: Your Current HP: (currentHP) / (maximalHP)
+     * @param player the playerobject thats health is printed
+     */
     private void printHealthInfo(Player player) {
         System.out
           .println("Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
             + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
     }
 
+    /**
+     *prints info for the name of the player
+     * @param player the playerobject thats name is printed
+     */
     private void printNameInfo(Player player) {
         System.out.println(
           "Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player
