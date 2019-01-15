@@ -1,5 +1,6 @@
 package honkytonky.objects;
 
+import honkytonky.factories.RoomFactory;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +8,14 @@ public abstract class Actor {
 
     private final int id;
     private final String name;
+    private final RoomFactory roomFactory = new RoomFactory();
+    private final Room[][] roomList = roomFactory.createRooms();
     private int hp;
     private int maxHP;
     private int x, y;
-
+    private Room currentRoom;
     private List<Actor> actors = new ArrayList<>();
+
 
     public Actor(String name, int maxHP, int x, int y) {
 
@@ -54,6 +58,10 @@ public abstract class Actor {
 
     public int getMaxHP() {
         return maxHP;
+    }
+
+    public Room getCurrentRoom() {
+        return roomList[this.x][this.y];
     }
 
     @Override

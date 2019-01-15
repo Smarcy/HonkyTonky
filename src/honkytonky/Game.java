@@ -16,6 +16,7 @@ import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
+import honkytonky.resources.CharacterInfoPattern;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -34,6 +35,7 @@ public class Game {
     private final RoomFactory roomFactory           = new RoomFactory();
     private final WeaponFactory weaponFactory       = new WeaponFactory();
     private final ArmorFactory armorFactory         = new ArmorFactory();
+    private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
 
     private final Room[][] roomList                 = roomFactory.createRooms();
     private final List<Monster> monsterList         = monsterFactory.getMonsterList();
@@ -201,25 +203,15 @@ public class Game {
     private void showCharacterInfo() {
         clearScreen();
 
-        System.out.println(
-          "Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player
-            + ANSI_RESET);
+        charInfo.printNameInfo(player);
 
-        System.out.println(
-          "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
-            + player.getWeapon() + ANSI_RESET);
+        charInfo.printWeaponInfo(player);
 
-        System.out.println(
-          "Your Current Armor Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
-            + player.getArmor() + " (" + player.getArmor().getArmorPoints() + " Armor Points)" + ANSI_RESET);
+        charInfo.printArmorInfo(player);
 
-        System.out.println(
-          "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
-            + roomList[player.getX()][player.getY()] + ANSI_RESET);
-        System.out.println(
+        charInfo.printLocationInfo(player);
 
-          "Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
-            + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
+        charInfo.printHealthInfo(player);
 
         scanner.nextLine(); // Stop here until a key is pressed
     }
@@ -268,8 +260,8 @@ public class Game {
     }
 
     /**
-     * Checks if a requested move is valid by comparing
-     * input string & roomList[x][y] != null & Room.has[direction]Exit
+     * Checks if a requested move is valid by comparing input string & roomList[x][y] != null &
+     * Room.has[direction]Exit
      *
      * @param direction where the player wants to move
      * @return if the requested move is valid
