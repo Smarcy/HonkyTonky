@@ -19,6 +19,11 @@ public class Armor extends Item
         return armorPoints;
     }
 
+    public String printArmorInfo(Armor armor)
+    {
+        return null;
+    }
+
     @Override
     public String toString()
     {

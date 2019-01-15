@@ -211,7 +211,7 @@ public class Game {
 
         System.out.println(
           "Your Current Armor Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 30)
-            + player.getArmor() + ANSI_RESET);
+            + player.getArmor() + " (" + player.getArmor().getArmorPoints() + " Armor Points)" + ANSI_RESET);
 
         System.out.println(
           "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
@@ -320,7 +320,7 @@ public class Game {
      */
     private void startBattle()
       throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException,
-      InterruptedException, NumberFormatException {
+      InterruptedException {
         clearScreen();
 
         boolean monsterAlive = true;
