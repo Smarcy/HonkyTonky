@@ -57,8 +57,10 @@ class Game {
      * Shows the menu to choose an option
      */
     private void showIntro() throws InterruptedException, NumberFormatException {
-        introLoop:
-        while (true) {
+
+        boolean run = true;
+
+        while (run) {
             clearScreen();
 
             System.out.println("Welcome to HonkyTonky!");
@@ -76,7 +78,8 @@ class Game {
                         if (player != null) {
                             clearScreen();
                             startGame();
-                            break introLoop;
+                            run = false;
+                            break;
                         } else {
                             System.out.println("Please create a new player first!");
                             TimeUnit.SECONDS.sleep(3);

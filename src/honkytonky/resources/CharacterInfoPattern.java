@@ -10,13 +10,13 @@ public class CharacterInfoPattern {
     public void printCharacterInfo(Player player) {
         printNameInfo(player);
 
+        printHealthInfo(player);
+
         printWeaponInfo(player);
 
         printArmorInfo(player);
 
         printLocationInfo(player);
-
-        printHealthInfo(player);
     }
 
     /**
@@ -27,12 +27,12 @@ public class CharacterInfoPattern {
      */
     private void printArmorInfo(Player player) {
         if (player.getArmor().getArmorPoints() <= 1) {
-            System.out.println("Your Current Armor Is: " + ANSI_YELLOW + String
-              .format("%c[%d;%df", 0x1B, 3, 30) + player.getArmor()
+            System.out.println("Armor: " + ANSI_YELLOW + String
+              .format("%c[%d;%df", 0x1B, 4, 15) + player.getArmor()
               + " (" + player.getArmor().getArmorPoints() + " Armor Point)" + ANSI_RESET);
         } else {
-            System.out.println("Your Current Armor Is: " + ANSI_YELLOW + String
-              .format("%c[%d;%df", 0x1B, 3, 30) + player.getArmor()
+            System.out.println("Armor: " + ANSI_YELLOW + String
+              .format("%c[%d;%df", 0x1B, 4, 15) + player.getArmor()
               + " (" + player.getArmor().getArmorPoints() + " Armor Points)" + ANSI_RESET);
         }
     }
@@ -45,7 +45,7 @@ public class CharacterInfoPattern {
      */
     private void printWeaponInfo(Player player) {
         System.out.println(
-          "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
+          "Weapon: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 3, 15)
             + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + ANSI_RESET);
     }
 
@@ -55,7 +55,7 @@ public class CharacterInfoPattern {
      */
     private void printLocationInfo(Player player) {
         System.out.println(
-          "You Are Currently In: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 30)
+          "Location: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 15)
             + player.getCurrentRoom() + ANSI_RESET);
     }
 
@@ -66,7 +66,7 @@ public class CharacterInfoPattern {
      */
     private void printHealthInfo(Player player) {
         System.out
-          .println("Your Current HP: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 30)
+          .println("Health: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 15)
             + player.getHp() + " / " + player.getMaxHP() + ANSI_RESET);
     }
 
@@ -76,7 +76,7 @@ public class CharacterInfoPattern {
      */
     private void printNameInfo(Player player) {
         System.out.println(
-          "Your Name Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 30) + player
+          "Name: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 15) + player
             + ANSI_RESET);
     }
 }
