@@ -21,9 +21,9 @@ public class CharacterInfoPattern {
 
     /**
      * prints info for the type and strength (armorpoints) of the player's current armor
+     * Output pattern: "Your Current Armor Is: ArmorType (x Armor Points)"
      *
      * @param player the playerobject that is wearing the armor
-     * @return "Your Current Armor Is: ArmorType (x Armor Points)"
      */
     private void printArmorInfo(Player player) {
         if (player.getArmor().getArmorPoints() <= 1) {
@@ -37,10 +37,16 @@ public class CharacterInfoPattern {
         }
     }
 
+    /**
+     * prints info for the type and strength (damage) of the player's current weapon
+     * Output pattern: "Your Current Weapon Is: WeaponType (x Damage)"
+     *
+     * @param player the playerobject that is carrying the weapon
+     */
     private void printWeaponInfo(Player player) {
         System.out.println(
           "Your Current Weapon Is: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 2, 30)
-            + player.getWeapon() + ANSI_RESET);
+            + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + ANSI_RESET);
     }
 
     private void printLocationInfo(Player player) {

@@ -1,8 +1,5 @@
 package honkytonky.objects;
 
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
-
 public class Armor extends Item {
 
     private final int armorPoints;

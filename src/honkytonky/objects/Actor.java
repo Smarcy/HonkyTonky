@@ -17,7 +17,7 @@ public abstract class Actor {
     private List<Actor> actors = new ArrayList<>();
 
 
-    public Actor(String name, int maxHP, int x, int y) {
+    Actor(String name, int maxHP, int x, int y) {
 
         //@formatter:off
         this.name   = name;

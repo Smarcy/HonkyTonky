@@ -25,7 +25,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-public class Game {
+class Game {
 
 
     // @formatter:off

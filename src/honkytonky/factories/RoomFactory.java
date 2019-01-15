@@ -1,7 +1,6 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Room;
-import java.util.Arrays;
 
 public class RoomFactory
 {

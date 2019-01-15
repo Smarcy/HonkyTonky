@@ -3,9 +3,7 @@ package honkytonky.factories;
 import static honkytonky.objects.Monster.MonsterType.BUTTERFLY;
 import static honkytonky.objects.Monster.MonsterType.ZOMBIE;
 
-import honkytonky.objects.Actor;
 import honkytonky.objects.Monster;
-import honkytonky.objects.Monster.MonsterType;
 import java.util.ArrayList;
 import java.util.List;
 

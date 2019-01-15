@@ -1,8 +1,7 @@
 package honkytonky.objects;
 
 
-
-public abstract class Item
+abstract class Item
 {
     private int id;
     private String name;
@@ -13,7 +12,7 @@ public abstract class Item
         this.name = name;
     }
 
-    public String getName()
+    String getName()
     {
         return name;
     }
