@@ -177,8 +177,7 @@ public class Game {
                         }
                         break;
                     case 2:
-                        showCharacterInfo();
-                        clearScreen();
+                        printCharacterInfo();
                         break;
                     case 3:
                         System.exit(0);
@@ -200,20 +199,14 @@ public class Game {
             + ANSI_RESET);  // set Console color to green and reset after
     }
 
-    private void showCharacterInfo() {
+    private void printCharacterInfo() {
         clearScreen();
 
-        charInfo.printNameInfo(player);
-
-        charInfo.printWeaponInfo(player);
-
-        charInfo.printArmorInfo(player);
-
-        charInfo.printLocationInfo(player);
-
-        charInfo.printHealthInfo(player);
+        charInfo.printCharacterInfo(player);
 
         scanner.nextLine(); // Stop here until a key is pressed
+
+        clearScreen();
     }
 
     /**
