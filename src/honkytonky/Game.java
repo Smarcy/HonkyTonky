@@ -67,7 +67,6 @@ class Game {
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
             System.out.println("2) Create New Player\n");
-
             System.out.print("\n> ");
 
             try {
@@ -127,19 +126,19 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER)); // One-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER)); // Two-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER)); // One-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER)); // Two-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -244,7 +243,7 @@ class Game {
                 clearScreen();
                 System.out
                   .println(ANSI_RED + "There is no place connected in this direction! (" + direction
-                    + ")\n" + ANSI_RESET);
+                             + ")\n" + ANSI_RESET);
                 startGame();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -346,8 +345,7 @@ class Game {
             }
 
             if (monsterAlive) {
-                int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
-                  .getArmorPoints();
+                int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor().getArmorPoints();
 
                 if (rng < 0) {
                     rng = 0;
@@ -382,8 +380,7 @@ class Game {
     private boolean playerAttacks() {
         clearScreen();
 
-        int wepDMG = player.getWeapon()
-          .getDamage();
+        int wepDMG = player.getWeapon().getDamage();
         int rng = rnd.nextInt(wepDMG + 2) + 1;
 
         int dmg = wepDMG + rng;
@@ -416,7 +413,24 @@ class Game {
     }
 
     private void rewardPlayer() {
+        int xpReward = calculateExperienceReward();
 
+        System.out.println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
+
+        if(playerLeveledUp())
+        {
+
+        }
+    }
+
+    private int calculateExperienceReward()
+    {
+        return 0;
+    }
+
+    private boolean playerLeveledUp()
+    {
+        return false;
     }
 
     private void resetGame() {

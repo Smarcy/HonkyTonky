@@ -13,11 +13,11 @@ public abstract class Actor {
     private int hp;
     private int maxHP;
     private int x, y;
+    private int level = 1;
     private Room currentRoom;
     private List<Actor> actors = new ArrayList<>();
 
-
-    Actor(String name, int maxHP, int x, int y) {
+    Actor(String name, int maxHP, int x, int y, int level) {
 
         //@formatter:off
         this.name   = name;
@@ -25,6 +25,7 @@ public abstract class Actor {
         this.hp     = maxHP;
         this.x      = x;
         this.y      = y;
+        this.level  = level;
         this.id     = actors.size();
         //@formatter:on
 
@@ -62,6 +63,11 @@ public abstract class Actor {
 
     public Room getCurrentRoom() {
         return roomList[this.x][this.y];
+    }
+
+    public int getLevel()
+    {
+        return level;
     }
 
     @Override
