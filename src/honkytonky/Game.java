@@ -345,7 +345,8 @@ class Game {
             }
 
             if (monsterAlive) {
-                int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor().getArmorPoints();
+                int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
+                  .getArmorPoints();
 
                 if (rng < 0) {
                     rng = 0;
@@ -417,13 +418,13 @@ class Game {
 
         player.increaseExperience(xpReward);
 
-        System.out.println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
+        System.out
+          .println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
 
         player.checkForLevelUp(player);
     }
 
-    private int calculateExperienceReward()
-    {
+    private int calculateExperienceReward() {
         return monster.getGrantedExperience();
     }
 

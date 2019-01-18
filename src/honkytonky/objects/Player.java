@@ -36,8 +36,7 @@ public class Player extends Actor {
         this.currentRoomID = currentRoomID;
     }
 
-    public int getExperience()
-    {
+    public int getExperience() {
         return experience;
     }
 
@@ -49,15 +48,12 @@ public class Player extends Actor {
         return armor;
     }
 
-    public void increaseExperience(int amount)
-    {
+    public void increaseExperience(int amount) {
         this.experience += amount;
     }
 
-    public void checkForLevelUp(Player player)
-    {
-        if(expTable.hasLevelUp(player.getLevel(), player.experience))
-        {
+    public void checkForLevelUp(Player player) {
+        if (expTable.hasLevelUp(player.getLevel(), player.experience)) {
             this.setLevel(getLevel() + 1);
 
             System.out.println("\nYou have leveled up!\n");
@@ -65,8 +61,7 @@ public class Player extends Actor {
         }
     }
 
-    public float getPercentalExperience()
-    {
+    public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }
 }
