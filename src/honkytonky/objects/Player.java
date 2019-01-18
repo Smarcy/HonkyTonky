@@ -1,5 +1,9 @@
 package honkytonky.objects;
 
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
+
+import honkytonky.resources.ExpTable;
+
 public class Player extends Actor {
 
     private int currentRoomID;
@@ -8,6 +12,7 @@ public class Player extends Actor {
     private boolean hadLevelUp = false;
     private Weapon weapon;
     private Armor armor;
+    private ExpTable expTable = new ExpTable();
 
     public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor) {
 
@@ -39,26 +44,19 @@ public class Player extends Actor {
         return armor;
     }
 
-    public boolean rewardExperience(int amount)
+    public void increaseExperience(int amount)
     {
-        int tempLevel = getLevel();
         this.experience += amount;
-
-        if(didLevelUp(tempLevel))
-        {
-            return true;
-        }
-
-        return false;
     }
 
-    public boolean didLevelUp(int tempLevel)
+    public void checkForLevelUp(Player player)
     {
-        if(getLevel() > tempLevel)
+        if(expTable.hasLevelUp(player.getLevel(), player.experience))
         {
-            return true;
-        }
+            this.setLevel(getLevel() + 1);
 
-        return false;
+            System.out.println("\nYou have leveled up!\n");
+            System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel());
+        }
     }
 }

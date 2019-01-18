@@ -70,6 +70,11 @@ public abstract class Actor {
         return level;
     }
 
+    public void setLevel(int level)
+    {
+        this.level = level;
+    }
+
     @Override
     public String toString() {
         return this.name;

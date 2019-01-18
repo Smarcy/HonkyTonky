@@ -415,22 +415,16 @@ class Game {
     private void rewardPlayer() {
         int xpReward = calculateExperienceReward();
 
+        player.increaseExperience(xpReward);
+
         System.out.println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
 
-        if(playerLeveledUp())
-        {
-
-        }
+        player.checkForLevelUp(player);
     }
 
     private int calculateExperienceReward()
     {
-        return 0;
-    }
-
-    private boolean playerLeveledUp()
-    {
-        return false;
+        return monster.getGrantedExperience();
     }
 
     private void resetGame() {
