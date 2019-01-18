@@ -65,8 +65,8 @@ public class Player extends Actor {
         }
     }
 
-    public int getPercentalExperience()
+    public float getPercentalExperience()
     {
-        return expTable.calculatePercentalExperience(this);
+        return expTable.calculatePercentalExperience(experience, getLevel());
     }
 }

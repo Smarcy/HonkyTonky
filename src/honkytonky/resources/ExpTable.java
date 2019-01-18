@@ -26,8 +26,12 @@ public class ExpTable {
         return false;
     }
 
-    public int calculatePercentalExperience(Player player)
+    public float calculatePercentalExperience(int experience,  int level)
     {
-        return (player.getExperience() / expTable.get(player.getLevel()) * 100);
+        int test = expTable.get(level);
+
+        float moreTest = ((float)experience / (float)test);
+
+        return ((float)experience / (float)expTable.get(level)) * 100;
     }
 }
