@@ -344,31 +344,43 @@ class Game {
                 continue;
             }
 
-            if (monsterAlive) {
-                int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
-                  .getArmorPoints();
-
-                if (rng < 0) {
-                    rng = 0;
-                }
-
-                player.setHp(player.getHp() - rng);
-
-                System.out.println(
-                  ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!\n");
-
-                isPlayerAlive();
-            } else {
-                System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
-
-                rewardPlayer();
-
-                scanner.nextLine(); // Stop here until a key is pressed
-
-                clearScreen();
-                break;
+            if(monsterAttacks(monsterAlive))
+            {
+               break;
             }
 
+
+        }
+    }
+
+    private boolean monsterAttacks(boolean monsterAlive) throws InterruptedException
+    {
+        if (monsterAlive) {
+            int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
+              .getArmorPoints();
+
+            if (rng < 0) {
+                rng = 0;
+            }
+
+            player.setHp(player.getHp() - rng);
+
+            System.out.println(
+              ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!\n");
+
+            isPlayerAlive();
+
+            return false;
+        } else {
+            System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
+
+            rewardPlayer();
+
+            scanner.nextLine(); // Stop here until a key is pressed
+
+            clearScreen();
+
+            return true;
         }
     }
 
