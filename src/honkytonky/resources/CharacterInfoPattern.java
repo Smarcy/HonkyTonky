@@ -12,6 +12,10 @@ public class CharacterInfoPattern {
 
         printHealthInfo(player);
 
+        printLevelInfo(player);
+
+        printExperienceInfo(player);
+
         printWeaponInfo(player);
 
         printArmorInfo(player);
@@ -78,5 +82,18 @@ public class CharacterInfoPattern {
         System.out.println(
           "Name: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 1, 15) + player
             + ANSI_RESET);
+    }
+
+    private void printLevelInfo(Player player)
+    {
+        System.out.println(
+          "Level: " + ANSI_YELLOW +  player.getLevel() + ANSI_RESET);
+    }
+
+    private void printExperienceInfo(Player player)
+    {
+
+        System.out.println(
+          "Experience: " + ANSI_YELLOW +  player.getExperience() + " (" + player.getPercentalExperience() + "%)" + ANSI_RESET);
     }
 }

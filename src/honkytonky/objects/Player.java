@@ -36,6 +36,11 @@ public class Player extends Actor {
         this.currentRoomID = currentRoomID;
     }
 
+    public int getExperience()
+    {
+        return experience;
+    }
+
     public Weapon getWeapon() {
         return weapon;
     }
@@ -58,5 +63,10 @@ public class Player extends Actor {
             System.out.println("\nYou have leveled up!\n");
             System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel());
         }
+    }
+
+    public int getPercentalExperience()
+    {
+        return expTable.calculatePercentalExperience(this);
     }
 }

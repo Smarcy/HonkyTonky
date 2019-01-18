@@ -1,5 +1,6 @@
 package honkytonky.resources;
 
+import honkytonky.objects.Player;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,5 +24,10 @@ public class ExpTable {
         }
 
         return false;
+    }
+
+    public int calculatePercentalExperience(Player player)
+    {
+        return (player.getExperience() / expTable.get(player.getLevel()) * 100);
     }
 }
