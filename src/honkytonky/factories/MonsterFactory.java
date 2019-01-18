@@ -13,7 +13,7 @@ public class MonsterFactory
 
     public MonsterFactory()
     {
-        monsterList.add(new Monster("Zombie", 15, 1, 1, 2, 1, 100, ZOMBIE));
+        monsterList.add(new Monster("Zombie", 15, 1, 1, 2, 1, 70, ZOMBIE));
         monsterList.add(new Monster("Butterfly", 10, 2, 2, 1, 2, 100, BUTTERFLY));
     }
 
