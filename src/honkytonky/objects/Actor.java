@@ -8,8 +8,6 @@ public abstract class Actor {
 
     private final int id;
     private final String name;
-    private final RoomFactory roomFactory = new RoomFactory();
-    private final Room[][] roomList = roomFactory.createRooms();
     private int hp;
     private int maxHP;
     private int x, y;
@@ -59,10 +57,6 @@ public abstract class Actor {
 
     public int getMaxHP() {
         return maxHP;
-    }
-
-    public Room getCurrentRoom() {
-        return roomList[this.x][this.y];
     }
 
     public int getLevel()

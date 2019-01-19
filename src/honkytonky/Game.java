@@ -7,6 +7,8 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
 
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.ArmorFactory.ArmorType;
+import honkytonky.factories.DoorFactory;
+import honkytonky.factories.MapLayout;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -32,12 +34,11 @@ class Game {
     private final Scanner scanner                   = new Scanner(System.in);
     private final ProcessBuilder pb                 = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
     private final MonsterFactory monsterFactory     = new MonsterFactory();
-    private final RoomFactory roomFactory           = new RoomFactory();
     private final WeaponFactory weaponFactory       = new WeaponFactory();
     private final ArmorFactory armorFactory         = new ArmorFactory();
+    private final MapLayout mapLayout               = new MapLayout();
     private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
 
-    private final Room[][] roomList                 = roomFactory.createRooms();
     private final List<Monster> monsterList         = monsterFactory.getMonsterList();
     private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
 
@@ -158,7 +159,7 @@ class Game {
     private void startGame()
       throws InputMismatchException, NumberFormatException, InterruptedException {
         while (true) {
-            printCurrentLocation();
+            //printCurrentLocation();
 
             System.out.println("Choose an option:\n");
             System.out.println("1) Move");
@@ -195,11 +196,11 @@ class Game {
     /**
      * Console output of the current Room or Place
      */
-    private void printCurrentLocation() {
-        System.out.println(
-          "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
-            + ANSI_RESET);  // set Console color to green and reset after
-    }
+//    private void printCurrentLocation() {
+//        System.out.println(
+//          "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
+//            + ANSI_RESET);  // set Console color to green and reset after
+//    }
 
     private void printCharacterInfo() {
         clearScreen();
@@ -263,19 +264,7 @@ class Game {
      * @return if the requested move is valid
      */
     private boolean isValidMove(String direction) {
-        if (direction.equals("north") && roomList[player.getX()][player.getY() + 1] != null
-          && roomList[player.getX()][player.getY()].hasNorthExit()) {
-            return true;
-        } else if (direction.equals("east") && roomList[player.getX() + 1][player.getY()] != null
-          && roomList[player.getX()][player.getY()].hasEastExit()) {
-            return true;
-        } else if (direction.equals("south") && roomList[player.getX()][player.getY() - 1] != null
-          && roomList[player.getX()][player.getY()].hasSouthExit()) {
-            return true;
-        } else {
-            return direction.equals("west") && roomList[player.getX() - 1][player.getY()] != null
-              && roomList[player.getX()][player.getY()].hasWestExit();
-        }
+        return false;
     }
 
     /**

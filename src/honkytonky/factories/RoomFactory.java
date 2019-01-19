@@ -1,26 +1,38 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Room;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RoomFactory
 {
 
-    private Room[][] roomList = new Room[10][10];
+    private List<Room> rooms = new ArrayList<>();
 
-    public RoomFactory()
+    RoomFactory()
     {
-
+        rooms.add(new Room(0, "Bedroom", 0, 0));
+        rooms.add(new Room(1, "Living Room", 0, 1));
+        rooms.add(new Room(2, "Kitchen", 1, 1));
+        rooms.add(new Room(3, "Storage", 1, 2));
+        rooms.add(new Room(4, "Hall", 0, 2));
     }
 
-    public Room[][] createRooms()
+    public Room getRoomByID(int id)
     {
-        roomList[0][0] = new Room("Bedroom",     0, 0, true, false, false, false);
-        roomList[0][1] = new Room("Living Room", 0, 1, true, true, true, false);
-        roomList[0][2] = new Room("Hall",        0, 2, true, false, true, false);
-        roomList[0][3] = new Room("Entrance",    0, 3, false, false, true, false);
-        roomList[1][1] = new Room("Kitchen",     1, 1, true, false, false, true);
-        roomList[1][2] = new Room("Storage",     1, 2, false, false, true, false);
+        return rooms.get(id);
+    }
 
-        return roomList;
+    Room getRoomByName(String name)
+    {
+        for(Room room : rooms)
+        {
+            if(room.getName().equals(name))
+            {
+                return room;
+            }
+        }
+
+        return null;
     }
 }

@@ -37,6 +37,11 @@ public class Player extends Actor {
         this.currentRoomID = currentRoomID;
     }
 
+    public Room getCurrentRoom()
+    {
+        return null;
+    }
+
     public int getExperience() {
         return experience;
     }
