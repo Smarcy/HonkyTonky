@@ -34,8 +34,28 @@ public class Room {
         doors.add(door);
     }
 
+    public List<Door> getDoors()
+    {
+        return doors;
+    }
+
+    public void listDoorOptions()
+    {
+        System.out.println("Where would you like to go?\n");
+        System.out.println("There are doors to the following rooms:\n");
+
+        int i = 1;
+
+        for(Door door : doors)
+        {
+            System.out.println(i + ") " + door.getTargetRoom());
+            i++;
+        }
+    }
+
     public String getName()
     {
         return name;
     }
+
 }

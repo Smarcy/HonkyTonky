@@ -1,11 +1,15 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Room;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapLayout {
 
     private RoomFactory roomFactory = new RoomFactory();
     private DoorFactory doorFactory = new DoorFactory();
+
+    private List<Room> rooms = new ArrayList<>();
 
     public MapLayout()
     {
@@ -26,6 +30,17 @@ public class MapLayout {
 
         Room hall = roomFactory.getRoomByName("Hall");
         hall.addDoor(doorFactory.getDoorByName("living room"));
+
+        rooms.add(bedroom);
+        rooms.add(livingRoom);
+        rooms.add(kitchen);
+        rooms.add(storage);
+        rooms.add(hall);
+    }
+
+    public List<Room> getRooms()
+    {
+        return rooms;
     }
 
 }

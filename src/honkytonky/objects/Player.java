@@ -13,14 +13,16 @@ public class Player extends Actor {
     private boolean hadLevelUp = false;
     private Weapon weapon;
     private Armor armor;
+    private Room currentRoom;
     private ExpTable expTable = new ExpTable();
 
-    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor) {
+    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor, Room currentRoom) {
 
         super(name, maxHP, x, y, 1);
 
         //@formatter:off
         this.currentRoomID      = 0;
+        this.currentRoom        = currentRoom;
         this.temporaryDefBoost  = 0;
         this.experience         = 0;
         this.weapon             = weapon;
@@ -33,13 +35,13 @@ public class Player extends Actor {
         return currentRoomID;
     }
 
-    public void setCurrentRoomID(int currentRoomID) {
-        this.currentRoomID = currentRoomID;
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
     }
 
     public Room getCurrentRoom()
     {
-        return null;
+        return currentRoom;
     }
 
     public int getExperience() {

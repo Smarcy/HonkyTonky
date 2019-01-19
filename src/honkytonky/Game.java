@@ -7,10 +7,8 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
 
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.ArmorFactory.ArmorType;
-import honkytonky.factories.DoorFactory;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.MonsterFactory;
-import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
@@ -41,6 +39,7 @@ class Game {
 
     private final List<Monster> monsterList         = monsterFactory.getMonsterList();
     private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
+    private final List<Room> rooms                  = mapLayout.getRooms();
 
     private Player player   = null;
     private Monster monster = null;
@@ -127,19 +126,19 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER)); // One-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER)); // Two-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER)); // One-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER)); // Two-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -201,7 +200,6 @@ class Game {
 //          "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
 //            + ANSI_RESET);  // set Console color to green and reset after
 //    }
-
     private void printCharacterInfo() {
         clearScreen();
 
@@ -215,41 +213,16 @@ class Game {
     /**
      * Lets the player move to a requested direction
      */
-    private void move() throws InterruptedException {
-        System.out.println("Where would you like to go?\n");
-        System.out.println("\nType west, east, south or north\n");
-        String direction;
+    private void move() {
 
-        try {
-            direction = (scanner.nextLine().trim().toLowerCase());
+        player.getCurrentRoom().listDoorOptions();
 
-            if (isValidMove(direction)) {
-                switch (direction) {
-                    case "north":
-                        player.setLocation(player.getX(), player.getY() + 1);
-                        break;
-                    case "east":
-                        player.setLocation(player.getX() + 1, player.getY());
-                        break;
-                    case "south":
-                        player.setLocation(player.getX(), player.getY() - 1);
-                        break;
-                    case "west":
-                        player.setLocation(player.getX() - 1, player.getY());
-                        break;
-                    default:
-                        System.out.println(direction + " is not a valid command!");
-                }
-            } else {
-                invalidMoveCommand();
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            invalidMoveCommand();
-        }
+        int targetRoom = Integer.parseInt(scanner.nextLine());
+
+        player.setCurrentRoom(mapLayout.getRooms().get(targetRoom-1));
     }
 
-    private void invalidMoveCommand() throws InterruptedException
-    {
+    private void invalidMoveCommand() throws InterruptedException {
         clearScreen();
         System.out.println(
           ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
@@ -334,17 +307,15 @@ class Game {
                 continue;
             }
 
-            if(monsterAttacks(monsterAlive))
-            {
-               break;
+            if (monsterAttacks(monsterAlive)) {
+                break;
             }
 
 
         }
     }
 
-    private boolean monsterAttacks(boolean monsterAlive) throws InterruptedException
-    {
+    private boolean monsterAttacks(boolean monsterAlive) throws InterruptedException {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
               .getArmorPoints();

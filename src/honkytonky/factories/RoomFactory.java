@@ -11,11 +11,11 @@ public class RoomFactory
 
     RoomFactory()
     {
-        rooms.add(new Room(0, "Bedroom", 0, 0));
-        rooms.add(new Room(1, "Living Room", 0, 1));
-        rooms.add(new Room(2, "Kitchen", 1, 1));
-        rooms.add(new Room(3, "Storage", 1, 2));
-        rooms.add(new Room(4, "Hall", 0, 2));
+        rooms.add(new Room(1, "Bedroom", 0, 0));
+        rooms.add(new Room(2, "Living Room", 0, 1));
+        rooms.add(new Room(3, "Kitchen", 1, 1));
+        rooms.add(new Room(4, "Storage", 1, 2));
+        rooms.add(new Room(5, "Hall", 0, 2));
     }
 
     public Room getRoomByID(int id)
