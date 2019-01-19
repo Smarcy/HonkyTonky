@@ -14,11 +14,12 @@ public class RoomFactory
 
     public Room[][] createRooms()
     {
-        roomList[0][0] = new Room("Entrance", 0, 0, true, true, false, false);
-        roomList[0][1] = new Room("Hall", 0, 1, true, true, true, true);
-        roomList[0][2] = new Room("Bedroom", 0, 2, false, true, true, false);
-        roomList[1][0] = new Room("Kitchen", 1, 0, false, false, true, true);
-        roomList[1][1] = new Room("Yard", 1, 1, true, false, true, false);
+        roomList[0][0] = new Room("Bedroom",     0, 0, true, false, false, false);
+        roomList[0][1] = new Room("Living Room", 0, 1, true, true, true, false);
+        roomList[0][2] = new Room("Hall",        0, 2, true, false, true, false);
+        roomList[0][3] = new Room("Entrance",    0, 3, false, false, true, false);
+        roomList[1][1] = new Room("Kitchen",     1, 1, true, false, false, true);
+        roomList[1][2] = new Room("Storage",     1, 2, false, false, true, false);
 
         return roomList;
     }

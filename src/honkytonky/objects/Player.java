@@ -1,6 +1,7 @@
 package honkytonky.objects;
 
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.resources.ExpTable;
 
@@ -57,7 +58,7 @@ public class Player extends Actor {
             this.setLevel(getLevel() + 1);
 
             System.out.println("\nYou have leveled up!\n");
-            System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel());
+            System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel() + ANSI_RESET);
         }
     }
 

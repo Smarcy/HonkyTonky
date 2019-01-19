@@ -240,18 +240,19 @@ class Game {
                         System.out.println(direction + " is not a valid command!");
                 }
             } else {
-                clearScreen();
-                System.out
-                  .println(ANSI_RED + "There is no place connected in this direction! (" + direction
-                             + ")\n" + ANSI_RESET);
-                startGame();
+                invalidMoveCommand();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            clearScreen();
-            System.out.println(
-              ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
-            startGame();
+            invalidMoveCommand();
         }
+    }
+
+    private void invalidMoveCommand() throws InterruptedException
+    {
+        clearScreen();
+        System.out.println(
+          ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
+        startGame();
     }
 
     /**
