@@ -14,22 +14,22 @@ public class MapLayout {
     public MapLayout()
     {
         Room bedroom = roomFactory.getRoomByName("Bedroom");
-        bedroom.addDoor(doorFactory.getDoorByName("living room"));
+        bedroom.addDoor(doorFactory.getDoorByName("Living Room"));
 
         Room livingRoom = roomFactory.getRoomByName("Living Room");
-        livingRoom.addDoor(doorFactory.getDoorByName("bedroom"));
-        livingRoom.addDoor(doorFactory.getDoorByName("kitchen"));
-        livingRoom.addDoor(doorFactory.getDoorByName("hall"));
+        livingRoom.addDoor(doorFactory.getDoorByName("Bedroom"));
+        livingRoom.addDoor(doorFactory.getDoorByName("Kitchen"));
+        livingRoom.addDoor(doorFactory.getDoorByName("Hall"));
 
         Room kitchen = roomFactory.getRoomByName("Kitchen");
-        kitchen.addDoor(doorFactory.getDoorByName("living room"));
-        kitchen.addDoor(doorFactory.getDoorByName("storage"));
+        kitchen.addDoor(doorFactory.getDoorByName("Living Room"));
+        kitchen.addDoor(doorFactory.getDoorByName("Storage"));
 
         Room storage = roomFactory.getRoomByName("Storage");
-        storage.addDoor(doorFactory.getDoorByName("kitchen"));
+        storage.addDoor(doorFactory.getDoorByName("Kitchen"));
 
         Room hall = roomFactory.getRoomByName("Hall");
-        hall.addDoor(doorFactory.getDoorByName("living room"));
+        hall.addDoor(doorFactory.getDoorByName("Living Room"));
 
         rooms.add(bedroom);
         rooms.add(livingRoom);
@@ -41,6 +41,16 @@ public class MapLayout {
     public List<Room> getRooms()
     {
         return rooms;
+    }
+
+    public Room getRoomByName(String name)
+    {
+        return roomFactory.getRoomByName(name);
+    }
+
+    public Room getRoomByID(int id)
+    {
+        return roomFactory.getRoomByID(id);
     }
 
 }

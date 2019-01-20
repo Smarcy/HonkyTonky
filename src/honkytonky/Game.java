@@ -218,7 +218,9 @@ class Game {
 
         int targetRoom = Integer.parseInt(scanner.nextLine());
 
-        player.setCurrentRoom(mapLayout.getRooms().get(targetRoom-1));
+        //String targetRoom = scanner.nextLine();
+
+        //player.setCurrentRoom();
 
         clearScreen();
     }

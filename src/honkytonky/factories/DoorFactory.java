@@ -11,11 +11,11 @@ public class DoorFactory {
 
     DoorFactory()
     {
-        doors.add(new Door(1, "bedroom", roomFactory.getRoomByName("Bedroom")));
-        doors.add(new Door(2, "living room",  roomFactory.getRoomByName("Living Room")));
-        doors.add(new Door(3, "kitchen", roomFactory.getRoomByName("Kitchen")));
-        doors.add(new Door(4, "storage", roomFactory.getRoomByName("Storage")));
-        doors.add(new Door(5, "hall", roomFactory.getRoomByName("Hall")));
+        doors.add(new Door(1, "Bedroom", roomFactory.getRoomByName("Bedroom")));
+        doors.add(new Door(2, "Living Room",  roomFactory.getRoomByName("Living Room")));
+        doors.add(new Door(3, "Kitchen", roomFactory.getRoomByName("Kitchen")));
+        doors.add(new Door(4, "Storage", roomFactory.getRoomByName("Storage")));
+        doors.add(new Door(5, "Hall", roomFactory.getRoomByName("Hall")));
 
     }
 
