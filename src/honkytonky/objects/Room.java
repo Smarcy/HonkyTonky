@@ -5,7 +5,6 @@ import java.util.List;
 
 public class Room {
 
-    private static Room[][] rooms = new Room[10][10];
     private final int id;
     private final String name;
     private final int x, y;
@@ -18,8 +17,6 @@ public class Room {
         this.id     = id;
         this.x      = x;
         this.y      = y;
-
-        rooms[x][y] = this;
         //@formatter:on
 
     }

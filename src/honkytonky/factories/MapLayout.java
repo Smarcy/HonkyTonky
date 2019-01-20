@@ -47,10 +47,4 @@ public class MapLayout {
     {
         return roomFactory.getRoomByName(name);
     }
-
-    public Room getRoomByID(int id)
-    {
-        return roomFactory.getRoomByID(id);
-    }
-
 }

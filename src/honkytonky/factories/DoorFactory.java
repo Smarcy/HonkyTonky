@@ -4,7 +4,7 @@ import honkytonky.objects.Door;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DoorFactory {
+class DoorFactory {
 
     private List<Door> doors = new ArrayList<>();
     private RoomFactory roomFactory = new RoomFactory();
@@ -17,11 +17,6 @@ public class DoorFactory {
         doors.add(new Door(4, "Storage", roomFactory.getRoomByName("Storage")));
         doors.add(new Door(5, "Hall", roomFactory.getRoomByName("Hall")));
 
-    }
-
-    Door getDoorById(int id)
-    {
-        return doors.get(id);
     }
 
     Door getDoorByName(String name)

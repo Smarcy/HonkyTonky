@@ -18,11 +18,6 @@ public class RoomFactory
         rooms.add(new Room(5, "Hall", 0, 2));
     }
 
-    public Room getRoomByID(int id)
-    {
-        return rooms.get(id);
-    }
-
     Room getRoomByName(String name)
     {
         for(Room room : rooms)

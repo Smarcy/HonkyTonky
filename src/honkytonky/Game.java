@@ -12,6 +12,7 @@ import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
+import honkytonky.objects.Door;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
@@ -196,14 +197,14 @@ class Game {
     private void printCurrentLocation() {
         System.out.println(
           "You are currently in: " + ANSI_GREEN + player.getCurrentRoom()
-            + ANSI_RESET);  // set Console color to green and reset after
+            + ANSI_RESET);
     }
     private void printCharacterInfo() {
         clearScreen();
 
         charInfo.printCharacterInfo(player);
 
-        scanner.nextLine(); // Stop here until a key is pressed
+        scanner.nextLine();
 
         clearScreen();
     }
@@ -216,20 +217,14 @@ class Game {
 
         player.getCurrentRoom().listDoorOptions();
 
-        int targetRoom = Integer.parseInt(scanner.nextLine());
+        int option = Integer.parseInt(scanner.nextLine());
 
-        //String targetRoom = scanner.nextLine();
+        Door targetDoor = player.getCurrentRoom().getDoors().get(option-1);
+        Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
 
-        player.setCurrentRoom(mapLayout.getRoomByName(player.getCurrentRoom().getDoors().get(targetRoom-1).getTargetRoom().getName()));
+        player.setCurrentRoom(targetRoom);
 
         clearScreen();
-    }
-
-    private void invalidMoveCommand() throws InterruptedException {
-        clearScreen();
-        System.out.println(
-          ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
-        startGame();
     }
 
     /**
