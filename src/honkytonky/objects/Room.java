@@ -8,15 +8,18 @@ public class Room {
     private final int id;
     private final String name;
     private final int x, y;
-    private List<Door> doors = new ArrayList<>();
+    private final boolean hasMonster;
+    private final List<Door> doors = new ArrayList<>();
+    private Monster presentMonster;
 
-    public Room(int id, String name, int x, int y) {
+    public Room(int id, String name, int x, int y, boolean hasMonster) {
 
         //@formatter:off
         this.name   = name;
         this.id     = id;
         this.x      = x;
         this.y      = y;
+        this.hasMonster = hasMonster;
         //@formatter:on
 
     }
