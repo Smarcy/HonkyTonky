@@ -158,9 +158,9 @@ class Game {
     private void startGame()
       throws InputMismatchException, NumberFormatException, InterruptedException {
         while (true) {
-            //printCurrentLocation();
+            printCurrentLocation();
 
-            System.out.println("Choose an option:\n");
+            System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
             System.out.println("2) Character Info");
             System.out.println("3) Exit Game");
@@ -171,9 +171,7 @@ class Game {
 
                 switch (option) {
                     case 1:
-                        clearScreen();
                         move();
-                        clearScreen();
                         if (roomHasMonster()) {
                             startBattle();
                         }
@@ -195,11 +193,11 @@ class Game {
     /**
      * Console output of the current Room or Place
      */
-//    private void printCurrentLocation() {
-//        System.out.println(
-//          "You are currently in: " + ANSI_GREEN + roomList[player.getX()][player.getY()]
-//            + ANSI_RESET);  // set Console color to green and reset after
-//    }
+    private void printCurrentLocation() {
+        System.out.println(
+          "You are currently in: " + ANSI_GREEN + player.getCurrentRoom()
+            + ANSI_RESET);  // set Console color to green and reset after
+    }
     private void printCharacterInfo() {
         clearScreen();
 
@@ -214,12 +212,15 @@ class Game {
      * Lets the player move to a requested direction
      */
     private void move() {
+        clearScreen();
 
         player.getCurrentRoom().listDoorOptions();
 
         int targetRoom = Integer.parseInt(scanner.nextLine());
 
         player.setCurrentRoom(mapLayout.getRooms().get(targetRoom-1));
+
+        clearScreen();
     }
 
     private void invalidMoveCommand() throws InterruptedException {
@@ -227,17 +228,6 @@ class Game {
         System.out.println(
           ANSI_RED + "There is no place connected in this direction!\n" + ANSI_RESET);
         startGame();
-    }
-
-    /**
-     * Checks if a requested move is valid by comparing input string & roomList[x][y] != null &
-     * Room.has[direction]Exit
-     *
-     * @param direction where the player wants to move
-     * @return if the requested move is valid
-     */
-    private boolean isValidMove(String direction) {
-        return false;
     }
 
     /**
