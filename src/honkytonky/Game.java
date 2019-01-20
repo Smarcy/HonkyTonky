@@ -220,7 +220,7 @@ class Game {
 
         //String targetRoom = scanner.nextLine();
 
-        //player.setCurrentRoom();
+        player.setCurrentRoom(mapLayout.getRoomByName(player.getCurrentRoom().getDoors().get(targetRoom-1).getTargetRoom().getName()));
 
         clearScreen();
     }
