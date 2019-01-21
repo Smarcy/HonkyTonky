@@ -42,8 +42,9 @@ class Game {
     private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
-    private Player player   = null;
-    private Monster monster = null;
+    private Player player       = null;
+    private Monster monster     = null;
+    private boolean playerFled  = false;
     private int monsterID;
 
     private Random rnd = new Random();
@@ -303,7 +304,13 @@ class Game {
                 continue;
             }
 
-            if (monsterAttacks(monsterAlive)) {
+            if(playerFled)
+            {
+                playerFled = false;
+                break;
+            }
+
+            if (monsterAttacks(monsterAlive && !playerFled)) {
                 break;
             }
 
@@ -372,6 +379,11 @@ class Game {
 
     /**
      * Is called when the Player is in a battle and chooses defend himself
+     * Calculation:
+     * tempDefBoost = (armorDef / 2)
+     * If (armorDef > 10) then = 2
+     * If (calcDef < 1) then = 1
+     * NOT OPTIMAL!r
      */
     private void playerDefends() {
         player.giveTemporaryDefBoost();
@@ -380,8 +392,23 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses to flee from the fight
      */
-    private boolean playerFlees() {
-        return true;
+    private void playerFlees() {
+
+        clearScreen();
+
+        float fleeChance = (float)(player.getLevel() / monster.getLevel());
+
+        fleeChance -= rnd.nextFloat();
+
+        if(fleeChance >= 0.5f)
+        {
+            System.out.println(ANSI_GREEN + player + ANSI_RESET + " ran away like a little girl!");
+            playerFled =  true;
+        } else {
+            System.out.println(ANSI_RED + "You are going nowhere!" + ANSI_RESET);
+        }
+
+
     }
 
     private void rewardPlayer() {
