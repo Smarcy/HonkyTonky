@@ -39,6 +39,30 @@ public class Player extends Actor {
         this.currentRoom = room;
     }
 
+    public void giveTemporaryDefBoost()
+    {
+        float defBoost = ((float)this.armor.getArmorPoints() / 2);
+
+        if(defBoost > 10) {
+            this.temporaryDefBoost = 2;
+        } else if( defBoost < 1)
+        {
+            this.temporaryDefBoost = 1;
+        } else {
+            this.temporaryDefBoost = (int)defBoost;
+        }
+    }
+
+    public void resetTemporaryDefBoost()
+    {
+        this.temporaryDefBoost = 0;
+    }
+
+    public float getTemporaryDefBoost()
+    {
+        return this.temporaryDefBoost;
+    }
+
     public Room getCurrentRoom()
     {
         return currentRoom;

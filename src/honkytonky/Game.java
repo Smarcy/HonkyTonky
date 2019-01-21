@@ -315,15 +315,18 @@ class Game {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
               .getArmorPoints();
+            int monsterDamage = rng - player.getArmor().getArmorPoints() - (int)player.getTemporaryDefBoost();
 
-            if (rng < 0) {
-                rng = 0;
+            if (monsterDamage < 0) {
+                monsterDamage = 0;
             }
 
-            player.setHp(player.getHp() - rng);
+            player.setHp(player.getHp() - monsterDamage);
 
             System.out.println(
-              ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + rng + ANSI_RESET + " damage!\n");
+              ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + monsterDamage + ANSI_RESET + " damage!\n");
+
+            player.resetTemporaryDefBoost();
 
             isPlayerAlive();
 
@@ -333,7 +336,7 @@ class Game {
 
             rewardPlayer();
 
-            scanner.nextLine(); // Stop here until a key is pressed
+            scanner.nextLine();
 
             clearScreen();
 
@@ -344,15 +347,14 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      *
-     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
-     * damage was reached, it counts as critical hit
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2)
+     * If maximum damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
 
         int wepDMG = player.getWeapon().getDamage();
         int rng = rnd.nextInt(wepDMG + 2) + 1;
-
         int dmg = wepDMG + rng;
 
         monster.setHp(monster.getHp() - dmg);
@@ -371,8 +373,8 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses defend himself
      */
-    private boolean playerDefends() {
-        return true;
+    private void playerDefends() {
+        player.giveTemporaryDefBoost();
     }
 
     /**
