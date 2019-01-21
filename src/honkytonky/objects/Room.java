@@ -8,7 +8,7 @@ public class Room {
     private final int id;
     private final String name;
     private final int x, y;
-    private final boolean hasMonster;
+    private final boolean hasLivingMonster;
     private final List<Door> doors = new ArrayList<>();
     private Monster presentMonster;
 
@@ -19,7 +19,7 @@ public class Room {
         this.id     = id;
         this.x      = x;
         this.y      = y;
-        this.hasMonster = hasMonster;
+        this.hasLivingMonster = hasMonster;
         //@formatter:on
 
     }
@@ -32,6 +32,11 @@ public class Room {
     public void addDoor(Door door)
     {
         doors.add(door);
+    }
+
+    public void addMonster(Monster monster)
+    {
+        this.presentMonster = monster;
     }
 
     public List<Door> getDoors()
@@ -51,6 +56,11 @@ public class Room {
             System.out.println(i + ") " + door.getTargetRoom());
             i++;
         }
+    }
+
+    public boolean hasLivingMonster()
+    {
+        return this.hasLivingMonster;
     }
 
     public String getName()

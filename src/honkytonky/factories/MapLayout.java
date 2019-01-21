@@ -8,6 +8,7 @@ public class MapLayout {
 
     private RoomFactory roomFactory = new RoomFactory();
     private DoorFactory doorFactory = new DoorFactory();
+    private MonsterFactory monsterFactory = new MonsterFactory();
 
     private List<Room> rooms = new ArrayList<>();
 
@@ -27,6 +28,8 @@ public class MapLayout {
 
         Room storage = roomFactory.getRoomByName("Storage");
         storage.addDoor(doorFactory.getDoorByName("Kitchen"));
+
+        storage.addMonster(monsterFactory.getMonsterbyName("Peanut Butter Zombie"));
 
         Room hall = roomFactory.getRoomByName("Hall");
         hall.addDoor(doorFactory.getDoorByName("Living Room"));

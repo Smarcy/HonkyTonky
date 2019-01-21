@@ -13,12 +13,25 @@ public class MonsterFactory
 
     public MonsterFactory()
     {
-        monsterList.add(new Monster("Zombie", 15, 1, 1, 2, 1, 70, ZOMBIE));
+        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 2, 1, 70, ZOMBIE));
         monsterList.add(new Monster("Butterfly", 10, 2, 2, 1, 2, 100, BUTTERFLY));
     }
 
     public List<Monster> getMonsterList()
     {
         return monsterList;
+    }
+
+    public Monster getMonsterbyName(String name)
+    {
+        for(Monster monster : monsterList)
+        {
+            if(monster.toString().equals(name))
+            {
+                return monster;
+            }
+        }
+
+        return null;
     }
 }

@@ -127,19 +127,23 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // One-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER), rooms
+                                              .get(0)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // Two-Handed Sword
+                                            armorMap.get(ArmorType.LEATHER), rooms
+                                              .get(0)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // One-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER), rooms
+                                              .get(0)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms.get(0)); // Two-Handed Axe
+                                            armorMap.get(ArmorType.LEATHER), rooms
+                                              .get(0)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -173,9 +177,7 @@ class Game {
                 switch (option) {
                     case 1:
                         move();
-                        if (roomHasMonster()) {
-                            startBattle();
-                        }
+                        checkRoomForMonster();
                         break;
                     case 2:
                         printCharacterInfo();
@@ -191,6 +193,12 @@ class Game {
         }
     }
 
+    private void checkRoomForMonster() throws InterruptedException {
+        if (player.getCurrentRoom().hasLivingMonster()) {
+            startBattle();
+        }
+    }
+
     /**
      * Console output of the current Room or Place
      */
@@ -199,6 +207,7 @@ class Game {
           "You are currently in: " + ANSI_GREEN + player.getCurrentRoom()
             + ANSI_RESET);
     }
+
     private void printCharacterInfo() {
         clearScreen();
 
@@ -219,7 +228,7 @@ class Game {
 
         int option = Integer.parseInt(scanner.nextLine());
 
-        Door targetDoor = player.getCurrentRoom().getDoors().get(option-1);
+        Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
         Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
 
         player.setCurrentRoom(targetRoom);
@@ -263,7 +272,7 @@ class Game {
         boolean monsterAlive = true;
         monster = monsterFactory.getMonsterList().get(monsterID);
 
-        System.out.println(ANSI_RED + "You encountered a " + monster + "!\n" + ANSI_RESET);
+        System.out.println("You encountered " + ANSI_RED + monster + ANSI_RESET + "!\n");
 
         while (monsterAlive) {
             System.out.println("What do you want to do this round?\n");
