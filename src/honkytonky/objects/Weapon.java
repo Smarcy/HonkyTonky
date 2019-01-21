@@ -7,6 +7,7 @@ public class Weapon extends Item {
     private int maxDurability;
     private boolean twoHanded; // false = onehanded, true = twohanded
     private WeaponType weaponType;
+
     public Weapon(int id, String name, WeaponType weaponType, int damage, int durability,
       int maxDurability, boolean twoHanded) {
 

@@ -12,8 +12,7 @@ public class MapLayout {
 
     private List<Room> rooms = new ArrayList<>();
 
-    public MapLayout()
-    {
+    public MapLayout() {
         Room bedroom = roomFactory.getRoomByName("Bedroom");
         bedroom.addDoor(doorFactory.getDoorByName("Living Room"));
 
@@ -41,13 +40,11 @@ public class MapLayout {
         rooms.add(hall);
     }
 
-    public List<Room> getRooms()
-    {
+    public List<Room> getRooms() {
         return rooms;
     }
 
-    public Room getRoomByName(String name)
-    {
+    public Room getRoomByName(String name) {
         return roomFactory.getRoomByName(name);
     }
 }

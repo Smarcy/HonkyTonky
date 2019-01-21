@@ -10,7 +10,6 @@ import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.WeaponFactory;
-import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Door;
 import honkytonky.objects.Monster;
@@ -18,7 +17,6 @@ import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import honkytonky.resources.CharacterInfoPattern;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -38,19 +36,18 @@ class Game {
     private final MapLayout mapLayout               = new MapLayout();
     private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
 
-    private final List<Monster> monsterList         = monsterFactory.getMonsterList();
     private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
-    private Player player       = null;
-    private Monster monster     = null;
-    private boolean playerFled  = false;
-    private int monsterID;
+    private Player player                           = null;
+    private Monster monster                         = null;
+    private boolean playerFled                      = false;
+    private int monsterID                           = -1;
 
     private Random rnd = new Random();
     // @formatter:on
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
         game.showIntro();
     }
@@ -58,7 +55,7 @@ class Game {
     /**
      * Shows the menu to choose an option
      */
-    private void showIntro() throws InterruptedException, NumberFormatException {
+    private void showIntro() throws InterruptedException {
 
         boolean run = true;
 
@@ -102,8 +99,7 @@ class Game {
     /**
      * Lets the user create a Player Object
      */
-    private void createPlayer()
-      throws NumberFormatException, InputMismatchException, IndexOutOfBoundsException {
+    private void createPlayer() {
         clearScreen();
 
         System.out.println("Enter your name: ");
@@ -162,7 +158,7 @@ class Game {
      * main game loop
      */
     private void startGame()
-      throws InputMismatchException, NumberFormatException, InterruptedException {
+      throws InterruptedException {
         while (true) {
             printCurrentLocation();
 
@@ -190,6 +186,8 @@ class Game {
                 clearScreen();
                 startGame();
             }
+
+            clearScreen();
 
         }
     }
@@ -227,13 +225,16 @@ class Game {
 
         player.getCurrentRoom().listDoorOptions();
 
-        int option = Integer.parseInt(scanner.nextLine());
+        try {
+            int option = Integer.parseInt(scanner.nextLine());
 
-        Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
-        Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
+            Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
+            Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
 
-        player.setCurrentRoom(targetRoom);
-
+            player.setCurrentRoom(targetRoom);
+        } catch (IndexOutOfBoundsException e) {
+            move();
+        }
         clearScreen();
     }
 
@@ -246,32 +247,16 @@ class Game {
     }
 
     /**
-     * Checks after every move if the current room contains a monster
-     *
-     * @return true if monster in room, false if no monster in room
-     */
-    private boolean roomHasMonster() {
-        for (Actor actor : monsterList) {
-            if (actor.getX() == player.getX() && actor.getY() == player.getY()) {
-                monsterID = actor.getID();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * This method gets called when the player enters a room or place that contains an enemy
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
     private void startBattle()
-      throws InputMismatchException, NumberFormatException, ArrayIndexOutOfBoundsException,
-      InterruptedException {
+      throws InterruptedException {
         clearScreen();
 
         boolean monsterAlive = true;
-        monster = monsterFactory.getMonsterList().get(monsterID);
+        monster = player.getCurrentRoom().getPresentMonster();
 
         System.out.println("You encountered " + ANSI_RED + monster + ANSI_RESET + "!\n");
 
@@ -304,8 +289,7 @@ class Game {
                 continue;
             }
 
-            if(playerFled)
-            {
+            if (playerFled) {
                 playerFled = false;
                 break;
             }
@@ -322,7 +306,8 @@ class Game {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
               .getArmorPoints();
-            int monsterDamage = rng - player.getArmor().getArmorPoints() - (int)player.getTemporaryDefBoost();
+            int monsterDamage = rng - player.getArmor().getArmorPoints() - (int) player
+              .getTemporaryDefBoost();
 
             if (monsterDamage < 0) {
                 monsterDamage = 0;
@@ -341,6 +326,8 @@ class Game {
         } else {
             System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
 
+            player.getCurrentRoom().monsterKilled();
+
             rewardPlayer();
 
             scanner.nextLine();
@@ -354,8 +341,8 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      *
-     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2)
-     * If maximum damage was reached, it counts as critical hit
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
+     * damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
@@ -378,12 +365,8 @@ class Game {
     }
 
     /**
-     * Is called when the Player is in a battle and chooses defend himself
-     * Calculation:
-     * tempDefBoost = (armorDef / 2)
-     * If (armorDef > 10) then = 2
-     * If (calcDef < 1) then = 1
-     * NOT OPTIMAL!r
+     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost
+     * = (armorDef / 2) If (armorDef > 10) then = 2 If (calcDef < 1) then = 1 NOT OPTIMAL!r
      */
     private void playerDefends() {
         player.giveTemporaryDefBoost();
@@ -396,16 +379,15 @@ class Game {
 
         clearScreen();
 
-        float fleeChance = (float)(player.getLevel() / monster.getLevel());
+        float fleeChance = (float) (player.getLevel() / monster.getLevel());
 
         fleeChance -= rnd.nextFloat();
 
-        if(fleeChance >= 0.5f)
-        {
+        if (fleeChance >= 0.5f) {
             System.out.println(ANSI_GREEN + player + ANSI_RESET + " ran away like a little girl!");
-            playerFled =  true;
+            playerFled = true;
         } else {
-            System.out.println(ANSI_RED + "You are going nowhere!" + ANSI_RESET);
+            System.out.println(ANSI_RED + "You are going nowhere, scrub!" + ANSI_RESET);
         }
 
 
@@ -419,14 +401,18 @@ class Game {
         System.out
           .println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
 
-        player.checkForLevelUp(player);
+        player.checkForLevelUp();
     }
 
     private int calculateExperienceReward() {
         return monster.getGrantedExperience();
     }
 
-    private void resetGame() {
+    private void resetGame() throws InterruptedException {
+        player = null;
+        monster = null;
+
+        showIntro();
 
     }
 

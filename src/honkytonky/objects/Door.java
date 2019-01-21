@@ -6,20 +6,17 @@ public class Door {
     private String name;
     private Room targetRoom;
 
-    public Door(int id, String name,  Room targetRoom)
-    {
-        this.id         = id;
-        this.name       = name;
+    public Door(int id, String name, Room targetRoom) {
+        this.id = id;
+        this.name = name;
         this.targetRoom = targetRoom;
     }
 
-    public Room getTargetRoom()
-    {
+    public Room getTargetRoom() {
         return targetRoom;
     }
 
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 

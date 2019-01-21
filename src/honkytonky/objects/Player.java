@@ -16,7 +16,8 @@ public class Player extends Actor {
     private Room currentRoom;
     private ExpTable expTable = new ExpTable();
 
-    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor, Room currentRoom) {
+    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor,
+      Room currentRoom) {
 
         super(name, maxHP, x, y, 1);
 
@@ -35,37 +36,32 @@ public class Player extends Actor {
         return currentRoomID;
     }
 
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-    }
+    public void giveTemporaryDefBoost() {
+        float defBoost = ((float) this.armor.getArmorPoints() / 2);
 
-    public void giveTemporaryDefBoost()
-    {
-        float defBoost = ((float)this.armor.getArmorPoints() / 2);
-
-        if(defBoost > 10) {
+        if (defBoost > 10) {
             this.temporaryDefBoost = 2;
-        } else if( defBoost < 1)
-        {
+        } else if (defBoost < 1) {
             this.temporaryDefBoost = 1;
         } else {
-            this.temporaryDefBoost = (int)defBoost;
+            this.temporaryDefBoost = (int) defBoost;
         }
     }
 
-    public void resetTemporaryDefBoost()
-    {
+    public void resetTemporaryDefBoost() {
         this.temporaryDefBoost = 0;
     }
 
-    public float getTemporaryDefBoost()
-    {
+    public float getTemporaryDefBoost() {
         return this.temporaryDefBoost;
     }
 
-    public Room getCurrentRoom()
-    {
+    public Room getCurrentRoom() {
         return currentRoom;
+    }
+
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
     }
 
     public int getExperience() {
@@ -84,8 +80,8 @@ public class Player extends Actor {
         this.experience += amount;
     }
 
-    public void checkForLevelUp(Player player) {
-        if (expTable.hasLevelUp(player.getLevel(), player.experience)) {
+    public void checkForLevelUp() {
+        if (expTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
 
             System.out.println("\nYou have leveled up!\n");
