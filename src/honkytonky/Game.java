@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
 class Game {
 
@@ -30,7 +29,6 @@ class Game {
     // @formatter:off
     private final Scanner scanner                   = new Scanner(System.in);
     private final ProcessBuilder pb                 = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
-    private final MonsterFactory monsterFactory     = new MonsterFactory();
     private final WeaponFactory weaponFactory       = new WeaponFactory();
     private final ArmorFactory armorFactory         = new ArmorFactory();
     private final MapLayout mapLayout               = new MapLayout();
@@ -42,12 +40,11 @@ class Game {
     private Player player                           = null;
     private Monster monster                         = null;
     private boolean playerFled                      = false;
-    private int monsterID                           = -1;
 
     private Random rnd = new Random();
     // @formatter:on
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
         Game game = new Game();
         game.showIntro();
     }
@@ -55,7 +52,7 @@ class Game {
     /**
      * Shows the menu to choose an option
      */
-    private void showIntro() throws InterruptedException {
+    private void showIntro() {
 
         boolean run = true;
 
@@ -80,7 +77,7 @@ class Game {
                             break;
                         } else {
                             System.out.println("Please create a new player first!");
-                            TimeUnit.SECONDS.sleep(3);
+                            scanner.nextLine();
                         }
                         break;
                     case 2:
@@ -157,8 +154,7 @@ class Game {
     /**
      * main game loop
      */
-    private void startGame()
-      throws InterruptedException {
+    private void startGame(){
         while (true) {
             printCurrentLocation();
 
@@ -192,7 +188,7 @@ class Game {
         }
     }
 
-    private void checkRoomForMonster() throws InterruptedException {
+    private void checkRoomForMonster() {
         if (player.getCurrentRoom().hasLivingMonster()) {
             startBattle();
         }
@@ -251,8 +247,7 @@ class Game {
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
-    private void startBattle()
-      throws InterruptedException {
+    private void startBattle(){
         clearScreen();
 
         boolean monsterAlive = true;
@@ -302,7 +297,7 @@ class Game {
         }
     }
 
-    private boolean monsterAttacks(boolean monsterAlive) throws InterruptedException {
+    private boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
               .getArmorPoints();
@@ -408,7 +403,7 @@ class Game {
         return monster.getGrantedExperience();
     }
 
-    private void resetGame() throws InterruptedException {
+    private void resetGame() {
         player = null;
         monster = null;
 
@@ -419,7 +414,7 @@ class Game {
     /**
      * checks if the Player is alive every time he got hit by an enemy
      */
-    private void isPlayerAlive() throws InterruptedException {
+    private void isPlayerAlive() {
         if (player.getHp() <= 0) {
             clearScreen();
 
