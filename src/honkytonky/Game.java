@@ -424,12 +424,9 @@ class Game {
             clearScreen();
 
             System.out.println("You died!");
+            scanner.nextLine();
 
             resetGame();
-
-            scanner.nextLine(); // Stop here until a key is pressed
-
-            showIntro();
         }
     }
 }
