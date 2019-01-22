@@ -8,7 +8,6 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MapLayout;
-import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Door;
@@ -41,6 +40,7 @@ class Game {
     private Monster monster                         = null;
     private boolean playerFled                      = false;
 
+
     private Random rnd = new Random();
     // @formatter:on
 
@@ -72,7 +72,7 @@ class Game {
                     case 1:
                         if (player != null) {
                             clearScreen();
-                            startGame();
+                            gameLoop();
                             run = false;
                             break;
                         } else {
@@ -154,7 +154,7 @@ class Game {
     /**
      * main game loop
      */
-    private void startGame(){
+    private void gameLoop() {
         while (true) {
             printCurrentLocation();
 
@@ -184,7 +184,7 @@ class Game {
                 }
             } catch (InputMismatchException | NumberFormatException e) {
                 clearScreen();
-                startGame();
+                gameLoop();
             }
 
             clearScreen();
@@ -198,15 +198,13 @@ class Game {
         }
     }
 
-    private void printInventoryDialog()
-    {
+    private void printInventoryDialog() {
         clearScreen();
 
         System.out.println("What kind of items would you like to see?\n");
         System.out.println("1) Weapons");
         System.out.println("2) Armors");
         System.out.println("3) Potions");
-
 
         try {
             int option = Integer.parseInt(scanner.nextLine());
@@ -288,7 +286,7 @@ class Game {
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
-    private void startBattle(){
+    private void startBattle() {
         clearScreen();
 
         boolean monsterAlive = true;
