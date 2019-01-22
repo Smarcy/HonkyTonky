@@ -4,17 +4,18 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.resources.ExpTable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Actor {
 
-    private int currentRoomID;
     private int temporaryDefBoost;
     private int experience;
-    private boolean hadLevelUp = false;
     private Weapon weapon;
     private Armor armor;
     private Room currentRoom;
     private ExpTable expTable = new ExpTable();
+    private List<Item> inventory;
 
     public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor,
       Room currentRoom) {
@@ -22,18 +23,17 @@ public class Player extends Actor {
         super(name, maxHP, x, y, 1);
 
         //@formatter:off
-        this.currentRoomID      = 0;
         this.currentRoom        = currentRoom;
         this.temporaryDefBoost  = 0;
         this.experience         = 0;
         this.weapon             = weapon;
         this.armor              = armor;
+        this.inventory          = new ArrayList<>();
         //@formatter:on
 
-    }
+        inventory.add(weapon);
+        inventory.add(armor);
 
-    public int getCurrentRoomID() {
-        return currentRoomID;
     }
 
     public void giveTemporaryDefBoost() {
@@ -89,7 +89,25 @@ public class Player extends Actor {
         }
     }
 
+    public void showInventory(String option)
+    {
+
+        switch(option)
+        {
+            case "weapons":
+                System.out.println("Weapons");
+                break;
+            case "armors":
+                System.out.println("Armors");
+                break;
+            case "potions":
+                System.out.println("Potions");
+                break;
+        }
+    }
+
     public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }
+
 }

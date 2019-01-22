@@ -161,7 +161,8 @@ class Game {
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
             System.out.println("2) Character Info");
-            System.out.println("3) Exit Game");
+            System.out.println("3) Show Inventory");
+            System.out.println("4) Exit Game");
             System.out.print("\n> ");
 
             try {
@@ -176,6 +177,9 @@ class Game {
                         printCharacterInfo();
                         break;
                     case 3:
+                        printInventoryDialog();
+                        break;
+                    case 4:
                         System.exit(0);
                 }
             } catch (InputMismatchException | NumberFormatException e) {
@@ -192,6 +196,43 @@ class Game {
         if (player.getCurrentRoom().hasLivingMonster()) {
             startBattle();
         }
+    }
+
+    private void printInventoryDialog()
+    {
+        clearScreen();
+
+        System.out.println("What kind of items would you like to see?\n");
+        System.out.println("1) Weapons");
+        System.out.println("2) Armors");
+        System.out.println("3) Potions");
+
+
+        try {
+            int option = Integer.parseInt(scanner.nextLine());
+
+            clearScreen();
+
+            switch (option) {
+                case 1:
+                    player.showInventory("weapons");
+                    break;
+                case 2:
+                    player.showInventory("armors");
+                    break;
+                case 3:
+                    player.showInventory("potions");
+                    break;
+                default:
+                    printInventoryDialog();
+                    break;
+            }
+        } catch (InputMismatchException | NumberFormatException e) {
+            printInventoryDialog();
+        }
+
+        scanner.nextLine();
+
     }
 
     /**
@@ -348,7 +389,7 @@ class Game {
 
         monster.setHp(monster.getHp() - dmg);
 
-        if ((wepDMG + 2) == rng) {
+        if ((wepDMG + 2) == dmg) {
             System.out.println(
               "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!" + ANSI_RED + " (Critical Hit!)" + ANSI_RESET);
         } else {
