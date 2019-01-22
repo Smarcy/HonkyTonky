@@ -3,6 +3,7 @@ package honkytonky.objects;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
+import honkytonky.objects.Weapon.WeaponType;
 import honkytonky.resources.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,6 @@ public class Player extends Actor {
 
         inventory.add(weapon);
         inventory.add(armor);
-
     }
 
     public void giveTemporaryDefBoost() {
@@ -95,10 +95,18 @@ public class Player extends Actor {
         switch(option)
         {
             case "weapons":
-                System.out.println("Weapons");
+                for(Item item : inventory) {
+                    if(item instanceof Weapon) {
+                        System.out.println(item);
+                    }
+                }
                 break;
             case "armors":
-                System.out.println("Armors");
+                for(Item item : inventory) {
+                    if(item instanceof Armor) {
+                        System.out.println(item);
+                    }
+                }
                 break;
             case "potions":
                 System.out.println("Potions");
