@@ -12,6 +12,7 @@ import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.*;
 import honkytonky.resources.CharacterInfoPattern;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -227,6 +228,7 @@ class Game {
                     player.usePotion("defense", 10);
                     break;
             }
+            scanner.nextLine();
         } catch (InputMismatchException | NumberFormatException e) {
             printUsePotionDialog();
         }
@@ -264,7 +266,6 @@ class Game {
         }
 
         scanner.nextLine();
-
     }
 
     /**

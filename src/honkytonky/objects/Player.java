@@ -3,7 +3,6 @@ package honkytonky.objects;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
-import honkytonky.objects.Weapon.WeaponType;
 import honkytonky.resources.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +21,7 @@ public class Player extends Actor {
     public Player(String name, int maxHP, Weapon weapon, Armor armor, Potion potion,
       Room currentRoom) {
 
-        super(name, maxHP, 0, 0, 1);
+        super(name, maxHP, 0, 0, 1);        // give x & y default values - coordinates not needed anymore after Room-Door revamp?!
 
         //@formatter:off
         this.currentRoom        = currentRoom;
@@ -92,28 +91,26 @@ public class Player extends Actor {
         }
     }
 
-    public void showInventory(String option)
-    {
+    public void showInventory(String option) {
 
-        switch(option)
-        {
+        switch (option) {
             case "weapons":
-                for(Item item : inventory) {
-                    if(item instanceof Weapon) {
+                for (Item item : inventory) {
+                    if (item instanceof Weapon) {
                         System.out.println(item);
                     }
                 }
                 break;
             case "armors":
-                for(Item item : inventory) {
-                    if(item instanceof Armor) {
+                for (Item item : inventory) {
+                    if (item instanceof Armor) {
                         System.out.println(item);
                     }
                 }
                 break;
             case "potions":
-                for(Item item : inventory) {
-                    if(item instanceof Potion) {
+                for (Item item : inventory) {
+                    if (item instanceof Potion) {
                         System.out.println(item);
                     }
                 }
@@ -122,26 +119,42 @@ public class Player extends Actor {
     }
 
     public void usePotion(String potionType, int amount) {
-        switch(potionType) {
+        boolean playerHasPotion = false;
+
+        switch (potionType) {
             case "health":
-                switch (amount) {
-                    case 10:
-                        this.healPlayer(10);
+
+                for (Item p : inventory) {
+                    if (p.getName().equals("Small Health Potion")) {
+                        inventory.remove(p);
+                        playerHasPotion = true;
                         break;
-                    case 20:
-                        this.healPlayer(20);
-                        break;
+                    }
                 }
-                break;
+
+                if (playerHasPotion) {
+                    switch (amount) {
+                        case 10:
+                            this.healPlayer(10);
+                            break;
+                        case 20:
+                            this.healPlayer(20);
+                            break;
+                    }
+                    System.out.println("\nYou were healed by " + ANSI_GREEN +  amount + ANSI_RESET + " points!");
+                } else {
+                    System.out.println("\nYou do not have any Small Health Potions!");
+                }
             case "defense":
                 break;
         }
     }
 
+
     private void healPlayer(int amount) {
         this.setHp(this.getHp() + amount);
 
-        if(this.getHp() > this.getMaxHP()) {
+        if (this.getHp() > this.getMaxHP()) {
             this.setHp(this.getMaxHP());
         }
     }
