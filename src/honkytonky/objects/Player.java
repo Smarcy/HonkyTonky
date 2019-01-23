@@ -121,9 +121,10 @@ public class Player extends Actor {
         }
     }
 
-    public void usePotion(String potionType) {
+    public void usePotion(String potionType, int amount) {
         switch(potionType) {
             case "health":
+
                 break;
             case "defense":
                 break;

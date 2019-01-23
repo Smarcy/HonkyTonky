@@ -207,10 +207,20 @@ class Game {
         try {
             switch (Integer.parseInt(scanner.nextLine())) {
                 case 1:
-                    player.usePotion("health");
+                    System.out.println("Small or Big Potion?\n");
+                    System.out.println("1) Big Health Potion");
+                    System.out.println("2) Small Health Potion");
+                    switch (Integer.parseInt(scanner.nextLine())) {
+                        case 1:
+                            player.usePotion("health", 10);
+                            break;
+                        case 2:
+                            player.usePotion("health", 20);
+                            break;
+                    }
                     break;
                 case 2:
-                    player.usePotion("defense");
+                    player.usePotion("defense", 10);
                     break;
             }
         } catch (InputMismatchException | NumberFormatException e) {
