@@ -52,7 +52,7 @@ public class Player extends Actor {
         this.temporaryDefBoost = 0;
     }
 
-    public float getTemporaryDefBoost() {
+    public int getTemporaryDefBoost() {
         return this.temporaryDefBoost;
     }
 

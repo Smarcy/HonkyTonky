@@ -121,23 +121,23 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms
-                                              .get(0)); // One-Handed Sword
+                          armorMap.get(ArmorType.LEATHER), rooms
+                          .get(0)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms
-                                              .get(0)); // Two-Handed Sword
+                          armorMap.get(ArmorType.LEATHER), rooms
+                          .get(0)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms
-                                              .get(0)); // One-Handed Axe
+                          armorMap.get(ArmorType.LEATHER), rooms
+                          .get(0)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), rooms
-                                              .get(0)); // Two-Handed Axe
+                          armorMap.get(ArmorType.LEATHER), rooms
+                          .get(0)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -328,7 +328,7 @@ class Game {
                 break;
             }
 
-            if (monsterAttacks(monsterAlive && !playerFled)) {
+            if (monsterAttacks(monsterAlive) && !playerFled) {
                 break;
             }
 
@@ -338,14 +338,10 @@ class Game {
 
     private boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
-            int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - player.getArmor()
-              .getArmorPoints();
-            int monsterDamage = rng - player.getArmor().getArmorPoints() - (int) player
-              .getTemporaryDefBoost();
+            int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - 10;
+            int monsterDamage = rng - player.getArmor().getArmorPoints() - player.getTemporaryDefBoost();
 
-            if (monsterDamage < 0) {
-                monsterDamage = 0;
-            }
+            monsterDamage = (monsterDamage < 0) ? 0 : monsterDamage;
 
             player.setHp(player.getHp() - monsterDamage);
 
@@ -433,7 +429,8 @@ class Game {
         player.increaseExperience(xpReward);
 
         System.out
-          .println("\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
+          .println(
+            "\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
 
         player.checkForLevelUp();
     }
