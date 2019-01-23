@@ -18,9 +18,4 @@ public class Armor extends Item {
     public int getArmorPoints() {
         return armorPoints;
     }
-
-    @Override
-    public String toString() {
-        return this.getName();
-    }
 }

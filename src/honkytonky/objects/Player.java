@@ -14,11 +14,12 @@ public class Player extends Actor {
     private int experience;
     private Weapon weapon;
     private Armor armor;
+    private Potion potion;
     private Room currentRoom;
     private ExpTable expTable = new ExpTable();
     private List<Item> inventory;
 
-    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor,
+    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor, Potion potion,
       Room currentRoom) {
 
         super(name, maxHP, x, y, 1);
@@ -29,11 +30,13 @@ public class Player extends Actor {
         this.experience         = 0;
         this.weapon             = weapon;
         this.armor              = armor;
+        this.potion             = potion;
         this.inventory          = new ArrayList<>();
         //@formatter:on
 
         inventory.add(weapon);
         inventory.add(armor);
+        inventory.add(potion);
     }
 
     public void giveTemporaryDefBoost() {
@@ -109,7 +112,11 @@ public class Player extends Actor {
                 }
                 break;
             case "potions":
-                System.out.println("Potions");
+                for(Item item : inventory) {
+                    if(item instanceof Potion) {
+                        System.out.println(item);
+                    }
+                }
                 break;
         }
     }

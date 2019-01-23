@@ -8,13 +8,9 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MapLayout;
+import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
-import honkytonky.objects.Armor;
-import honkytonky.objects.Door;
-import honkytonky.objects.Monster;
-import honkytonky.objects.Player;
-import honkytonky.objects.Room;
-import honkytonky.objects.Weapon;
+import honkytonky.objects.*;
 import honkytonky.resources.CharacterInfoPattern;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -30,6 +26,7 @@ class Game {
     private final ProcessBuilder pb                 = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
     private final WeaponFactory weaponFactory       = new WeaponFactory();
     private final ArmorFactory armorFactory         = new ArmorFactory();
+    private final PotionFactory potionFactory       = new PotionFactory();
     private final MapLayout mapLayout               = new MapLayout();
     private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
 
@@ -121,22 +118,22 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), rooms
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
                           .get(0)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), rooms
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
                           .get(0)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), rooms
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
                           .get(0)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), rooms
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
                           .get(0)); // Two-Handed Axe
                         break;
                     default:

@@ -9,10 +9,12 @@ public class PotionFactory {
 
     private List<Potion> potionList = new ArrayList<>();
 
-    PotionFactory() {
+    public PotionFactory() {
 
-        potionList.add(new Potion(0, "Health Potion", 10, PotionType.HEALTH));
+    }
 
+    public Potion startPotion() {
+        return new Potion(0, "Health Potion", 10, PotionType.HEALTH);
     }
 
 }
