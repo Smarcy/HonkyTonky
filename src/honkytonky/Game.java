@@ -157,9 +157,10 @@ class Game {
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
-            System.out.println("2) Character Info");
-            System.out.println("3) Show Inventory");
-            System.out.println("4) Exit Game");
+            System.out.println("2) Use Potion");
+            System.out.println("3) Character Info");
+            System.out.println("4) Show Inventory");
+            System.out.println("5) Exit Game");
             System.out.print("\n> ");
 
             try {
@@ -171,12 +172,15 @@ class Game {
                         checkRoomForMonster();
                         break;
                     case 2:
-                        printCharacterInfo();
+                        printUsePotionDialog();
                         break;
                     case 3:
-                        printInventoryDialog();
+                        printCharacterInfo();
                         break;
                     case 4:
+                        printInventoryDialog();
+                        break;
+                    case 5:
                         System.exit(0);
                 }
             } catch (InputMismatchException | NumberFormatException e) {
@@ -192,6 +196,27 @@ class Game {
     private void checkRoomForMonster() {
         if (player.getCurrentRoom().hasLivingMonster()) {
             startBattle();
+        }
+    }
+
+    private void printUsePotionDialog() {
+        System.out.println("What kind of Potion would you like to use?\n");
+        System.out.println("1) Health Potion");
+        System.out.println("2) Defense Potion");
+
+        try
+            {
+            switch (Integer.parseInt(scanner.nextLine()))
+                {
+                    case 1:
+                        player.usePotion("health");
+                        break;
+                    case 2:
+                        player.usePotion("defense");
+                        break;
+                }
+            } catch (InputMismatchException | NumberFormatException e) {
+            printUsePotionDialog();
         }
     }
 
