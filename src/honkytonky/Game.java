@@ -117,24 +117,24 @@ class Game {
 
                 switch (weapon) {
                     case 1:
-                        player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
-                          .get(0)); // One-Handed Sword
+                        player = new Player(name, 20, startWeapon,
+                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                                              .get(0)); // One-Handed Sword
                         break;
                     case 2:
-                        player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
-                          .get(0)); // Two-Handed Sword
+                        player = new Player(name, 20, startWeapon,
+                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                                              .get(0)); // Two-Handed Sword
                         break;
                     case 3:
-                        player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
-                          .get(0)); // One-Handed Axe
+                        player = new Player(name, 20, startWeapon,
+                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                                              .get(0)); // One-Handed Axe
                         break;
                     case 4:
-                        player = new Player(name, 20, 0, 0, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion() , rooms
-                          .get(0)); // Two-Handed Axe
+                        player = new Player(name, 20, startWeapon,
+                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                                              .get(0)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -204,18 +204,16 @@ class Game {
         System.out.println("1) Health Potion");
         System.out.println("2) Defense Potion");
 
-        try
-            {
-            switch (Integer.parseInt(scanner.nextLine()))
-                {
-                    case 1:
-                        player.usePotion("health");
-                        break;
-                    case 2:
-                        player.usePotion("defense");
-                        break;
-                }
-            } catch (InputMismatchException | NumberFormatException e) {
+        try {
+            switch (Integer.parseInt(scanner.nextLine())) {
+                case 1:
+                    player.usePotion("health");
+                    break;
+                case 2:
+                    player.usePotion("defense");
+                    break;
+            }
+        } catch (InputMismatchException | NumberFormatException e) {
             printUsePotionDialog();
         }
     }
@@ -393,8 +391,7 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      *
-     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
-     * damage was reached, it counts as critical hit
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
@@ -417,8 +414,8 @@ class Game {
     }
 
     /**
-     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost
-     * = (armorDef / 2) If (armorDef > 10) then = 2 If (calcDef < 1) then = 1 NOT OPTIMAL!r
+     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost = (armorDef / 2) If (armorDef > 10) then = 2 If
+     * (calcDef < 1) then = 1 NOT OPTIMAL!r
      */
     private void playerDefends() {
         player.giveTemporaryDefBoost();

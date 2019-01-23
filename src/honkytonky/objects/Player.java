@@ -19,10 +19,10 @@ public class Player extends Actor {
     private ExpTable expTable = new ExpTable();
     private List<Item> inventory;
 
-    public Player(String name, int maxHP, int x, int y, Weapon weapon, Armor armor, Potion potion,
+    public Player(String name, int maxHP, Weapon weapon, Armor armor, Potion potion,
       Room currentRoom) {
 
-        super(name, maxHP, x, y, 1);
+        super(name, maxHP, 0, 0, 1);
 
         //@formatter:off
         this.currentRoom        = currentRoom;
@@ -117,6 +117,15 @@ public class Player extends Actor {
                         System.out.println(item);
                     }
                 }
+                break;
+        }
+    }
+
+    public void usePotion(String potionType) {
+        switch(potionType) {
+            case "health":
+                break;
+            case "defense":
                 break;
         }
     }
