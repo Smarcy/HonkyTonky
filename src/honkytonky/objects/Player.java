@@ -124,10 +124,25 @@ public class Player extends Actor {
     public void usePotion(String potionType, int amount) {
         switch(potionType) {
             case "health":
-
+                switch (amount) {
+                    case 10:
+                        this.healPlayer(10);
+                        break;
+                    case 20:
+                        this.healPlayer(20);
+                        break;
+                }
                 break;
             case "defense":
                 break;
+        }
+    }
+
+    private void healPlayer(int amount) {
+        this.setHp(this.getHp() + amount);
+
+        if(this.getHp() > this.getMaxHP()) {
+            this.setHp(this.getMaxHP());
         }
     }
 

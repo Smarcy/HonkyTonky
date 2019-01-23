@@ -200,6 +200,8 @@ class Game {
     }
 
     private void printUsePotionDialog() {
+        clearScreen();
+
         System.out.println("What kind of Potion would you like to use?\n");
         System.out.println("1) Health Potion");
         System.out.println("2) Defense Potion");
@@ -207,9 +209,10 @@ class Game {
         try {
             switch (Integer.parseInt(scanner.nextLine())) {
                 case 1:
+                    clearScreen();
                     System.out.println("Small or Big Potion?\n");
-                    System.out.println("1) Big Health Potion");
-                    System.out.println("2) Small Health Potion");
+                    System.out.println("1) Small Health Potion");
+                    System.out.println("2) Big Health Potion");
                     switch (Integer.parseInt(scanner.nextLine())) {
                         case 1:
                             player.usePotion("health", 10);
@@ -220,6 +223,7 @@ class Game {
                     }
                     break;
                 case 2:
+                    clearScreen();
                     player.usePotion("defense", 10);
                     break;
             }
@@ -368,7 +372,7 @@ class Game {
 
     private boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
-            int rng = monster.getDamage() + (rnd.nextInt(2) + 1) - 10;
+            int rng = monster.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player.getTemporaryDefBoost();
 
             monsterDamage = (monsterDamage < 0) ? 0 : monsterDamage;
