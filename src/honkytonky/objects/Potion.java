@@ -13,6 +13,10 @@ public class Potion extends Item {
         this.type   = type;
     }
 
+    public int getAmount() {
+        return this.amount;
+    }
+
     public enum PotionType {
         HEALTH,
         MANA,

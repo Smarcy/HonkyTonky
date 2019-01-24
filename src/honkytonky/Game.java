@@ -216,16 +216,16 @@ class Game {
                     System.out.println("2) Big Health Potion");
                     switch (Integer.parseInt(scanner.nextLine())) {
                         case 1:
-                            player.usePotion("health", 10);
+                            player.usePotion("Small Health Potion");
                             break;
                         case 2:
-                            player.usePotion("health", 20);
+                            player.usePotion("Big Health Potion");
                             break;
                     }
                     break;
                 case 2:
                     clearScreen();
-                    player.usePotion("defense", 10);
+                    player.usePotion("defense");
                     break;
             }
             scanner.nextLine();

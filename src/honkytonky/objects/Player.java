@@ -1,6 +1,7 @@
 package honkytonky.objects;
 
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.resources.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.resources.ExpTable;
@@ -118,40 +119,36 @@ public class Player extends Actor {
         }
     }
 
-    public void usePotion(String potionType, int amount) {
+    public void usePotion(String potionType) {
         boolean playerHasPotion = false;
 
-        switch (potionType) {
-            case "health":
-
-                for (Item p : inventory) {
-                    if (p.getName().equals("Small Health Potion")) {
-                        inventory.remove(p);
-                        playerHasPotion = true;
-                        break;
-                    }
-                }
-
-                if (playerHasPotion) {
-                    switch (amount) {
-                        case 10:
-                            this.healPlayer(10);
-                            break;
-                        case 20:
-                            this.healPlayer(20);
-                            break;
-                    }
-                    System.out.println("\nYou were healed by " + ANSI_GREEN +  amount + ANSI_RESET + " points!");
-                } else {
-                    System.out.println("\nYou do not have any Small Health Potions!");
-                }
-            case "defense":
+        for (Item p : inventory) {
+            if (p.getName().equals(potionType)) {
+                inventory.remove(p);
+                playerHasPotion = true;
+                potion = (Potion)p;
                 break;
+            }
+        }
+
+        if(playerHasPotion) {
+            switch (potionType) {
+
+                case "Small Health Potion":
+                    this.healPlayer(10);
+                    break;
+                case "Big Health Potion":
+                    this.healPlayer(20);
+                    break;
+            }
+            System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " Health Points!");
+        } else {
+            System.out.println("You do not have " + ANSI_RED + potionType + ANSI_RESET + "!");
         }
     }
 
 
-    private void healPlayer(int amount) {
+    public void healPlayer(int amount) {
         this.setHp(this.getHp() + amount);
 
         if (this.getHp() > this.getMaxHP()) {
