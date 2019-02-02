@@ -27,11 +27,23 @@ public class MapLayout {
 
         Room storage = roomFactory.getRoomByName("Storage");
         storage.addDoor(doorFactory.getDoorByName("Kitchen"));
-
         storage.addMonster(monsterFactory.getMonsterbyName("Peanut Butter Zombie"));
 
         Room hall = roomFactory.getRoomByName("Hall");
         hall.addDoor(doorFactory.getDoorByName("Living Room"));
+        hall.addDoor(doorFactory.getDoorByName("Yard"));
+
+        Room yard = roomFactory.getRoomByName("Yard");
+        yard.addDoor(doorFactory.getDoorByName("Town Square"));
+        yard.addDoor(doorFactory.getDoorByName("Hall"));
+        yard.addMonster(monsterFactory.getMonsterbyName("Peanut Butter Zombie"));
+
+        Room townSquare = roomFactory.getRoomByName("Town Square");
+        townSquare.addDoor(doorFactory.getDoorByName("Yard"));
+        townSquare.addDoor(doorFactory.getDoorByName("Marketplace"));
+
+        Room marketplace = roomFactory.getRoomByName("Marketplace");
+        marketplace.addDoor(doorFactory.getDoorByName("Town Square"));
 
         rooms.add(bedroom);
         rooms.add(livingRoom);

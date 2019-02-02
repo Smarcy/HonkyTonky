@@ -7,18 +7,15 @@ public class Room {
 
     private final int id;
     private final String name;
-    private final int x, y;
     private final List<Door> doors = new ArrayList<>();
     private boolean hasLivingMonster;
     private Monster presentMonster;
 
-    public Room(int id, String name, int x, int y, boolean hasMonster) {
+    public Room(int id, String name,  boolean hasMonster) {
 
         //@formatter:off
         this.name   = name;
         this.id     = id;
-        this.x      = x;
-        this.y      = y;
         this.hasLivingMonster = hasMonster;
         //@formatter:on
 

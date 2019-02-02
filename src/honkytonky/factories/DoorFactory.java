@@ -15,7 +15,9 @@ class DoorFactory {
         doors.add(new Door(3, "Kitchen", roomFactory.getRoomByName("Kitchen")));
         doors.add(new Door(4, "Storage", roomFactory.getRoomByName("Storage")));
         doors.add(new Door(5, "Hall", roomFactory.getRoomByName("Hall")));
-
+        doors.add(new Door(6, "Yard", roomFactory.getRoomByName("Yard")));
+        doors.add(new Door(7, "Town Square", roomFactory.getRoomByName("Town Square")));
+        doors.add(new Door(8, "Marketplace", roomFactory.getRoomByName("Marketplace")));
     }
 
     Door getDoorByName(String name) {

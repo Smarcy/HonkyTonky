@@ -11,11 +11,14 @@ public class RoomFactory
 
     RoomFactory()
     {
-        rooms.add(new Room(1, "Bedroom", 0, 0, false));
-        rooms.add(new Room(2, "Living Room", 0, 1, false));
-        rooms.add(new Room(3, "Kitchen", 1, 1,false));
-        rooms.add(new Room(4, "Storage", 1, 2, true));
-        rooms.add(new Room(5, "Hall", 0, 2, false));
+        rooms.add(new Room(1, "Bedroom",        false));
+        rooms.add(new Room(2, "Living Room",    false));
+        rooms.add(new Room(3, "Kitchen",        false));
+        rooms.add(new Room(4, "Storage",        true));
+        rooms.add(new Room(5, "Hall",           false));
+        rooms.add(new Room(6, "Yard",           true));
+        rooms.add(new Room(7, "Town Square",    false));
+        rooms.add(new Room(8, "Marketplace",    false));
     }
 
     Room getRoomByName(String name)
