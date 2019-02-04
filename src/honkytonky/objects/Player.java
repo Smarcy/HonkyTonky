@@ -23,7 +23,7 @@ public class Player extends Actor {
     public Player(String name, int maxHP, Weapon weapon, Armor armor, Potion potion,
       Room currentRoom) {
 
-        super(name, maxHP, 0, 0, 1);        // give x & y default values - coordinates not needed anymore after Room-Door revamp?!
+        super(name, maxHP, 1);
 
         //@formatter:off
         this.currentRoom        = currentRoom;
@@ -158,7 +158,7 @@ public class Player extends Actor {
     }
 
 
-    public void healPlayer(int amount) {
+    private void healPlayer(int amount) {
         this.setHp(this.getHp() + amount);
 
         if (this.getHp() > this.getMaxHP()) {

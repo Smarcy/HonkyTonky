@@ -417,7 +417,7 @@ class Game {
 
         monster.setHp(monster.getHp() - dmg);
 
-        if ((wepDMG + 2) == dmg) {
+        if ((wepDMG + 2) == rng) {
             System.out.println(
               "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!" + ANSI_RED + " (Critical Hit!)" + ANSI_RESET);
         } else {

@@ -9,36 +9,20 @@ public abstract class Actor {
     private final String name;
     private int hp;
     private int maxHP;
-    private int x, y;
-    private int level = 1;
+    private int level;  //default = 1
     private List<Actor> actors = new ArrayList<>();
 
-    Actor(String name, int maxHP, int x, int y, int level) {
+    Actor(String name, int maxHP, int level) {
 
         //@formatter:off
         this.name   = name;
         this.maxHP  = maxHP;
         this.hp     = maxHP;
-        this.x      = x;
-        this.y      = y;
         this.level  = level;
         this.id     = actors.size();
         //@formatter:on
 
         actors.add(this);
-    }
-
-    public void setLocation(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public int getID() {

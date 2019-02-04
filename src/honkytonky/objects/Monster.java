@@ -5,9 +5,9 @@ public class Monster extends Actor {
     private int damage;
     private int grantedExperience;
     private MonsterType monsterType;
-    public Monster(String name, int maxHP, int x, int y, int damage, int level,
+    public Monster(String name, int maxHP, int damage, int level,
       int grantedExperience, MonsterType monsterType) {
-        super(name, maxHP, x, y, level);
+        super(name, maxHP, level);
         this.damage = damage;
         this.grantedExperience = grantedExperience;
         this.monsterType = monsterType;

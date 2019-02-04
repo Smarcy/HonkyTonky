@@ -12,11 +12,11 @@ public class MonsterFactory {
     private List<Monster> monsterList = new ArrayList<>();
 
     public MonsterFactory() {
-        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 2, 1, 70, ZOMBIE));
-        monsterList.add(new Monster("Butterfly", 10, 2, 2, 1, 2, 100, BUTTERFLY));
+        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 70, ZOMBIE));
+        monsterList.add(new Monster("Butterfly", 20, 2, 2, 100, BUTTERFLY));
     }
 
-    Monster getMonsterbyName(String name) {
+    Monster getMonsterByName(String name) {
         for (Monster monster : monsterList) {
             if (monster.toString().equals(name)) {
                 return monster;
