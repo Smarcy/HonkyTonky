@@ -37,7 +37,7 @@ public class MapLayout {
         Room yard = roomFactory.getRoomByName("Yard");
         yard.addDoor(doorFactory.getDoorByName("Town Square"));
         yard.addDoor(doorFactory.getDoorByName("Hall"));
-        yard.addMonster(monsterFactory.getMonsterByName("Peanut Butter Zombie"));
+        yard.addMonster(monsterFactory.getMonsterByName("Butterfly"));
 
         Room townSquare = roomFactory.getRoomByName("Town Square");
         townSquare.addDoor(doorFactory.getDoorByName("Yard"));

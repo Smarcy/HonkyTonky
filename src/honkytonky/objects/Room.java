@@ -66,8 +66,16 @@ public class Room {
         return this.hasLivingMonster;
     }
 
+    public boolean hasMerchant() {
+        return this.hasMerchant;
+    }
+
     public Monster getPresentMonster() {
         return presentMonster;
+    }
+
+    public Merchant getPresentMerchant() {
+        return this.presentMerchant;
     }
 
     public void monsterKilled() {

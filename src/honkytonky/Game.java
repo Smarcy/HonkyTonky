@@ -171,6 +171,7 @@ class Game {
                     case 1:
                         move();
                         checkRoomForMonster();
+                        checkRoomForMerchant();
                         break;
                     case 2:
                         printUsePotionDialog();
@@ -198,6 +199,18 @@ class Game {
         if (player.getCurrentRoom().hasLivingMonster()) {
             startBattle();
         }
+    }
+
+    private void checkRoomForMerchant() {
+        if(player.getCurrentRoom().hasMerchant()) {
+            printMerchantDialog();
+        }
+    }
+
+    private void printMerchantDialog() {
+        clearScreen();
+        System.out.println("Hello, my name is " + ANSI_YELLOW + player.getCurrentRoom().getPresentMerchant().toString() + ANSI_RESET);
+        scanner.nextLine();
     }
 
     private void printUsePotionDialog() {
