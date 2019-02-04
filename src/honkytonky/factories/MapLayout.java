@@ -9,6 +9,7 @@ public class MapLayout {
     private RoomFactory roomFactory = new RoomFactory();
     private DoorFactory doorFactory = new DoorFactory();
     private MonsterFactory monsterFactory = new MonsterFactory();
+    private MerchantFactory merchantFactory = new MerchantFactory();
 
     private List<Room> rooms = new ArrayList<>();
 
@@ -44,6 +45,7 @@ public class MapLayout {
 
         Room marketplace = roomFactory.getRoomByName("Marketplace");
         marketplace.addDoor(doorFactory.getDoorByName("Town Square"));
+        marketplace.addMerchant(merchantFactory.getMerchantByName("Belechor"));
 
         rooms.add(bedroom);
         rooms.add(livingRoom);

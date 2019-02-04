@@ -7,10 +7,8 @@ public class Merchant extends Actor {
 
     List<Item> itemsForSell = new ArrayList<>();
 
-    public Merchant(String name, int maxHP, int level, List<Item> itemsForSell) {
+    public Merchant(String name, int maxHP, int level) {
         super(name, maxHP, level);
-
-        this.itemsForSell = itemsForSell;
     }
 
     public void addItemToShop(Item item) {

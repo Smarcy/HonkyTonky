@@ -17,4 +17,7 @@ public class PotionFactory {
         return new Potion(0, "Small Health Potion", 10, PotionType.HEALTH);
     }
 
+    public Potion createSmallHealthPotion() {
+        return new Potion(0, "Small Health Potion", 10, PotionType.HEALTH);
+    }
 }
