@@ -9,14 +9,17 @@ public class Room {
     private final String name;
     private final List<Door> doors = new ArrayList<>();
     private boolean hasLivingMonster;
+    private boolean hasMerchant;
     private Monster presentMonster;
+    private Merchant presentMerchant;
 
-    public Room(int id, String name,  boolean hasMonster) {
+    public Room(int id, String name, boolean hasMonster) {
 
         //@formatter:off
         this.name   = name;
         this.id     = id;
         this.hasLivingMonster = hasMonster;
+        this.hasMerchant = false;
         //@formatter:on
 
     }
@@ -32,6 +35,15 @@ public class Room {
 
     public void addMonster(Monster monster) {
         this.presentMonster = monster;
+    }
+
+    public void addMerchant(Merchant merchant) {
+        if (!hasMerchant) {
+            this.presentMerchant = merchant;
+            hasMerchant = true;
+        } else {
+            throw new IllegalArgumentException(this.name + " already has a merchant!");
+        }
     }
 
     public List<Door> getDoors() {
