@@ -10,7 +10,7 @@ public abstract class Actor {
     private int hp;
     private int maxHP;
     private int level;  //default = 1
-    private List<Actor> actors = new ArrayList<>();
+    private static List<Actor> actors = new ArrayList<>();
 
     Actor(String name, int maxHP, int level) {
 
