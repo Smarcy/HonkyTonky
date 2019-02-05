@@ -11,9 +11,9 @@ public class WeaponFactory {
 
     public WeaponFactory() {
         weaponList.add(new Weapon(weaponList
-                                    .size(), "One-Handed Sword", WeaponType.SWORD, 2, 100, 100, false));
+          .size(), "One-Handed Sword", WeaponType.SWORD, 2, 100, 100, false));
         weaponList.add(new Weapon(weaponList
-                                    .size(), "Two-Handed Sword", WeaponType.SWORD, 3, 100, 100, true));
+          .size(), "Two-Handed Sword", WeaponType.SWORD, 3, 100, 100, true));
         weaponList
           .add(new Weapon(weaponList.size(), "One-Handed Axe", WeaponType.AXE, 2, 100, 100, false));
         weaponList

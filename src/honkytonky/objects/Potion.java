@@ -10,7 +10,7 @@ public class Potion extends Item {
         super(id, name);
 
         this.amount = amount;
-        this.type   = type;
+        this.type = type;
     }
 
     public int getAmount() {

@@ -5,6 +5,7 @@ public class Monster extends Actor {
     private int damage;
     private int grantedExperience;
     private MonsterType monsterType;
+
     public Monster(String name, int maxHP, int damage, int level,
       int grantedExperience, MonsterType monsterType) {
         super(name, maxHP, level);

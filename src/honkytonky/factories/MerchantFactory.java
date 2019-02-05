@@ -17,8 +17,8 @@ class MerchantFactory {
     }
 
     Merchant getMerchantByName(String name) {
-        for(Merchant merchant : merchants) {
-            if(merchant.toString().equals(name)) {
+        for (Merchant merchant : merchants) {
+            if (merchant.toString().equals(name)) {
                 return merchant;
             }
         }

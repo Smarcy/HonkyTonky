@@ -4,7 +4,6 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 
-import honkytonky.objects.Weapon.WeaponType;
 import honkytonky.resources.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
@@ -100,7 +99,7 @@ public class Player extends Actor {
                 for (Item item : inventory) {
                     if (item instanceof Weapon) {
 
-                        if(item.equals(this.weapon)) {
+                        if (item.equals(this.weapon)) {
                             System.out.println(item + " (equipped)");
                         } else {
                             System.out.println(item);
@@ -111,7 +110,7 @@ public class Player extends Actor {
             case "armors":
                 for (Item item : inventory) {
                     if (item instanceof Armor) {
-                        if(item.equals(this.armor)) {
+                        if (item.equals(this.armor)) {
                             System.out.println(item + " (equipped)");
                         } else {
                             System.out.println(item);
@@ -136,12 +135,12 @@ public class Player extends Actor {
             if (p.getName().equals(potionType)) {
                 inventory.remove(p);
                 playerHasPotion = true;
-                potion = (Potion)p;
+                potion = (Potion) p;
                 break;
             }
         }
 
-        if(playerHasPotion) {
+        if (playerHasPotion) {
             switch (potionType) {
 
                 case "Small Health Potion":
@@ -151,7 +150,8 @@ public class Player extends Actor {
                     this.healPlayer(20);
                     break;
             }
-            System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " Health Points!");
+            System.out.println("You were healed by " + ANSI_GREEN + potion
+              .getAmount() + ANSI_RESET + " Health Points!");
         } else {
             System.out.println("You do not have " + ANSI_RED + potionType + ANSI_RESET + "!");
         }

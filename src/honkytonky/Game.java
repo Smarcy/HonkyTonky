@@ -10,9 +10,14 @@ import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
-import honkytonky.objects.*;
+import honkytonky.objects.Armor;
+import honkytonky.objects.Door;
+import honkytonky.objects.Merchant;
+import honkytonky.objects.Monster;
+import honkytonky.objects.Player;
+import honkytonky.objects.Room;
+import honkytonky.objects.Weapon;
 import honkytonky.resources.CharacterInfoPattern;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -119,23 +124,23 @@ class Game {
                 switch (weapon) {
                     case 1:
                         player = new Player(name, 20, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                                              .get(0)); // One-Handed Sword
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                          .get(6)); // One-Handed Sword
                         break;
                     case 2:
                         player = new Player(name, 20, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                                              .get(0)); // Two-Handed Sword
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                          .get(0)); // Two-Handed Sword
                         break;
                     case 3:
                         player = new Player(name, 20, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                                              .get(0)); // One-Handed Axe
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                          .get(0)); // One-Handed Axe
                         break;
                     case 4:
                         player = new Player(name, 20, startWeapon,
-                                            armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                                              .get(0)); // Two-Handed Axe
+                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                          .get(0)); // Two-Handed Axe
                         break;
                     default:
                         clearScreen();
@@ -202,14 +207,23 @@ class Game {
     }
 
     private void checkRoomForMerchant() {
-        if(player.getCurrentRoom().hasMerchant()) {
+        if (player.getCurrentRoom().hasMerchant()) {
             printMerchantDialog();
         }
     }
 
     private void printMerchantDialog() {
         clearScreen();
-        System.out.println("Hello, my name is " + ANSI_YELLOW + player.getCurrentRoom().getPresentMerchant().toString() + ANSI_RESET);
+        Merchant merchant = player.getCurrentRoom().getPresentMerchant();
+
+        System.out.println("\n1) Talk to " + merchant);
+        System.out.println("\n2) Trade with " + merchant);
+        System.out.println("\n3) Attack " + merchant);
+
+        System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET);
+        merchant.printItemsForSell();
+
+
         scanner.nextLine();
     }
 
@@ -387,7 +401,8 @@ class Game {
     private boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1);
-            int monsterDamage = rng - player.getArmor().getArmorPoints() - player.getTemporaryDefBoost();
+            int monsterDamage = rng - player.getArmor().getArmorPoints() - player
+              .getTemporaryDefBoost();
 
             monsterDamage = (monsterDamage < 0) ? 0 : monsterDamage;
 
@@ -419,7 +434,8 @@ class Game {
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      *
-     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum damage was reached, it counts as critical hit
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
+     * damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
@@ -442,8 +458,8 @@ class Game {
     }
 
     /**
-     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost = (armorDef / 2) If (armorDef > 10) then = 2 If
-     * (calcDef < 1) then = 1 NOT OPTIMAL!r
+     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost
+     * = (armorDef / 2) If (armorDef > 10) then = 2 If (calcDef < 1) then = 1 NOT OPTIMAL!r
      */
     private void playerDefends() {
         player.giveTemporaryDefBoost();

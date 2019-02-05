@@ -52,6 +52,9 @@ public class MapLayout {
         rooms.add(kitchen);
         rooms.add(storage);
         rooms.add(hall);
+        rooms.add(yard);
+        rooms.add(townSquare);
+        rooms.add(marketplace);
     }
 
     public List<Room> getRooms() {
