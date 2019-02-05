@@ -216,13 +216,22 @@ class Game {
         clearScreen();
         Merchant merchant = player.getCurrentRoom().getPresentMerchant();
 
-        System.out.println("\n1) Talk to " + merchant);
-        System.out.println("\n2) Trade with " + merchant);
-        System.out.println("\n3) Attack " + merchant);
+        System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
+        System.out.println("1) Talk to " + merchant);
+        System.out.println("2) Trade with " + merchant);
+        System.out.println("3) Attack " + merchant);
 
-        System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET);
-        merchant.printItemsForSell();
+        switch(Integer.parseInt(scanner.nextLine())) {
 
+            case 1:
+                merchant.printSmalltalk();
+                break;
+            case 2:
+            merchant.printItemsForSell();
+            break;
+            case 3:
+                break;
+        }
 
         scanner.nextLine();
     }

@@ -12,7 +12,8 @@ class MerchantFactory {
 
     MerchantFactory() {
 
-        merchants.add(new Merchant("Belechor", 50, 3));
+        merchants.add(new Merchant("Belechor", 50, 3,
+          "I used to be a powerful magician, but once my hair fell out I stopped being powerful."));
         merchants.get(0).addItemToShop(potionFactory.createSmallHealthPotion());
     }
 
