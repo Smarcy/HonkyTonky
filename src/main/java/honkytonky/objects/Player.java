@@ -7,7 +7,9 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 import honkytonky.resources.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
+@Data
 public class Player extends Actor {
 
     private int temporaryDefBoost;
@@ -53,30 +55,6 @@ public class Player extends Actor {
 
     public void resetTemporaryDefBoost() {
         this.temporaryDefBoost = 0;
-    }
-
-    public int getTemporaryDefBoost() {
-        return this.temporaryDefBoost;
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public Armor getArmor() {
-        return armor;
     }
 
     public void increaseExperience(int amount) {
