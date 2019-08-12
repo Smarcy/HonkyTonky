@@ -1,7 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Weapon;
-import honkytonky.objects.Weapon.WeaponType;
+import honkytonky.resources.WeaponType;
 import java.util.ArrayList;
 import java.util.List;
 

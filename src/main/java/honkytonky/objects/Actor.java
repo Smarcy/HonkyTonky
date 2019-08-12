@@ -2,8 +2,10 @@ package honkytonky.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 
-public abstract class Actor {
+@Data
+abstract class Actor {
 
     private final int id;
     private final String name;
@@ -23,34 +25,5 @@ public abstract class Actor {
         //@formatter:on
 
         actors.add(this);
-    }
-
-    public int getID() {
-        return id;
-    }
-
-    public int getHp() {
-        return hp;
-    }
-
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
-
-    public int getMaxHP() {
-        return maxHP;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 }

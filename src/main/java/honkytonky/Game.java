@@ -6,7 +6,6 @@ import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
 
 import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.ArmorFactory.ArmorType;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
@@ -17,6 +16,7 @@ import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
+import honkytonky.resources.ArmorType;
 import honkytonky.resources.CharacterInfoPattern;
 import java.util.InputMismatchException;
 import java.util.List;

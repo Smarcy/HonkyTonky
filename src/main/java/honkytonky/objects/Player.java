@@ -8,7 +8,10 @@ import honkytonky.resources.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NonNull;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Player extends Actor {
 
@@ -21,8 +24,8 @@ public class Player extends Actor {
     private ExpTable expTable = new ExpTable();
     private List<Item> inventory;
 
-    public Player(String name, int maxHP, Weapon weapon, Armor armor, Potion potion,
-      Room currentRoom) {
+    public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Potion potion,
+      @NonNull Room currentRoom) {
 
         super(name, maxHP, 1);
 
@@ -135,7 +138,6 @@ public class Player extends Actor {
         }
     }
 
-
     private void healPlayer(int amount) {
         this.setHp(this.getHp() + amount);
 
@@ -147,5 +149,4 @@ public class Player extends Actor {
     public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }
-
 }

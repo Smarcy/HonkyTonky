@@ -1,5 +1,11 @@
 package honkytonky.objects;
 
+import honkytonky.resources.PotionType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Potion extends Item {
 
     private int amount;
@@ -11,16 +17,5 @@ public class Potion extends Item {
 
         this.amount = amount;
         this.type = type;
-    }
-
-    public int getAmount() {
-        return this.amount;
-    }
-
-    public enum PotionType {
-        HEALTH,
-        MANA,
-        SPEED,
-        DEFENSE
     }
 }

@@ -1,5 +1,10 @@
 package honkytonky.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Armor extends Item {
 
     private final int armorPoints;
@@ -13,9 +18,5 @@ public class Armor extends Item {
         this.durability     = durability;
         this.maxDurability  = maxDurability;
         //@formatter:on
-    }
-
-    public int getArmorPoints() {
-        return armorPoints;
     }
 }

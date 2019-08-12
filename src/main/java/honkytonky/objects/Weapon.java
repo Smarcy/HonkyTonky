@@ -1,5 +1,11 @@
 package honkytonky.objects;
 
+import honkytonky.resources.WeaponType;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Weapon extends Item {
 
     private int damage;
@@ -20,15 +26,5 @@ public class Weapon extends Item {
         this.twoHanded      = twoHanded;
         //@formatter:on
 
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public enum WeaponType {
-        SWORD,
-        AXE,
-        HAMMER
     }
 }

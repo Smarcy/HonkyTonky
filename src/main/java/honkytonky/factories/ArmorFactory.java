@@ -1,6 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Armor;
+import honkytonky.resources.ArmorType;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -16,11 +17,5 @@ public class ArmorFactory {
 
     public Map<ArmorType, Armor> getArmorMap() {
         return armorMap;
-    }
-
-    public enum ArmorType {
-        LEATHER,
-        IRON,
-        STEEL
     }
 }

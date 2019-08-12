@@ -1,5 +1,10 @@
 package honkytonky.objects;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Monster extends Actor {
 
     private int damage;
@@ -12,14 +17,6 @@ public class Monster extends Actor {
         this.damage = damage;
         this.grantedExperience = grantedExperience;
         this.monsterType = monsterType;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getGrantedExperience() {
-        return this.grantedExperience;
     }
 
     public enum MonsterType {
