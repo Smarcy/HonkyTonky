@@ -24,7 +24,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
-class Game {
+public class Game {
 
 
     // @formatter:off
@@ -407,7 +407,7 @@ class Game {
         }
     }
 
-    private boolean monsterAttacks(boolean monsterAlive) {
+    protected boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
