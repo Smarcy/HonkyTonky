@@ -31,4 +31,12 @@ public class Merchant extends Actor {
             System.out.println(i + ") " + item + "\n");
         }
     }
+
+    public List<Item> getItemsForSell() {
+        return itemsForSell;
+    }
+
+    public String getSmalltalk() {
+        return smalltalk;
+    }
 }
