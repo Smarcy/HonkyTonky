@@ -45,6 +45,6 @@ public class GameTest {
 
         verify(player, times(1)).getTemporaryDefBoost();
         verify(player, times(1)).setHp(anyInt());
+        verify(player, times(1)).resetTemporaryDefBoost();
     }
-
 }
