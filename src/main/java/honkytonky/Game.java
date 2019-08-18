@@ -86,8 +86,6 @@ public class Game {
                     case 2:
                         createPlayer();
                         break;
-                    default:
-                        break;
                 }
             } catch (NumberFormatException e) {
                 showIntro();

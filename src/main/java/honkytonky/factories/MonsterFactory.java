@@ -1,7 +1,7 @@
 package honkytonky.factories;
 
-import static honkytonky.objects.Monster.MonsterType.BUTTERFLY;
-import static honkytonky.objects.Monster.MonsterType.ZOMBIE;
+import static honkytonky.resources.MonsterType.BUTTERFLY;
+import static honkytonky.resources.MonsterType.ZOMBIE;
 
 import honkytonky.objects.Monster;
 import java.util.ArrayList;
