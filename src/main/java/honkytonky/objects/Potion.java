@@ -8,11 +8,10 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Potion extends Item {
 
-    private int amount;
-    private PotionType type;
+    private final int amount;
+    private final PotionType type;
 
     public Potion(int id, String name, int amount, PotionType type) {
-
         super(id, name);
 
         this.amount = amount;

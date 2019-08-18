@@ -1,5 +1,6 @@
 package honkytonky.objects;
 
+import honkytonky.resources.MonsterType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,10 +18,5 @@ public class Monster extends Actor {
         this.damage = damage;
         this.grantedExperience = grantedExperience;
         this.monsterType = monsterType;
-    }
-
-    public enum MonsterType {
-        ZOMBIE,
-        BUTTERFLY
     }
 }

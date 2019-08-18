@@ -128,7 +128,7 @@ public class Game {
                     case 4:
                         player = new Player(name, 20, startWeapon,
                           armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                          .get(0)); // Two-Handed Axe
+                          .get(0));
                         break;
                     default:
                         clearScreen();
