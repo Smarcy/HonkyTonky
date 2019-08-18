@@ -79,7 +79,6 @@ public class Player extends Actor {
             case "weapons":
                 for (Item item : inventory) {
                     if (item instanceof Weapon) {
-
                         if (item.equals(this.weapon)) {
                             System.out.println(item + " (equipped)");
                         } else {
@@ -123,7 +122,6 @@ public class Player extends Actor {
 
         if (playerHasPotion) {
             switch (potionType) {
-
                 case "Small Health Potion":
                     this.healPlayer(10);
                     break;

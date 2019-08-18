@@ -123,20 +123,8 @@ public class Game {
 
                 switch (weapon) {
                     case 1:
-                        player = new Player(name, 20, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                          .get(6)); // One-Handed Sword
-                        break;
                     case 2:
-                        player = new Player(name, 20, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                          .get(0)); // Two-Handed Sword
-                        break;
                     case 3:
-                        player = new Player(name, 20, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
-                          .get(0)); // One-Handed Axe
-                        break;
                     case 4:
                         player = new Player(name, 20, startWeapon,
                           armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
