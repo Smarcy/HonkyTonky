@@ -9,17 +9,11 @@ public class CharacterInfoPattern {
 
     public void printCharacterInfo(Player player) {
         printNameInfo(player);
-
         printHealthInfo(player);
-
         printLevelInfo(player);
-
         printExperienceInfo(player);
-
         printWeaponInfo(player);
-
         printArmorInfo(player);
-
         printLocationInfo(player);
     }
 

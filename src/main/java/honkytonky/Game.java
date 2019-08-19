@@ -36,7 +36,7 @@ public class Game {
     private final MapLayout mapLayout               = new MapLayout();
     private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
 
-    private final Map<ArmorType, Armor> armorMap    = armorFactory.getArmorMap();
+    private final Map<String, Armor> armorMap       = armorFactory.getArmorMap();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
     private Player player                           = null;

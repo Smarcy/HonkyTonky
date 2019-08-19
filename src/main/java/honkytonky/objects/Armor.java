@@ -1,5 +1,6 @@
 package honkytonky.objects;
 
+import honkytonky.resources.ArmorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -8,15 +9,17 @@ import lombok.EqualsAndHashCode;
 public class Armor extends Item {
 
     private final int armorPoints;
-    private int durability;
-    private int maxDurability;
+    private final int durability;
+    private final int maxDurability;
+    private final ArmorType armorType;
 
-    public Armor(int id, String name, int armorPoints, int durability, int maxDurability) {
+    public Armor(int id, String name, int armorPoints, int durability, int maxDurability, ArmorType armorType) {
         //@formatter:off
         super(id, name);
         this.armorPoints    = armorPoints;
         this.durability     = durability;
         this.maxDurability  = maxDurability;
+        this.armorType      = armorType;
         //@formatter:on
     }
 }
