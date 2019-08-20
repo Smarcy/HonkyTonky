@@ -85,12 +85,12 @@
 
         </plugins>
 
-       <!-- <resources>
-            <resource>
+       <resources>
+           <resource>
               <directory>src/main/resources</directory>
                 <filtering>false</filtering>
-            </resource>
-        </resources> -->
+           </resource>
+       </resources>
     </build>
 
 </project>

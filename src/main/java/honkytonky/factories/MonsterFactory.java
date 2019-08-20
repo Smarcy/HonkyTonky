@@ -1,8 +1,5 @@
 package honkytonky.factories;
 
-import static honkytonky.enumtypes.MonsterType.BUTTERFLY;
-import static honkytonky.enumtypes.MonsterType.ZOMBIE;
-
 import com.opencsv.CSVReader;
 import honkytonky.enumtypes.MonsterType;
 import honkytonky.objects.Monster;
@@ -19,9 +16,9 @@ public class MonsterFactory {
     private List<Monster> monsterList = new ArrayList<>();
 
     public MonsterFactory() throws IOException {
-        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 70, ZOMBIE));
-        monsterList.add(new Monster("Butterfly", 20, 2, 2, 100, BUTTERFLY));
-        //    createMonstersFromFile();
+//        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 70, ZOMBIE));
+//        monsterList.add(new Monster("Butterfly", 20, 2, 2, 100, BUTTERFLY));
+            createMonstersFromFile();
     }
 
     Monster getMonsterByName(String name) {
