@@ -1,6 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Door;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +10,7 @@ class DoorFactory {
     private List<Door> doors = new ArrayList<>();
     private RoomFactory roomFactory = new RoomFactory();
 
-    DoorFactory() {
+    DoorFactory() throws IOException {
         doors.add(new Door(1, "Bedroom", roomFactory.getRoomByName("Bedroom")));
         doors.add(new Door(2, "Living Room", roomFactory.getRoomByName("Living Room")));
         doors.add(new Door(3, "Kitchen", roomFactory.getRoomByName("Kitchen")));

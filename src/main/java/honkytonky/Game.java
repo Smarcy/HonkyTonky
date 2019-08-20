@@ -18,6 +18,7 @@ import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import honkytonky.resources.ArmorType;
 import honkytonky.resources.CharacterInfoPattern;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -45,9 +46,12 @@ public class Game {
 
 
     private Random rnd = new Random();
+
+    public Game() throws IOException {
+    }
     // @formatter:on
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Game game = new Game();
         game.showIntro();
     }
@@ -125,7 +129,7 @@ public class Game {
                     case 3:
                     case 4:
                         player = new Player(name, 20, startWeapon,
-                          armorMap.get(ArmorType.LEATHER), potionFactory.startPotion(), rooms
+                          armorMap.get("Leather Armor"), potionFactory.startPotion(), rooms
                           .get(0));
                         break;
                     default:
