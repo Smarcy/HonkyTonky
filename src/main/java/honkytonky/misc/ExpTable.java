@@ -1,4 +1,4 @@
-package honkytonky.resources;
+package honkytonky.misc;
 
 import java.util.HashMap;
 import java.util.Map;

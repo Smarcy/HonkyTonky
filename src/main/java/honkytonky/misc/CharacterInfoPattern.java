@@ -1,7 +1,7 @@
-package honkytonky.resources;
+package honkytonky.misc;
 
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 
 import honkytonky.objects.Player;
 

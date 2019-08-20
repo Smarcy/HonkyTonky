@@ -1,9 +1,9 @@
 package honkytonky;
 
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RED;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_YELLOW;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
@@ -16,7 +16,7 @@ import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
-import honkytonky.resources.CharacterInfoPattern;
+import honkytonky.misc.CharacterInfoPattern;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;

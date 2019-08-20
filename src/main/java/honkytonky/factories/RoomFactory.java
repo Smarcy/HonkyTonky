@@ -28,7 +28,9 @@ public class RoomFactory {
 
     private void createRoomsFromFile() {
         try (
-            Reader reader = Files.newBufferedReader(Paths.get("data/rooms"));
+          Reader reader = Files.newBufferedReader(
+            Paths.get("src/main/resources/rooms")
+          );
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
         ) {
             String[] nextRecord;
@@ -37,11 +39,10 @@ public class RoomFactory {
                 rooms.add(new Room(
                   Integer.parseInt(nextRecord[0]),      // Room ID
                   nextRecord[1],                        // Room Name
-                  Boolean.getBoolean(nextRecord[2])));  // contains Monster
+                  Boolean.parseBoolean(nextRecord[2])));  // contains Monster
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei rooms!");
         }
-
     }
 }

@@ -1,10 +1,10 @@
 package honkytonky.objects;
 
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_GREEN;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RED;
-import static honkytonky.resources.ANSI_Color_Codes.ANSI_RESET;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
-import honkytonky.resources.ExpTable;
+import honkytonky.misc.ExpTable;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;

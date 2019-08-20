@@ -1,4 +1,4 @@
-package honkytonky.resources;
+package honkytonky.misc;
 
 public class ANSI_Color_Codes {
 
