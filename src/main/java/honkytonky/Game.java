@@ -221,13 +221,11 @@ public class Game {
             case 3:
                 break;
         }
-
         scanner.nextLine();
     }
 
     private void printUsePotionDialog() {
         clearScreen();
-
         System.out.println("What kind of Potion would you like to use?\n");
         System.out.println("1) Health Potion");
         System.out.println("2) Defense Potion");
