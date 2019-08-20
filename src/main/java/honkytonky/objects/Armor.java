@@ -1,6 +1,6 @@
 package honkytonky.objects;
 
-import honkytonky.resources.ArmorType;
+import honkytonky.enumtypes.ArmorType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

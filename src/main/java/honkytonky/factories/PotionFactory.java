@@ -1,7 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Potion;
-import honkytonky.resources.PotionType;
+import honkytonky.enumtypes.PotionType;
 import java.util.ArrayList;
 import java.util.List;
 

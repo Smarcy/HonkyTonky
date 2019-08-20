@@ -1,6 +1,6 @@
 package honkytonky.objects;
 
-import honkytonky.resources.PotionType;
+import honkytonky.enumtypes.PotionType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

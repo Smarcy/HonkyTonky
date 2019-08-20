@@ -1,6 +1,6 @@
 package honkytonky.objects;
 
-import honkytonky.resources.MonsterType;
+import honkytonky.enumtypes.MonsterType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,7 +1,7 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Armor;
-import honkytonky.resources.ArmorType;
+import honkytonky.enumtypes.ArmorType;
 import java.util.HashMap;
 import java.util.Map;
 

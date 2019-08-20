@@ -16,7 +16,6 @@ import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
-import honkytonky.resources.ArmorType;
 import honkytonky.resources.CharacterInfoPattern;
 import java.io.IOException;
 import java.util.InputMismatchException;

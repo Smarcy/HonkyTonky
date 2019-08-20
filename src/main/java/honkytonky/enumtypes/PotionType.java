@@ -1,4 +1,4 @@
-package honkytonky.resources;
+package honkytonky.enumtypes;
 
 public enum PotionType {
     HEALTH,
