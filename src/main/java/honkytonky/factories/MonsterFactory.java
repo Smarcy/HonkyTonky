@@ -1,10 +1,14 @@
 package honkytonky.factories;
 
+import static honkytonky.enumtypes.MonsterType.BUTTERFLY;
+import static honkytonky.enumtypes.MonsterType.ZOMBIE;
+
 import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 import honkytonky.enumtypes.MonsterType;
 import honkytonky.objects.Monster;
+import java.io.IOException;
 import java.io.Reader;
+import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -14,10 +18,10 @@ public class MonsterFactory {
 
     private List<Monster> monsterList = new ArrayList<>();
 
-    public MonsterFactory() {
- //       monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 70, ZOMBIE));
-//        monsterList.add(new Monster("Butterfly", 20, 2, 2, 100, BUTTERFLY));
-        createMonstersFromFile();
+    public MonsterFactory() throws IOException {
+        monsterList.add(new Monster("Peanut Butter Zombie", 15, 1, 1, 70, ZOMBIE));
+        monsterList.add(new Monster("Butterfly", 20, 2, 2, 100, BUTTERFLY));
+        //    createMonstersFromFile();
     }
 
     Monster getMonsterByName(String name) {
@@ -30,15 +34,15 @@ public class MonsterFactory {
         return null;
     }
 
-    private void createMonstersFromFile() {
+    private void createMonstersFromFile() throws IOException {
         try (
           Reader reader = Files.newBufferedReader(
-            Paths.get("src/main/resources/monsters"));
-            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+            Paths.get(URI.create(getClass().getResource("/monsters").toString())));
+          CSVReader csvReader = new CSVReader(reader);
         ) {
             String[] nextRecord;
 
-            while((nextRecord = csvReader.readNext()) != null) {
+            while ((nextRecord = csvReader.readNext()) != null) {
                 monsterList.add(new Monster(
                   nextRecord[0],                        // name
                   Integer.parseInt(nextRecord[1]),      // maxHP

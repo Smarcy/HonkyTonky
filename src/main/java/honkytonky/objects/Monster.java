@@ -19,4 +19,9 @@ public class Monster extends Actor {
         this.grantedExperience = grantedExperience;
         this.monsterType = monsterType;
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }
