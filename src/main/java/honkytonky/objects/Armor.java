@@ -22,4 +22,9 @@ public class Armor extends Item {
         this.armorType      = armorType;
         //@formatter:on
     }
+
+    @Override
+    public String toString() {
+        return this.getName();
+    }
 }

@@ -26,4 +26,9 @@ abstract class Actor {
 
         actors.add(this);
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

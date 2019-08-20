@@ -304,11 +304,8 @@ public class Game {
 
     private void printCharacterInfo() {
         clearScreen();
-
         charInfo.printCharacterInfo(player);
-
         scanner.nextLine();
-
         clearScreen();
     }
 
@@ -391,8 +388,6 @@ public class Game {
             if (monsterAttacks(monsterAlive) && !playerFled) {
                 break;
             }
-
-
         }
     }
 
@@ -410,21 +405,15 @@ public class Game {
               ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + monsterDamage + ANSI_RESET + " damage!\n");
 
             player.resetTemporaryDefBoost();
-
             isPlayerAlive();
-
             return false;
         } else {
             System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
 
             player.getCurrentRoom().monsterKilled();
-
             rewardPlayer();
-
             scanner.nextLine();
-
             clearScreen();
-
             return true;
         }
     }
@@ -467,11 +456,8 @@ public class Game {
      * Is called when the Player is in a battle and chooses to flee from the fight
      */
     private void playerFlees() {
-
         clearScreen();
-
         float fleeChance = (float) (player.getLevel() / monster.getLevel());
-
         fleeChance -= rnd.nextFloat();
 
         if (fleeChance >= 0.5f) {
@@ -486,7 +472,6 @@ public class Game {
 
     private void rewardPlayer() {
         int xpReward = calculateExperienceReward();
-
         player.increaseExperience(xpReward);
 
         System.out
@@ -503,9 +488,7 @@ public class Game {
     private void resetGame() {
         player = null;
         monster = null;
-
         showIntro();
-
     }
 
     /**
@@ -514,10 +497,8 @@ public class Game {
     private void isPlayerAlive() {
         if (player.getHp() <= 0) {
             clearScreen();
-
             System.out.println("You died!");
             scanner.nextLine();
-
             resetGame();
         }
     }

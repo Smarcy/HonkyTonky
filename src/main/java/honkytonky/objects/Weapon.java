@@ -25,6 +25,10 @@ public class Weapon extends Item {
         this.maxDurability  = maxDurability;
         this.twoHanded      = twoHanded;
         //@formatter:on
+    }
 
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

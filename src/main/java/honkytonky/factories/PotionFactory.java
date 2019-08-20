@@ -7,8 +7,6 @@ import java.util.List;
 
 public class PotionFactory {
 
-    private List<Potion> potionList = new ArrayList<>();
-
     public PotionFactory() {
 
     }

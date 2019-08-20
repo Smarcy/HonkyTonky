@@ -39,7 +39,7 @@ public class RoomFactory {
         try (
           Reader reader = Files.newBufferedReader(
             Paths.get(URI.create(getClass().getResource("/rooms").toString())));
-          CSVReader csvReader = new CSVReader(reader);
+          CSVReader csvReader = new CSVReader(reader)
         ) {
             String[] nextRecord;
 

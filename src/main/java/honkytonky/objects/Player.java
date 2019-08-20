@@ -24,7 +24,8 @@ public class Player extends Actor {
     private ExpTable expTable = new ExpTable();
     private List<Item> inventory;
 
-    public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Potion potion,
+    public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor,
+      @NonNull Potion potion,
       @NonNull Room currentRoom) {
 
         super(name, maxHP, 1);
@@ -146,5 +147,10 @@ public class Player extends Actor {
 
     public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }
