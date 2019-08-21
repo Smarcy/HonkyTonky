@@ -1,0 +1,4 @@
+id, name, armorPoints, durability, maxDurability, armorType
+1,Leather Armor,1,100,100,LEATHER
+2,Iron Armor,2,100,100,IRON
+3,Steel Armor,3,100,100,STEEL

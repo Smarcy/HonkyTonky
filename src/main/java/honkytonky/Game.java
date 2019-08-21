@@ -35,8 +35,7 @@ public class Game {
     private final PotionFactory potionFactory       = new PotionFactory();
     private final MapLayout mapLayout               = new MapLayout();
     private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
-
-    private final Map<String, Armor> armorMap       = armorFactory.getArmorMap();
+    private final List<Armor> armorList             = armorFactory.getArmorList();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
     private Player player                           = null;
@@ -128,7 +127,7 @@ public class Game {
                     case 3:
                     case 4:
                         player = new Player(name, 20, startWeapon,
-                          armorMap.get("Leather Armor"), potionFactory.startPotion(), rooms
+                          armorFactory.findArmorByName("Leather Armor"), potionFactory.startPotion(), rooms
                           .get(0));
                         break;
                     default:
