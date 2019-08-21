@@ -1,0 +1,5 @@
+id, name, weaponType, damage, durability, maxDurability, twoHanded
+1,One-Handed Sword,SWORD,2,100,100,false
+2,Two-Handed Sword,SWORD,3,100,100,true
+3,One-Handed Axe,AXE,2,100,100,false
+4,Two-Handed Axe,AXE,3,100,100,true

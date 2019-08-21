@@ -1,6 +1,7 @@
 package honkytonky.factories;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import honkytonky.enumtypes.MonsterType;
 import honkytonky.objects.Monster;
 import java.io.BufferedReader;
@@ -32,7 +33,7 @@ public class MonsterFactory {
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
           BufferedReader reader = new BufferedReader(inputStreamReader)) {
 
-            CSVReader csvReader = new CSVReader(reader);
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {

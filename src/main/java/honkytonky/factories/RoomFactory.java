@@ -1,6 +1,7 @@
 package honkytonky.factories;
 
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import honkytonky.objects.Room;
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -30,7 +31,7 @@ public class RoomFactory {
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
           BufferedReader reader = new BufferedReader(inputStreamReader)) {
 
-            CSVReader csvReader = new CSVReader(reader);
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {

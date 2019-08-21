@@ -1,3 +1,4 @@
+id, name, containsMonster
 1,Bedroom,false
 2,Living Room,false
 3,Kitchen,false
