@@ -1,3 +1,5 @@
 Grundsätzlich Factories:
 	- Einlesen per OpenCSV
 		- Done!
+
+	- Controllerklassen erstellen (BattleController, PlayerController, ...)
