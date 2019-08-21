@@ -26,7 +26,6 @@ class DoorFactory {
                 return door;
             }
         }
-
         return null;
     }
 

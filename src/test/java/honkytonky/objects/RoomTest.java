@@ -1,11 +1,12 @@
 package honkytonky.objects;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
@@ -25,7 +26,7 @@ class RoomTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        room = new Room(1, "myRoom", false);
+        room = new Room(1, "myRoom");
     }
 
     @Test

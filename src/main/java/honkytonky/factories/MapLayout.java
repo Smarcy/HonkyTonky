@@ -1,7 +1,6 @@
 package honkytonky.factories;
 
 import honkytonky.objects.Room;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +13,7 @@ public class MapLayout {
 
     private List<Room> rooms = new ArrayList<>();
 
-    public MapLayout() throws IOException {
+    public MapLayout() {
         Room bedroom = roomFactory.getRoomByName("Bedroom");
         bedroom.addDoor(doorFactory.getDoorByName("Living Room"));
 

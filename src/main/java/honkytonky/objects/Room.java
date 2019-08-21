@@ -13,11 +13,11 @@ public class Room {
     private Monster presentMonster;
     private Merchant presentMerchant;
 
-    public Room(int id, String name, boolean hasMonster) {
+    public Room(int id, String name) {
         //@formatter:off
         this.id                 = id;
         this.name               = name;
-        this.hasLivingMonster   = hasMonster;
+        this.hasLivingMonster   = false;
         this.hasMerchant        = false;
         this.doors              = new ArrayList<>();
         //@formatter:on

@@ -5,7 +5,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import honkytonky.Game;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
@@ -36,7 +35,6 @@ public class GameTest {
 
     @Test
     public void testMonsterAttacks() {
-
         when(monster.getDamage()).thenReturn(1);
         when(player.getArmor()).thenReturn(armor);
         when(player.getTemporaryDefBoost()).thenReturn(5);

@@ -37,8 +37,7 @@ public class RoomFactory {
             while ((nextRecord = csvReader.readNext()) != null) {
                 rooms.add(new Room(
                   Integer.parseInt(nextRecord[0]),      // Room ID
-                  nextRecord[1],                        // Room Name
-                  Boolean.parseBoolean(nextRecord[2])));  // contains Monster
+                  nextRecord[1]));                        // Room Name
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei rooms!");
