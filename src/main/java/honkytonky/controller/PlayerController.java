@@ -3,8 +3,10 @@ package honkytonky.controller;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Door;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
@@ -69,5 +71,26 @@ public class PlayerController {
             }
         }
         return null;
+    }
+
+    /**
+     * Lets the player move to a requested direction
+     */
+    public void move(Scanner scanner, MapLayout mapLayout) {
+        clearScreen();
+
+        player.getCurrentRoom().listDoorOptions();
+
+        try {
+            int option = Integer.parseInt(scanner.nextLine());
+
+            Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
+            Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
+
+            player.setCurrentRoom(targetRoom);
+        } catch (IndexOutOfBoundsException e) {
+            move(scanner, mapLayout);
+        }
+        clearScreen();
     }
 }

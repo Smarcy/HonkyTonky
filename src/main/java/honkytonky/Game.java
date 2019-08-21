@@ -9,7 +9,6 @@ import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
-import honkytonky.objects.Door;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import java.util.InputMismatchException;
@@ -72,7 +71,9 @@ public class Game {
                         }
                         break;
                     case 2:
-                        player = playerController.createPlayer(scanner, armorFactory, weaponFactory, potionFactory, battleController, rooms);
+                        player = playerController
+                          .createPlayer(scanner, armorFactory, weaponFactory, potionFactory,
+                            battleController, rooms);
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -101,7 +102,7 @@ public class Game {
 
                 switch (option) {
                     case 1:
-                        move();
+                        playerController.move(scanner, mapLayout);
                         battleController.checkRoomForMonster(scanner);
                         checkRoomForMerchant();
                         break;
@@ -129,26 +130,5 @@ public class Game {
         if (player.getCurrentRoom().hasMerchant()) {
             dialogController.printMerchantDialog(player, scanner);
         }
-    }
-
-    /**
-     * Lets the player move to a requested direction
-     */
-    private void move() {
-        clearScreen();
-
-        player.getCurrentRoom().listDoorOptions();
-
-        try {
-            int option = Integer.parseInt(scanner.nextLine());
-
-            Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
-            Room targetRoom = mapLayout.getRoomByName(targetDoor.getTargetRoom().getName());
-
-            player.setCurrentRoom(targetRoom);
-        } catch (IndexOutOfBoundsException e) {
-            move();
-        }
-        clearScreen();
     }
 }
