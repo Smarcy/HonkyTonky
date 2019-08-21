@@ -25,7 +25,6 @@ public class DialogController {
         System.out.println("3) Attack " + merchant);
 
         switch(Integer.parseInt(scanner.nextLine())) {
-
             case 1:
                 merchant.printSmalltalk();
                 break;
