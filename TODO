@@ -3,3 +3,7 @@ Grundsätzlich Factories:
 		- Done!
 
 	- Controllerklassen erstellen (BattleController, PlayerController, ...)
+
+- Room:
+  - hasLivingMonster default = false
+  - addMonster setzt auf true!

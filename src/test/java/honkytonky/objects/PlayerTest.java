@@ -1,4 +1,4 @@
-package honkytonky;
+package honkytonky.objects;
 
 import honkytonky.objects.Player;
 import org.junit.jupiter.api.Assertions;

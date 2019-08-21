@@ -7,21 +7,20 @@ public class Room {
 
     private final int id;
     private final String name;
-    private final List<Door> doors = new ArrayList<>();
+    private final List<Door> doors;
     private boolean hasLivingMonster;
     private boolean hasMerchant;
     private Monster presentMonster;
     private Merchant presentMerchant;
 
     public Room(int id, String name, boolean hasMonster) {
-
         //@formatter:off
-        this.name   = name;
-        this.id     = id;
-        this.hasLivingMonster = hasMonster;
-        this.hasMerchant = false;
+        this.id                 = id;
+        this.name               = name;
+        this.hasLivingMonster   = hasMonster;
+        this.hasMerchant        = false;
+        this.doors              = new ArrayList<>();
         //@formatter:on
-
     }
 
     @Override
@@ -35,6 +34,7 @@ public class Room {
 
     public void addMonster(Monster monster) {
         this.presentMonster = monster;
+        this.hasLivingMonster = true;
     }
 
     public void addMerchant(Merchant merchant) {
@@ -85,5 +85,4 @@ public class Room {
     public String getName() {
         return name;
     }
-
 }
