@@ -104,7 +104,7 @@ public class Game {
                     case 1:
                         playerController.move(scanner, mapLayout);
                         battleController.checkRoomForMonster(scanner);
-                        checkRoomForMerchant();
+                        battleController.checkRoomForMerchant(scanner, dialogController);
                         break;
                     case 2:
                         dialogController.printUsePotionDialog(player, scanner);
@@ -123,12 +123,6 @@ public class Game {
                 gameLoop();
             }
             clearScreen();
-        }
-    }
-
-    private void checkRoomForMerchant() {
-        if (player.getCurrentRoom().hasMerchant()) {
-            dialogController.printMerchantDialog(player, scanner);
         }
     }
 }

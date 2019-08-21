@@ -196,4 +196,10 @@ public class BattleController {
             startBattle(scanner);
         }
     }
+
+    public void checkRoomForMerchant(Scanner scanner, DialogController dialogController) {
+        if (player.getCurrentRoom().hasMerchant()) {
+            dialogController.printMerchantDialog(player, scanner);
+        }
+    }
 }
