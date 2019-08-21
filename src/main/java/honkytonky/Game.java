@@ -1,7 +1,10 @@
 package honkytonky;
 
+import static honkytonky.misc.ClearScreen.clearScreen;
+
 import honkytonky.controller.BattleController;
 import honkytonky.controller.DialogController;
+import honkytonky.controller.PlayerController;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
@@ -9,7 +12,6 @@ import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Door;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
-import honkytonky.objects.Weapon;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -24,6 +26,7 @@ public class Game {
     private final MapLayout mapLayout               = new MapLayout();
     private final DialogController dialogController = new DialogController();
     private final BattleController battleController = new BattleController();
+    private final PlayerController playerController = new PlayerController();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
     private Player player                           = null;
@@ -35,14 +38,6 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.showIntro();
-    }
-
-    /**
-     * Clear the console completely
-     */
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 
     /**
@@ -77,59 +72,11 @@ public class Game {
                         }
                         break;
                     case 2:
-                        createPlayer();
+                        player = playerController.createPlayer(scanner, armorFactory, weaponFactory, potionFactory, battleController, rooms);
                         break;
                 }
             } catch (NumberFormatException e) {
                 showIntro();
-            }
-        }
-    }
-
-    /**
-     * Lets the user create a Player Object
-     */
-    private void createPlayer() {
-        clearScreen();
-
-        System.out.println("Enter your name: ");
-        String name = scanner.nextLine();
-
-        clearScreen();
-
-        while (player == null) {
-            clearScreen();
-
-            System.out.println("Choose a weapon: ");
-            System.out.println("1) One-Handed Sword");
-            System.out.println("2) Two-Handed Sword");
-            System.out.println("3) One-Handed Axe");
-            System.out.println("4) Two-Handed Axe");
-
-            try {
-                int weapon = Integer.parseInt(scanner.nextLine());
-
-                Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
-
-                switch (weapon) {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        player = new Player(name, 20, startWeapon,
-                          armorFactory.findArmorByName("Leather Armor"),
-                          potionFactory.startPotion(), rooms
-                          .get(0));
-                        battleController.setPlayer(player);
-                        break;
-                    default:
-                        clearScreen();
-                        System.out.println(weapon + " is not a valid option!\n");
-                        break;
-                }
-            } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
-                e.printStackTrace();
-                clearScreen();
             }
         }
     }

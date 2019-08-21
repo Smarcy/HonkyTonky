@@ -9,3 +9,6 @@ Grundsätzlich Factories:
 
 - Controllerklassen erstellen (BattleController, PlayerController, ...)
   - Erste Version -> Done!
+
+- FIXME:
+  - GameTest - testMonsterAttacks()

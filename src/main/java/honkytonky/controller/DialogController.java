@@ -1,9 +1,10 @@
 package honkytonky.controller;
 
-import static honkytonky.Game.clearScreen;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
+import static honkytonky.misc.ClearScreen.clearScreen;
+
 
 import honkytonky.misc.CharacterInfoPattern;
 import honkytonky.objects.Merchant;
