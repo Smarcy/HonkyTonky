@@ -1,7 +1,13 @@
 package honkytonky.factories;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import honkytonky.objects.Door;
+import honkytonky.objects.Room;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,15 +16,8 @@ class DoorFactory {
     private List<Door> doors = new ArrayList<>();
     private RoomFactory roomFactory = new RoomFactory();
 
-    DoorFactory() throws IOException {
-        doors.add(new Door(1, "Bedroom", roomFactory.getRoomByName("Bedroom")));
-        doors.add(new Door(2, "Living Room", roomFactory.getRoomByName("Living Room")));
-        doors.add(new Door(3, "Kitchen", roomFactory.getRoomByName("Kitchen")));
-        doors.add(new Door(4, "Storage", roomFactory.getRoomByName("Storage")));
-        doors.add(new Door(5, "Hall", roomFactory.getRoomByName("Hall")));
-        doors.add(new Door(6, "Yard", roomFactory.getRoomByName("Yard")));
-        doors.add(new Door(7, "Town Square", roomFactory.getRoomByName("Town Square")));
-        doors.add(new Door(8, "Marketplace", roomFactory.getRoomByName("Marketplace")));
+    DoorFactory() {
+        createDoorsFromFile();
     }
 
     Door getDoorByName(String name) {
@@ -29,5 +28,25 @@ class DoorFactory {
         }
 
         return null;
+    }
+
+    private void createDoorsFromFile() {
+        try (InputStream inputStream = getClass().getResourceAsStream("/doors");
+          InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+          BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+            String[] nextRecord;
+
+            while ((nextRecord = csvReader.readNext()) != null) {
+                doors.add(new Door(
+                  Integer.parseInt(nextRecord[0]),          // id
+                  nextRecord[1],                            // doorName
+                  roomFactory.getRoomByName(nextRecord[2])  // targetroom
+                ));
+            }
+        } catch (Exception IOException) {
+            System.err.println("Fehler beim Lesen der Datei doors!");
+        }
     }
 }

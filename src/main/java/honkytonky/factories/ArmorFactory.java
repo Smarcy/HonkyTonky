@@ -54,7 +54,7 @@ public class ArmorFactory {
                 ));
             }
         } catch (Exception IOException) {
-            System.err.println("Fehler beim Lesen der Datei rooms!");
+            System.err.println("Fehler beim Lesen der Datei armors!");
         }
     }
 }
