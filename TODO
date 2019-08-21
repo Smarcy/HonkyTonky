@@ -2,8 +2,9 @@ Grundsätzlich Factories:
 	- Einlesen per OpenCSV
 		- Done!
 
-	- Controllerklassen erstellen (BattleController, PlayerController, ...)
-
 - Room:
   - hasLivingMonster default = false
   - addMonster setzt auf true!
+    - Done!
+
+- Controllerklassen erstellen (BattleController, PlayerController, ...)

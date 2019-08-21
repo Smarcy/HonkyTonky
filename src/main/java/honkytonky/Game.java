@@ -5,28 +5,23 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 
+import honkytonky.controller.DialogController;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Door;
-import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
-import honkytonky.misc.CharacterInfoPattern;
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Game {
-
-
     // @formatter:off
     private final Scanner scanner                   = new Scanner(System.in);
     private final ProcessBuilder pb                 = new ProcessBuilder("cmd", "/c", "cls").inheritIO();
@@ -34,7 +29,7 @@ public class Game {
     private final ArmorFactory armorFactory         = new ArmorFactory();
     private final PotionFactory potionFactory       = new PotionFactory();
     private final MapLayout mapLayout               = new MapLayout();
-    private final CharacterInfoPattern charInfo     = new CharacterInfoPattern();
+    private final DialogController dialogController = new DialogController();
     private final List<Armor> armorList             = armorFactory.getArmorList();
     private final List<Room> rooms                  = mapLayout.getRooms();
 
@@ -42,14 +37,13 @@ public class Game {
     private Monster monster                         = null;
     private boolean playerFled                      = false;
 
-
     private Random rnd = new Random();
-
-    public Game() throws IOException {
-    }
     // @formatter:on
 
-    public static void main(String[] args) throws IOException {
+    private Game() {
+    }
+
+    public static void main(String[] args) {
         Game game = new Game();
         game.showIntro();
     }
@@ -93,7 +87,6 @@ public class Game {
                 showIntro();
             }
         }
-
     }
 
     /**
@@ -147,7 +140,7 @@ public class Game {
      */
     private void gameLoop() {
         while (true) {
-            printCurrentLocation();
+            dialogController.printCurrentLocation(player);
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
@@ -167,13 +160,13 @@ public class Game {
                         checkRoomForMerchant();
                         break;
                     case 2:
-                        printUsePotionDialog();
+                        dialogController.printUsePotionDialog(player, scanner);
                         break;
                     case 3:
-                        printCharacterInfo();
+                        dialogController.printCharacterInfo(player, scanner);
                         break;
                     case 4:
-                        printInventoryDialog();
+                        dialogController.printInventoryDialog(player, scanner);
                         break;
                     case 5:
                         System.exit(0);
@@ -182,9 +175,7 @@ public class Game {
                 clearScreen();
                 gameLoop();
             }
-
             clearScreen();
-
         }
     }
 
@@ -196,114 +187,8 @@ public class Game {
 
     private void checkRoomForMerchant() {
         if (player.getCurrentRoom().hasMerchant()) {
-            printMerchantDialog();
+            dialogController.printMerchantDialog(player, scanner);
         }
-    }
-
-    private void printMerchantDialog() {
-        clearScreen();
-        Merchant merchant = player.getCurrentRoom().getPresentMerchant();
-
-        System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
-        System.out.println("1) Talk to " + merchant);
-        System.out.println("2) Trade with " + merchant);
-        System.out.println("3) Attack " + merchant);
-
-        switch(Integer.parseInt(scanner.nextLine())) {
-
-            case 1:
-                merchant.printSmalltalk();
-                break;
-            case 2:
-            merchant.printItemsForSell();
-            break;
-            case 3:
-                break;
-        }
-        scanner.nextLine();
-    }
-
-    private void printUsePotionDialog() {
-        clearScreen();
-        System.out.println("What kind of Potion would you like to use?\n");
-        System.out.println("1) Health Potion");
-        System.out.println("2) Defense Potion");
-
-        try {
-            switch (Integer.parseInt(scanner.nextLine())) {
-                case 1:
-                    clearScreen();
-                    System.out.println("Small or Big Potion?\n");
-                    System.out.println("1) Small Health Potion");
-                    System.out.println("2) Big Health Potion");
-                    switch (Integer.parseInt(scanner.nextLine())) {
-                        case 1:
-                            player.usePotion("Small Health Potion");
-                            break;
-                        case 2:
-                            player.usePotion("Big Health Potion");
-                            break;
-                    }
-                    break;
-                case 2:
-                    clearScreen();
-                    player.usePotion("defense");
-                    break;
-            }
-            scanner.nextLine();
-        } catch (InputMismatchException | NumberFormatException e) {
-            printUsePotionDialog();
-        }
-    }
-
-    private void printInventoryDialog() {
-        clearScreen();
-
-        System.out.println("What kind of items would you like to see?\n");
-        System.out.println("1) Weapons");
-        System.out.println("2) Armors");
-        System.out.println("3) Potions");
-
-        try {
-            int option = Integer.parseInt(scanner.nextLine());
-
-            clearScreen();
-
-            switch (option) {
-                case 1:
-                    player.showInventory("weapons");
-                    break;
-                case 2:
-                    player.showInventory("armors");
-                    break;
-                case 3:
-                    player.showInventory("potions");
-                    break;
-                default:
-                    printInventoryDialog();
-                    break;
-            }
-        } catch (InputMismatchException | NumberFormatException e) {
-            printInventoryDialog();
-        }
-
-        scanner.nextLine();
-    }
-
-    /**
-     * Console output of the current Room or Place
-     */
-    private void printCurrentLocation() {
-        System.out.println(
-          "You are currently in: " + ANSI_GREEN + player.getCurrentRoom()
-            + ANSI_RESET);
-    }
-
-    private void printCharacterInfo() {
-        clearScreen();
-        charInfo.printCharacterInfo(player);
-        scanner.nextLine();
-        clearScreen();
     }
 
     /**
@@ -330,7 +215,7 @@ public class Game {
     /**
      * Clear the console completely
      */
-    private void clearScreen() {
+    public static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }

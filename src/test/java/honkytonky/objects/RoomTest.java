@@ -26,7 +26,7 @@ class RoomTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        room = new Room(1, "myRoom");
+        room = new Room(1, "testRoom");
     }
 
     @Test
