@@ -1,11 +1,10 @@
-package honkytonky;
+package honkytonky.controller;
 
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import honkytonky.controller.BattleController;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
@@ -15,7 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-public class GameTest {
+public class BattleControllerTest {
 
     @InjectMocks
     BattleController battleController;
