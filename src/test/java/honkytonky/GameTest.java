@@ -10,6 +10,7 @@ import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -17,8 +18,6 @@ import org.mockito.MockitoAnnotations;
 public class GameTest {
 
     @InjectMocks
-    Game game;
-
     BattleController battleController;
 
     @Mock
@@ -35,6 +34,7 @@ public class GameTest {
         MockitoAnnotations.initMocks(this);
     }
 
+    @Test
     public void testMonsterAttacks() {
         when(monster.getDamage()).thenReturn(1);
         when(player.getArmor()).thenReturn(armor);
