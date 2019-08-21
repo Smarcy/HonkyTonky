@@ -17,8 +17,8 @@ public class Merchant extends Actor {
         this.itemsForSell.add(item);
     }
 
-    public void removeItemFromShop(int id) {
-        this.itemsForSell.remove(itemsForSell.get(id));
+    public void removeItemFromShop(Item item) {
+        this.itemsForSell.remove(item);
     }
 
     public void printSmalltalk() {
