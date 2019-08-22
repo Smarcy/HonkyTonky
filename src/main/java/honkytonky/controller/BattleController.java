@@ -15,15 +15,13 @@ import java.util.Scanner;
 
 public class BattleController {
 
-    private Player player;
-    private Monster monster;
     private final Random rnd = new Random();
     private final Scanner scanner = new Scanner(System.in);
-
-
+    private Player player;
+    private Monster monster;
     private boolean playerFled = false;
 
-   //----------------------------------------------------------------------//
+    //----------------------------------------------------------------------//
 
     void setPlayer(Player player) {
         this.player = player;
@@ -153,7 +151,7 @@ public class BattleController {
     }
 
     private void resetGame() {
-       Game game = new Game();
+        Game game = new Game();
     }
 
     /**
@@ -199,9 +197,9 @@ public class BattleController {
         }
     }
 
-    public void checkRoomForMerchant(DialogController dialogController) {
+    public void checkRoomForMerchant(MerchantDialogController merchantDialogController) {
         if (player.getCurrentRoom().hasMerchant()) {
-            dialogController.printMerchantDialog(player);
+            merchantDialogController.printMerchantDialog(player);
         }
     }
 }

@@ -3,7 +3,8 @@ package honkytonky;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.controller.BattleController;
-import honkytonky.controller.DialogController;
+import honkytonky.controller.MerchantDialogController;
+import honkytonky.controller.PlayerDialogController;
 import honkytonky.controller.PlayerController;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
@@ -18,17 +19,17 @@ import java.util.Scanner;
 public class Game {
 
     // @formatter:off
-    private final Scanner scanner                   = new Scanner(System.in);
-    private final WeaponFactory weaponFactory       = new WeaponFactory();
-    private final ArmorFactory armorFactory         = new ArmorFactory();
-    private final PotionFactory potionFactory       = new PotionFactory();
-    private final MapLayout mapLayout               = new MapLayout();
-    private final DialogController dialogController = new DialogController();
-    private final BattleController battleController = new BattleController();
-    private final PlayerController playerController = new PlayerController();
-    private final List<Room> rooms                  = mapLayout.getRooms();
-
-    private Player player                           = null;
+    private final Scanner scanner                                   = new Scanner(System.in);
+    private final WeaponFactory weaponFactory                       = new WeaponFactory();
+    private final ArmorFactory armorFactory                         = new ArmorFactory();
+    private final PotionFactory potionFactory                       = new PotionFactory();
+    private final MapLayout mapLayout                               = new MapLayout();
+    private final PlayerDialogController playerDialogController     = new PlayerDialogController();
+    private final MerchantDialogController merchantDialogController = new MerchantDialogController();
+    private final BattleController battleController                 = new BattleController();
+    private final PlayerController playerController                 = new PlayerController();
+    private final List<Room> rooms                                  = mapLayout.getRooms();
+    private Player player                                           = null;
     // @formatter:on
 
     public Game() {
@@ -87,7 +88,9 @@ public class Game {
      */
     private void gameLoop() {
         while (true) {
-            dialogController.printCurrentLocation(player);
+            playerDialogController.printCurrentLocation(player);
+
+            player.setCurrentRoom(mapLayout.getRoomByName("Town Square"));
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
@@ -104,16 +107,16 @@ public class Game {
                     case 1:
                         playerController.move(scanner, mapLayout);
                         battleController.checkRoomForMonster();
-                        battleController.checkRoomForMerchant(dialogController);
+                        battleController.checkRoomForMerchant(merchantDialogController);
                         break;
                     case 2:
-                        dialogController.printUsePotionDialog(player);
+                        playerDialogController.printUsePotionDialog(player);
                         break;
                     case 3:
-                        dialogController.printCharacterInfo(player);
+                        playerDialogController.printCharacterInfo(player);
                         break;
                     case 4:
-                        dialogController.printInventoryDialog(player);
+                        playerDialogController.printInventoryDialog(player);
                         break;
                     case 5:
                         System.exit(0);

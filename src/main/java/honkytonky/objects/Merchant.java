@@ -2,6 +2,7 @@ package honkytonky.objects;
 
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_BLUE;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.misc.ClearScreen;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class Merchant extends Actor {
 
     public void printSmalltalk() {
         ClearScreen.clearScreen();
-        System.out.println(ANSI_CYAN + this.getName() + ": " + ANSI_BLUE + smalltalk);
+        System.out.println(ANSI_CYAN + this.getName() + ": " + ANSI_BLUE + smalltalk + ANSI_RESET);
     }
 
     public void printItemsForSell() {
