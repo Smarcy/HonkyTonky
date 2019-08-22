@@ -16,11 +16,7 @@ import java.util.Scanner;
 
 public class PlayerController {
 
-    Player player;
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
+    private Player player;
 
     /**
      * Lets the user create a Player Object

@@ -10,5 +10,7 @@ Grundsätzlich Factories:
 - Controllerklassen erstellen (BattleController, PlayerController, ...)
   - Erste Version -> Done!
 
+- (Mockito)Tests für Controller Package (insb. PlayerController/createPlayer())
+
 - FIXME:
   - GameTest - testMonsterAttacks() -> Done!
