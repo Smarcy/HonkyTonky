@@ -23,7 +23,7 @@ public class PlayerController {
     /**
      * Lets the user create a Player Object
      */
-    public Player createPlayer( ArmorFactory armorFactory,
+    public Player createPlayer(ArmorFactory armorFactory,
       WeaponFactory weaponFactory, PotionFactory potionFactory, BattleController battleController,
       List<Room> rooms) {
         clearScreen();

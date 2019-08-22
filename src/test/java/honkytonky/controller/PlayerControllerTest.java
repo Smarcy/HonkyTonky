@@ -1,16 +1,24 @@
 package honkytonky.controller;
 
-import honkytonky.factories.ArmorFactory;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import honkytonky.factories.MapLayout;
-import honkytonky.factories.PotionFactory;
-import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Door;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
+import java.io.ByteArrayInputStream;
+import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 class PlayerControllerTest {
@@ -22,22 +30,13 @@ class PlayerControllerTest {
     Player player;
 
     @Mock
-    WeaponFactory wf;
-
-    @Mock
-    ArmorFactory af;
-
-    @Mock
-    BattleController bc;
-
-    @Mock
-    PotionFactory pf;
-
-    @Mock
-    List<Room> rooms;
-
-    @Mock
     MapLayout ml;
+
+    @Mock
+    Room room;
+
+    @Mock
+    Door door;
 
     @BeforeEach
     void setUp() {
@@ -45,7 +44,28 @@ class PlayerControllerTest {
     }
 
     @Test
-    public void testLel() {
-    //    when(pc.createPlayer(af, wf, pf, bc, rooms)).thenReturn(null);
+    public void testMove() {
+
+        ByteArrayInputStream in = new ByteArrayInputStream("1".getBytes());
+        System.setIn(in);
+        Scanner scanner = new Scanner(in);
+
+        List<Door> doors = Collections.singletonList(door);
+
+        when(player.getCurrentRoom()).thenReturn(room);
+        when(player.getCurrentRoom().getDoors()).thenReturn(doors);
+        when(door.getTargetRoom()).thenReturn(room);
+        when(door.getTargetRoom().getName()).thenReturn("targetRoom");
+        when(ml.getRoomByName(Mockito.anyString())).thenReturn(room);
+
+        pc.move(scanner, ml);
+
+        verify(player, times(3)).getCurrentRoom();
+        verify(player, times(1)).setCurrentRoom(any());
+        verify(player.getCurrentRoom(), times(1)).listDoorOptions();
+        verify(player.getCurrentRoom(), times(1)).getDoors();
+        verify(door, times(2)).getTargetRoom();
+        verify(door.getTargetRoom(), times(1)).getName();
+        verify(ml, times(1)).getRoomByName(anyString());
     }
 }
