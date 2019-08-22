@@ -18,6 +18,8 @@ public class BattleController {
     private Player player;
     private Monster monster;
     private Random rnd = new Random();
+    private final Scanner scanner = new Scanner(System.in);
+
 
     private boolean playerFled = false;
 
@@ -36,7 +38,7 @@ public class BattleController {
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
-    public void startBattle(Scanner scanner) {
+    public void startBattle() {
         clearScreen();
 
         boolean monsterAlive = true;
@@ -76,7 +78,7 @@ public class BattleController {
                 playerFled = false;
                 break;
             }
-            if (monsterAttacks(monsterAlive, scanner) && !playerFled) {
+            if (monsterAttacks(monsterAlive) && !playerFled) {
                 break;
             }
         }
@@ -108,7 +110,7 @@ public class BattleController {
         return monster.getHp() >= 0;
     }
 
-    public boolean monsterAttacks(boolean monsterAlive, Scanner scanner) {
+    public boolean monsterAttacks(boolean monsterAlive) {
         if (monsterAlive) {
             int rng = monster.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
@@ -122,7 +124,7 @@ public class BattleController {
               ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + monsterDamage + ANSI_RESET + " damage!\n");
 
             player.resetTemporaryDefBoost();
-            isPlayerAlive(scanner);
+            isPlayerAlive();
             return false;
         } else {
             System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
@@ -157,7 +159,7 @@ public class BattleController {
     /**
      * checks if the Player is alive every time he got hit by an enemy
      */
-    private void isPlayerAlive(Scanner scanner) {
+    private void isPlayerAlive() {
         if (player.getHp() <= 0) {
             clearScreen();
             System.out.println("You died!");
@@ -190,16 +192,16 @@ public class BattleController {
         }
     }
 
-    public void checkRoomForMonster(Scanner scanner) {
+    public void checkRoomForMonster() {
         if (player.getCurrentRoom().hasLivingMonster()) {
             setMonster(player.getCurrentRoom().getPresentMonster());
-            startBattle(scanner);
+            startBattle();
         }
     }
 
-    public void checkRoomForMerchant(Scanner scanner, DialogController dialogController) {
+    public void checkRoomForMerchant(DialogController dialogController) {
         if (player.getCurrentRoom().hasMerchant()) {
-            dialogController.printMerchantDialog(player, scanner);
+            dialogController.printMerchantDialog(player);
         }
     }
 }

@@ -72,7 +72,7 @@ public class Game {
                         break;
                     case 2:
                         player = playerController
-                          .createPlayer(scanner, armorFactory, weaponFactory, potionFactory,
+                          .createPlayer(armorFactory, weaponFactory, potionFactory,
                             battleController, rooms);
                         break;
                 }
@@ -103,17 +103,17 @@ public class Game {
                 switch (option) {
                     case 1:
                         playerController.move(scanner, mapLayout);
-                        battleController.checkRoomForMonster(scanner);
-                        battleController.checkRoomForMerchant(scanner, dialogController);
+                        battleController.checkRoomForMonster();
+                        battleController.checkRoomForMerchant(dialogController);
                         break;
                     case 2:
-                        dialogController.printUsePotionDialog(player, scanner);
+                        dialogController.printUsePotionDialog(player);
                         break;
                     case 3:
-                        dialogController.printCharacterInfo(player, scanner);
+                        dialogController.printCharacterInfo(player);
                         break;
                     case 4:
-                        dialogController.printInventoryDialog(player, scanner);
+                        dialogController.printInventoryDialog(player);
                         break;
                     case 5:
                         System.exit(0);

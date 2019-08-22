@@ -18,10 +18,12 @@ public class PlayerController {
 
     private Player player;
 
+    private final Scanner scanner = new Scanner(System.in);
+
     /**
      * Lets the user create a Player Object
      */
-    public Player createPlayer(Scanner scanner, ArmorFactory armorFactory,
+    public Player createPlayer( ArmorFactory armorFactory,
       WeaponFactory weaponFactory, PotionFactory potionFactory, BattleController battleController,
       List<Room> rooms) {
         clearScreen();

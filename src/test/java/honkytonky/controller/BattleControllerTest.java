@@ -41,7 +41,7 @@ public class BattleControllerTest {
         when(player.getHp()).thenReturn(100);
 
         battleController.setPlayer(player);
-        battleController.monsterAttacks(true, null);
+        battleController.monsterAttacks(true);
 
         verify(player, times(1)).getTemporaryDefBoost();
         verify(player, times(1)).setHp(anyInt());

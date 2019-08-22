@@ -15,8 +15,10 @@ import java.util.Scanner;
 public class DialogController {
 
     private CharacterInfoPattern charInfo = new CharacterInfoPattern();
+    private final Scanner scanner = new Scanner(System.in);
 
-    public void printMerchantDialog(Player player, Scanner scanner) {
+
+    public void printMerchantDialog(Player player) {
         clearScreen();
         Merchant merchant = player.getCurrentRoom().getPresentMerchant();
 
@@ -38,7 +40,7 @@ public class DialogController {
         scanner.nextLine();
     }
 
-    public void printUsePotionDialog(Player player, Scanner scanner) {
+    public void printUsePotionDialog(Player player) {
         clearScreen();
         System.out.println("What kind of Potion would you like to use?\n");
         System.out.println("1) Health Potion");
@@ -67,11 +69,11 @@ public class DialogController {
             }
             scanner.nextLine();
         } catch (InputMismatchException | NumberFormatException e) {
-            printUsePotionDialog(player, scanner);
+            printUsePotionDialog(player);
         }
     }
 
-    public void printInventoryDialog(Player player, Scanner scanner) {
+    public void printInventoryDialog(Player player) {
         clearScreen();
 
         System.out.println("What kind of items would you like to see?\n");
@@ -95,11 +97,11 @@ public class DialogController {
                     player.showInventory("potions");
                     break;
                 default:
-                    printInventoryDialog(player, scanner);
+                    printInventoryDialog(player);
                     break;
             }
         } catch (InputMismatchException | NumberFormatException e) {
-            printInventoryDialog(player, scanner);
+            printInventoryDialog(player);
         }
         scanner.nextLine();
     }
@@ -113,7 +115,7 @@ public class DialogController {
             + ANSI_RESET);
     }
 
-    public void printCharacterInfo(Player player, Scanner scanner) {
+    public void printCharacterInfo(Player player) {
         clearScreen();
         charInfo.printCharacterInfo(player);
         scanner.nextLine();
