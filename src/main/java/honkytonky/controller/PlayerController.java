@@ -16,9 +16,8 @@ import java.util.Scanner;
 
 public class PlayerController {
 
-    private Player player;
-
     private final Scanner scanner = new Scanner(System.in);
+    private Player player;
 
     /**
      * Lets the user create a Player Object

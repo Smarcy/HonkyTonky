@@ -5,7 +5,6 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
-
 import honkytonky.misc.CharacterInfoPattern;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;

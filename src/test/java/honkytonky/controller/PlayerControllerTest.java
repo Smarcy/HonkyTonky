@@ -2,6 +2,7 @@ package honkytonky.controller;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -67,5 +68,7 @@ class PlayerControllerTest {
         verify(door, times(2)).getTargetRoom();
         verify(door.getTargetRoom(), times(1)).getName();
         verify(ml, times(1)).getRoomByName(anyString());
+        verify(player, never()).getInventory();
+        verify(player, never()).getExperience();
     }
 }
