@@ -7,8 +7,8 @@ import java.util.List;
 class MerchantFactory {
 
 
-    PotionFactory potionFactory = new PotionFactory();
-    List<Merchant> merchants = new ArrayList<>();
+    private final PotionFactory potionFactory = new PotionFactory();
+    private final List<Merchant> merchants = new ArrayList<>();
 
     MerchantFactory() {
 

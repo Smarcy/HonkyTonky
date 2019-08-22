@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Merchant extends Actor {
 
-    private List<Item> itemsForSell = new ArrayList<>();
-    private String smalltalk;
+    private final List<Item> itemsForSell = new ArrayList<>();
+    private final String smalltalk;
 
     public Merchant(String name, int maxHP, int level, String smalltalk) {
         super(name, maxHP, level);

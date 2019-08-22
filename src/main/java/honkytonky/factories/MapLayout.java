@@ -6,12 +6,12 @@ import java.util.List;
 
 public class MapLayout {
 
-    private RoomFactory roomFactory = new RoomFactory();
-    private DoorFactory doorFactory = new DoorFactory();
-    private MonsterFactory monsterFactory = new MonsterFactory();
-    private MerchantFactory merchantFactory = new MerchantFactory();
+    private final RoomFactory roomFactory = new RoomFactory();
+    private final DoorFactory doorFactory = new DoorFactory();
+    private final MonsterFactory monsterFactory = new MonsterFactory();
+    private final MerchantFactory merchantFactory = new MerchantFactory();
 
-    private List<Room> rooms = new ArrayList<>();
+    private final List<Room> rooms = new ArrayList<>();
 
     public MapLayout() {
         Room bedroom = roomFactory.getRoomByName("Bedroom");

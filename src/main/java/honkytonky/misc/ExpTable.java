@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ExpTable {
 
-    private Map<Integer, Integer> expTable = new HashMap<>();
+    private final Map<Integer, Integer> expTable = new HashMap<>();
 
     public ExpTable() {
         expTable.put(1, 100);
@@ -16,14 +16,9 @@ public class ExpTable {
 
     public boolean hasLevelUp(int level, int currentExp) {
         return expTable.get(level) <= currentExp;
-
     }
 
     public float calculatePercentalExperience(int experience, int level) {
-        int test = expTable.get(level);
-
-        float moreTest = ((float) experience / (float) test);
-
         return ((float) experience / (float) expTable.get(level)) * 100;
     }
 }

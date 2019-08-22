@@ -1,7 +1,6 @@
 package honkytonky.misc;
 
 public class ANSI_Color_Codes {
-
     //@formatter:off
     public static final String ANSI_RESET   = "\u001B[0m";
     public static final String ANSI_BLACK   = "\u001B[30m";
@@ -13,5 +12,4 @@ public class ANSI_Color_Codes {
     public static final String ANSI_CYAN    = "\u001B[36m";
     public static final String ANSI_WHITE   = "\u001B[37m";
     //@formatter:on
-
 }

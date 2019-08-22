@@ -12,7 +12,7 @@ import java.util.List;
 
 public class MonsterFactory {
 
-    private List<Monster> monsterList = new ArrayList<>();
+    private final List<Monster> monsterList = new ArrayList<>();
 
     public MonsterFactory() {
             createMonstersFromFile();

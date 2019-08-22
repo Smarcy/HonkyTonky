@@ -2,9 +2,8 @@ package honkytonky.factories;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import honkytonky.objects.Room;
-import honkytonky.objects.Weapon;
 import honkytonky.enumtypes.WeaponType;
+import honkytonky.objects.Weapon;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +12,7 @@ import java.util.List;
 
 public class WeaponFactory {
 
-    private List<Weapon> weaponList = new ArrayList<>();
+    private final List<Weapon> weaponList = new ArrayList<>();
 
     public WeaponFactory() {
         createWeaponsFromFile();

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class RoomFactory {
 
-    private List<Room> rooms = new ArrayList<>();
+    private final List<Room> rooms = new ArrayList<>();
 
     RoomFactory() {
          createRoomsFromFile();

@@ -17,7 +17,7 @@ public class BattleController {
 
     private Player player;
     private Monster monster;
-    private Random rnd = new Random();
+    private final Random rnd = new Random();
     private final Scanner scanner = new Scanner(System.in);
 
 
@@ -25,11 +25,11 @@ public class BattleController {
 
    //----------------------------------------------------------------------//
 
-    public void setPlayer(Player player) {
+    void setPlayer(Player player) {
         this.player = player;
     }
 
-    public void setMonster(Monster monster) {
+    private void setMonster(Monster monster) {
         this.monster = monster;
     }
 
@@ -116,7 +116,7 @@ public class BattleController {
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
               .getTemporaryDefBoost();
 
-            monsterDamage = (monsterDamage < 0) ? 0 : monsterDamage;
+            monsterDamage = Math.max(monsterDamage, 0);
 
             player.setHp(player.getHp() - monsterDamage);
 

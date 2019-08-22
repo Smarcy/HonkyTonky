@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class DialogController {
 
-    private CharacterInfoPattern charInfo = new CharacterInfoPattern();
+    private final CharacterInfoPattern charInfo = new CharacterInfoPattern();
     private final Scanner scanner = new Scanner(System.in);
 
 

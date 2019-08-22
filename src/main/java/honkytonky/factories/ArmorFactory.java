@@ -2,21 +2,17 @@ package honkytonky.factories;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import honkytonky.enumtypes.WeaponType;
-import honkytonky.objects.Armor;
 import honkytonky.enumtypes.ArmorType;
-import honkytonky.objects.Weapon;
+import honkytonky.objects.Armor;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ArmorFactory {
 
-    private List<Armor> armorList = new ArrayList<>();
+    private final List<Armor> armorList = new ArrayList<>();
 
     public ArmorFactory() {
         createArmorsFromFile();

@@ -3,9 +3,7 @@ package honkytonky.factories;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import honkytonky.objects.Door;
-import honkytonky.objects.Room;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -13,8 +11,8 @@ import java.util.List;
 
 class DoorFactory {
 
-    private List<Door> doors = new ArrayList<>();
-    private RoomFactory roomFactory = new RoomFactory();
+    private final List<Door> doors = new ArrayList<>();
+    private final RoomFactory roomFactory = new RoomFactory();
 
     DoorFactory() {
         createDoorsFromFile();
