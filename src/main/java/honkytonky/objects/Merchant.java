@@ -1,8 +1,16 @@
 package honkytonky.objects;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_BLUE;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
+
+import honkytonky.misc.ClearScreen;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class Merchant extends Actor {
 
     private final List<Item> itemsForSell = new ArrayList<>();
@@ -22,7 +30,8 @@ public class Merchant extends Actor {
     }
 
     public void printSmalltalk() {
-        System.out.println(smalltalk);
+        ClearScreen.clearScreen();
+        System.out.println(ANSI_CYAN + this.getName() + ": " + ANSI_BLUE + smalltalk);
     }
 
     public void printItemsForSell() {
@@ -32,11 +41,8 @@ public class Merchant extends Actor {
         }
     }
 
-    public List<Item> getItemsForSell() {
-        return itemsForSell;
-    }
-
-    public String getSmalltalk() {
-        return smalltalk;
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

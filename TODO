@@ -1,3 +1,11 @@
+-----------------------------------TODO------------------------------------------
+
+- Merchant nach Smalltalk weiter anzeigen
+- Merchant "exit" Option
+- Merchant allg. fixen
+
+----------------------------------------DONE-------------------------------------
+
 Grundsätzlich Factories:
 	- Einlesen per OpenCSV
 		- Done!
@@ -11,6 +19,8 @@ Grundsätzlich Factories:
   - Erste Version -> Done!
 
 - (Mockito)Tests für Controller Package (insb. PlayerController/createPlayer())
+  - createPlayer() Tests sehr komplex aufgrund von 2x Scanner User Input
+  - move() MockitoTestCase -> Done!
 
 - FIXME:
   - GameTest - testMonsterAttacks() -> Done!

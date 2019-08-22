@@ -14,7 +14,7 @@ public class RoomFactory {
     private final List<Room> rooms = new ArrayList<>();
 
     RoomFactory() {
-         createRoomsFromFile();
+        createRoomsFromFile();
     }
 
     Room getRoomByName(String name) {
@@ -28,8 +28,8 @@ public class RoomFactory {
 
     private void createRoomsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/rooms");
-          InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-          BufferedReader reader = new BufferedReader(inputStreamReader)) {
+             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+             BufferedReader reader = new BufferedReader(inputStreamReader)) {
 
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
             String[] nextRecord;

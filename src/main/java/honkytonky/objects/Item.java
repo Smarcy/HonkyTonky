@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public abstract class Item {
+abstract class Item {
 
     private int id;
     private String name;
