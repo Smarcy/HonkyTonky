@@ -1,11 +1,12 @@
 package honkytonky;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.controller.BattleController;
 import honkytonky.controller.MerchantDialogController;
-import honkytonky.controller.PlayerDialogController;
 import honkytonky.controller.PlayerController;
+import honkytonky.controller.PlayerDialogController;
 import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.MapLayout;
 import honkytonky.factories.PotionFactory;
@@ -75,6 +76,8 @@ public class Game {
                         player = playerController
                           .createPlayer(armorFactory, weaponFactory, potionFactory,
                             battleController, rooms);
+
+                        player.setCurrentRoom(mapLayout.getRoomByName("Town Square"));
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -90,14 +93,13 @@ public class Game {
         while (true) {
             playerDialogController.printCurrentLocation(player);
 
-            player.setCurrentRoom(mapLayout.getRoomByName("Town Square"));
-
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
             System.out.println("2) Use Potion");
             System.out.println("3) Character Info");
             System.out.println("4) Show Inventory");
             System.out.println("5) Exit Game");
+            if(player.getCurrentRoom().hasMerchant()) System.out.println("6) Talk to " + ANSI_CYAN + player.getCurrentRoom().getPresentMerchant());
             System.out.print("\n> ");
 
             try {
@@ -120,6 +122,8 @@ public class Game {
                         break;
                     case 5:
                         System.exit(0);
+                    case 6:
+                        battleController.checkRoomForMerchant(merchantDialogController);
                 }
             } catch (InputMismatchException | NumberFormatException e) {
                 clearScreen();

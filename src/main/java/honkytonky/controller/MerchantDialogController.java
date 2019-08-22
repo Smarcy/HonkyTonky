@@ -12,29 +12,36 @@ public class MerchantDialogController {
 
     private final Scanner scanner = new Scanner(System.in);
 
-    public void printMerchantDialog(Player player) {
-        clearScreen();
-        Merchant merchant = player.getCurrentRoom().getPresentMerchant();
+    void printMerchantDialog(Player player) {
+        Boolean run = true;
 
-        System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
-        System.out.println("1) Talk to " + merchant);
-        System.out.println("2) Trade with " + merchant);
-        System.out.println("3) Attack " + merchant);
+        while(run) {
+            clearScreen();
+            Merchant merchant = player.getCurrentRoom().getPresentMerchant();
 
-        switch(Integer.parseInt(scanner.nextLine())) {
-            case 1:
-                merchant.printSmalltalk();
-                break;
-            case 2:
-                merchant.printItemsForSell();
-                break;
-            case 3:
-                break;
+            System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
+            System.out.println("1) Talk to " + merchant);
+            System.out.println("2) Trade with " + merchant);
+            System.out.println("3) Attack " + merchant);
+            System.out.println("4) Leave " + merchant + " alone");
+
+            switch (Integer.parseInt(scanner.nextLine())) {
+                case 1:
+                    merchant.printSmalltalk();
+                    System.out.print("\n\nContinue..");
+                    scanner.nextLine();
+                    break;
+                case 2:
+                    merchant.printItemsForSell();
+                    System.out.print("\n\nContinue..");
+                    scanner.nextLine();
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    run = false;
+                    break;
+            }
         }
-        System.out.print("\n\nContinue..");
-        scanner.nextLine();
     }
-
-
-
 }
