@@ -24,7 +24,7 @@ public class MerchantFactory {
         addItemsToMerchantCRAPPYSTATIC();
     }
 
-    Merchant getMerchantByName(String name) {
+    public Merchant getMerchantByName(String name) {
         for (Merchant merchant : merchants) {
             if (merchant.toString().equals(name)) {
                 return merchant;
@@ -37,8 +37,8 @@ public class MerchantFactory {
         try (InputStream inputStream = getClass().getResourceAsStream("/merchants");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
           BufferedReader reader = new BufferedReader(inputStreamReader)) {
-
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
