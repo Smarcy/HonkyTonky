@@ -7,9 +7,9 @@
 
 ----------------------------------------DONE-------------------------------------
 
-- Merchant aus CSV lesen
-- Merchant nach Smalltalk weiter anzeigen
-- Merchant "exit" Option
+- Merchant aus CSV lesen                    -> Done!
+- Merchant nach Smalltalk weiter anzeigen   -> Done!
+- Merchant "exit" Option                    -> Done!
 
 Grundsätzlich Factories:
 	- Einlesen per OpenCSV
