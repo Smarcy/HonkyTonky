@@ -1,11 +1,14 @@
 -----------------------------------TODO------------------------------------------
 
-- Merchant nach Smalltalk weiter anzeigen
-- Merchant "exit" Option
+- UsePotion fix / refactor
 - Merchant allg. fixen
 - DELETEME: Game.java Zeile 79 (player.setCurrentRoom()) - Testing Purposes
 
 ----------------------------------------DONE-------------------------------------
+
+- Merchant aus CSV lesen
+- Merchant nach Smalltalk weiter anzeigen
+- Merchant "exit" Option
 
 Grundsätzlich Factories:
 	- Einlesen per OpenCSV

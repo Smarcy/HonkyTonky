@@ -13,11 +13,15 @@ public class RoomFactory {
 
     private final List<Room> rooms = new ArrayList<>();
 
-    RoomFactory() {
+    public RoomFactory() {
         createRoomsFromFile();
     }
 
-    Room getRoomByName(String name) {
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public Room getRoomByName(String name) {
         for (Room room : rooms) {
             if (room.getName().equals(name)) {
                 return room;

@@ -1,20 +1,25 @@
 package honkytonky.factories;
 
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import honkytonky.objects.Merchant;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-class MerchantFactory {
+public class MerchantFactory {
 
 
     private final PotionFactory potionFactory = new PotionFactory();
     private final List<Merchant> merchants = new ArrayList<>();
+    private final RoomFactory roomFactory;
+    private Merchant currMerchant;
 
-    MerchantFactory() {
-
-        merchants.add(new Merchant("Belechor", 50, 3,
-          "I used to be a powerful magician, but once my hair fell out I stopped being powerful."));
-        merchants.get(0).addItemToShop(potionFactory.createSmallHealthPotion());
+    public MerchantFactory(RoomFactory roomFactory) {
+        this.roomFactory = roomFactory;
+        createMerchantsFromFile();
     }
 
     Merchant getMerchantByName(String name) {
@@ -24,5 +29,27 @@ class MerchantFactory {
             }
         }
         return null;
+    }
+
+    private void createMerchantsFromFile() {
+        try (InputStream inputStream = getClass().getResourceAsStream("/merchants");
+          InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+          BufferedReader reader = new BufferedReader(inputStreamReader)) {
+
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+            String[] nextRecord;
+
+            while ((nextRecord = csvReader.readNext()) != null) {
+                merchants.add(currMerchant = new Merchant(
+                  nextRecord[0],                    // name
+                  Integer.parseInt(nextRecord[1]),  // maxHP
+                  Integer.parseInt(nextRecord[2]),  // level
+                  nextRecord[4]                     // smalltalk
+                ));
+                roomFactory.getRoomByName(nextRecord[3]).addMerchant(currMerchant);
+            }
+        } catch (Exception IOException) {
+            System.err.println("Fehler beim Lesen der Datei doors!");
+        }
     }
 }

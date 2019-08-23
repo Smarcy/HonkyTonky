@@ -1,9 +1,15 @@
-id, name, targetroom
-1,Bedroom,Bedroom
-2,Living Room,Living Room
-3,Kitchen,Kitchen
-4,Storage,Storage
-5,Hall,Hall
-6,Yard,Yard
-7,Town Square,Town Square
-8,Marketplace,Marketplace
+id, name, sourceroom, targetroom
+1,Bedroom,Bedroom,Living Room
+2,Living Room To Bedroom,Living Room,Bedroom
+3,Living Room To Kitchen,Living Room,Kitchen
+4,Living Room To Hall,Living Room,Hall
+5,Kitchen To Living Room,Kitchen,Living Room
+6,Kitchen To Storage,Kitchen,Storage
+7,Storage To Kitchen,Storage,Kitchen
+8,Hall To Living Room,Hall,Living Room
+9,Hall To Yard,Hall,Yard
+10,Yard To Town Square,Yard,Town Square
+11,Yard To Hall,Yard,Hall
+12,Town Square To Yard,Town Square,Yard
+13,Town Square To Marketplace,Town Square,Marketplace
+14,Marketplace To Town Square,Marketplace,Town Square

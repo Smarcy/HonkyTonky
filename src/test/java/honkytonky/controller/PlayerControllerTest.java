@@ -7,7 +7,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import honkytonky.factories.MapLayout;
+import honkytonky.factories.RoomFactory;
 import honkytonky.objects.Door;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
@@ -31,7 +31,7 @@ class PlayerControllerTest {
     Player player;
 
     @Mock
-    MapLayout ml;
+    RoomFactory rf;
 
     @Mock
     Room room;
@@ -57,9 +57,9 @@ class PlayerControllerTest {
         when(player.getCurrentRoom().getDoors()).thenReturn(doors);
         when(door.getTargetRoom()).thenReturn(room);
         when(door.getTargetRoom().getName()).thenReturn("targetRoom");
-        when(ml.getRoomByName(Mockito.anyString())).thenReturn(room);
+        when(rf.getRoomByName(Mockito.anyString())).thenReturn(room);
 
-        pc.move(scanner, ml);
+        pc.move(scanner, rf);
 
         verify(player, times(3)).getCurrentRoom();
         verify(player, times(1)).setCurrentRoom(any());
@@ -67,7 +67,7 @@ class PlayerControllerTest {
         verify(player.getCurrentRoom(), times(1)).getDoors();
         verify(door, times(2)).getTargetRoom();
         verify(door.getTargetRoom(), times(1)).getName();
-        verify(ml, times(1)).getRoomByName(anyString());
+        verify(rf, times(1)).getRoomByName(anyString());
         verify(player, never()).getInventory();
         verify(player, never()).getExperience();
     }

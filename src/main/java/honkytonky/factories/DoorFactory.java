@@ -9,12 +9,14 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-class DoorFactory {
+public class DoorFactory {
 
     private final List<Door> doors = new ArrayList<>();
-    private final RoomFactory roomFactory = new RoomFactory();
+    private final RoomFactory roomFactory;
+    private Door currDoor;
 
-    DoorFactory() {
+    public DoorFactory(RoomFactory roomFactory) {
+        this.roomFactory = roomFactory;
         createDoorsFromFile();
     }
 
@@ -36,11 +38,13 @@ class DoorFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
-                doors.add(new Door(
+                doors.add(currDoor = new Door(
                   Integer.parseInt(nextRecord[0]),          // id
                   nextRecord[1],                            // doorName
-                  roomFactory.getRoomByName(nextRecord[2])  // targetroom
+                  roomFactory.getRoomByName(nextRecord[2]), // sourceRoom
+                  roomFactory.getRoomByName(nextRecord[3])  // targetroom
                 ));
+                currDoor.getSourceRoom().addDoor(getDoorByName(currDoor.getName()));
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei doors!");

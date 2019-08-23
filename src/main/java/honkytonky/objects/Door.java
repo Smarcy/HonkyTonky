@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class Door {
-
-    private int id;
-    private String name;
-    private Room targetRoom;
+    private final int id;
+    private final String name;
+    private final Room sourceRoom;
+    private final Room targetRoom;
 }

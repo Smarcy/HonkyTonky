@@ -1,6 +1,7 @@
 package honkytonky;
 
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.controller.BattleController;
@@ -8,8 +9,11 @@ import honkytonky.controller.MerchantDialogController;
 import honkytonky.controller.PlayerController;
 import honkytonky.controller.PlayerDialogController;
 import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.MapLayout;
+import honkytonky.factories.DoorFactory;
+import honkytonky.factories.MerchantFactory;
+import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.PotionFactory;
+import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Player;
 import honkytonky.objects.Room;
@@ -24,12 +28,15 @@ public class Game {
     private final WeaponFactory weaponFactory                       = new WeaponFactory();
     private final ArmorFactory armorFactory                         = new ArmorFactory();
     private final PotionFactory potionFactory                       = new PotionFactory();
-    private final MapLayout mapLayout                               = new MapLayout();
+    private final RoomFactory roomFactory                           = new RoomFactory();
+    private final DoorFactory doorFactory                           = new DoorFactory(roomFactory);
+    private final MonsterFactory monsterFactory                     = new MonsterFactory(roomFactory);
+    private final MerchantFactory merchantFactory                   = new MerchantFactory(roomFactory);
     private final PlayerDialogController playerDialogController     = new PlayerDialogController();
     private final MerchantDialogController merchantDialogController = new MerchantDialogController();
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
-    private final List<Room> rooms                                  = mapLayout.getRooms();
+    private final List<Room> rooms                                  = roomFactory.getRooms();
     private Player player                                           = null;
     // @formatter:on
 
@@ -77,7 +84,7 @@ public class Game {
                           .createPlayer(armorFactory, weaponFactory, potionFactory,
                             battleController, rooms);
 
-                        player.setCurrentRoom(mapLayout.getRoomByName("Town Square"));
+                        player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -99,7 +106,7 @@ public class Game {
             System.out.println("3) Character Info");
             System.out.println("4) Show Inventory");
             System.out.println("5) Exit Game");
-            if(player.getCurrentRoom().hasMerchant()) System.out.println("6) Talk to " + ANSI_CYAN + player.getCurrentRoom().getPresentMerchant());
+            if(player.getCurrentRoom().hasMerchant()) System.out.println("6) Talk to " + ANSI_CYAN + player.getCurrentRoom().getPresentMerchant() + ANSI_RESET);
             System.out.print("\n> ");
 
             try {
@@ -107,7 +114,7 @@ public class Game {
 
                 switch (option) {
                     case 1:
-                        playerController.move(scanner, mapLayout);
+                        playerController.move(scanner, roomFactory);
                         battleController.checkRoomForMonster();
                         battleController.checkRoomForMerchant(merchantDialogController);
                         break;

@@ -13,8 +13,11 @@ import java.util.List;
 public class MonsterFactory {
 
     private final List<Monster> monsterList = new ArrayList<>();
+    private Monster currMonster;
+    private final RoomFactory roomFactory;
 
-    public MonsterFactory() {
+    public MonsterFactory(RoomFactory roomFactory) {
+            this.roomFactory = roomFactory;
             createMonstersFromFile();
     }
 
@@ -37,7 +40,7 @@ public class MonsterFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
-                monsterList.add(new Monster(
+                monsterList.add(currMonster = new Monster(
                   nextRecord[0],                        // name
                   Integer.parseInt(nextRecord[1]),      // maxHP
                   Integer.parseInt(nextRecord[2]),      // damage
@@ -45,6 +48,7 @@ public class MonsterFactory {
                   Integer.parseInt(nextRecord[4]),      // grantedExperience
                   MonsterType.valueOf(nextRecord[5])    // MonsterType
                 ));
+               roomFactory.getRoomByName(nextRecord[6]).addMonster(currMonster);
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei monsters!");
