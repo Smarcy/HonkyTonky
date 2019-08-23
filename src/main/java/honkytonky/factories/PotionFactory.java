@@ -10,10 +10,10 @@ public class PotionFactory {
     }
 
     public Potion startPotion() {
-        return new Potion(0, "Small Health Potion", 10, PotionType.HEALTH);
+        return new Potion(0, "Small Health Potion", 10, 20, PotionType.HEALTH);
     }
 
     public Potion createSmallHealthPotion() {
-        return new Potion(0, "Small Health Potion", 10, PotionType.HEALTH);
+        return new Potion(0, "Small Health Potion", 10, 20, PotionType.HEALTH);
     }
 }

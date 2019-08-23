@@ -17,12 +17,13 @@ public class Player extends Actor {
 
     private int temporaryDefBoost;
     private int experience;
+    private int gold;
     private Weapon weapon;
     private Armor armor;
     private Potion potion;
     private Room currentRoom;
-    private ExpTable expTable = new ExpTable();
-    private List<Item> inventory;
+    private final ExpTable expTable = new ExpTable();
+    private final List<Item> inventory;
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor,
       @NonNull Potion potion,
@@ -34,6 +35,7 @@ public class Player extends Actor {
         this.currentRoom        = currentRoom;
         this.temporaryDefBoost  = 0;
         this.experience         = 0;
+        this.gold               = 0;
         this.weapon             = weapon;
         this.armor              = armor;
         this.potion             = potion;
@@ -72,6 +74,10 @@ public class Player extends Actor {
             System.out.println("\nYou have leveled up!\n");
             System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel() + ANSI_RESET);
         }
+    }
+
+    public void giveGold(int amount) {
+        this.gold += amount;
     }
 
     public void showInventory(String option) {

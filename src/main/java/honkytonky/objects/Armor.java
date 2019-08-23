@@ -13,9 +13,9 @@ public class Armor extends Item {
     private final int maxDurability;
     private final ArmorType armorType;
 
-    public Armor(int id, String name, int armorPoints, int durability, int maxDurability, ArmorType armorType) {
+    public Armor(int id, String name, int armorPoints, int durability, int maxDurability, int value, ArmorType armorType) {
         //@formatter:off
-        super(id, name);
+        super(id, name, value);
         this.armorPoints    = armorPoints;
         this.durability     = durability;
         this.maxDurability  = maxDurability;

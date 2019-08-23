@@ -5,6 +5,7 @@ import com.opencsv.CSVReaderBuilder;
 import honkytonky.enumtypes.WeaponType;
 import honkytonky.objects.Weapon;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -38,11 +39,12 @@ public class WeaponFactory {
                   Integer.parseInt(nextRecord[3]),      // damage
                   Integer.parseInt(nextRecord[4]),      // durability
                   Integer.parseInt(nextRecord[5]),      // maxDurability
-                  Boolean.parseBoolean(nextRecord[6])   // two-handed
+                  Integer.parseInt(nextRecord[6]),      // value
+                  Boolean.parseBoolean(nextRecord[7])   // two-handed
                   ));
             }
-        } catch (Exception IOException) {
-            System.err.println("Fehler beim Lesen der Datei weapons!");
+        } catch (IOException | IllegalArgumentException e) {
+            throw new IllegalArgumentException("Fehler beim Lesen der Datei weapons!");
         }
     }
 }

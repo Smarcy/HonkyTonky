@@ -11,8 +11,8 @@ public class Potion extends Item {
     private final int amount;
     private final PotionType type;
 
-    public Potion(int id, String name, int amount, PotionType type) {
-        super(id, name);
+    public Potion(int id, String name, int amount, int value, PotionType type) {
+        super(id, name, value);
 
         this.amount = amount;
         this.type = type;

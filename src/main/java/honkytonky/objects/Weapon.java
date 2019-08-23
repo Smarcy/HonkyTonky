@@ -15,10 +15,10 @@ public class Weapon extends Item {
     private WeaponType weaponType;
 
     public Weapon(int id, String name, WeaponType weaponType, int damage, int durability,
-      int maxDurability, boolean twoHanded) {
+      int maxDurability, int value, boolean twoHanded) {
 
         //@formatter:off
-        super(id, name);
+        super(id, name, value);
         this.weaponType     = weaponType;
         this.damage         = damage;
         this.durability     = durability;

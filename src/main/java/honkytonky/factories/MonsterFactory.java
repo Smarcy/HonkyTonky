@@ -45,9 +45,10 @@ public class MonsterFactory {
                   Integer.parseInt(nextRecord[2]),      // damage
                   Integer.parseInt(nextRecord[3]),      // level
                   Integer.parseInt(nextRecord[4]),      // grantedExperience
-                  MonsterType.valueOf(nextRecord[5])    // MonsterType
+                  Integer.parseInt(nextRecord[5]),      // goldDropped
+                  MonsterType.valueOf(nextRecord[6])    // MonsterType
                 ));
-               roomFactory.getRoomByName(nextRecord[6]).addMonster(currMonster);
+               roomFactory.getRoomByName(nextRecord[7]).addMonster(currMonster);
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei monsters!");

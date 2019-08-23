@@ -12,6 +12,7 @@ public class CharacterInfoPattern {
         printHealthInfo(player);
         printLevelInfo(player);
         printExperienceInfo(player);
+        printGoldInfo(player);
         printWeaponInfo(player);
         printArmorInfo(player);
         printLocationInfo(player);
@@ -26,12 +27,12 @@ public class CharacterInfoPattern {
     private void printArmorInfo(Player player) {
         if (player.getArmor().getArmorPoints() <= 1) {
             System.out.println("Armor: " + ANSI_YELLOW + String
-              .format("%c[%d;%df", 0x1B, 6, 15) + player.getArmor()
+              .format("%c[%d;%df", 0x1B, 7, 15) + player.getArmor()
                                  + " (" + player.getArmor()
               .getArmorPoints() + " Armor Point)" + ANSI_RESET);
         } else {
             System.out.println("Armor: " + ANSI_YELLOW + String
-              .format("%c[%d;%df", 0x1B, 6, 15) + player.getArmor()
+              .format("%c[%d;%df", 0x1B, 7, 15) + player.getArmor()
                                  + " (" + player.getArmor()
               .getArmorPoints() + " Armor Points)" + ANSI_RESET);
         }
@@ -45,7 +46,7 @@ public class CharacterInfoPattern {
      */
     private void printWeaponInfo(Player player) {
         System.out.println(
-          "Weapon: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 15)
+          "Weapon: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 6, 15)
             + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + ANSI_RESET);
     }
 
@@ -56,7 +57,7 @@ public class CharacterInfoPattern {
      */
     private void printLocationInfo(Player player) {
         System.out.println(
-          "Location: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 7, 15)
+          "Location: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 8, 15)
             + player.getCurrentRoom() + ANSI_RESET);
     }
 
@@ -90,9 +91,14 @@ public class CharacterInfoPattern {
     }
 
     private void printExperienceInfo(Player player) {
-
         System.out.println(
           "Experience: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 4, 15) + player
             .getExperience() + " (" + player.getPercentalExperience() + "%)" + ANSI_RESET);
+    }
+
+    private void printGoldInfo(Player player) {
+        System.out.println(
+          "Gold: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 5, 15) + player
+            .getGold() + ANSI_RESET);
     }
 }

@@ -141,8 +141,10 @@ public class BattleController {
 
         System.out
           .println(
-            "\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points!" + ANSI_RESET);
+            "\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points" + ANSI_RESET +
+              " and " + ANSI_GREEN + monster.getGoldDropped() + " Gold!" + ANSI_RESET);
 
+        player.giveGold(monster.getGoldDropped());
         player.checkForLevelUp();
     }
 

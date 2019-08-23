@@ -5,6 +5,7 @@ import com.opencsv.CSVReaderBuilder;
 import honkytonky.enumtypes.ArmorType;
 import honkytonky.objects.Armor;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -46,11 +47,12 @@ public class ArmorFactory {
                   Integer.parseInt(nextRecord[2]),      // damage
                   Integer.parseInt(nextRecord[3]),      // durability
                   Integer.parseInt(nextRecord[4]),      // maxDurability
-                  ArmorType.valueOf(nextRecord[5])      // type
+                  Integer.parseInt(nextRecord[5]),      // value
+                  ArmorType.valueOf(nextRecord[6])      // type
                 ));
             }
-        } catch (Exception IOException) {
-            System.err.println("Fehler beim Lesen der Datei armors!");
+        } catch (IOException | IllegalArgumentException e) {
+            throw new IllegalArgumentException("Fehler beim Lesen der Datei armors!");
         }
     }
 }
