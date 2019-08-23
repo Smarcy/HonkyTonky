@@ -2,7 +2,9 @@ package honkytonky.factories;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import honkytonky.enumtypes.PotionType;
 import honkytonky.objects.Merchant;
+import honkytonky.objects.Potion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -19,6 +21,7 @@ public class MerchantFactory {
     public MerchantFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
         createMerchantsFromFile();
+        addItemsToMerchantCRAPPYSTATIC();
     }
 
     Merchant getMerchantByName(String name) {
@@ -51,5 +54,9 @@ public class MerchantFactory {
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchants!");
         }
+    }
+
+    private void addItemsToMerchantCRAPPYSTATIC() {
+        getMerchantByName("Belechor").addItemToShop(new Potion(1, "Small Health Potion", 10, 15, PotionType.HEALTH));
     }
 }
