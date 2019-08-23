@@ -12,10 +12,8 @@ import java.util.List;
 public class MerchantFactory {
 
 
-    private final PotionFactory potionFactory = new PotionFactory();
     private final List<Merchant> merchants = new ArrayList<>();
     private final RoomFactory roomFactory;
-    private Merchant currMerchant;
 
     public MerchantFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
@@ -40,6 +38,7 @@ public class MerchantFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
+                Merchant currMerchant;
                 merchants.add(currMerchant = new Merchant(
                   nextRecord[0],                    // name
                   Integer.parseInt(nextRecord[1]),  // maxHP

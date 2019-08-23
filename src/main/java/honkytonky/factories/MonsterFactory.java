@@ -13,7 +13,6 @@ import java.util.List;
 public class MonsterFactory {
 
     private final List<Monster> monsterList = new ArrayList<>();
-    private Monster currMonster;
     private final RoomFactory roomFactory;
 
     public MonsterFactory(RoomFactory roomFactory) {
@@ -27,7 +26,6 @@ public class MonsterFactory {
                 return monster;
             }
         }
-
         return null;
     }
 
@@ -40,6 +38,7 @@ public class MonsterFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
+                Monster currMonster;
                 monsterList.add(currMonster = new Monster(
                   nextRecord[0],                        // name
                   Integer.parseInt(nextRecord[1]),      // maxHP

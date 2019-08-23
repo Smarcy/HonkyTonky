@@ -20,7 +20,7 @@ public class DoorFactory {
         createDoorsFromFile();
     }
 
-    Door getDoorByName(String name) {
+    private Door getDoorByName(String name) {
         for (Door door : doors) {
             if (door.getName().equals(name)) {
                 return door;
