@@ -32,6 +32,9 @@ public class PlayerController {
 
         clearScreen();
 
+        // Necessary if "Create A New Player" gets called a second time -> prevent NPE
+        player = null;
+
         while (player == null) {
             clearScreen();
 
