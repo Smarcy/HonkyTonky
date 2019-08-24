@@ -31,7 +31,8 @@ public class MerchantFactory {
                 return merchant;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Merchant " + name + " not found!");
+
     }
 
     private void createMerchantsFromFile() {

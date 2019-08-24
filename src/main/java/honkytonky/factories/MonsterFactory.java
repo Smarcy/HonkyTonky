@@ -26,7 +26,8 @@ public class MonsterFactory {
                 return monster;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Monster " + name + " not found!");
+
     }
 
     private void createMonstersFromFile() {

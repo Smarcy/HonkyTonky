@@ -29,7 +29,8 @@ public class ArmorFactory {
                 return armor;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Armor " + name + " not found!");
+
     }
 
     private void createArmorsFromFile() {

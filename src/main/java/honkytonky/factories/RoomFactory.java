@@ -27,7 +27,8 @@ public class RoomFactory {
                 return room;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Room " + name + " not found!");
+
     }
 
     private void createRoomsFromFile() {

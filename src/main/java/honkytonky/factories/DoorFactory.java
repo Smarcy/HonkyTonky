@@ -26,7 +26,8 @@ public class DoorFactory {
                 return door;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Door " + name + " not found!");
+
     }
 
     private void createDoorsFromFile() {

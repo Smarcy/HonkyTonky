@@ -29,7 +29,8 @@ public class WeaponFactory {
                 return w;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Weapon " + name + " not found!");
+
     }
 
     private void createWeaponsFromFile() {

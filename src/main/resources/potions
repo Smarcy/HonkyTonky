@@ -1,0 +1,3 @@
+id, name, amount, value, type
+1,Small Health Potion,10,20,HEALTH
+2,Big Health Potion,20,30,HEALTH
