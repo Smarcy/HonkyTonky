@@ -5,7 +5,9 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.misc.ExpTable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -22,6 +24,7 @@ public class Player extends Actor {
     private Room currentRoom;
     private final ExpTable expTable = new ExpTable();
     private final List<Item> inventory;
+    private final Map<String, Integer> playersPotions;
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
@@ -35,6 +38,7 @@ public class Player extends Actor {
         this.weapon             = weapon;
         this.armor              = armor;
         this.inventory          = new ArrayList<>();
+        this.playersPotions     = new HashMap<>();
         //@formatter:on
 
         inventory.add(weapon);
@@ -112,6 +116,7 @@ public class Player extends Actor {
     public void usePotion(Potion potion) {
         healPlayer(potion.getAmount());
         inventory.remove(potion);
+        playersPotions.put(potion.getName(), playersPotions.get(potion.getName()) - 1);
         System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " health points!");
     }
 
@@ -127,15 +132,8 @@ public class Player extends Actor {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }
 
-    public int countPotion(Item i) {
-        int count = 0;
-
-        for(Item item : inventory) {
-            if(item.equals(i)) {
-                count++;
-            }
-        }
-        return count;
+    public int getPotionCount(Item i) {
+       return playersPotions.get(i.getName());
     }
 
     @Override

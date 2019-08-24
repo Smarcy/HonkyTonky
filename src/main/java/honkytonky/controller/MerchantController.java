@@ -8,6 +8,7 @@ import static honkytonky.misc.ClearScreen.clearScreen;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
 import java.util.Scanner;
 
 public class MerchantController {
@@ -61,8 +62,14 @@ public class MerchantController {
         if(player.getGold() >= itemToBuy.getValue()) {
             player.getInventory().add(itemToBuy);
             merchant.removeItemFromShop(itemToBuy);
-            player.giveGold(-10);
+            player.giveGold(-itemToBuy.getValue());
             System.out.println("You succesfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
+
+            if(itemToBuy instanceof Potion) {
+                if(player.getPlayersPotions().containsKey(itemToBuy.getName())) {
+                    player.getPlayersPotions().put(itemToBuy.getName(), player.getPlayersPotions().get(itemToBuy.getName()) + 1);
+                }
+            }
         } else {
             System.out.println("You don't have enough gold to purchase " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
         }

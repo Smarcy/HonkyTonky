@@ -85,6 +85,7 @@ public class Game {
                             battleController, rooms);
 
                         player.getInventory().add(potionFactory.getPotionByName("Small Health Potion")); // give Player startPotion
+                        player.getPlayersPotions().put("Small Health Potion", 1);
                         player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                 }

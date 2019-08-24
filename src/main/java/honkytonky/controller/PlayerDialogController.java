@@ -5,13 +5,14 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.factories.PotionFactory;
 import honkytonky.misc.CharacterInfoPattern;
-import honkytonky.objects.Item;
 import honkytonky.objects.Player;
 import honkytonky.objects.Potion;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PlayerDialogController {
@@ -24,27 +25,27 @@ public class PlayerDialogController {
 
         // --------------------------------------- REFACTORME START ---------------------------------------
 
-        List<Item> playersPotions = new ArrayList<>();
+        Map<String, Integer> playersPotions = player.getPlayersPotions();
 
-        for (Item i : player.getInventory()) {
-            if (i instanceof Potion && !(playersPotions.contains(i))) {
-                playersPotions.add(i);
-            }
-        }
 
         System.out.println("You have got the following Potions:\n");
         int option = 0;
+        List<Potion> tmpPotions = new ArrayList<>();
 
-        for (Item i : playersPotions) {
-            option++;
-            System.out
-              .println(option + ") " + i.getName() + " (" + player.countPotion(i) + "x) \n");
+        for (String potionName : playersPotions.keySet()) {
+            if(playersPotions.get(potionName) > 0) {
+                option++;
+                System.out
+                  .println(
+                    option + ") " + potionName + " (" + playersPotions.get(potionName) + "x) \n");
+                tmpPotions.add(new PotionFactory().getPotionByName(potionName));
+            }
         }
 
         int choice = Integer.parseInt(scanner.nextLine());
 
         if (choice >= 0 && choice <= option) {
-            player.usePotion((Potion) playersPotions.get(option - 1));
+            player.usePotion(tmpPotions.get(option - 1));
             scanner.nextLine();
         } else {
             printUsePotionDialog(player);
