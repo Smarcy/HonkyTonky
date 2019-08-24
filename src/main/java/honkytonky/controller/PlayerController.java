@@ -53,7 +53,7 @@ public class PlayerController {
 
                 if (weapon <= 4) {
                     player = new Player(name, 20, startWeapon,
-                      armorFactory.findArmorByName("Leather Armor"), rooms.get(0));
+                      armorFactory.getArmorByName("Leather Armor"), rooms.get(0));
                     battleController.setPlayer(player);
                     return player;
                 }
