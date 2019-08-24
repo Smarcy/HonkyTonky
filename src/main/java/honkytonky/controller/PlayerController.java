@@ -49,30 +49,22 @@ public class PlayerController {
                 int weapon = Integer.parseInt(scanner.nextLine());
 
                 Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
+                Potion startPotion =  potionFactory.getPotionByName("Small Health Potion");
 
-                switch (weapon) {
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                        Potion startPotion =  potionFactory.getPotionByName("Small Health Potion");
-                        player = new Player(name, 20, startWeapon,
-                          armorFactory.findArmorByName("Leather Armor"),
-                          startPotion, rooms
-                          .get(0));
-                        battleController.setPlayer(player);
-                        return player;
-                    default:
-                        clearScreen();
-                        System.out.println(weapon + " is not a valid option!\n");
-                        break;
+                if(weapon <= 4) {
+                    player = new Player(name, 20, startWeapon,
+                      armorFactory.findArmorByName("Leather Armor"),
+                      startPotion, rooms
+                      .get(0));
+                    battleController.setPlayer(player);
+                    return player;
                 }
             } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
                 e.printStackTrace();
                 clearScreen();
             }
         }
-        return null;
+        throw new IllegalArgumentException("Something went wrong while creating Player..");
     }
 
     /**
