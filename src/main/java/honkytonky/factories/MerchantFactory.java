@@ -17,6 +17,7 @@ public class MerchantFactory {
 
     private final List<Merchant> merchants = new ArrayList<>();
     private final RoomFactory roomFactory;
+    private final WeaponFactory weaponFactory = new WeaponFactory();
 
     public MerchantFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
@@ -58,5 +59,6 @@ public class MerchantFactory {
 
     private void addItemsToMerchantCRAPPYSTATIC() {
         getMerchantByName("Belechor").addItemToShop(new Potion(1, "Small Health Potion", 10, 15, PotionType.HEALTH));
+        getMerchantByName("Belechor").addItemToShop(weaponFactory.getWeaponByName("One-Handed Axe"));
     }
 }

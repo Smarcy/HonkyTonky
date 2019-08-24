@@ -23,6 +23,15 @@ public class WeaponFactory {
         return weaponList;
     }
 
+    public Weapon getWeaponByName(String name) {
+        for(Weapon w : weaponList) {
+            if(w.getName().equals(name)) {
+                return w;
+            }
+        }
+        return null;
+    }
+
     private void createWeaponsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/weapons");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
