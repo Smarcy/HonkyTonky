@@ -23,14 +23,11 @@ public class PlayerDialogController {
     public void printUsePotionDialog(Player player) {
         clearScreen();
 
-        // --------------------------------------- REFACTORME START ---------------------------------------
-
         Map<String, Integer> playersPotions = player.getPlayersPotions();
-
+        List<Potion> tmpPotions = new ArrayList<>();    // needed to temp save actual potions, not names
+        int option = 0;
 
         System.out.println("You have got the following Potions:\n");
-        int option = 0;
-        List<Potion> tmpPotions = new ArrayList<>();
 
         for (String potionName : playersPotions.keySet()) {
             if(playersPotions.get(potionName) > 0) {
@@ -41,7 +38,6 @@ public class PlayerDialogController {
                 tmpPotions.add(new PotionFactory().getPotionByName(potionName));
             }
         }
-
         int choice = Integer.parseInt(scanner.nextLine());
 
         if (choice >= 0 && choice <= option) {
@@ -50,7 +46,6 @@ public class PlayerDialogController {
         } else {
             printUsePotionDialog(player);
         }
-        // --------------------------------------- REFACTORME END ---------------------------------------
     }
 
     public void printInventoryDialog(Player player) {
