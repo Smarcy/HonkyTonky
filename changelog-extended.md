@@ -1,6 +1,12 @@
-<li>  (HEAD -> dev, tag: v0.2.2, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/a023d420dc9c73264ad277e3ea5ccb75204d63ce">view commit &bull;</a> Read/Add Merchant Items From CSV File #changelog</li> 
+<li>  (HEAD -> dev, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d49cf2b87ba8788169f1e1872941ec5265ff46d">view commit &bull;</a> Merge branch 'dev' of https://github.com/Smarcy/HonkyTonky into dev</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/9caea949472117224c5f028e36f79015cc340839">view commit &bull;</a> Restructured Inventory Dialog Output</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/ee073b3bd21f48325e7b124e411769117a9bb9c1">view commit &bull;</a> add recent changelog</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/d697d83f28e993c546a5f8867894d7c2ae30f8b7">view commit &bull;</a> Read/Add Merchant Items From CSV File</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/1257d09ab141061881580b73bcf4bcb5278e8525">view commit &bull;</a> Restructured Inventory Dialog Output</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/a6c63e2aeac0863e3d062fe09371859406af21a7">view commit &bull;</a> add recent changelog</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/b57b06d458a9ad4cac02b58e18362fd29c100f0b">view commit &bull;</a> Read/Add Merchant Items From CSV File</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/2b91d3866d7bb905c7b706c99c3d6caa4defb533">view commit &bull;</a> Refactor UsePotion - still work to be done</li> 
-<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/f1b0ba9758a62bc40d0353c89b42427cb4f9789a">view commit &bull;</a> simplified Player creation (redundant switch to if-else)</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f1b0ba9758a62bc40d0353c89b42427cb4f9789a">view commit &bull;</a> simplified Player creation (redundant switch to if-else)</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/391fbb3bef60b7c703ef8bd967c98dd5c0eb3ce2">view commit &bull;</a> Read Potions from CSV and fix startPotion</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/ccd48fe8bfe6d6189750a985698738ec4212c0f0">view commit &bull;</a> 'getXbyName' refactored - throw Exception instead of return null</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/187585a66761edb43c27fdac6a12f73bbe68e882">view commit &bull;</a> fixed NPE when 'create player' gets called more than once</li> 
