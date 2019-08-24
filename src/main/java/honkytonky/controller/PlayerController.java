@@ -8,6 +8,7 @@ import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Door;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import java.util.InputMismatchException;
@@ -54,9 +55,10 @@ public class PlayerController {
                     case 2:
                     case 3:
                     case 4:
+                        Potion startPotion =  potionFactory.getPotionByName("Small Health Potion");
                         player = new Player(name, 20, startWeapon,
                           armorFactory.findArmorByName("Leather Armor"),
-                          potionFactory.startPotion(), rooms
+                          startPotion, rooms
                           .get(0));
                         battleController.setPlayer(player);
                         return player;

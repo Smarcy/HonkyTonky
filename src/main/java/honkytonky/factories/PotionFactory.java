@@ -18,10 +18,15 @@ public class PotionFactory {
         createPotionsFromFile();
     }
 
+    /**
+     * Finds a Potion by its name and return a COPY of it (so it stays in potionList after use!)
+     * @param name name of potion to find
+     * @return copy of found potion
+     */
     public Potion getPotionByName(String name) {
         for(Potion p : potionList) {
             if(p.getName().equals(name)) {
-                return p;
+                return new Potion(p.getId(), p.getName(), p.getAmount(), p.getValue(), p.getType());
             }
         }
         throw new IllegalArgumentException("Potion " + name + " not found!");
