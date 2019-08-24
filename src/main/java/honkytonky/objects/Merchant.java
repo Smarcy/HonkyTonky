@@ -48,7 +48,7 @@ public class Merchant extends Actor {
 
         int i = 1;  //start counting at 1 for design purposes
         for (Item item : itemsForSell) {
-            System.out.println(i + ") " + item);
+            System.out.println(i + ") " + item + " (" + item.getValue() + " Gold)");
             i++;
         }
 

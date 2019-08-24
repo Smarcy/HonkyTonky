@@ -1,5 +1,6 @@
 package honkytonky.controller;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_PURPLE;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
@@ -56,7 +57,15 @@ public class MerchantController {
      */
     private void tradeWithMerchant(int choice) {
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
-        player.getInventory().add(itemToBuy);
-        merchant.removeItemFromShop(itemToBuy);
+
+        if(player.getGold() >= itemToBuy.getValue()) {
+            player.getInventory().add(itemToBuy);
+            merchant.removeItemFromShop(itemToBuy);
+            player.giveGold(-10);
+            System.out.println("You succesfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
+        } else {
+            System.out.println("You don't have enough gold to purchase " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
+        }
+        scanner.nextLine();
     }
 }
