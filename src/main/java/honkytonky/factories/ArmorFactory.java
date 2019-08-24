@@ -23,7 +23,7 @@ public class ArmorFactory {
         return armorList;
     }
 
-    public Armor findArmorByName(String name) {
+    public Armor getArmorByName(String name) {
         for(Armor armor : armorList) {
             if(armor.getName().equals(name)) {
                 return armor;

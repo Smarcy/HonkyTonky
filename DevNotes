@@ -1,3 +1,6 @@
 - DELETEME: Game.java - Only for testing purposes:
-                      -> showIntro()
-                                     -> player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));
+              -> showIntro()
+                -> player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));
+
+
+- Let Player equip different Weapon/Armor

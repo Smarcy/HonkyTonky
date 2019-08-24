@@ -2,9 +2,7 @@ package honkytonky.factories;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import honkytonky.enumtypes.PotionType;
 import honkytonky.objects.Merchant;
-import honkytonky.objects.Potion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -17,7 +15,6 @@ public class MerchantFactory {
 
     private final List<Merchant> merchants = new ArrayList<>();
     private final RoomFactory roomFactory;
-    private final WeaponFactory weaponFactory = new WeaponFactory();
 
     public MerchantFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
@@ -32,7 +29,6 @@ public class MerchantFactory {
             }
         }
         throw new IllegalArgumentException("Merchant " + name + " not found!");
-
     }
 
     private void createMerchantsFromFile() {
@@ -59,7 +55,31 @@ public class MerchantFactory {
     }
 
     private void addItemsToMerchantCRAPPYSTATIC() {
-        getMerchantByName("Belechor").addItemToShop(new Potion(1, "Small Health Potion", 10, 15, PotionType.HEALTH));
-        getMerchantByName("Belechor").addItemToShop(weaponFactory.getWeaponByName("One-Handed Axe"));
+        try (InputStream inputStream = getClass().getResourceAsStream("/merchantitems");
+          InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+          BufferedReader reader = new BufferedReader(inputStreamReader)) {
+            CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
+
+            String[] nextRecord;
+
+            while ((nextRecord = csvReader.readNext()) != null) {
+                Merchant currMerchant = getMerchantByName(nextRecord[0]);
+                String itemToGive = nextRecord[1];
+
+                switch(nextRecord[2]) {
+                    case "Potion":
+                        currMerchant.addItemToShop(new PotionFactory().getPotionByName(itemToGive));
+                        break;
+                    case "Weapon":
+                        currMerchant.addItemToShop(new WeaponFactory().getWeaponByName(itemToGive));
+                        break;
+                    case "Armor":
+                        currMerchant.addItemToShop(new ArmorFactory().getArmorByName(itemToGive));
+                        break;
+                }
+            }
+        } catch (IOException | IllegalArgumentException e) {
+            throw new IllegalArgumentException("Fehler beim Lesen der Datei merchantitems!");
+        }
     }
 }
