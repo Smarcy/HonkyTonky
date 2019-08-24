@@ -1,6 +1,7 @@
 package honkytonky.controller;
 
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
@@ -25,23 +26,24 @@ public class PlayerDialogController {
 
         List<Item> playersPotions = new ArrayList<>();
 
-        for(Item i : player.getInventory()) {
-           if(i instanceof Potion && !(playersPotions.contains(i))) {
-               playersPotions.add(i);
-           }
+        for (Item i : player.getInventory()) {
+            if (i instanceof Potion && !(playersPotions.contains(i))) {
+                playersPotions.add(i);
+            }
         }
 
         System.out.println("You have got the following Potions:\n");
         int option = 0;
 
-        for(Item i : playersPotions) {
+        for (Item i : playersPotions) {
             option++;
-            System.out.println(option + ") " + i.getName() + " (" + player.countPotion(i) + "x) \n");
+            System.out
+              .println(option + ") " + i.getName() + " (" + player.countPotion(i) + "x) \n");
         }
 
         int choice = Integer.parseInt(scanner.nextLine());
 
-        if(choice >= 0 && choice <= option) {
+        if (choice >= 0 && choice <= option) {
             player.usePotion((Potion) playersPotions.get(option - 1));
             scanner.nextLine();
         } else {
@@ -52,33 +54,44 @@ public class PlayerDialogController {
 
     public void printInventoryDialog(Player player) {
         clearScreen();
-        System.out.println("What kind of items would you like to see?\n");
-        System.out.println("1) Weapons");
-        System.out.println("2) Armors");
-        System.out.println("3) Potions");
 
-        try {
-            int option = Integer.parseInt(scanner.nextLine());
-            clearScreen();
+        if (player.getInventory().size() < 30) {
+            System.out.println(ANSI_RED + "Weapons:" + ANSI_RESET);
+            player.showInventory("weapons");
+            System.out.println(ANSI_RED + "\nArmors:" + ANSI_RESET);
+            player.showInventory("armors");
+            System.out.println(ANSI_RED + "\nPotions:" + ANSI_RESET);
+            player.showInventory("potions");
+        } else {
+            System.out.println("What kind of items would you like to see?\n");
+            System.out.println("1) Weapons");
+            System.out.println("2) Armors");
+            System.out.println("3) Potions");
 
-            switch (option) {
-                case 1:
-                    player.showInventory("weapons");
-                    break;
-                case 2:
-                    player.showInventory("armors");
-                    break;
-                case 3:
-                    player.showInventory("potions");
-                    break;
-                default:
-                    printInventoryDialog(player);
-                    break;
+            try {
+                int option = Integer.parseInt(scanner.nextLine());
+                clearScreen();
+
+                switch (option) {
+                    case 1:
+                        player.showInventory("weapons");
+                        break;
+                    case 2:
+                        player.showInventory("armors");
+                        break;
+                    case 3:
+                        player.showInventory("potions");
+                        break;
+                    default:
+                        printInventoryDialog(player);
+                        break;
+                }
+            } catch (InputMismatchException | NumberFormatException e) {
+                printInventoryDialog(player);
             }
-        } catch (InputMismatchException | NumberFormatException e) {
-            printInventoryDialog(player);
         }
         scanner.nextLine();
+
     }
 
     /**
