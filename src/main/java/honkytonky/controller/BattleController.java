@@ -135,7 +135,7 @@ public class BattleController {
         }
     }
 
-    private void rewardPlayer() {
+    protected void rewardPlayer() {
         int xpReward = calculateExperienceReward();
         player.increaseExperience(xpReward);
 
