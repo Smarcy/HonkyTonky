@@ -1,4 +1,13 @@
-<li>  (HEAD -> dev, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/f23da9c1f6d46248ab3d91992078661de84f57c0">view commit &bull;</a> shorten doors names</li> 
+<li>  (HEAD -> dev, tag: v0.2.1, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/c7239db80c0f18f7cf15edae1921323fac1135fe">view commit &bull;</a> add Trade with Merchants</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/2d9482127dfdfe83a05d9a7561bd01ba1cf36686">view commit &bull;</a> add several BattleController Test (JUnit/Mockito)</li> 
+<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/c3476e70db1bc16c8e329fb75d9ae1f04aa7c911">view commit &bull;</a> fix CSV bug -> use double quotes</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/250412521ae93009b4763e588d32b889f29caff5">view commit &bull;</a> add Item To Merchant (crappy static - refactor asap)</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/8d6acab8d2cda6e644178b99879010a605a7fbf9">view commit &bull;</a> simplified CharacterInfoPattern</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/42827968946d47527496d52f9faec2ff15b19b2e">view commit &bull;</a> add currency and currencyDrops</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/80b0616f22efbff2676747a950385140a4ace1ea">view commit &bull;</a> Switch TODO to GitHub Kanbanboard</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/66a0ba1da56dbdc32869174ae064c2026713a4c8">view commit &bull;</a> delete html changelog</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/85c647462bd08d2e21708c037f0239bb79ef2dad">view commit &bull;</a> restructure changelogs</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f23da9c1f6d46248ab3d91992078661de84f57c0">view commit &bull;</a> shorten doors names</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/97b30ab8a9b5d5bde722ec2aead3ccb7e90d0da9">view commit &bull;</a> add changelog.html</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/c57b17d81b4e29cc19e4e0c88238a7443aeb064f">view commit &bull;</a> Full working dynamic CSV reading & adding #changelog</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/2c60c9e24a9019411865b777b9101d4b564ccca0">view commit &bull;</a> Revert "Full Working dynamic CSV reading & adding"</li> 
