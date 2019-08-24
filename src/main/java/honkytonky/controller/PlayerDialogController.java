@@ -5,8 +5,12 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.misc.CharacterInfoPattern;
+import honkytonky.objects.Item;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class PlayerDialogController {
@@ -16,35 +20,34 @@ public class PlayerDialogController {
 
     public void printUsePotionDialog(Player player) {
         clearScreen();
-        System.out.println("What kind of Potion would you like to use?\n");
-        System.out.println("1) Health Potion");
-        System.out.println("2) Defense Potion");
 
-        try {
-            switch (Integer.parseInt(scanner.nextLine())) {
-                case 1:
-                    clearScreen();
-                    System.out.println("Small or Big Potion?\n");
-                    System.out.println("1) Small Health Potion");
-                    System.out.println("2) Big Health Potion");
-                    switch (Integer.parseInt(scanner.nextLine())) {
-                        case 1:
-                            player.usePotion("Small Health Potion");
-                            break;
-                        case 2:
-                            player.usePotion("Big Health Potion");
-                            break;
-                    }
-                    break;
-                case 2:
-                    clearScreen();
-                    player.usePotion("defense");
-                    break;
-            }
+        // --------------------------------------- REFACTORME START ---------------------------------------
+
+        List<Item> playersPotions = new ArrayList<>();
+
+        for(Item i : player.getInventory()) {
+           if(i instanceof Potion && !(playersPotions.contains(i))) {
+               playersPotions.add(i);
+           }
+        }
+
+        System.out.println("You have got the following Potions:\n");
+        int option = 0;
+
+        for(Item i : playersPotions) {
+            option++;
+            System.out.println(option + ") " + i.getName() + " (" + player.countPotion(i) + "x) \n");
+        }
+
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        if(choice >= 0 && choice <= option) {
+            player.usePotion((Potion) playersPotions.get(option - 1));
             scanner.nextLine();
-        } catch (InputMismatchException | NumberFormatException e) {
+        } else {
             printUsePotionDialog(player);
         }
+        // --------------------------------------- REFACTORME END ---------------------------------------
     }
 
     public void printInventoryDialog(Player player) {

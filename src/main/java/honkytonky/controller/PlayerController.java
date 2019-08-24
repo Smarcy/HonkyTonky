@@ -49,13 +49,11 @@ public class PlayerController {
                 int weapon = Integer.parseInt(scanner.nextLine());
 
                 Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
-                Potion startPotion =  potionFactory.getPotionByName("Small Health Potion");
+                Potion startPotion = potionFactory.getPotionByName("Small Health Potion");
 
-                if(weapon <= 4) {
+                if (weapon <= 4) {
                     player = new Player(name, 20, startWeapon,
-                      armorFactory.findArmorByName("Leather Armor"),
-                      startPotion, rooms
-                      .get(0));
+                      armorFactory.findArmorByName("Leather Armor"), rooms.get(0));
                     battleController.setPlayer(player);
                     return player;
                 }

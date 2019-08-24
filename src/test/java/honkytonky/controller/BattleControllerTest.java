@@ -85,7 +85,7 @@ public class BattleControllerTest {
     @Test
     public void testRewardPlayerWithLevelUp() {
 
-        Player tmpPlayer = new Player("Dude", 50, weapon, armor, potion, room);
+        Player tmpPlayer = new Player("Dude", 50, weapon, armor, room);
 
         assertEquals(0, tmpPlayer.getExperience());
         assertEquals(0, tmpPlayer.getGold());

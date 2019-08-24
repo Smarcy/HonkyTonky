@@ -1,7 +1,6 @@
 package honkytonky.objects;
 
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
-import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.misc.ExpTable;
@@ -20,14 +19,11 @@ public class Player extends Actor {
     private int gold;
     private Weapon weapon;
     private Armor armor;
-    private Potion potion;
     private Room currentRoom;
     private final ExpTable expTable = new ExpTable();
     private final List<Item> inventory;
 
-    public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor,
-      @NonNull Potion potion,
-      @NonNull Room currentRoom) {
+    public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
         super(name, maxHP, 1);
 
@@ -38,13 +34,11 @@ public class Player extends Actor {
         this.gold               = 0;
         this.weapon             = weapon;
         this.armor              = armor;
-        this.potion             = potion;
         this.inventory          = new ArrayList<>();
         //@formatter:on
 
         inventory.add(weapon);
         inventory.add(armor);
-        inventory.add(potion);
     }
 
     public void giveTemporaryDefBoost() {
@@ -115,32 +109,10 @@ public class Player extends Actor {
         }
     }
 
-    public void usePotion(String potionType) {
-        boolean playerHasPotion = false;
-
-        for (Item p : inventory) {
-            if (p.getName().equals(potionType)) {
-                inventory.remove(p);
-                playerHasPotion = true;
-                potion = (Potion) p;
-                break;
-            }
-        }
-
-        if (playerHasPotion) {
-            switch (potionType) {
-                case "Small Health Potion":
-                    this.healPlayer(10);
-                    break;
-                case "Big Health Potion":
-                    this.healPlayer(20);
-                    break;
-            }
-            System.out.println("You were healed by " + ANSI_GREEN + potion
-              .getAmount() + ANSI_RESET + " Health Points!");
-        } else {
-            System.out.println("You do not have " + ANSI_RED + potionType + ANSI_RESET + "!");
-        }
+    public void usePotion(Potion potion) {
+        healPlayer(potion.getAmount());
+        inventory.remove(potion);
+        System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " health points!");
     }
 
     private void healPlayer(int amount) {
@@ -153,6 +125,17 @@ public class Player extends Actor {
 
     public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
+    }
+
+    public int countPotion(Item i) {
+        int count = 0;
+
+        for(Item item : inventory) {
+            if(item.equals(i)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     @Override

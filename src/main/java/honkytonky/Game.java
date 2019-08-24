@@ -84,7 +84,8 @@ public class Game {
                           .createPlayer(armorFactory, weaponFactory, potionFactory,
                             battleController, rooms);
 
-                        player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));
+                        player.getInventory().add(potionFactory.getPotionByName("Small Health Potion")); // give Player startPotion
+                        player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                 }
             } catch (NumberFormatException e) {
