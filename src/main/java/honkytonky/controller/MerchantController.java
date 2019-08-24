@@ -9,11 +9,11 @@ import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;
 import java.util.Scanner;
 
-public class MerchantDialogController {
+public class MerchantController {
 
     private final Scanner scanner = new Scanner(System.in);
-    Player player;
-    Merchant merchant;
+    private Player player;
+    private Merchant merchant;
 
     void printMerchantDialog(Player player) {
         this.player = player;
@@ -24,10 +24,10 @@ public class MerchantDialogController {
             this.merchant = player.getCurrentRoom().getPresentMerchant();
 
             System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
-            System.out.println("1) Talk to " + merchant);
-            System.out.println("2) Trade with " + merchant);
-            System.out.println("3) Attack " + merchant);
-            System.out.println("4) Leave " + merchant + " alone");
+            System.out.println("1) Talk to " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("2) Trade with " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("3) Attack " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("4) Leave " + ANSI_YELLOW +  merchant + ANSI_RESET + " alone");
 
             switch (Integer.parseInt(scanner.nextLine())) {
                 case 1:
@@ -50,6 +50,10 @@ public class MerchantDialogController {
         }
     }
 
+    /**
+     * Add Item to Player Inventory & remove Item from Merchant Inventory
+     * @param choice ID of Item in Merchants inventory (+1)
+     */
     private void tradeWithMerchant(int choice) {
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
         player.getInventory().add(itemToBuy);

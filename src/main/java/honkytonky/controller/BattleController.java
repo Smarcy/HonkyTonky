@@ -199,9 +199,9 @@ public class BattleController {
         }
     }
 
-    public void checkRoomForMerchant(MerchantDialogController merchantDialogController) {
+    public void checkRoomForMerchant(MerchantController merchantController) {
         if (player.getCurrentRoom().hasMerchant()) {
-            merchantDialogController.printMerchantDialog(player);
+            merchantController.printMerchantDialog(player);
         }
     }
 }

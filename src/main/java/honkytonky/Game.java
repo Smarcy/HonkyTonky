@@ -1,11 +1,11 @@
 package honkytonky;
 
-import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.controller.BattleController;
-import honkytonky.controller.MerchantDialogController;
+import honkytonky.controller.MerchantController;
 import honkytonky.controller.PlayerController;
 import honkytonky.controller.PlayerDialogController;
 import honkytonky.factories.ArmorFactory;
@@ -33,7 +33,7 @@ public class Game {
     private final MonsterFactory monsterFactory                     = new MonsterFactory(roomFactory);
     private final MerchantFactory merchantFactory                   = new MerchantFactory(roomFactory);
     private final PlayerDialogController playerDialogController     = new PlayerDialogController();
-    private final MerchantDialogController merchantDialogController = new MerchantDialogController();
+    private final MerchantController merchantController             = new MerchantController();
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
     private final List<Room> rooms                                  = roomFactory.getRooms();
@@ -106,7 +106,10 @@ public class Game {
             System.out.println("3) Character Info");
             System.out.println("4) Show Inventory");
             System.out.println("5) Exit Game");
-            if(player.getCurrentRoom().hasMerchant()) System.out.println("6) Talk to " + ANSI_CYAN + player.getCurrentRoom().getPresentMerchant() + ANSI_RESET);
+            if (player.getCurrentRoom().hasMerchant()) {
+                System.out.println("6) Talk to " + ANSI_YELLOW + player.getCurrentRoom()
+                  .getPresentMerchant() + ANSI_RESET);
+            }
             System.out.print("\n> ");
 
             try {
@@ -116,7 +119,7 @@ public class Game {
                     case 1:
                         playerController.move(scanner, roomFactory);
                         battleController.checkRoomForMonster();
-                        battleController.checkRoomForMerchant(merchantDialogController);
+                        battleController.checkRoomForMerchant(merchantController);
                         break;
                     case 2:
                         playerDialogController.printUsePotionDialog(player);
@@ -130,7 +133,7 @@ public class Game {
                     case 5:
                         System.exit(0);
                     case 6:
-                        battleController.checkRoomForMerchant(merchantDialogController);
+                        battleController.checkRoomForMerchant(merchantController);
                 }
             } catch (InputMismatchException | NumberFormatException e) {
                 clearScreen();
