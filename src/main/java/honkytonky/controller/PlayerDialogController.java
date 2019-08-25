@@ -20,6 +20,10 @@ public class PlayerDialogController {
     private final CharacterInfoPattern charInfo = new CharacterInfoPattern();
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * print all Potions the player has in inventory/potionlist to choose from
+     * @param player Player object
+     */
     public void printUsePotionDialog(Player player) {
         clearScreen();
 
@@ -29,8 +33,8 @@ public class PlayerDialogController {
 
         System.out.println("You have got the following Potions:\n");
 
-        for (Potion potion : playersPotions.keySet()) {
-            if(playersPotions.get(potion) > 0) {
+        for (Potion potion : playersPotions.keySet()) {     // found no elegant solution without temp saving iterated keys to get entry X
+            if (playersPotions.get(potion) > 0) {
                 option++;
                 System.out
                   .println(
