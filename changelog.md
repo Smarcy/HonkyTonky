@@ -1,4 +1,6 @@
-<li>  (HEAD -> dev, tag: v0.2.5) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d150632b5288807c5287e4233afe8681e8027f7">view commit &bull;</a> No other solution to choose potion found, yet</li> 
+<li>  (HEAD -> dev, tag: v0.3.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/974afaf15ec0c9319f5afc767d928a4fc11707bb">view commit &bull;</a> Player is now able to attack a Merchant (alpha-state)</li> 
+<li>  (tag: v0.2.7) <a href="http://github.com/Smarcy/HonkyTonky/commit/505484ce4988140909fc4b5099b0cfbd4e55d121">view commit &bull;</a> refactor methods Player->PlayerController</li> 
+<li>  (tag: v0.2.5) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d150632b5288807c5287e4233afe8681e8027f7">view commit &bull;</a> No other solution to choose potion found, yet</li> 
 <li>  (tag: v0.2.4) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
 <li>  (tag: v0.2.3) <a href="http://github.com/Smarcy/HonkyTonky/commit/d19a8e04f09756d024df6178a496faecf26f7f35">view commit &bull;</a> Now needs currency to trade with Merchant</li> 
 <li>  (tag: v0.2.2) <a href="http://github.com/Smarcy/HonkyTonky/commit/a023d420dc9c73264ad277e3ea5ccb75204d63ce">view commit &bull;</a> Read/Add Merchant Items From CSV File #changelog</li> 
