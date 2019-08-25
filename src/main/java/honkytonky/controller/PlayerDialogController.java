@@ -52,6 +52,10 @@ public class PlayerDialogController {
         }
     }
 
+    /**
+     * prints all items the player has in his inventory (sorted)
+     * @param player the player object
+     */
     public void printInventoryDialog(Player player) {
         clearScreen();
 
@@ -91,7 +95,6 @@ public class PlayerDialogController {
             }
         }
         scanner.nextLine();
-
     }
 
     /**
@@ -103,6 +106,10 @@ public class PlayerDialogController {
             + ANSI_RESET);
     }
 
+    /**
+     * prints all relevant character informations (formatted)
+     * @param player the player object
+     */
     public void printCharacterInfo(Player player) {
         clearScreen();
         charInfo.printCharacterInfo(player);

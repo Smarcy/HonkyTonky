@@ -1,4 +1,8 @@
-<li>  (HEAD -> dev, tag: v0.2.4, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
+<li>  (HEAD -> dev, tag: v0.2.5) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d150632b5288807c5287e4233afe8681e8027f7">view commit &bull;</a> No other solution to choose potion found, yet</li> 
+<li>  (origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/42499cc314fdba177ede66e6e150266540debb5e">view commit &bull;</a> refactor playersPotions <String, Integer> to <Potion, Integer></li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/101408c96f5870b1a436a1ee8abf94770aaa1e97">view commit &bull;</a> refactor printItemsForSell() from Merchant to MerchantController</li> 
+<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/eb7b2d3d4ffb9429217776c22e6b6791e63e381f">view commit &bull;</a> update changelog</li> 
+<li>  (tag: v0.2.4) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/44152dfa6a9d1402f1559af362decfdbd68e58b2">view commit &bull;</a> fixed UsePotion -> now additionaly using HashMap to count potions</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f75327291d945df92e45f3d046358fe866aa27bd">view commit &bull;</a> update changelog</li> 
 <li>  (tag: v0.2.3) <a href="http://github.com/Smarcy/HonkyTonky/commit/d19a8e04f09756d024df6178a496faecf26f7f35">view commit &bull;</a> Now needs currency to trade with Merchant</li> 

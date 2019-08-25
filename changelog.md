@@ -1,4 +1,5 @@
-<li>  (HEAD -> dev, tag: v0.2.4, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
+<li>  (HEAD -> dev, tag: v0.2.5) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d150632b5288807c5287e4233afe8681e8027f7">view commit &bull;</a> No other solution to choose potion found, yet</li> 
+<li>  (tag: v0.2.4) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
 <li>  (tag: v0.2.3) <a href="http://github.com/Smarcy/HonkyTonky/commit/d19a8e04f09756d024df6178a496faecf26f7f35">view commit &bull;</a> Now needs currency to trade with Merchant</li> 
 <li>  (tag: v0.2.2) <a href="http://github.com/Smarcy/HonkyTonky/commit/a023d420dc9c73264ad277e3ea5ccb75204d63ce">view commit &bull;</a> Read/Add Merchant Items From CSV File #changelog</li> 
 <li>  (tag: v0.2.1) <a href="http://github.com/Smarcy/HonkyTonky/commit/c7239db80c0f18f7cf15edae1921323fac1135fe">view commit &bull;</a> add Trade with Merchants</li> 
