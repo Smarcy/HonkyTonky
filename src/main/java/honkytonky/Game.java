@@ -101,6 +101,7 @@ public class Game {
     private void gameLoop() {
 
         playerDialogController.setPlayer(player);
+        player.setPlayerDialogController(playerDialogController);
 
         while (true) {
             playerDialogController.printCurrentLocation();

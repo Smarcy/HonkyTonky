@@ -8,7 +8,6 @@ import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Door;
 import honkytonky.objects.Player;
-import honkytonky.objects.Potion;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import java.util.InputMismatchException;
@@ -49,7 +48,6 @@ public class PlayerController {
                 int weapon = Integer.parseInt(scanner.nextLine());
 
                 Weapon startWeapon = weaponFactory.getWeaponList().get(weapon - 1);
-                Potion startPotion = potionFactory.getPotionByName("Small Health Potion");
 
                 if (weapon <= 4) {
                     player = new Player(name, 20, startWeapon,

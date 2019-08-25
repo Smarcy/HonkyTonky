@@ -3,6 +3,7 @@ package honkytonky.objects;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
+import honkytonky.controller.PlayerDialogController;
 import honkytonky.misc.ExpTable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class Player extends Actor {
     private final ExpTable expTable = new ExpTable();
     private final List<Item> inventory;
     private final Map<Potion, Integer> playersPotions;
+    private PlayerDialogController playerDialogController;
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
@@ -104,11 +106,7 @@ public class Player extends Actor {
                 }
                 break;
             case "potions":
-                for (Item item : inventory) {
-                    if (item instanceof Potion) {
-                        System.out.println(item);
-                    }
-                }
+                playerDialogController.countAndPrintPlayerPotions();
                 break;
         }
     }

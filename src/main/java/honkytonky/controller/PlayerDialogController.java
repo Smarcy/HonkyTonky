@@ -21,6 +21,10 @@ public class PlayerDialogController {
     private final Scanner scanner = new Scanner(System.in);
     private Player player;
 
+    /**
+     * set the attribute Player to corrrespond to the real object to save a bunch of parameters
+     * @param player the player object
+     */
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -31,11 +35,26 @@ public class PlayerDialogController {
     public void printUsePotionDialog() {
         clearScreen();
 
+        System.out.println("You have got the following Potions:\n");
+
+        Object[] tmpData = countAndPrintPlayerPotions();        // pretty hacky solution, maybe FIXME later ..
+        int option = (int) tmpData[0];
+        List tmpPotions = (List) tmpData[1];
+
+        int choice = Integer.parseInt(scanner.nextLine());
+
+        if (choice >= 0 && choice <= option) {
+            player.usePotion((Potion) tmpPotions.get(option - 1));
+            scanner.nextLine();
+        } else {
+            printUsePotionDialog();
+        }
+    }
+
+    public Object[] countAndPrintPlayerPotions() {
         Map<Potion, Integer> playersPotions = player.getPlayersPotions();
         List<Potion> tmpPotions = new ArrayList<>();    // needed to temp save actual potions, not names
         int option = 0;
-
-        System.out.println("You have got the following Potions:\n");
 
         for (Potion potion : playersPotions.keySet()) {     // found no elegant solution without temp saving iterated keys to get entry X
             if (playersPotions.get(potion) > 0) {
@@ -46,14 +65,7 @@ public class PlayerDialogController {
                 tmpPotions.add(new PotionFactory().getPotionByName(potion.getName()));
             }
         }
-        int choice = Integer.parseInt(scanner.nextLine());
-
-        if (choice >= 0 && choice <= option) {
-            player.usePotion(tmpPotions.get(option - 1));
-            scanner.nextLine();
-        } else {
-            printUsePotionDialog();
-        }
+        return new Object[] {option, tmpPotions};
     }
 
     /**
