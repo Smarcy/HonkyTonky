@@ -1,5 +1,8 @@
-<li>  (HEAD -> dev, tag: v0.2.3, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/d19a8e04f09756d024df6178a496faecf26f7f35">view commit &bull;</a> Now needs currency to trade with Merchant</li> 
-<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/f7b294c18f46a1cf1a2c4dcb2bec0140206f2767">view commit &bull;</a> Merge branch 'dev'</li> 
+<li>  (HEAD -> dev, tag: v0.2.4, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/802d77d9f947a5fede111b3447995de49974c6e7">view commit &bull;</a> no refactoring needed for now - deleted redundance</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/44152dfa6a9d1402f1559af362decfdbd68e58b2">view commit &bull;</a> fixed UsePotion -> now additionaly using HashMap to count potions</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f75327291d945df92e45f3d046358fe866aa27bd">view commit &bull;</a> update changelog</li> 
+<li>  (tag: v0.2.3) <a href="http://github.com/Smarcy/HonkyTonky/commit/d19a8e04f09756d024df6178a496faecf26f7f35">view commit &bull;</a> Now needs currency to trade with Merchant</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f7b294c18f46a1cf1a2c4dcb2bec0140206f2767">view commit &bull;</a> Merge branch 'dev'</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/e1527d1d7113fb43bd03623ef2e6267829b3d151">view commit &bull;</a> update changelog</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/d29e0bebcb100ca2da720ee8b58f248821c82483">view commit &bull;</a> Merge branch 'dev'</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/7d49cf2b87ba8788169f1e1872941ec5265ff46d">view commit &bull;</a> Merge branch 'dev' of https://github.com/Smarcy/HonkyTonky into dev</li> 
