@@ -3,7 +3,6 @@ package honkytonky.objects;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
-import honkytonky.controller.PlayerDialogController;
 import honkytonky.misc.ExpTable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,7 +25,6 @@ public class Player extends Actor {
     private final ExpTable expTable = new ExpTable();
     private final List<Item> inventory;
     private final Map<Potion, Integer> playersPotions;
-    private PlayerDialogController playerDialogController;
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
@@ -78,37 +76,6 @@ public class Player extends Actor {
 
     public void giveGold(int amount) {
         this.gold += amount;
-    }
-
-    public void showInventory(String option) {
-
-        switch (option) {
-            case "weapons":
-                for (Item item : inventory) {
-                    if (item instanceof Weapon) {
-                        if (item.equals(this.weapon)) {
-                            System.out.println(item + " (equipped)");
-                        } else {
-                            System.out.println(item);
-                        }
-                    }
-                }
-                break;
-            case "armors":
-                for (Item item : inventory) {
-                    if (item instanceof Armor) {
-                        if (item.equals(this.armor)) {
-                            System.out.println(item + " (equipped)");
-                        } else {
-                            System.out.println(item);
-                        }
-                    }
-                }
-                break;
-            case "potions":
-                playerDialogController.countAndPrintPlayerPotions();
-                break;
-        }
     }
 
     public void usePotion(Potion potion) {

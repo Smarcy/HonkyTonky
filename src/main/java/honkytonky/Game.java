@@ -101,7 +101,6 @@ public class Game {
     private void gameLoop() {
 
         playerDialogController.setPlayer(player);
-        player.setPlayerDialogController(playerDialogController);
 
         while (true) {
             playerDialogController.printCurrentLocation();
@@ -128,13 +127,13 @@ public class Game {
                         battleController.checkRoomForMerchant(merchantController);
                         break;
                     case 2:
-                        playerDialogController.printUsePotionDialog();
+                        playerDialogController.printUsePotionDialog(playerController);
                         break;
                     case 3:
                         playerDialogController.printCharacterInfo();
                         break;
                     case 4:
-                        playerDialogController.printInventoryDialog();
+                        playerDialogController.printInventoryDialog(playerController);
                         break;
                     case 5:
                         System.exit(0);

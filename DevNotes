@@ -4,5 +4,5 @@
 
 
 - Let Player equip different Weapon/Armor
-- fix showInventory Potion display (remove choice)
 - add some more tests
+- add a save/load infrastructure

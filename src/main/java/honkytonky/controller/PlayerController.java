@@ -6,12 +6,17 @@ import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Armor;
 import honkytonky.objects.Door;
+import honkytonky.objects.Item;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
 import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class PlayerController {
@@ -66,7 +71,7 @@ public class PlayerController {
     /**
      * Lets the player move to a requested direction
      */
-    public void move(Scanner scanner, RoomFactory roomFactory) {
+    public void move(Scanner scanner, RoomFactory roomFactory) {    // scanner necessary because of Mockito Tests
         clearScreen();
 
         player.getCurrentRoom().listDoorOptions();
@@ -82,5 +87,60 @@ public class PlayerController {
             move(scanner, roomFactory);
         }
         clearScreen();
+    }
+
+    /**
+     * prints items in inventory of a specific type in a formatted way
+     * @param option what type print
+     */
+    void showInventory(String option) {
+        switch (option) {
+            case "weapons":
+                for (Item item : player.getInventory()) {
+                    if (item instanceof Weapon) {
+                        if (item.equals(player.getWeapon())) {
+                            System.out.println(item + " (equipped)");
+                        } else {
+                            System.out.println(item);
+                        }
+                    }
+                }
+                break;
+            case "armors":
+                for (Item item : player.getInventory()) {
+                    if (item instanceof Armor) {
+                        if (item.equals(player.getArmor())) {
+                            System.out.println(item + " (equipped)");
+                        } else {
+                            System.out.println(item);
+                        }
+                    }
+                }
+                break;
+            case "potions":
+                countAndPrintPlayerPotions();
+                break;
+        }
+    }
+
+    /**
+     * Count how many Potions player has of each
+     * @return Array of {option for certain potion && all unique potions of player}
+     */
+    Object[] countAndPrintPlayerPotions() {
+        Map<Potion, Integer> playersPotions = player.getPlayersPotions();
+        List<Potion> tmpPotions = new ArrayList<>();    // needed to temp save actual potions, not names
+        int option = 0;
+
+        for (Potion potion : playersPotions.keySet()) {     // found no elegant solution without temp saving iterated keys to get entry X
+            if (playersPotions.get(potion) > 0) {
+                option++;
+                System.out
+                  .println(
+                    option + ") " + potion.getName() + " (" + playersPotions.get(potion) + "x) \n");
+                tmpPotions.add(new PotionFactory().getPotionByName(potion.getName()));
+            }
+        }
+        return new Object[] {option, tmpPotions};
     }
 }

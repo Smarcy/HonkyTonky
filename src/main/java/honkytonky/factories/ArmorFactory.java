@@ -19,10 +19,6 @@ public class ArmorFactory {
         createArmorsFromFile();
     }
 
-    public List<Armor> getArmorList() {
-        return armorList;
-    }
-
     public Armor getArmorByName(String name) {
         for(Armor armor : armorList) {
             if(armor.getName().equals(name)) {
