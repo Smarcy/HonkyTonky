@@ -17,7 +17,7 @@ class MerchantTest {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        merchant = new Merchant("Dude", 100, 100, null);
+        merchant = new Merchant("Dude", 100, 100, 1000, null);
     }
 
     @Test

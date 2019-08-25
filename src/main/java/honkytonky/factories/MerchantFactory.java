@@ -45,9 +45,10 @@ public class MerchantFactory {
                   nextRecord[0],                    // name
                   Integer.parseInt(nextRecord[1]),  // maxHP
                   Integer.parseInt(nextRecord[2]),  // level
-                  nextRecord[4]                     // smalltalk
+                  Integer.parseInt(nextRecord[3]),  // damage
+                  nextRecord[5]                     // smalltalk
                 ));
-                roomFactory.getRoomByName(nextRecord[3]).addMerchant(currMerchant);
+                roomFactory.getRoomByName(nextRecord[4]).addMerchant(currMerchant);
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchants!");

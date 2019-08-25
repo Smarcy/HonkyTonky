@@ -19,8 +19,8 @@ public class Merchant extends Actor {
     private final String smalltalk;
     Scanner scanner = new Scanner(System.in);
 
-    public Merchant(String name, int maxHP, int level, String smalltalk) {
-        super(name, maxHP, level);
+    public Merchant(String name, int maxHP, int level, int damage, String smalltalk) {
+        super(name, maxHP, level, damage);
         this.smalltalk = smalltalk;
     }
 

@@ -1,2 +1,2 @@
-name, maxHP, level, room, smalltalk
-Belechor,50,3,Marketplace,"I used to be a powerful magician, but once my hair fell out I stopped being powerful."
+name, maxHP, level, damage, room, smalltalk
+Belechor,50,3,6,Marketplace,"I used to be a powerful magician, but once my hair fell out I stopped being powerful."

@@ -28,7 +28,7 @@ public class Player extends Actor {
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
-        super(name, maxHP, 1);
+        super(name, maxHP, 1, weapon.getDamage());
 
         //@formatter:off
         this.currentRoom        = currentRoom;
