@@ -54,6 +54,7 @@ public class MerchantController {
     }
 
     /**
+     * List all items a merchant has to sell
      * @return ID of item player wants to buy
      */
     private int printItemsForSell(Merchant merchant) {
@@ -83,7 +84,7 @@ public class MerchantController {
     }
 
     /**
-     * Add Item to Player Inventory & remove Item from Merchant Inventory
+     * Add Item to Player Inventory and Players Potionlist & remove Item from Merchant Inventory
      * @param choice ID of Item in Merchants inventory (+1)
      */
     private void tradeWithMerchant(int choice) {
@@ -95,9 +96,9 @@ public class MerchantController {
             player.giveGold(-itemToBuy.getValue());
             System.out.println("You succesfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
 
-            if(itemToBuy instanceof Potion) {
-                if(player.getPlayersPotions().containsKey(itemToBuy.getName())) {
-                    player.getPlayersPotions().put(itemToBuy.getName(), player.getPlayersPotions().get(itemToBuy.getName()) + 1);
+            if(itemToBuy instanceof Potion) {   // If player is buying a potion, additionally add it to players potionmap
+                if(player.getPlayersPotions().containsKey(itemToBuy)) {
+                    player.getPlayersPotions().put((Potion) itemToBuy, player.getPlayersPotions().get(itemToBuy) + 1);
                 }
             }
         } else {

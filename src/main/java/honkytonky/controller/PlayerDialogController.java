@@ -23,19 +23,19 @@ public class PlayerDialogController {
     public void printUsePotionDialog(Player player) {
         clearScreen();
 
-        Map<String, Integer> playersPotions = player.getPlayersPotions();
+        Map<Potion, Integer> playersPotions = player.getPlayersPotions();
         List<Potion> tmpPotions = new ArrayList<>();    // needed to temp save actual potions, not names
         int option = 0;
 
         System.out.println("You have got the following Potions:\n");
 
-        for (String potionName : playersPotions.keySet()) {
-            if(playersPotions.get(potionName) > 0) {
+        for (Potion potion : playersPotions.keySet()) {
+            if(playersPotions.get(potion) > 0) {
                 option++;
                 System.out
                   .println(
-                    option + ") " + potionName + " (" + playersPotions.get(potionName) + "x) \n");
-                tmpPotions.add(new PotionFactory().getPotionByName(potionName));
+                    option + ") " + potion.getName() + " (" + playersPotions.get(potion) + "x) \n");
+                tmpPotions.add(new PotionFactory().getPotionByName(potion.getName()));
             }
         }
         int choice = Integer.parseInt(scanner.nextLine());

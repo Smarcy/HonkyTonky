@@ -24,7 +24,7 @@ public class Player extends Actor {
     private Room currentRoom;
     private final ExpTable expTable = new ExpTable();
     private final List<Item> inventory;
-    private final Map<String, Integer> playersPotions;
+    private final Map<Potion, Integer> playersPotions;
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
@@ -116,7 +116,7 @@ public class Player extends Actor {
     public void usePotion(Potion potion) {
         healPlayer(potion.getAmount());
         inventory.remove(potion);
-        playersPotions.put(potion.getName(), playersPotions.get(potion.getName()) - 1);
+        playersPotions.put(potion, playersPotions.get(potion) - 1);
         System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " health points!");
     }
 
