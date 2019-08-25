@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-abstract class Actor {
+public abstract class Actor {
 
     private final int id;
     private final String name;

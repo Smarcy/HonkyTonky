@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
@@ -41,6 +42,9 @@ public class BattleControllerTest {
     @Mock
     Room room;
 
+    @Mock
+    Actor actor;
+
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -54,7 +58,7 @@ public class BattleControllerTest {
         when(player.getHp()).thenReturn(100);
 
         battleController.setPlayer(player);
-        battleController.monsterAttacks(true);
+        battleController.enemyAttacks(true);
 
         verify(player, times(1)).getTemporaryDefBoost();
         verify(player, times(1)).setHp(anyInt());
@@ -74,7 +78,7 @@ public class BattleControllerTest {
         when(monster.getGrantedExperience()).thenReturn(100);
         when(monster.getGoldDropped()).thenReturn(50);
 
-        battleController.rewardPlayer();
+        battleController.rewardPlayerForMonsterKill();
 
         verify(player, times(1)).increaseExperience(anyInt());
         verify(player, times(1)).giveGold(anyInt());
@@ -95,7 +99,7 @@ public class BattleControllerTest {
         when(monster.getGoldDropped()).thenReturn(50);
 
         battleController.setPlayer(tmpPlayer);
-        battleController.rewardPlayer();
+        battleController.rewardPlayerForMonsterKill();
 
         assertEquals(100, tmpPlayer.getExperience());
         assertEquals(50, tmpPlayer.getGold());

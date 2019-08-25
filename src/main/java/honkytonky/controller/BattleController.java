@@ -7,6 +7,8 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.Game;
+import honkytonky.objects.Actor;
+import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import java.util.InputMismatchException;
@@ -19,6 +21,7 @@ public class BattleController {
     private final Scanner scanner = new Scanner(System.in);
     private Player player;
     private Monster monster;
+    private Actor enemy;
     private boolean playerFled = false;
 
     //----------------------------------------------------------------------//
@@ -27,35 +30,31 @@ public class BattleController {
         this.player = player;
     }
 
-    private void setMonster(Monster monster) {
-        this.monster = monster;
-    }
-
     /**
      * This method gets called when the player enters a room or place that contains an enemy
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
-    public void startBattle() {
+    public void startBattle(Actor enemy) {
         clearScreen();
 
-        boolean monsterAlive = true;
-        monster = player.getCurrentRoom().getPresentMonster();
+        boolean enemyAlive = true;
+        this.enemy = enemy;
 
-        System.out.println("You encountered " + ANSI_RED + monster + ANSI_RESET + "!\n");
+        System.out.println("You encountered " + ANSI_RED + enemy + ANSI_RESET + "!\n");
 
-        while (monsterAlive) {
+        while (enemyAlive) {
             System.out.println("What do you want to do this round?\n");
             System.out.println(
               "1) Attack with your " + ANSI_YELLOW + player.getWeapon() + ANSI_RESET);
             System.out.println("2) Defensive Mode");
-            System.out.println("3) Flee from " + ANSI_YELLOW + monster + ANSI_RESET);
+            System.out.println("3) Flee from " + ANSI_YELLOW + enemy + ANSI_RESET);
             System.out.print("\n> ");
 
             try {
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
-                        monsterAlive = playerAttacks();
+                        enemyAlive = playerAttacks();
                         break;
                     case 2:
                         playerDefends();
@@ -76,7 +75,7 @@ public class BattleController {
                 playerFled = false;
                 break;
             }
-            if (monsterAttacks(monsterAlive) && !playerFled) {
+            if (enemyAttacks(enemyAlive) && !playerFled) {
                 break;
             }
         }
@@ -85,8 +84,7 @@ public class BattleController {
     /**
      * Is called when the Player is in a battle and chooses to attack the enemy
      *
-     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum
-     * damage was reached, it counts as critical hit
+     * Player Damage Calculation: (WeaponDamage) + (RndNr from 1 to WeaponDamage+2) If maximum damage was reached, it counts as critical hit
      */
     private boolean playerAttacks() {
         clearScreen();
@@ -95,22 +93,22 @@ public class BattleController {
         int rng = rnd.nextInt(wepDMG + 2) + 1;
         int dmg = wepDMG + rng;
 
-        monster.setHp(monster.getHp() - dmg);
+        enemy.setHp(enemy.getHp() - dmg);
 
         if ((wepDMG + 2) == rng) {
             System.out.println(
-              "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!" + ANSI_RED + " (Critical Hit!)" + ANSI_RESET);
+              "You hit " + ANSI_RED + enemy + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!" + ANSI_RED + " (Critical Hit!)" + ANSI_RESET);
         } else {
             System.out.println(
-              "You hit " + ANSI_RED + monster + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!");
+              "You hit " + ANSI_RED + enemy + ANSI_RESET + " for " + ANSI_YELLOW + dmg + ANSI_RESET + " damage!");
         }
 
-        return monster.getHp() >= 0;
+        return enemy.getHp() >= 0;
     }
 
-    public boolean monsterAttacks(boolean monsterAlive) {
+    boolean enemyAttacks(boolean monsterAlive) {
         if (monsterAlive) {
-            int rng = monster.getDamage() + (rnd.nextInt(2) + 1);
+            int rng = enemy.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
               .getTemporaryDefBoost();
 
@@ -119,23 +117,32 @@ public class BattleController {
             player.setHp(player.getHp() - monsterDamage);
 
             System.out.println(
-              ANSI_RED + monster + ANSI_RESET + " hit you for " + ANSI_YELLOW + monsterDamage + ANSI_RESET + " damage!\n");
+              ANSI_RED + enemy + ANSI_RESET + " hit you for " + ANSI_YELLOW + monsterDamage + ANSI_RESET + " damage!\n");
 
             player.resetTemporaryDefBoost();
             isPlayerAlive();
             return false;
         } else {
-            System.out.println("You killed " + ANSI_RED + monster + ANSI_RESET + "!");
+            System.out.println("You killed " + ANSI_RED + enemy + ANSI_RESET + "!");
 
-            player.getCurrentRoom().monsterKilled();
-            rewardPlayer();
+            if (enemy instanceof Monster) {
+                monster = (Monster) enemy;
+                player.getCurrentRoom().monsterKilled();
+                rewardPlayerForMonsterKill();
+            } else if (enemy instanceof Merchant) {
+                //FIXME: reward player for killing a Merchant (separate reward-method?!)
+            }
             scanner.nextLine();
             clearScreen();
             return true;
         }
     }
 
-    protected void rewardPlayer() {
+    /**
+     * Rewards Player for killing a Monster by increasing his exp, giving him gold and checking for level up
+     */
+    void rewardPlayerForMonsterKill() {
+
         int xpReward = calculateExperienceReward();
         player.increaseExperience(xpReward);
 
@@ -169,8 +176,8 @@ public class BattleController {
     }
 
     /**
-     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost
-     * = (armorDef / 2) If (armorDef > 10) then = 2 If (calcDef < 1) then = 1 NOT OPTIMAL!r
+     * Is called when the Player is in a battle and chooses defend himself Calculation: tempDefBoost = (armorDef / 2) If (armorDef > 10) then = 2 If
+     * (calcDef < 1) then = 1 NOT OPTIMAL!r
      */
     private void playerDefends() {
         player.giveTemporaryDefBoost();
@@ -181,7 +188,7 @@ public class BattleController {
      */
     private void playerFlees() {
         clearScreen();
-        float fleeChance = (float) (player.getLevel() / monster.getLevel());
+        float fleeChance = (float) (player.getLevel() / enemy.getLevel());
         fleeChance -= rnd.nextFloat();
 
         if (fleeChance >= 0.5f) {
@@ -194,14 +201,17 @@ public class BattleController {
 
     public void checkRoomForMonster() {
         if (player.getCurrentRoom().hasLivingMonster()) {
-            setMonster(player.getCurrentRoom().getPresentMonster());
-            startBattle();
+            startBattle(player.getCurrentRoom().getPresentMonster());
         }
     }
 
     public void checkRoomForMerchant(MerchantController merchantController) {
         if (player.getCurrentRoom().hasMerchant()) {
-            merchantController.printMerchantDialog(player);
+            merchantController.printMerchantDialog(player, this);
         }
+    }
+
+    void startBattleWithMerchant(Merchant merchant) {
+
     }
 }

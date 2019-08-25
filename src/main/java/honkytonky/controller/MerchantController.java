@@ -18,7 +18,7 @@ public class MerchantController {
     private Player player;
     private Merchant merchant;
 
-    void printMerchantDialog(Player player) {
+    void printMerchantDialog(Player player, BattleController battleController) {
         this.player = player;
         Boolean run = true;
 
@@ -45,6 +45,7 @@ public class MerchantController {
                     }
                     break;
                 case 3:
+                    battleController.startBattle(merchant);
                     break;
                 case 4:
                     run = false;
