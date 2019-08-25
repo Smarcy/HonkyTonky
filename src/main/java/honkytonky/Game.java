@@ -24,6 +24,7 @@ import java.util.Scanner;
 public class Game {
 
     // @formatter:off
+    private Player player                                           = null;
     private final Scanner scanner                                   = new Scanner(System.in);
     private final WeaponFactory weaponFactory                       = new WeaponFactory();
     private final ArmorFactory armorFactory                         = new ArmorFactory();
@@ -37,7 +38,6 @@ public class Game {
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
     private final List<Room> rooms                                  = roomFactory.getRooms();
-    private Player player                                           = null;
     // @formatter:on
 
     public Game() {
@@ -99,8 +99,11 @@ public class Game {
      * main game loop
      */
     private void gameLoop() {
+
+        playerDialogController.setPlayer(player);
+
         while (true) {
-            playerDialogController.printCurrentLocation(player);
+            playerDialogController.printCurrentLocation();
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
@@ -124,13 +127,13 @@ public class Game {
                         battleController.checkRoomForMerchant(merchantController);
                         break;
                     case 2:
-                        playerDialogController.printUsePotionDialog(player);
+                        playerDialogController.printUsePotionDialog();
                         break;
                     case 3:
-                        playerDialogController.printCharacterInfo(player);
+                        playerDialogController.printCharacterInfo();
                         break;
                     case 4:
-                        playerDialogController.printInventoryDialog(player);
+                        playerDialogController.printInventoryDialog();
                         break;
                     case 5:
                         System.exit(0);

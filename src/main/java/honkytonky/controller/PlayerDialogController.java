@@ -19,12 +19,16 @@ public class PlayerDialogController {
 
     private final CharacterInfoPattern charInfo = new CharacterInfoPattern();
     private final Scanner scanner = new Scanner(System.in);
+    private Player player;
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 
     /**
      * print all Potions the player has in inventory/potionlist to choose from
-     * @param player Player object
      */
-    public void printUsePotionDialog(Player player) {
+    public void printUsePotionDialog() {
         clearScreen();
 
         Map<Potion, Integer> playersPotions = player.getPlayersPotions();
@@ -48,15 +52,14 @@ public class PlayerDialogController {
             player.usePotion(tmpPotions.get(option - 1));
             scanner.nextLine();
         } else {
-            printUsePotionDialog(player);
+            printUsePotionDialog();
         }
     }
 
     /**
      * prints all items the player has in his inventory (sorted)
-     * @param player the player object
      */
-    public void printInventoryDialog(Player player) {
+    public void printInventoryDialog() {
         clearScreen();
 
         if (player.getInventory().size() < 30) {
@@ -87,11 +90,11 @@ public class PlayerDialogController {
                         player.showInventory("potions");
                         break;
                     default:
-                        printInventoryDialog(player);
+                        printInventoryDialog();
                         break;
                 }
             } catch (InputMismatchException | NumberFormatException e) {
-                printInventoryDialog(player);
+                printInventoryDialog();
             }
         }
         scanner.nextLine();
@@ -100,7 +103,7 @@ public class PlayerDialogController {
     /**
      * Console output of the current Room or Place
      */
-    public void printCurrentLocation(Player player) {
+    public void printCurrentLocation() {
         System.out.println(
           "You are currently in: " + ANSI_GREEN + player.getCurrentRoom()
             + ANSI_RESET);
@@ -108,9 +111,8 @@ public class PlayerDialogController {
 
     /**
      * prints all relevant character informations (formatted)
-     * @param player the player object
      */
-    public void printCharacterInfo(Player player) {
+    public void printCharacterInfo() {
         clearScreen();
         charInfo.printCharacterInfo(player);
         scanner.nextLine();
