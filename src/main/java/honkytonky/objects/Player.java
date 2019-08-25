@@ -130,10 +130,6 @@ public class Player extends Actor {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }
 
-    public int getPotionCount(Item i) {
-       return playersPotions.get(i.getName());
-    }
-
     @Override
     public String toString() {
         return this.getName();

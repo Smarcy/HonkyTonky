@@ -75,9 +75,9 @@ public class MerchantController {
         // Can't use variable in switch-Statement, therefore a specialcase for choosing item
         if (choice == i) {   // choose "Dont trade"
             return -1;
-        } else if (choice < i && choice > 0) {     // choice does match an item
+        } else if (choice < i && choice > 0) {     // choice does match an option
             return choice;
-        } else {    // choice does not match with options -> print Dialog again
+        } else {    // choice does not match any option -> print Dialog again
             this.printItemsForSell(merchant);
         }
         return -1;
