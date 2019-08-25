@@ -34,14 +34,14 @@ public class PlayerDialogController {
 
         System.out.println("You have got the following Potions:\n");
 
-        Object[] tmpData = playerController.countAndPrintPlayerPotions();        // pretty hacky solution, maybe FIXME later ..
+        Object[] tmpData = playerController.countAndPrintPlayerPotions(true);        // pretty hacky solution, maybe FIXME later ..
         int option = (int) tmpData[0];
         List tmpPotions = (List) tmpData[1];
 
         int choice = Integer.parseInt(scanner.nextLine());
 
-        if (choice >= 0 && choice <= option) {
-            player.usePotion((Potion) tmpPotions.get(option - 1));
+        if (choice >= 1 && choice <= option) {
+            player.usePotion((Potion) tmpPotions.get(choice - 1));
             scanner.nextLine();
         } else {
             printUsePotionDialog(playerController);

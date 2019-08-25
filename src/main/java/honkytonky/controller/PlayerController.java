@@ -91,6 +91,7 @@ public class PlayerController {
 
     /**
      * prints items in inventory of a specific type in a formatted way
+     *
      * @param option what type print
      */
     void showInventory(String option) {
@@ -118,16 +119,18 @@ public class PlayerController {
                 }
                 break;
             case "potions":
-                countAndPrintPlayerPotions();
+                countAndPrintPlayerPotions(false);
                 break;
         }
     }
 
     /**
      * Count how many Potions player has of each
-     * @return Array of {option for certain potion && all unique potions of player}
+     *
+     * @param showOptionNumbers true if "choosing numbers" should be displayed. (use potion = true, inventory = false)
+     * @return Array of {option for certain potion && all unique potions of player
      */
-    Object[] countAndPrintPlayerPotions() {
+    Object[] countAndPrintPlayerPotions(boolean showOptionNumbers) {
         Map<Potion, Integer> playersPotions = player.getPlayersPotions();
         List<Potion> tmpPotions = new ArrayList<>();    // needed to temp save actual potions, not names
         int option = 0;
@@ -135,12 +138,15 @@ public class PlayerController {
         for (Potion potion : playersPotions.keySet()) {     // found no elegant solution without temp saving iterated keys to get entry X
             if (playersPotions.get(potion) > 0) {
                 option++;
-                System.out
-                  .println(
-                    option + ") " + potion.getName() + " (" + playersPotions.get(potion) + "x) \n");
+
+                if(showOptionNumbers) {
+                    System.out.println(option + ") " + potion.getName() + " (" + playersPotions.get(potion) + "x)"); // display option numbers
+                } else {
+                    System.out.println(potion.getName() + " (" + playersPotions.get(potion) + "x)");                 // without option numbers
+                }
                 tmpPotions.add(new PotionFactory().getPotionByName(potion.getName()));
             }
         }
-        return new Object[] {option, tmpPotions};
+        return new Object[]{option, tmpPotions};
     }
 }
