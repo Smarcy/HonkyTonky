@@ -5,6 +5,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.misc.ClearScreen;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;
@@ -38,7 +39,7 @@ public class MerchantController {
                     scanner.nextLine();
                     break;
                 case 2:
-                    int choice = merchant.printItemsForSell();
+                    int choice = printItemsForSell(merchant);
                     if(choice != -1) {
                         tradeWithMerchant(choice);
                     }
@@ -50,6 +51,35 @@ public class MerchantController {
                     break;
             }
         }
+    }
+
+    /**
+     * @return ID of item player wants to buy
+     */
+    private int printItemsForSell(Merchant merchant) {
+        ClearScreen.clearScreen();
+
+        System.out
+          .println(ANSI_YELLOW + merchant.getName() + ANSI_RESET + " is selling the following items:\n");
+
+        int i = 1;  //start counting at 1 for design purposes
+        for (Item item : merchant.getItemsForSell()) {
+            System.out.println(i + ") " + item + " (" + item.getValue() + " Gold)");
+            i++;
+        }
+
+        System.out.println(i + ") Don't trade \n");
+        final int choice = Integer.parseInt(scanner.nextLine());
+
+        // Can't use variable in switch-Statement, therefore a specialcase for choosing item
+        if (choice == i) {   // choose "Dont trade"
+            return -1;
+        } else if (choice < i && choice > 0) {     // choice does match an item
+            return choice;
+        } else {    // choice does not match with options -> print Dialog again
+            this.printItemsForSell(merchant);
+        }
+        return -1;
     }
 
     /**
