@@ -45,6 +45,9 @@ public class Player extends Actor {
         inventory.add(armor);
     }
 
+    /**
+     * give the player some additional armor points based on his current armor points
+     */
     public void giveTemporaryDefBoost() {
         float defBoost = ((float) this.armor.getArmorPoints() / 2);
 
@@ -57,14 +60,24 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * reset the temporary armor points boost
+     */
     public void resetTemporaryDefBoost() {
         this.temporaryDefBoost = 0;
     }
 
+    /**
+     * increase players experience by a set amount
+     * @param amount amount to increase exp by
+     */
     public void increaseExperience(int amount) {
         this.experience += amount;
     }
 
+    /**
+     * compare players current level und exp with exptable and may level him up
+     */
     public void checkForLevelUp() {
         if (expTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
@@ -74,10 +87,18 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * increase players gold by a set amount
+     * @param amount amount to increase gold by
+     */
     public void giveGold(int amount) {
         this.gold += amount;
     }
 
+    /**
+     * raise players hp and remove the used potion from his inventory and potionlist
+     * @param potion the used potion
+     */
     public void usePotion(Potion potion) {
         healPlayer(potion.getAmount());
         inventory.remove(potion);
@@ -85,6 +106,10 @@ public class Player extends Actor {
         System.out.println("You were healed by " + ANSI_GREEN + potion.getAmount() + ANSI_RESET + " health points!");
     }
 
+    /**
+     * increase players healthpoints - if hp is >maxHP set it to maxHP
+     * @param amount amount to increase healthpoints by
+     */
     private void healPlayer(int amount) {
         this.setHp(this.getHp() + amount);
 
@@ -93,6 +118,10 @@ public class Player extends Actor {
         }
     }
 
+    /**
+     * calculate how much percent the player has reached to the next level
+     * @return percentage to level up
+     */
     public float getPercentalExperience() {
         return expTable.calculatePercentalExperience(experience, getLevel());
     }

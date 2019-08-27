@@ -81,7 +81,7 @@ public class Game {
                         break;
                     case 2:
                         player = playerController
-                          .createPlayer(armorFactory, weaponFactory, potionFactory,
+                          .createPlayer(armorFactory, weaponFactory,
                             battleController, rooms);
 
                         player.getInventory().add(potionFactory.getPotionByName("Small Health Potion")); // give Player startPotion
