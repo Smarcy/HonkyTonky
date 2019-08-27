@@ -18,6 +18,11 @@ public class MerchantController {
     private Player player;
     private Merchant merchant;
 
+    /**
+     * If the player encounters a merchant, print this dialog
+     * @param player the player object
+     * @param battleController instance of BattleController (needed if the player chooses to fight the merchant)
+     */
     void printMerchantDialog(Player player, BattleController battleController) {
         this.player = player;
         Boolean run = true;

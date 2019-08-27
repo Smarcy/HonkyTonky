@@ -24,8 +24,10 @@ public class BattleController {
     private Actor enemy;
     private boolean playerFled = false;
 
-    //----------------------------------------------------------------------//
-
+    /**
+     * set the player for this instance of BattleController
+     * @param player the player object
+     */
     void setPlayer(Player player) {
         this.player = player;
     }
@@ -106,6 +108,11 @@ public class BattleController {
         return enemy.getHp() >= 0;
     }
 
+    /**
+     * lets the enemy attack the player if he is alive, calculating the damage done
+     * @param monsterAlive true if the enemy is still alive
+     * @return ???
+     */
     boolean enemyAttacks(boolean monsterAlive) {
         if (monsterAlive) {
             int rng = enemy.getDamage() + (rnd.nextInt(2) + 1);
@@ -155,10 +162,17 @@ public class BattleController {
         player.checkForLevelUp();
     }
 
+    /**
+     * calculate the exp the player gets rewarded
+     * @return exp amount to give player
+     */
     private int calculateExperienceReward() {
         return monster.getGrantedExperience();
     }
 
+    /**
+     * if the player died, reset the game - //FIXME!!!
+     */
     private void resetGame() {
         Game game = new Game();
     }
@@ -199,19 +213,22 @@ public class BattleController {
         }
     }
 
+    /**
+     * check if there is an enemy in the players current room to fight against
+     */
     public void checkRoomForMonster() {
         if (player.getCurrentRoom().hasLivingMonster()) {
             startBattle(player.getCurrentRoom().getPresentMonster());
         }
     }
 
+    /**
+     * check if there is a merchant in the players current room to interact with
+     * @param merchantController instance of MerchantController
+     */
     public void checkRoomForMerchant(MerchantController merchantController) {
         if (player.getCurrentRoom().hasMerchant()) {
             merchantController.printMerchantDialog(player, this);
         }
-    }
-
-    void startBattleWithMerchant(Merchant merchant) {
-
     }
 }
