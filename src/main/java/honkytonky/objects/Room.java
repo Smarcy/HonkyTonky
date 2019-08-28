@@ -2,15 +2,37 @@ package honkytonky.objects;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode
+@Data
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
 
+    @XmlTransient
     private final int id;
+
+    @XmlElement
     private final String name;
+
+    @XmlTransient
     private final List<Door> doors;
+
+    @XmlElement
     private boolean hasLivingMonster;
+
+    @XmlTransient
     private boolean hasMerchant;
+
+    @XmlTransient
     private Monster presentMonster;
+
+    @XmlTransient
     private Merchant presentMerchant;
 
     public Room(int id, String name) {
@@ -21,11 +43,6 @@ public class Room {
         this.hasMerchant        = false;
         this.doors              = new ArrayList<>();
         //@formatter:on
-    }
-
-    @Override
-    public String toString() {
-        return this.name;
     }
 
     public void addDoor(Door door) {
@@ -83,6 +100,11 @@ public class Room {
     }
 
     public String getName() {
-        return name;
+        return this.name;
+    }
+
+    @Override
+    public String toString() {
+        return this.getName();
     }
 }

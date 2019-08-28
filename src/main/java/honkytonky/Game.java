@@ -5,6 +5,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.controller.BattleController;
+import honkytonky.controller.JAXBController;
 import honkytonky.controller.MerchantController;
 import honkytonky.controller.PlayerController;
 import honkytonky.controller.PlayerDialogController;
@@ -20,6 +21,7 @@ import honkytonky.objects.Room;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import javax.xml.bind.JAXBException;
 
 public class Game {
 
@@ -136,11 +138,14 @@ public class Game {
                         playerDialogController.printInventoryDialog(playerController);
                         break;
                     case 5:
+                        JAXBController.ObjectToXML(player);
                         System.exit(0);
                     case 6:
                         battleController.checkRoomForMerchant(merchantController);
                 }
-            } catch (InputMismatchException | NumberFormatException e) {
+            } catch (InputMismatchException | NumberFormatException | JAXBException e) {
+                e.printStackTrace();
+                scanner.nextLine();
                 clearScreen();
                 gameLoop();
             }

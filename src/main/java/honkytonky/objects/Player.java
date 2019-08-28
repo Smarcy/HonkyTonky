@@ -8,23 +8,57 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Player extends Actor {
 
+    @XmlElement
     private int temporaryDefBoost;
+
+    @XmlElement
     private int experience;
+
+    @XmlElement
     private int gold;
+
+    @XmlElement
     private Weapon weapon;
+
+    @XmlElement
     private Armor armor;
+
+    @XmlElement
     private Room currentRoom;
-    private final ExpTable expTable = new ExpTable();
+
+    @XmlElementWrapper(name="inventory")
+    @XmlElement(name="item")
     private final List<Item> inventory;
+
+    @XmlElementWrapper(name="potions")
+    @XmlElement(name="potion")
     private final Map<Potion, Integer> playersPotions;
+
+    @XmlTransient
+    private final ExpTable expTable = new ExpTable();
+
+    // Needs NoArgsConstructor for JAXB to work
+    public Player() {
+        super(null, 0,0,0);
+        inventory = null;
+        playersPotions = null;
+    }
 
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
