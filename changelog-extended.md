@@ -1,6 +1,12 @@
-<li>  (HEAD -> dev, tag: v0.3.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/974afaf15ec0c9319f5afc767d928a4fc11707bb">view commit &bull;</a> Player is now able to attack a Merchant (alpha-state)</li> 
+<li>  (HEAD -> dev, tag: v0.4.0, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/2e15994daa96ef4c11e17deee9e649c69c7870d1">view commit &bull;</a> XML to Player - alpha version</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/88bd6ee5745a6768a6dc524ecef91b4c83c89f77">view commit &bull;</a> added JAXB - saving Player to XML working!</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/722b9dc1fc1e8f2668332b98c7ca8b4063324b14">view commit &bull;</a> more JavaDoc</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/5474a0d86cc9082c13905577b458c36a27a35516">view commit &bull;</a> JavaDoc</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/82ebcbad88fe71c36c2f144fa3e46b97a9478d3b">view commit &bull;</a> update changelog</li> 
+<li>  (tag: v0.3.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/974afaf15ec0c9319f5afc767d928a4fc11707bb">view commit &bull;</a> Player is now able to attack a Merchant (alpha-state)</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/ebecf4f7ed9848d70d707c2a4e1700ecf9ccdd2c">view commit &bull;</a> add damage attribute to Actor</li> 
-<li>  (origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/28d89a770017cc0d1c8f3bc19fb6d28d649c0042">view commit &bull;</a> bugfix: not displaying potionOptions in Inv & usePotion wrong calc</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/28d89a770017cc0d1c8f3bc19fb6d28d649c0042">view commit &bull;</a> bugfix: not displaying potionOptions in Inv & usePotion wrong calc</li> 
 <li>  (tag: v0.2.7) <a href="http://github.com/Smarcy/HonkyTonky/commit/505484ce4988140909fc4b5099b0cfbd4e55d121">view commit &bull;</a> refactor methods Player->PlayerController</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/3db671277fffa6968be1b6ed0b65b441b43a0eff">view commit &bull;</a> delete redundant method</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/62eb124cf655e7a8afd3d3a247499c8c272998ba">view commit &bull;</a> fix Inventory Dialog Potion display (count)</li> 

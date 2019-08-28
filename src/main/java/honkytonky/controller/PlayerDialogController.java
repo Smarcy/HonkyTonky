@@ -38,13 +38,16 @@ public class PlayerDialogController {
         int option = (int) tmpData[0];
         List tmpPotions = (List) tmpData[1];
 
-        int choice = Integer.parseInt(scanner.nextLine());
+        try {
+            int choice = Integer.parseInt(scanner.nextLine());
 
-        if (choice >= 1 && choice <= option) {
-            player.usePotion((Potion) tmpPotions.get(choice - 1));
-            scanner.nextLine();
-        } else {
-            printUsePotionDialog(playerController);
+            if (choice >= 1 && choice <= option) {
+                player.usePotion((Potion) tmpPotions.get(choice - 1));
+                scanner.nextLine();
+            } else {
+                printUsePotionDialog(playerController);
+            }
+        } catch (NumberFormatException ignored) {
         }
     }
 

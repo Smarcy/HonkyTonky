@@ -153,8 +153,6 @@ public class Game {
                         battleController.checkRoomForMerchant(merchantController);
                 }
             } catch (InputMismatchException | NumberFormatException | JAXBException e) {
-                e.printStackTrace();
-                scanner.nextLine();
                 clearScreen();
                 gameLoop();
             }
@@ -180,6 +178,7 @@ public class Game {
             player.setGold(dummy.getGold());
             player.setDamage(dummy.getDamage());
 
+            // Retrieve Potions
             int i = 0;
             for (Item item : dummy.getInventory()) {
                 if (item instanceof Potion) {
@@ -187,6 +186,8 @@ public class Game {
                     Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
                     player.getInventory().add(dummyPotion);
                     player.getPlayersPotions().put(dummyPotion, potionValue);
+                } else if (!(item.equals(dummy.getArmor())) && !(item.equals(dummy.getWeapon()))) {
+                    player.getInventory().add(item);
                 }
                 i++;
             }
