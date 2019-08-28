@@ -69,7 +69,7 @@ public class Game {
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
             System.out.println("2) Create New Player");
-            System.out.println("3) Load Player \n");
+            System.out.println("3) Load Game \n");
             System.out.print("\n> ");
 
             try {
@@ -97,44 +97,11 @@ public class Game {
                         player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                     case 3:
-                        Player dummy = JAXBController.unmarshall();
-
-                        // Extract real Items from "dummys"
-                        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
-                        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
-                        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
-
-                        //player = playerController.createPlayer(armorFactory, weaponFactory, battleController, rooms);
-                        player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
-
-//                        player.setWeapon(dummyWeapon);
-//                        player.setArmor(dummyArmor);
-//                        player.setCurrentRoom(dummyRoom);
-                        player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
-                        player.setHp(dummy.getHp());
-                        player.setExperience(dummy.getExperience());
-                        player.setLevel(dummy.getLevel());
-                        player.setGold(dummy.getGold());
-                        player.setDamage(dummy.getDamage());
-
-                        int i = 0;
-                        for(Item item : dummy.getInventory()) {
-                            if(item instanceof Potion) {
-                                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
-                                Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
-                                player.getInventory().add(dummyPotion);
-                                player.getPlayersPotions().put(dummyPotion, potionValue);
-                            }
-                            i++;
-                        }
-
-                        playerController.setPlayer(player);
-                        battleController.setPlayer(player);
+                        loadPlayer();
+                        break;
                 }
             } catch (NumberFormatException e) {
                 showIntro();
-            } catch (JAXBException | IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -154,7 +121,7 @@ public class Game {
             System.out.println("2) Use Potion");
             System.out.println("3) Character Info");
             System.out.println("4) Show Inventory");
-            System.out.println("5) Exit Game");
+            System.out.println("5) Save & Exit");
             if (player.getCurrentRoom().hasMerchant()) {
                 System.out.println("6) Talk to " + ANSI_YELLOW + player.getCurrentRoom()
                   .getPresentMerchant() + ANSI_RESET);
@@ -192,6 +159,48 @@ public class Game {
                 gameLoop();
             }
             clearScreen();
+        }
+    }
+
+    private void loadPlayer() {
+        try {
+            Player dummy = JAXBController.unmarshall();
+
+            // Extract real Items from "dummys"
+            Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
+            Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
+            Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
+
+            player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
+
+            player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
+            player.setHp(dummy.getHp());
+            player.setExperience(dummy.getExperience());
+            player.setLevel(dummy.getLevel());
+            player.setGold(dummy.getGold());
+            player.setDamage(dummy.getDamage());
+
+            int i = 0;
+            for (Item item : dummy.getInventory()) {
+                if (item instanceof Potion) {
+                    Potion dummyPotion = potionFactory.getPotionByName(item.getName());
+                    Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
+                    player.getInventory().add(dummyPotion);
+                    player.getPlayersPotions().put(dummyPotion, potionValue);
+                }
+                i++;
+            }
+
+            playerController.setPlayer(player);
+            battleController.setPlayer(player);
+
+            clearScreen();
+            gameLoop();
+        } catch (JAXBException e) {
+            e.printStackTrace();
+            System.out.println("Something went wrong while loading your Character!");
+        } catch (IOException e) {
+            System.out.println("Could not find savegame!");
         }
     }
 }

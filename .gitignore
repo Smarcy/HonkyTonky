@@ -38,6 +38,9 @@ bluej.pkh
 JavaDoc/
 doc/
 
+# JAXB xml
+player.xml
+
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
