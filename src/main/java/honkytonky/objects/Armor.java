@@ -17,13 +17,21 @@ public class Armor extends Item {
     private final int armorPoints;
 
     @XmlElement
-    private final int durability;
+    private int durability;
 
     @XmlTransient
     private final int maxDurability;
 
     @XmlTransient
     private final ArmorType armorType;
+
+    //Needed for JAXB
+    public Armor() {
+        super();
+        armorPoints = 0;
+        maxDurability = 0;
+        armorType = null;
+    }
 
     public Armor(int id, String name, int armorPoints, int durability, int maxDurability, int value, ArmorType armorType) {
         //@formatter:off

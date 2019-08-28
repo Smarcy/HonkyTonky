@@ -35,6 +35,13 @@ public class Room {
     @XmlTransient
     private Merchant presentMerchant;
 
+    //Needed for JAXB
+    public Room() {
+        id = 0;
+        name = null;
+        doors = null;
+    }
+
     public Room(int id, String name) {
         //@formatter:off
         this.id                 = id;

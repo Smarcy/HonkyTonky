@@ -16,8 +16,13 @@ import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Armor;
+import honkytonky.objects.Item;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
 import honkytonky.objects.Room;
+import honkytonky.objects.Weapon;
+import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -63,7 +68,8 @@ public class Game {
             System.out.println("Welcome to HonkyTonky!");
             System.out.println("Please choose an option:\n");
             System.out.println("1) Start Game");
-            System.out.println("2) Create New Player\n");
+            System.out.println("2) Create New Player");
+            System.out.println("3) Load Player \n");
             System.out.print("\n> ");
 
             try {
@@ -90,9 +96,45 @@ public class Game {
                         player.getPlayersPotions().put(potionFactory.getPotionByName("Small Health Potion"), 1);
                         player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
+                    case 3:
+                        Player dummy = JAXBController.unmarshall();
+
+                        // Extract real Items from "dummys"
+                        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
+                        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
+                        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
+
+                        //player = playerController.createPlayer(armorFactory, weaponFactory, battleController, rooms);
+                        player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
+
+//                        player.setWeapon(dummyWeapon);
+//                        player.setArmor(dummyArmor);
+//                        player.setCurrentRoom(dummyRoom);
+                        player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
+                        player.setHp(dummy.getHp());
+                        player.setExperience(dummy.getExperience());
+                        player.setLevel(dummy.getLevel());
+                        player.setGold(dummy.getGold());
+                        player.setDamage(dummy.getDamage());
+
+                        int i = 0;
+                        for(Item item : dummy.getInventory()) {
+                            if(item instanceof Potion) {
+                                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
+                                Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
+                                player.getInventory().add(dummyPotion);
+                                player.getPlayersPotions().put(dummyPotion, potionValue);
+                            }
+                            i++;
+                        }
+
+                        playerController.setPlayer(player);
+                        battleController.setPlayer(player);
                 }
             } catch (NumberFormatException e) {
                 showIntro();
+            } catch (JAXBException | IOException e) {
+                e.printStackTrace();
             }
         }
     }

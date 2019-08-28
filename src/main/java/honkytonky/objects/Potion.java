@@ -18,6 +18,13 @@ public class Potion extends Item {
     @XmlTransient
     private final PotionType type;
 
+    //Needed for JAXB
+    public Potion() {
+        super();
+        amount = 0;
+        type = null;
+    }
+
     public Potion(int id, String name, int amount, int value, PotionType type) {
         super(id, name, value);
 

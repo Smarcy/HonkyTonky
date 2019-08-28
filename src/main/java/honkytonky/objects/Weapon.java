@@ -30,7 +30,6 @@ public class Weapon extends Item {
 
     public Weapon() {
         super();
-
     }
 
     public Weapon(int id, String name, WeaponType weaponType, int damage, int durability,

@@ -24,6 +24,10 @@ public class PlayerController {
     private final Scanner scanner = new Scanner(System.in);
     private Player player;
 
+    public Player createPlayerForLoadPlayer(BattleController battleController) {
+        return null;
+    }
+
     /**
      * Lets the user create a Player Object
      */
@@ -148,5 +152,9 @@ public class PlayerController {
             }
         }
         return new Object[]{option, tmpPotions};
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

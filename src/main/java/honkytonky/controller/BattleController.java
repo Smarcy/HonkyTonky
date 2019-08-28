@@ -28,7 +28,7 @@ public class BattleController {
      * set the player for this instance of BattleController
      * @param player the player object
      */
-    void setPlayer(Player player) {
+    public void setPlayer(Player player) {
         this.player = player;
     }
 
