@@ -113,7 +113,7 @@ public class BattleController {
      * lets the enemy attack the player if he is alive, calculating the damage done
      *
      * @param monsterAlive true if the enemy is still alive
-     * @return ???
+     * @return true if monster is already dead, false if monster still alive
      */
     boolean enemyAttacks(boolean monsterAlive) {
         if (monsterAlive) {
