@@ -1,4 +1,4 @@
-<li>  (HEAD -> dev, tag: v0.4.0, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
+<li>  (tag: v0.4.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
 <li>  (tag: v0.3.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/974afaf15ec0c9319f5afc767d928a4fc11707bb">view commit &bull;</a> Player is now able to attack a Merchant (alpha-state)</li> 
 <li>  (tag: v0.2.7) <a href="http://github.com/Smarcy/HonkyTonky/commit/505484ce4988140909fc4b5099b0cfbd4e55d121">view commit &bull;</a> refactor methods Player->PlayerController</li> 
 <li>  (tag: v0.2.5) <a href="http://github.com/Smarcy/HonkyTonky/commit/7d150632b5288807c5287e4233afe8681e8027f7">view commit &bull;</a> No other solution to choose potion found, yet</li> 

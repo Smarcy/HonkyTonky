@@ -1,4 +1,10 @@
-<li>  (HEAD -> dev, tag: v0.4.0, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
+<li>  (HEAD -> dev, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/61f9c016dae8280fa04648f73b61c165e5f2c108">view commit &bull;</a> added @NoArgsContructor</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/a94841b5cac5252993548653547f1a57f885921c">view commit &bull;</a> additional documentation</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/ded11f38acdef4d7e96a18fb60572ec20c750895">view commit &bull;</a> current ClassDiagram (without fields)</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/11e30b6c0c403ecde048e9e2542b15c728d58848">view commit &bull;</a> quite a lot of JavaDoc</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/a791ff2328bcd5a7c7ef3bc0c87ee8eb586dd7ff">view commit &bull;</a> made ExpTable methods static</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/8b81b30e6318bb75a77f2a45e605e6a2f7c0b825">view commit &bull;</a> fixed loadPlayer bug that doubled equipped items</li> 
+<li>  (tag: v0.4.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/2e15994daa96ef4c11e17deee9e649c69c7870d1">view commit &bull;</a> XML to Player - alpha version</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/88bd6ee5745a6768a6dc524ecef91b4c83c89f77">view commit &bull;</a> added JAXB - saving Player to XML working!</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/722b9dc1fc1e8f2668332b98c7ca8b4063324b14">view commit &bull;</a> more JavaDoc</li> 

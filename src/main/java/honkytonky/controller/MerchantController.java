@@ -47,7 +47,7 @@ public class MerchantController {
                 case 2:
                     int choice = printItemsForSell(merchant);
                     if (choice != -1) {
-                        tradeWithMerchant(choice);
+                        tradeWithMerchant(choice, true);
                     }
                     break;
                 case 3:
@@ -96,13 +96,13 @@ public class MerchantController {
      *
      * @param choice ID of Item in Merchants inventory (+1)
      */
-    private void tradeWithMerchant(int choice) {
+    void tradeWithMerchant(int choice, boolean activateScanner) { // FIXME: activateScanner just for testing purposes
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
 
-        if (player.getGold() >= itemToBuy.getValue()) {
-            player.getInventory().add(itemToBuy);
-            merchant.removeItemFromShop(itemToBuy);
-            player.giveGold(-itemToBuy.getValue());
+        if (player.getGold() >= itemToBuy.getValue()) {     // does Player have enough gold?
+            player.getInventory().add(itemToBuy);           // add Item to inventory
+            merchant.removeItemFromShop(itemToBuy);         // remove from Merchants shop
+            player.giveGold(-itemToBuy.getValue());         // "giveGold" with a negative amount = reduce players gold
             System.out.println("You succesfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
 
             if (itemToBuy instanceof Potion) {   // If player is buying a potion, additionally add it to players potionmap
@@ -113,6 +113,7 @@ public class MerchantController {
         } else {
             System.out.println("You don't have enough gold to purchase " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
         }
-        scanner.nextLine();
+        if(activateScanner)
+            scanner.nextLine();
     }
 }
