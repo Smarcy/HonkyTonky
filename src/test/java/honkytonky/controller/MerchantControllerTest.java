@@ -1,6 +1,7 @@
 package honkytonky.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.mock;
@@ -62,6 +63,7 @@ class MerchantControllerTest {
         verify(dummyWeapon, times(1)).getName();
         verify(dummyWeapon, times(2)).getValue();
         assertEquals(1, player.getInventory().size());
+        assertTrue(player.getInventory().contains(dummyWeapon));
 
         Potion dummyPotion = mock(Potion.class);
         Map<Potion, Integer> playerPotions = new HashMap<>();
@@ -73,7 +75,7 @@ class MerchantControllerTest {
 
         verify(player, times(2)).getGold();
         verify(player, times(2)).giveGold(anyInt());
-        verify(player, times(3)).getInventory();
+        verify(player, times(4)).getInventory();
         verify(player, times(2)).giveGold(anyInt());
         verify(player, times(3)).getPlayersPotions();
         verify(merchant, times(2)).removeItemFromShop(any());
@@ -81,6 +83,9 @@ class MerchantControllerTest {
         verify(dummyPotion, times(1)).getName();
         verify(dummyPotion, times(2)).getValue();
         assertEquals(2, player.getInventory().size());
+        assertEquals(1, player.getPlayersPotions().size());
+        assertTrue(player.getPlayersPotions().get(dummyPotion) == 2);
+        assertTrue(player.getInventory().contains(dummyPotion));
     }
 
     @Test
