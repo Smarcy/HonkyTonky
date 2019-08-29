@@ -34,10 +34,6 @@ bluej.pkh
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-# JavaDoc Stuff
-JavaDoc/
-doc/
-
 # JAXB xml
 player.xml
 
