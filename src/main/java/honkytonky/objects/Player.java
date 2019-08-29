@@ -13,7 +13,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NonNull;
@@ -49,9 +48,6 @@ public class Player extends Actor {
     @XmlElementWrapper(name="potions")
     @XmlElement(name="potion")
     private final Map<Potion, Integer> playersPotions;
-
-    @XmlTransient
-    private final ExpTable expTable = new ExpTable();
 
     // Needs NoArgsConstructor for JAXB to work
     public Player() {
@@ -113,7 +109,7 @@ public class Player extends Actor {
      * compare players current level und exp with exptable and may level him up
      */
     public void checkForLevelUp() {
-        if (expTable.hasLevelUp(this.getLevel(), this.experience)) {
+        if (ExpTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
 
             System.out.println("\nYou have leveled up!\n");
@@ -157,7 +153,7 @@ public class Player extends Actor {
      * @return percentage to level up
      */
     public float getPercentalExperience() {
-        return expTable.calculatePercentalExperience(experience, getLevel());
+        return ExpTable.calculatePercentalExperience(experience, getLevel());
     }
 
     @Override
