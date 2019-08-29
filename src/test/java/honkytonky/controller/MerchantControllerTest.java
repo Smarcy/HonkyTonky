@@ -51,7 +51,7 @@ class MerchantControllerTest {
         when(merchant.getItemsForSell()).thenReturn(merchantItems);
         when(player.getInventory()).thenReturn(new ArrayList<>());
 
-        mc.tradeWithMerchant(1, false);
+        mc.tradeWithMerchant(1);
 
         verify(player, times(1)).getGold();
         verify(player, times(1)).giveGold(anyInt());
@@ -71,7 +71,7 @@ class MerchantControllerTest {
         when(player.getPlayersPotions()).thenReturn((playerPotions));
 
         merchantItems.add(dummyPotion);
-        mc.tradeWithMerchant(2, false);
+        mc.tradeWithMerchant(2);
 
         verify(player, times(2)).getGold();
         verify(player, times(2)).giveGold(anyInt());
@@ -99,7 +99,7 @@ class MerchantControllerTest {
         when(player.getGold()).thenReturn(0);
         when(dummyWeapon.getValue()).thenReturn(100);
 
-        mc.tradeWithMerchant(1, false);
+        mc.tradeWithMerchant(1);
 
         verify(player, times(1)).getGold();
         verify(player, never()).giveGold(anyInt());

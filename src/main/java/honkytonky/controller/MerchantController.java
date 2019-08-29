@@ -47,7 +47,8 @@ public class MerchantController {
                 case 2:
                     int choice = printItemsForSell(merchant);
                     if (choice != -1) {
-                        tradeWithMerchant(choice, true);
+                        tradeWithMerchant(choice);
+                        scanner.nextLine();
                     }
                     break;
                 case 3:
@@ -96,7 +97,7 @@ public class MerchantController {
      *
      * @param choice ID of Item in Merchants inventory (+1)
      */
-    void tradeWithMerchant(int choice, boolean activateScanner) { // FIXME: activateScanner just for testing purposes
+    void tradeWithMerchant(int choice) { // FIXME: activateScanner just for testing purposes
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
 
         if (player.getGold() >= itemToBuy.getValue()) {     // does Player have enough gold?
@@ -113,7 +114,5 @@ public class MerchantController {
         } else {
             System.out.println("You don't have enough gold to purchase " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
         }
-        if(activateScanner)
-            scanner.nextLine();
     }
 }
