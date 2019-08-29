@@ -1,3 +1,4 @@
+<li>  (HEAD -> dev, tag: v0.4.1, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/f2ee4fbe397dfcaca2852d5c4673f4856bd262e3">view commit &bull;</a> added reward for killing a Merchant</li> 
 <li>  (tag: v0.4.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/46c7f882c65a1068177472e727aafeaa1afe30db">view commit &bull;</a> extract LoadPlayer - Save/Load implemented</li> 
 <li>  (tag: v0.3.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/974afaf15ec0c9319f5afc767d928a4fc11707bb">view commit &bull;</a> Player is now able to attack a Merchant (alpha-state)</li> 
 <li>  (tag: v0.2.7) <a href="http://github.com/Smarcy/HonkyTonky/commit/505484ce4988140909fc4b5099b0cfbd4e55d121">view commit &bull;</a> refactor methods Player->PlayerController</li> 
