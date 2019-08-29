@@ -21,6 +21,7 @@ public class BattleController {
     private final Scanner scanner = new Scanner(System.in);
     private Player player;
     private Monster monster;
+    private Merchant enemyMerchant;
     private Actor enemy;
     private boolean playerFled = false;
 
@@ -139,12 +140,32 @@ public class BattleController {
                 player.getCurrentRoom().monsterKilled();
                 rewardPlayerForMonsterKill();
             } else if (enemy instanceof Merchant) {
-                //FIXME: reward player for killing a Merchant (separate reward-method?!)
+                enemyMerchant = (Merchant) enemy;
+                rewardPlayerForMerchantKill();
+                player.getCurrentRoom().setHasMerchant(false);
+                player.getCurrentRoom().setPresentMerchant(null);   // remove Merchant from the Room after he was killed
+                return true;
             }
             scanner.nextLine();
             clearScreen();
             return true;
         }
+    }
+
+    /**
+     * Rewards Player for killing a Merchant by increasing his exp, giving him gold and checking for level up
+     */
+    private void rewardPlayerForMerchantKill() {
+        int xpReward = enemyMerchant.getGrantedExperience();
+        player.increaseExperience(xpReward);
+
+        System.out
+          .println(
+            "\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points" + ANSI_RESET +
+              " and " + ANSI_GREEN + enemyMerchant.getGrantedGold() + " Gold!" + ANSI_RESET);
+
+        player.giveGold(enemyMerchant.getGrantedGold());
+        player.checkForLevelUp();
     }
 
     /**

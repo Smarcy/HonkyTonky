@@ -60,9 +60,11 @@ public class MerchantFactory {
                   Integer.parseInt(nextRecord[1]),  // maxHP
                   Integer.parseInt(nextRecord[2]),  // level
                   Integer.parseInt(nextRecord[3]),  // damage
-                  nextRecord[5]                     // smalltalk
+                  Integer.parseInt(nextRecord[4]),  // grantedExp
+                  Integer.parseInt(nextRecord[5]),   // grantedGold
+                  nextRecord[7]                     // smalltalk
                 ));
-                roomFactory.getRoomByName(nextRecord[4]).addMerchant(currMerchant);
+                roomFactory.getRoomByName(nextRecord[6]).addMerchant(currMerchant);
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchants!");

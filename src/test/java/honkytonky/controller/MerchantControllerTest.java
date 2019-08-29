@@ -1,6 +1,7 @@
 package honkytonky.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -84,7 +85,7 @@ class MerchantControllerTest {
         verify(dummyPotion, times(2)).getValue();
         assertEquals(2, player.getInventory().size());
         assertEquals(1, player.getPlayersPotions().size());
-        assertTrue(player.getPlayersPotions().get(dummyPotion) == 2);
+        assertEquals(2, (int) player.getPlayersPotions().get(dummyPotion));
         assertTrue(player.getInventory().contains(dummyPotion));
     }
 
@@ -111,5 +112,6 @@ class MerchantControllerTest {
         verify(dummyWeapon, times(1)).getName();
         verify(dummyWeapon, times(1)).getValue();
         assertEquals(0, player.getInventory().size());
+        assertFalse(player.getInventory().contains(dummyWeapon));
     }
 }

@@ -17,6 +17,8 @@ public class Merchant extends Actor {
 
     private final List<Item> itemsForSell = new ArrayList<>();
     private final String smalltalk;
+    private final int grantedExperience;
+    private final int grantedGold;
     Scanner scanner = new Scanner(System.in);
 
     /**
@@ -28,9 +30,11 @@ public class Merchant extends Actor {
      * @param damage Merchants damage it does
      * @param smalltalk Merchants dialog
      */
-    public Merchant(String name, int maxHP, int level, int damage, String smalltalk) {
+    public Merchant(String name, int maxHP, int level, int damage, int grantedExperience, int grantedGold, String smalltalk) {
         super(name, maxHP, level, damage);
         this.smalltalk = smalltalk;
+        this.grantedExperience = grantedExperience;
+        this.grantedGold = grantedGold;
     }
 
     /**
