@@ -7,9 +7,11 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
+@NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Weapon extends Item {
 
@@ -27,10 +29,6 @@ public class Weapon extends Item {
 
     @XmlTransient
     private WeaponType weaponType;
-
-    public Weapon() {
-        super();
-    }
 
     /**
      * create a Weapon in the game
