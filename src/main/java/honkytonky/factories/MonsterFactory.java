@@ -15,11 +15,22 @@ public class MonsterFactory {
     private final List<Monster> monsterList = new ArrayList<>();
     private final RoomFactory roomFactory;
 
+    /**
+     * read all Monsters from CSV-File
+     *
+     * @param roomFactory roomfactory instance
+     */
     public MonsterFactory(RoomFactory roomFactory) {
-            this.roomFactory = roomFactory;
-            createMonstersFromFile();
+        this.roomFactory = roomFactory;
+        createMonstersFromFile();
     }
 
+    /**
+     * Finds a Monster from the List of all Monsters by its name
+     *
+     * @param name the name of the Monster
+     * @return the Monster
+     */
     Monster getMonsterByName(String name) {
         for (Monster monster : monsterList) {
             if (monster.toString().equals(name)) {
@@ -27,9 +38,11 @@ public class MonsterFactory {
             }
         }
         throw new IllegalArgumentException("Monster " + name + " not found!");
-
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createMonstersFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/monsters");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -49,7 +62,7 @@ public class MonsterFactory {
                   Integer.parseInt(nextRecord[5]),      // goldDropped
                   MonsterType.valueOf(nextRecord[6])    // MonsterType
                 ));
-               roomFactory.getRoomByName(nextRecord[7]).addMonster(currMonster);
+                roomFactory.getRoomByName(nextRecord[7]).addMonster(currMonster);
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei monsters!");

@@ -15,6 +15,9 @@ public class WeaponFactory {
 
     private final List<Weapon> weaponList = new ArrayList<>();
 
+    /**
+     * read all weapons from CSV-File
+     */
     public WeaponFactory() {
         createWeaponsFromFile();
     }
@@ -23,16 +26,24 @@ public class WeaponFactory {
         return weaponList;
     }
 
+    /**
+     * Finds a Weapon from the List of all Weapons by its name
+     *
+     * @param name the name of the Weapon
+     * @return the Weapon
+     */
     public Weapon getWeaponByName(String name) {
-        for(Weapon w : weaponList) {
-            if(w.getName().equals(name)) {
+        for (Weapon w : weaponList) {
+            if (w.getName().equals(name)) {
                 return w;
             }
         }
         throw new IllegalArgumentException("Weapon " + name + " not found!");
-
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createWeaponsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/weapons");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -51,7 +62,7 @@ public class WeaponFactory {
                   Integer.parseInt(nextRecord[5]),      // maxDurability
                   Integer.parseInt(nextRecord[6]),      // value
                   Boolean.parseBoolean(nextRecord[7])   // two-handed
-                  ));
+                ));
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei weapons!");

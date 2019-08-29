@@ -25,6 +25,15 @@ public class Potion extends Item {
         type = null;
     }
 
+    /**
+     * create a Potion in the game
+     *
+     * @param id if of Potion
+     * @param name name of the Potion
+     * @param amount amount the Potion provides when used (e.g. Health)
+     * @param value selling/buying price of the Potion
+     * @param type Type of the Potion
+     */
     public Potion(int id, String name, int amount, int value, PotionType type) {
         super(id, name, value);
 

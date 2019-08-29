@@ -26,6 +26,7 @@ public class BattleController {
 
     /**
      * set the player for this instance of BattleController
+     *
      * @param player the player object
      */
     public void setPlayer(Player player) {
@@ -37,7 +38,7 @@ public class BattleController {
      *
      * Monster Damage Calculation: MonsterDamage + RndNr (1-2) - PlayerArmorPoints
      */
-    public void startBattle(Actor enemy) {
+    void startBattle(Actor enemy) {
         clearScreen();
 
         boolean enemyAlive = true;
@@ -110,6 +111,7 @@ public class BattleController {
 
     /**
      * lets the enemy attack the player if he is alive, calculating the damage done
+     *
      * @param monsterAlive true if the enemy is still alive
      * @return ???
      */
@@ -164,6 +166,7 @@ public class BattleController {
 
     /**
      * calculate the exp the player gets rewarded
+     *
      * @return exp amount to give player
      */
     private int calculateExperienceReward() {
@@ -224,6 +227,7 @@ public class BattleController {
 
     /**
      * check if there is a merchant in the players current room to interact with
+     *
      * @param merchantController instance of MerchantController
      */
     public void checkRoomForMerchant(MerchantController merchantController) {

@@ -41,21 +41,30 @@ public class Player extends Actor {
     @XmlElement
     private Room currentRoom;
 
-    @XmlElementWrapper(name="inventory")
-    @XmlElement(name="item")
+    @XmlElementWrapper(name = "inventory")
+    @XmlElement(name = "item")
     private final List<Item> inventory;
 
-    @XmlElementWrapper(name="potions")
-    @XmlElement(name="potion")
+    @XmlElementWrapper(name = "potions")
+    @XmlElement(name = "potion")
     private final Map<Potion, Integer> playersPotions;
 
     // Needs NoArgsConstructor for JAXB to work
     public Player() {
-        super(null, 0,0,0);
+        super(null, 0, 0, 0);
         inventory = null;
         playersPotions = null;
     }
 
+    /**
+     * creates a Player in the game (should only be used once!)
+     *
+     * @param name name of the Player
+     * @param maxHP maximal Health Points of the Player
+     * @param weapon (starting-)Weapon of the Player
+     * @param armor (starting-)Armor of the Player
+     * @param currentRoom (starting-)Room of the Player
+     */
     public Player(@NonNull String name, int maxHP, @NonNull Weapon weapon, @NonNull Armor armor, @NonNull Room currentRoom) {
 
         super(name, maxHP, 1, weapon.getDamage());
@@ -99,6 +108,7 @@ public class Player extends Actor {
 
     /**
      * increase players experience by a set amount
+     *
      * @param amount amount to increase exp by
      */
     public void increaseExperience(int amount) {
@@ -119,6 +129,7 @@ public class Player extends Actor {
 
     /**
      * increase players gold by a set amount
+     *
      * @param amount amount to increase gold by
      */
     public void giveGold(int amount) {
@@ -127,6 +138,7 @@ public class Player extends Actor {
 
     /**
      * raise players hp and remove the used potion from his inventory and potionlist
+     *
      * @param potion the used potion
      */
     public void usePotion(Potion potion) {
@@ -138,6 +150,7 @@ public class Player extends Actor {
 
     /**
      * increase players healthpoints - if hp is >maxHP set it to maxHP
+     *
      * @param amount amount to increase healthpoints by
      */
     private void healPlayer(int amount) {
@@ -150,6 +163,7 @@ public class Player extends Actor {
 
     /**
      * calculate how much percent the player has reached to the next level
+     *
      * @return percentage to level up
      */
     public float getPercentalExperience() {

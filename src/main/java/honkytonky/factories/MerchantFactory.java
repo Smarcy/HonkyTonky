@@ -16,12 +16,23 @@ public class MerchantFactory {
     private final List<Merchant> merchants = new ArrayList<>();
     private final RoomFactory roomFactory;
 
+    /**
+     * read all Merchants from CSV-File
+     *
+     * @param roomFactory roomfactory instance
+     */
     public MerchantFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
         createMerchantsFromFile();
-        addItemsToMerchantCRAPPYSTATIC();
+        addItemsFromFileToMerchant();
     }
 
+    /**
+     * Finds a Merchant from the List of all Merchants by its name
+     *
+     * @param name the name of the Merchant
+     * @return the Merchant
+     */
     public Merchant getMerchantByName(String name) {
         for (Merchant merchant : merchants) {
             if (merchant.toString().equals(name)) {
@@ -31,6 +42,9 @@ public class MerchantFactory {
         throw new IllegalArgumentException("Merchant " + name + " not found!");
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createMerchantsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/merchants");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -55,7 +69,10 @@ public class MerchantFactory {
         }
     }
 
-    private void addItemsToMerchantCRAPPYSTATIC() {
+    /**
+     * Reads all contents from a CSV-File and adds the items to the corresponding merchant
+     */
+    private void addItemsFromFileToMerchant() {
         try (InputStream inputStream = getClass().getResourceAsStream("/merchantitems");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
           BufferedReader reader = new BufferedReader(inputStreamReader)) {
@@ -67,7 +84,7 @@ public class MerchantFactory {
                 Merchant currMerchant = getMerchantByName(nextRecord[0]);
                 String itemToGive = nextRecord[1];
 
-                switch(nextRecord[2]) {
+                switch (nextRecord[2]) {
                     case "Potion":
                         currMerchant.addItemToShop(new PotionFactory().getPotionByName(itemToGive));
                         break;

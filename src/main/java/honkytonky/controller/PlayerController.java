@@ -24,10 +24,6 @@ public class PlayerController {
     private final Scanner scanner = new Scanner(System.in);
     private Player player;
 
-    public Player createPlayerForLoadPlayer(BattleController battleController) {
-        return null;
-    }
-
     /**
      * Lets the user create a Player Object
      */
@@ -143,7 +139,7 @@ public class PlayerController {
             if (playersPotions.get(potion) > 0) {
                 option++;
 
-                if(showOptionNumbers) {
+                if (showOptionNumbers) {
                     System.out.println(option + ") " + potion.getName() + " (" + playersPotions.get(potion) + "x)"); // display option numbers
                 } else {
                     System.out.println(potion.getName() + " (" + playersPotions.get(potion) + "x)");                 // without option numbers

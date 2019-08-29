@@ -15,11 +15,22 @@ public class DoorFactory {
     private final RoomFactory roomFactory;
     private Door currDoor;
 
+    /**
+     * read all Doors from CSV-File
+     *
+     * @param roomFactory roomfactory instance
+     */
     public DoorFactory(RoomFactory roomFactory) {
         this.roomFactory = roomFactory;
         createDoorsFromFile();
     }
 
+    /**
+     * Finds a Door from the List of all Doors by its name
+     *
+     * @param name the name of the Door
+     * @return the Door
+     */
     private Door getDoorByName(String name) {
         for (Door door : doors) {
             if (door.getName().equals(name)) {
@@ -27,9 +38,11 @@ public class DoorFactory {
             }
         }
         throw new IllegalArgumentException("Door " + name + " not found!");
-
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createDoorsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/doors");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

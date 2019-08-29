@@ -14,24 +14,31 @@ public class PotionFactory {
 
     private List<Potion> potionList = new ArrayList<>();
 
+    /**
+     * read all Potions from CSV-File
+     */
     public PotionFactory() {
         createPotionsFromFile();
     }
 
     /**
      * Finds a Potion by its name and return a COPY of it (so it stays in potionList after use!)
+     *
      * @param name name of potion to find
      * @return copy of found potion
      */
     public Potion getPotionByName(String name) {
-        for(Potion p : potionList) {
-            if(p.getName().equals(name)) {
+        for (Potion p : potionList) {
+            if (p.getName().equals(name)) {
                 return new Potion(p.getId(), p.getName(), p.getAmount(), p.getValue(), p.getType());
             }
         }
         throw new IllegalArgumentException("Potion " + name + " not found!");
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createPotionsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/potions");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);

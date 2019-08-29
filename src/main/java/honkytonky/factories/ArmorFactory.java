@@ -13,22 +13,33 @@ import java.util.List;
 
 public class ArmorFactory {
 
-    private final List<Armor> armorList = new ArrayList<>();
+    private final List<Armor> armors = new ArrayList<>();
 
+    /**
+     * read all Armors from CSV-File
+     */
     public ArmorFactory() {
         createArmorsFromFile();
     }
 
+    /**
+     * Finds an Armor from the List of all Armors by its name
+     *
+     * @param name the name of the armor
+     * @return the Armor
+     */
     public Armor getArmorByName(String name) {
-        for(Armor armor : armorList) {
-            if(armor.getName().equals(name)) {
+        for (Armor armor : armors) {
+            if (armor.getName().equals(name)) {
                 return armor;
             }
         }
         throw new IllegalArgumentException("Armor " + name + " not found!");
-
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createArmorsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/armors");
           InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
@@ -38,7 +49,7 @@ public class ArmorFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
-                armorList.add(new Armor(
+                armors.add(new Armor(
                   Integer.parseInt(nextRecord[0]),      // id
                   nextRecord[1],                        // name
                   Integer.parseInt(nextRecord[2]),      // damage

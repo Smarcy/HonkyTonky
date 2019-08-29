@@ -20,6 +20,7 @@ public class PlayerDialogController {
 
     /**
      * set the attribute Player to corrrespond to the real object to save a bunch of parameters
+     *
      * @param player the player object
      */
     public void setPlayer(Player player) {

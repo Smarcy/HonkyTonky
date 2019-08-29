@@ -42,6 +42,12 @@ public class Room {
         doors = null;
     }
 
+    /**
+     * create a Room in the game
+     *
+     * @param id id of the Room
+     * @param name name of the Room
+     */
     public Room(int id, String name) {
         //@formatter:off
         this.id                 = id;
@@ -52,15 +58,31 @@ public class Room {
         //@formatter:on
     }
 
+    /**
+     * add a Door to this Room
+     *
+     * @param door the Door to add
+     */
     public void addDoor(Door door) {
+        assert doors != null;
         doors.add(door);
     }
 
+    /**
+     * add a Monster to this Room
+     *
+     * @param monster the Monster to add
+     */
     public void addMonster(Monster monster) {
         this.presentMonster = monster;
         this.hasLivingMonster = true;
     }
 
+    /**
+     * add a Merchant to this Room
+     *
+     * @param merchant the Merchant to add
+     */
     public void addMerchant(Merchant merchant) {
         if (!hasMerchant) {
             this.presentMerchant = merchant;
@@ -70,10 +92,18 @@ public class Room {
         }
     }
 
+    /**
+     * return all Doors of this Room
+     *
+     * @return List of all Doors of this Room
+     */
     public List<Door> getDoors() {
         return doors;
     }
 
+    /**
+     * prints all Doors the Player can take from this Room
+     */
     public void listDoorOptions() {
         System.out.println("Where would you like to go?\n");
         System.out.println("There are doors to the following rooms:\n");
@@ -86,26 +116,54 @@ public class Room {
         }
     }
 
+    /**
+     * check if there is a Monster in this Room
+     *
+     * @return true if this Room has a (living) Monster
+     */
     public boolean hasLivingMonster() {
         return this.hasLivingMonster;
     }
 
+    /**
+     * check if there is a Merchant in this Room
+     *
+     * @return true if there is a Merchant
+     */
     public boolean hasMerchant() {
         return this.hasMerchant;
     }
 
+    /**
+     * returns the actual Monster this Room contains
+     *
+     * @return the Monster in this Room
+     */
     public Monster getPresentMonster() {
         return presentMonster;
     }
 
+    /**
+     * returns the actual Merchant this Room contains
+     *
+     * @return the Merchant in this Room
+     */
     public Merchant getPresentMerchant() {
         return this.presentMerchant;
     }
 
+    /**
+     * sets the Monsters status in this Room to 'killed'
+     */
     public void monsterKilled() {
         this.hasLivingMonster = false;
     }
 
+    /**
+     * returns the name of this Room
+     *
+     * @return the Name of this Room
+     */
     public String getName() {
         return this.name;
     }

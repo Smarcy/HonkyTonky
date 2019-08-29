@@ -12,7 +12,8 @@ import lombok.Data;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Item {
 
-    Item() {}
+    Item() {
+    }
 
     @XmlElement
     private int id;

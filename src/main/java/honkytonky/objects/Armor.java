@@ -33,6 +33,17 @@ public class Armor extends Item {
         armorType = null;
     }
 
+    /**
+     * create an Armor
+     *
+     * @param id id of the Armor Object
+     * @param name name of the Armor
+     * @param armorPoints how much the Armor absorbs
+     * @param durability current durability of the Armor
+     * @param maxDurability maximal durability of the Armor
+     * @param value selling/buying price of the Armor
+     * @param armorType Type of the Armor
+     */
     public Armor(int id, String name, int armorPoints, int durability, int maxDurability, int value, ArmorType armorType) {
         //@formatter:off
         super(id, name, value);

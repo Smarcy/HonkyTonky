@@ -10,7 +10,11 @@ import javax.xml.bind.Marshaller;
 
 public class JAXBController {
 
-
+    /**
+     * save the current state of the World to XML
+     *
+     * @param player the player Object
+     */
     public static void ObjectToXML(Player player) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(Player.class);
         Marshaller mar = context.createMarshaller();
@@ -18,6 +22,12 @@ public class JAXBController {
         mar.marshal(player, new File("./player.xml"));
     }
 
+    /**
+     * load the last saved state of the World from XML
+     *
+     * @return a dummy Player object
+     * @throws IOException file not found
+     */
     public static Player unmarshall() throws JAXBException, IOException {
         JAXBContext context = JAXBContext.newInstance(Player.class);
         return (Player) context.createUnmarshaller()

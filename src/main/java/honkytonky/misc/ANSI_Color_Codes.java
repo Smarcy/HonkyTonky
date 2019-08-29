@@ -1,6 +1,10 @@
 package honkytonky.misc;
 
+/**
+ * a number of Console-Color-Codes for design purposes
+ */
 public class ANSI_Color_Codes {
+
     //@formatter:off
     public static final String ANSI_RESET   = "\u001B[0m";
     public static final String ANSI_BLACK   = "\u001B[30m";

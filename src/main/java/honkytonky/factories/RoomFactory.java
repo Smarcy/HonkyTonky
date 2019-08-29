@@ -13,6 +13,9 @@ public class RoomFactory {
 
     private final List<Room> rooms = new ArrayList<>();
 
+    /**
+     * read all Rooms from CSV-File
+     */
     public RoomFactory() {
         createRoomsFromFile();
     }
@@ -21,6 +24,12 @@ public class RoomFactory {
         return rooms;
     }
 
+    /**
+     * Finds a Room from the List of all Rooms by its name
+     *
+     * @param name the name of the Room
+     * @return the Room
+     */
     public Room getRoomByName(String name) {
         for (Room room : rooms) {
             if (room.getName().equals(name)) {
@@ -28,13 +37,15 @@ public class RoomFactory {
             }
         }
         throw new IllegalArgumentException("Room " + name + " not found!");
-
     }
 
+    /**
+     * Reads all contents from a CSV-File and creates a new Item from the contents on the fly
+     */
     private void createRoomsFromFile() {
         try (InputStream inputStream = getClass().getResourceAsStream("/rooms");
-             InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
-             BufferedReader reader = new BufferedReader(inputStreamReader)) {
+          InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+          BufferedReader reader = new BufferedReader(inputStreamReader)) {
 
             CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
             String[] nextRecord;
