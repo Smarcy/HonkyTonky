@@ -11,6 +11,9 @@ import java.util.List;
 
 public class RoomFactory {
 
+    /**
+     * List that contains every Room in the game
+     */
     private final List<Room> rooms = new ArrayList<>();
 
     /**

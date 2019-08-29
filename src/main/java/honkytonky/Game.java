@@ -47,8 +47,6 @@ public class Game {
     private final List<Room> rooms                                  = roomFactory.getRooms();
     // @formatter:on
 
-    public Game() {
-    }
 
     public static void main(String[] args) {
         Game game = new Game();

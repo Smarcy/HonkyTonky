@@ -14,12 +14,19 @@ import lombok.NoArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Item {
 
+    /**
+     * ID of the Item
+     */
     @XmlElement
     private int id;
-
+    /**
+     * name of the Item
+     */
     @XmlElement
     private String name;
-
+    /**
+     * selling/buying price of the Item
+     */
     @XmlTransient
     private int value;
 }

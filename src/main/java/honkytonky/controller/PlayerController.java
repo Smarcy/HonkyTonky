@@ -21,7 +21,13 @@ import java.util.Scanner;
 
 public class PlayerController {
 
+    /**
+     * Scanner for reading Player Inputs
+     */
     private final Scanner scanner = new Scanner(System.in);
+    /**
+     * The Player Object
+     */
     private Player player;
 
     /**

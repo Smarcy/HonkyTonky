@@ -6,7 +6,7 @@ import java.util.Map;
 public class ExpTable {
 
     /**
-     * contains all level threshholds
+     * contains all level thresholds
      */
     private static final Map<Integer, Integer> expTable = new HashMap<>() {{
         put(1, 100);
@@ -16,7 +16,7 @@ public class ExpTable {
     }};
 
     /**
-     * compare players exp with threshholds to check if the leveled up
+     * compare players exp with thresholds to check if the leveled up
      *
      * @param level players current level
      * @param currentExp players current experience points

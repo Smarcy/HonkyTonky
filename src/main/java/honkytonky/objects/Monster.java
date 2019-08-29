@@ -8,9 +8,17 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Monster extends Actor {
 
-    //private final int damage;
+    /**
+     * amount of Exp the Player gets after kill
+     */
     private final int grantedExperience;
+    /**
+     * amount of Gold the Player gets after kill
+     */
     private final int goldDropped;
+    /**
+     * Type of the Monster
+     */
     private final MonsterType monsterType;
 
     /**

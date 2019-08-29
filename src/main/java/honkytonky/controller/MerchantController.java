@@ -14,8 +14,17 @@ import java.util.Scanner;
 
 public class MerchantController {
 
+    /**
+     * Scanner for reading Player Inputs
+     */
     private final Scanner scanner = new Scanner(System.in);
+    /**
+     * The Player Object
+     */
     private Player player;
+    /**
+     * The Merchant the Player encountered
+     */
     private Merchant merchant;
 
     /**

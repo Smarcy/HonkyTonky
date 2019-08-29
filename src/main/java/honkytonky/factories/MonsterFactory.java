@@ -12,7 +12,13 @@ import java.util.List;
 
 public class MonsterFactory {
 
+    /**
+     * List that contains every Monster in the game
+     */
     private final List<Monster> monsterList = new ArrayList<>();
+    /**
+     * Needed to attach a Monster to a specific Room
+     */
     private final RoomFactory roomFactory;
 
     /**

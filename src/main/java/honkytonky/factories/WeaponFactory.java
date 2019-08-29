@@ -13,6 +13,9 @@ import java.util.List;
 
 public class WeaponFactory {
 
+    /**
+     * List that contains every Weapon in the game
+     */
     private final List<Weapon> weaponList = new ArrayList<>();
 
     /**

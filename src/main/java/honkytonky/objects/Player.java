@@ -23,33 +23,52 @@ import lombok.NonNull;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Player extends Actor {
 
-    @XmlElement
-    private int temporaryDefBoost;
-
-    @XmlElement
-    private int experience;
-
-    @XmlElement
-    private int gold;
-
-    @XmlElement
-    private Weapon weapon;
-
-    @XmlElement
-    private Armor armor;
-
-    @XmlElement
-    private Room currentRoom;
-
+    /**
+     * List of all Items the Player has
+     */
     @XmlElementWrapper(name = "inventory")
     @XmlElement(name = "item")
     private final List<Item> inventory;
-
+    /**
+     * Extra List of only the Potions the Player has
+     */
     @XmlElementWrapper(name = "potions")
     @XmlElement(name = "potion")
     private final Map<Potion, Integer> playersPotions;
+    /**
+     * used in defensive mode, gives the Player some additional armor points
+     */
+    @XmlElement
+    private int temporaryDefBoost;
+    /**
+     * current amount of Experience of the Player
+     */
+    @XmlElement
+    private int experience;
+    /**
+     * current amount of Gold of the Player
+     */
+    @XmlElement
+    private int gold;
+    /**
+     * The equipped Weapon of the Player
+     */
+    @XmlElement
+    private Weapon weapon;
+    /**
+     * The equipped Armor of the Player
+     */
+    @XmlElement
+    private Armor armor;
+    /**
+     * The Room where the Player currently stands
+     */
+    @XmlElement
+    private Room currentRoom;
 
-    // Needs NoArgsConstructor for JAXB to work
+    /**
+     * default Contructor needed for persisting with JAXB
+     */
     public Player() {
         super(null, 0, 0, 0);
         inventory = null;

@@ -13,6 +13,9 @@ import java.util.List;
 
 public class ArmorFactory {
 
+    /**
+     * List that contains every Armor in the game
+     */
     private final List<Armor> armors = new ArrayList<>();
 
     /**

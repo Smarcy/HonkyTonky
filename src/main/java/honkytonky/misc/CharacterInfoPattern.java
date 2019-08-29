@@ -7,6 +7,9 @@ import honkytonky.objects.Player;
 
 public class CharacterInfoPattern {
 
+    /**
+     * The Player Object
+     */
     private Player player;
 
     /**

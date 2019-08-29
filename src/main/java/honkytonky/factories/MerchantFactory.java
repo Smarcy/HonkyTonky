@@ -12,8 +12,13 @@ import java.util.List;
 
 public class MerchantFactory {
 
-
+    /**
+     * List that contains every Merchant in the game
+     */
     private final List<Merchant> merchants = new ArrayList<>();
+    /**
+     * Instance of RoomFactory to attach a Merchant to a specific Room
+     */
     private final RoomFactory roomFactory;
 
     /**

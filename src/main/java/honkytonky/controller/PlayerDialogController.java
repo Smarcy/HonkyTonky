@@ -14,8 +14,17 @@ import java.util.Scanner;
 
 public class PlayerDialogController {
 
+    /**
+     * Instance of CharacterInfoPattern so the Player can print all his infos formatted
+     */
     private final CharacterInfoPattern charInfo = new CharacterInfoPattern();
+    /**
+     * Scanner for reading Player Inputs
+     */
     private final Scanner scanner = new Scanner(System.in);
+    /**
+     * The Player Object
+     */
     private Player player;
 
     /**

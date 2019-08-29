@@ -17,12 +17,33 @@ import java.util.Scanner;
 
 public class BattleController {
 
+    /**
+     * Random Generator so damage is not too static
+     */
     private final Random rnd = new Random();
+    /**
+     * Scanner for reading Player Inputs
+     */
     private final Scanner scanner = new Scanner(System.in);
+    /**
+     * The Player Object
+     */
     private Player player;
+    /**
+     * The Monster the Player encountered
+     */
     private Monster monster;
+    /**
+     * The hostile Merchant if the Player decides to attack
+     */
     private Merchant enemyMerchant;
+    /**
+     * First Instance of Enemy, without dependence if its a Monster or Merchant
+     */
     private Actor enemy;
+    /**
+     * true is the Player managed to flee from a fight
+     */
     private boolean playerFled = false;
 
     /**
@@ -140,7 +161,7 @@ public class BattleController {
                 player.getCurrentRoom().monsterKilled();
                 rewardPlayerForMonsterKill();
             } else if (enemy instanceof Merchant) {
-                enemyMerchant = (Merchant) enemy;
+                enemyMerchant = (Merchant) enemy;                   // convert the encountered enemy to Object of Type Merchant
                 rewardPlayerForMerchantKill();
                 player.getCurrentRoom().setHasMerchant(false);
                 player.getCurrentRoom().setPresentMerchant(null);   // remove Merchant from the Room after he was killed

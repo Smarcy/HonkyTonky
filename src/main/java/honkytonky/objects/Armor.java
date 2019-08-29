@@ -13,15 +13,24 @@ import lombok.EqualsAndHashCode;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Armor extends Item {
 
+    /**
+     * Damage absorption of the Armor
+     */
     @XmlTransient
     private final int armorPoints;
-
+    /**
+     * current durability of the Armor
+     */
     @XmlElement
     private int durability;
-
+    /**
+     * maximum durability of the Armor
+     */
     @XmlTransient
     private final int maxDurability;
-
+    /**
+     * Type of the Armor
+     */
     @XmlTransient
     private final ArmorType armorType;
 

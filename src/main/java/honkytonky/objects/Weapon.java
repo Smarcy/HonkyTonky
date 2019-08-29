@@ -15,18 +15,29 @@ import lombok.NoArgsConstructor;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Weapon extends Item {
 
+    /**
+     * Damage done by the Weapon
+     */
     @XmlTransient
     private int damage;
-
+    /**
+     * current durability of the Weapon
+     */
     @XmlElement
     private int durability;
-
+    /**
+     * maximum durability of the Weapon
+     */
     @XmlTransient
     private int maxDurability;
-
+    /**
+     * true if the Weapon is Two-Handed, false if One-Handed
+     */
     @XmlTransient
     private boolean twoHanded; // false = onehanded, true = twohanded
-
+    /**
+     * Type of the Weapon
+     */
     @XmlTransient
     private WeaponType weaponType;
 

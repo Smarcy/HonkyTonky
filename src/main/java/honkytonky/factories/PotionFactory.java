@@ -12,6 +12,9 @@ import java.util.List;
 
 public class PotionFactory {
 
+    /**
+     * List that contains every Potion in the game
+     */
     private List<Potion> potionList = new ArrayList<>();
 
     /**

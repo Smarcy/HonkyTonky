@@ -12,13 +12,20 @@ import lombok.EqualsAndHashCode;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Potion extends Item {
 
+    /**
+     * Amount the Potion gives (e.g. Health)
+     */
     @XmlTransient
     private final int amount;
-
+    /**
+     * Type of the Potion
+     */
     @XmlTransient
     private final PotionType type;
 
-    //Needed for JAXB
+    /**
+     * default Contructor needed for persisting with JAXB
+     */
     public Potion() {
         super();
         amount = 0;

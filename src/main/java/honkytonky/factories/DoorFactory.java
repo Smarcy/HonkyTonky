@@ -11,9 +11,14 @@ import java.util.List;
 
 public class DoorFactory {
 
+    /**
+     * List that contains every Door in the game
+     */
     private final List<Door> doors = new ArrayList<>();
+    /**
+     * Needed to attach a Door to a specific Room
+     */
     private final RoomFactory roomFactory;
-    private Door currDoor;
 
     /**
      * read all Doors from CSV-File
@@ -52,6 +57,7 @@ public class DoorFactory {
             String[] nextRecord;
 
             while ((nextRecord = csvReader.readNext()) != null) {
+                Door currDoor;
                 doors.add(currDoor = new Door(
                   Integer.parseInt(nextRecord[0]),          // id
                   nextRecord[1],                            // doorName

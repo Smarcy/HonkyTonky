@@ -15,10 +15,25 @@ import lombok.EqualsAndHashCode;
 @Data
 public class Merchant extends Actor {
 
+    /**
+     * The List of the Items the Merchant has to sell
+     */
     private final List<Item> itemsForSell = new ArrayList<>();
+    /**
+     * The Merchants Dialog
+     */
     private final String smalltalk;
+    /**
+     * Amount of Experience granted if the Player decides to attack
+     */
     private final int grantedExperience;
+    /**
+     * Amount of Gold granted if the Player decides to attack
+     */
     private final int grantedGold;
+    /**
+     * Scanner for taking Player Inputs
+     */
     Scanner scanner = new Scanner(System.in);
 
     /**

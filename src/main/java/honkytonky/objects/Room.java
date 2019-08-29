@@ -14,28 +14,45 @@ import lombok.EqualsAndHashCode;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
 
+    /**
+     * ID of the Room
+     */
     @XmlTransient
     private final int id;
-
+    /**
+     * name of the Room
+     */
     @XmlElement
     private final String name;
-
+    /**
+     * contains all Doors attached to this Room
+     */
     @XmlTransient
     private final List<Door> doors;
-
+    /**
+     * true if the Room contains a Monster that is alive
+     */
     @XmlElement
     private boolean hasLivingMonster;
-
+    /**
+     * true if the Room contains a (living) Merchant
+     */
     @XmlTransient
     private boolean hasMerchant;
-
+    /**
+     * the actual Monster in this Room
+     */
     @XmlTransient
     private Monster presentMonster;
-
+    /**
+     * the actual Merchant in this Room
+     */
     @XmlTransient
     private Merchant presentMerchant;
 
-    //Needed for JAXB
+    /**
+     * default constructor needed for persisting with JAXB
+     */
     public Room() {
         id = 0;
         name = null;
