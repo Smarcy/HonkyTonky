@@ -14,7 +14,7 @@ import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.misc.Cheats;
-import honkytonky.misc.CreateWorld;
+import honkytonky.factories.CreateWorld;
 import honkytonky.misc.ExpTable;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Item;
@@ -30,7 +30,6 @@ import javax.xml.bind.JAXBException;
 public class Game {
 
     // @formatter:off
-    private Player player                                           = null;
     private final Scanner scanner                                   = new Scanner(System.in);
     private final WeaponFactory weaponFactory                       = new WeaponFactory();
     private final ArmorFactory armorFactory                         = new ArmorFactory();
@@ -40,8 +39,8 @@ public class Game {
     private final MerchantController merchantController             = new MerchantController();
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
+    private Player player                                           = null;
     // @formatter:on
-
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -178,37 +177,37 @@ public class Game {
             return;
         }
 
-            // Extract real Items from "dummys"
-            Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
-            Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
-            Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
+        // Extract real Items from "dummys"
+        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
+        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
+        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
 
-            player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
+        player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
 
-            player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
-            player.setHp(dummy.getHp());
-            player.setExperience(dummy.getExperience());
-            player.setLevel(dummy.getLevel());
-            player.setGold(dummy.getGold());
-            player.setDamage(dummy.getDamage());
+        player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
+        player.setHp(dummy.getHp());
+        player.setExperience(dummy.getExperience());
+        player.setLevel(dummy.getLevel());
+        player.setGold(dummy.getGold());
+        player.setDamage(dummy.getDamage());
 
-            // Retrieve Potions
-            int i = 0;
-            for (Item item : dummy.getInventory()) {
-                if (item instanceof Potion) {
-                    Potion dummyPotion = potionFactory.getPotionByName(item.getName());
-                    Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
-                    player.getInventory().add(dummyPotion);
-                    player.getPlayersPotions().put(dummyPotion, potionValue);
-                } else if (!(item.equals(dummy.getArmor())) && !(item.equals(dummy.getWeapon()))) {
-                    player.getInventory().add(item);
-                }
-                i++;
+        // Retrieve Potions
+        int i = 0;
+        for (Item item : dummy.getInventory()) {
+            if (item instanceof Potion) {
+                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
+                Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
+                player.getInventory().add(dummyPotion);
+                player.getPlayersPotions().put(dummyPotion, potionValue);
+            } else if (!(item.equals(dummy.getArmor())) && !(item.equals(dummy.getWeapon()))) {
+                player.getInventory().add(item);
             }
+            i++;
+        }
 
-            playerController.setPlayer(player);
-            battleController.setPlayer(player);
-            clearScreen();
-            gameLoop();
+        playerController.setPlayer(player);
+        battleController.setPlayer(player);
+        clearScreen();
+        gameLoop();
     }
 }

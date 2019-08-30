@@ -6,7 +6,6 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
-import honkytonky.Game;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
@@ -216,21 +215,17 @@ public class BattleController {
     }
 
     /**
-     * if the player died, reset the game - //FIXME!!!
-     */
-    private void resetGame() {
-        Game game = new Game();
-    }
-
-    /**
      * checks if the Player is alive every time he got hit by an enemy
      */
     private void isPlayerAlive() {
         if (player.getHp() <= 0) {
             clearScreen();
-            System.out.println("You died!");
+            System.out
+              .println(String.format("%c[%d;%df", 0x1B, 15, 53) + ANSI_RED + "YOU DIED!" + ANSI_RESET);
+            System.out.println(String.format("%c[%d;%df", 0x1B, 16, 10) + "Since this Game is in 'Hardcore Mode', the last time you saved will be your latest respawn point.");
+            System.out.println(String.format("%c[%d;%df", 0x1B, 17, 10) + "If you want to go on please restart the Game and load your last savestate or create a new Character!");
             scanner.nextLine();
-            resetGame();
+            System.exit(0);
         }
     }
 

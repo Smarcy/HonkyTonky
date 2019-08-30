@@ -1,9 +1,4 @@
-package honkytonky.misc;
-
-import honkytonky.factories.DoorFactory;
-import honkytonky.factories.MerchantFactory;
-import honkytonky.factories.MonsterFactory;
-import honkytonky.factories.RoomFactory;
+package honkytonky.factories;
 
 public class CreateWorld {
 
