@@ -6,6 +6,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import honkytonky.misc.ExpTable;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Monster;
@@ -48,6 +49,7 @@ public class BattleControllerTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
+        ExpTable.createLevels();
     }
 
     @Test
