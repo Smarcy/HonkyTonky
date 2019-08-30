@@ -35,7 +35,7 @@ public class MerchantController {
      */
     void printMerchantDialog(Player player, BattleController battleController) {
         this.player = player;
-        Boolean run = true;
+        boolean run = true;
 
         while (run) {
             clearScreen();
