@@ -10,10 +10,15 @@ public class ExpTable {
      */
     private static final Map<Integer, Integer> expTable = new HashMap<>() {{
         put(1, 100);
-        put(2, 500);
-        put(3, 1300);
-        put(4, 2000);
     }};
+
+    public static void createLevels() {
+        for (int i = 2; i < 100; ++i) {
+            int predecessor = expTable.get(i-1);
+            double expNeededForNextLevel = predecessor * 1.2;
+            expTable.put(i, (int) expNeededForNextLevel);
+        }
+    }
 
     /**
      * compare players exp with thresholds to check if the leveled up

@@ -16,6 +16,8 @@ import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
+import honkytonky.misc.Cheats;
+import honkytonky.misc.ExpTable;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Item;
 import honkytonky.objects.Player;
@@ -49,6 +51,7 @@ public class Game {
 
 
     public static void main(String[] args) {
+        ExpTable.createLevels();
         Game game = new Game();
         game.showIntro();
     }
@@ -149,6 +152,11 @@ public class Game {
                         System.exit(0);
                     case 6:
                         battleController.checkRoomForMerchant(merchantController);
+                        break;
+                    case 1337:
+                        Cheats.increaseGold(player);
+                        Cheats.increaseExperience(player);
+                        Cheats.increaseDamage(player);
                 }
             } catch (InputMismatchException | NumberFormatException | JAXBException e) {
                 clearScreen();

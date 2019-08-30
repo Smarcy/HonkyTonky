@@ -1,4 +1,7 @@
-<li>  (HEAD -> dev, tag: v0.4.1, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/f2ee4fbe397dfcaca2852d5c4673f4856bd262e3">view commit &bull;</a> added reward for killing a Merchant</li> 
+<li>  (HEAD -> dev, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/8c8282d03e301d3e06ab4a7b11654a8a52026433">view commit &bull;</a> decided to provide full JavaDoc documents</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/51f57bde57a8bb00c5758e1bdec5b669a8bdab28">view commit &bull;</a> Huge load of JavaDoc for all Classes</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/86b02deeb51e155e27f19c8367819b8a7cbdd48c">view commit &bull;</a> update changelog</li> 
+<li>  (tag: v0.4.1) <a href="http://github.com/Smarcy/HonkyTonky/commit/f2ee4fbe397dfcaca2852d5c4673f4856bd262e3">view commit &bull;</a> added reward for killing a Merchant</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/cf4348cda6e193de6087d7fb9cb6b0ac98530494">view commit &bull;</a> removed 'activateScanner' in tradeWithMerchant</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/d138bf90c08af8e377882d8111b964cbfadde65a">view commit &bull;</a> small additions to MerchantControllerTest</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/7ff81eec76daa8870e02f5d4e6b8f03ae5d5bd7f">view commit &bull;</a> added 2 huge Mockito Tests</li> 

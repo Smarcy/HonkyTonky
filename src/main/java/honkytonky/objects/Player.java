@@ -138,11 +138,12 @@ public class Player extends Actor {
      * compare players current level und exp with exptable and may level him up
      */
     public void checkForLevelUp() {
-        if (ExpTable.hasLevelUp(this.getLevel(), this.experience)) {
+        while (ExpTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
 
             System.out.println("\nYou have leveled up!\n");
             System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel() + ANSI_RESET);
+
         }
     }
 
