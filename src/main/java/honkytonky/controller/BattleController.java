@@ -6,6 +6,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.Game;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
@@ -225,7 +226,8 @@ public class BattleController {
             System.out.println(String.format("%c[%d;%df", 0x1B, 16, 10) + "Since this Game is in 'Hardcore Mode', the last time you saved will be your latest respawn point.");
             System.out.println(String.format("%c[%d;%df", 0x1B, 17, 10) + "If you want to go on please restart the Game and load your last savestate or create a new Character!");
             scanner.nextLine();
-            System.exit(0);
+            player = null;      // After death the character is lost
+            Game.main(null);    // If Player died return to intro Menu
         }
     }
 
