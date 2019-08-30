@@ -83,7 +83,8 @@ public class BattleController {
             try {
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
-                        durabilityLoss += player.getWeapon().getDurability() * 0.02;
+                        durabilityLoss += (player.getWeapon().isTwoHanded()) ? (player.getWeapon().getDurability() * 0.07)
+                          : (player.getWeapon().getDurability() * 0.05); // Two-Handed Weapon have slightly higher durability loss (for doing more dmg)
                         enemyAlive = playerAttacks();
                         break;
                     case 2:
