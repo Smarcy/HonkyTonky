@@ -10,13 +10,11 @@ import honkytonky.controller.MerchantController;
 import honkytonky.controller.PlayerController;
 import honkytonky.controller.PlayerDialogController;
 import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.DoorFactory;
-import honkytonky.factories.MerchantFactory;
-import honkytonky.factories.MonsterFactory;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.misc.Cheats;
+import honkytonky.misc.CreateWorld;
 import honkytonky.misc.ExpTable;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Item;
@@ -39,9 +37,6 @@ public class Game {
     private final ArmorFactory armorFactory                         = new ArmorFactory();
     private final PotionFactory potionFactory                       = new PotionFactory();
     private final RoomFactory roomFactory                           = new RoomFactory();
-    private final DoorFactory doorFactory                           = new DoorFactory(roomFactory);
-    private final MonsterFactory monsterFactory                     = new MonsterFactory(roomFactory);
-    private final MerchantFactory merchantFactory                   = new MerchantFactory(roomFactory);
     private final PlayerDialogController playerDialogController     = new PlayerDialogController();
     private final MerchantController merchantController             = new MerchantController();
     private final BattleController battleController                 = new BattleController();
@@ -60,9 +55,9 @@ public class Game {
      * Shows the menu to choose an option
      */
     private void showIntro() {
-
+        CreateWorld.populateWorld(roomFactory); // create all needed Factories/read CSV files
+        
         boolean run = true;
-
         while (run) {
             clearScreen();
 
