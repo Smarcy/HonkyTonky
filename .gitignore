@@ -36,6 +36,7 @@ bluej.pkh
 
 # JAXB xml
 player.xml
+rooms.xml
 
 # Gradle
 .idea/**/gradle.xml

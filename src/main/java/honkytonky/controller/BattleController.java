@@ -224,7 +224,7 @@ public class BattleController {
             System.out
               .println(String.format("%c[%d;%df", 0x1B, 15, 53) + ANSI_RED + "YOU DIED!" + ANSI_RESET);
             System.out.println(String.format("%c[%d;%df", 0x1B, 16, 10) + "Since this Game is in 'Hardcore Mode', the last time you saved will be your latest respawn point.");
-            System.out.println(String.format("%c[%d;%df", 0x1B, 17, 10) + "If you want to go on please restart the Game and load your last savestate or create a new Character!");
+            System.out.println(String.format("%c[%d;%df", 0x1B, 17, 10) + "If you want to go on load your last savestate or create a new Character!");
             scanner.nextLine();
             player = null;      // After death the character is lost
             Game.main(null);    // If Player died return to intro Menu

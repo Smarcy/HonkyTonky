@@ -5,12 +5,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode
 @Data
+@XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Room {
 
@@ -37,7 +39,7 @@ public class Room {
     /**
      * true if the Room contains a (living) Merchant
      */
-    @XmlTransient
+    @XmlElement
     private boolean hasMerchant;
     /**
      * the actual Monster in this Room

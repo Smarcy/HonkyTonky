@@ -94,6 +94,7 @@ public class Game {
                         player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                     case 3:
+                        loadRooms();
                         loadPlayer();
                         break;
                 }
@@ -144,7 +145,8 @@ public class Game {
                         playerDialogController.printInventoryDialog(playerController);
                         break;
                     case 5:
-                        JAXBController.ObjectToXML(player);
+                        JAXBController.PlayerToXML(player);
+                        JAXBController.RoomsToXML(roomFactory);
                         System.exit(0);
                     case 6:
                         battleController.checkRoomForMerchant(merchantController);
@@ -162,11 +164,32 @@ public class Game {
         }
     }
 
+    private void loadRooms() {
+        RoomFactory tmpRoomFactory;
+        try {
+            tmpRoomFactory = JAXBController.unmarshallRooms();
+        } catch (JAXBException e) {
+            System.out.println("Something went wrong while loading the Rooms!");
+            scanner.nextLine();
+            return;
+        } catch (IOException e) {
+            System.out.println("Could not find savegame!");
+            scanner.nextLine();
+            return;
+        }
+
+        for(Room room : tmpRoomFactory.getRooms()) {
+            Room realRoom = roomFactory.getRoomByName(room.getName());
+            realRoom.setHasMerchant(room.isHasMerchant());
+            realRoom.setHasLivingMonster(room.isHasLivingMonster());
+        }
+    }
+
     private void loadPlayer() {
 
-        Player dummy = null;
+        Player dummy;
         try {
-            dummy = JAXBController.unmarshall();
+            dummy = JAXBController.unmarshallPlayer();
         } catch (JAXBException e) {
             System.out.println("Something went wrong while loading your Character!");
             scanner.nextLine();

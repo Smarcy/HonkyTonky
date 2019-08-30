@@ -8,12 +8,21 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "RoomFactory")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class RoomFactory {
 
     /**
      * List that contains every Room in the game
      */
+    @XmlElementWrapper(name = "rooms")
+    @XmlElement(name = "room")
     private final List<Room> rooms = new ArrayList<>();
 
     /**
