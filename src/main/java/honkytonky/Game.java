@@ -24,7 +24,6 @@ import honkytonky.objects.Room;
 import honkytonky.objects.Weapon;
 import java.io.IOException;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 import javax.xml.bind.JAXBException;
 
@@ -41,22 +40,25 @@ public class Game {
     private final MerchantController merchantController             = new MerchantController();
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
-    private final List<Room> rooms                                  = roomFactory.getRooms();
     // @formatter:on
 
 
     public static void main(String[] args) {
-        ExpTable.createLevels();
         Game game = new Game();
+        game.setUpWorld();
         game.showIntro();
+    }
+
+    private void setUpWorld() {
+        ExpTable.createLevels();                // create levels with gradually increasing needed Exp
+        CreateWorld.populateWorld(roomFactory); // create all needed Factories / read CSV files
     }
 
     /**
      * Shows the menu to choose an option
      */
     private void showIntro() {
-        CreateWorld.populateWorld(roomFactory); // create all needed Factories/read CSV files
-        
+
         boolean run = true;
         while (run) {
             clearScreen();
@@ -86,7 +88,7 @@ public class Game {
                     case 2:
                         player = playerController
                           .createPlayer(armorFactory, weaponFactory,
-                            battleController, rooms);
+                            battleController, roomFactory.getRooms());
 
                         player.getInventory().add(potionFactory.getPotionByName("Small Health Potion")); // give Player startPotion
                         player.getPlayersPotions().put(potionFactory.getPotionByName("Small Health Potion"), 1);
@@ -162,8 +164,19 @@ public class Game {
     }
 
     private void loadPlayer() {
+
+        Player dummy = null;
         try {
-            Player dummy = JAXBController.unmarshall();
+            dummy = JAXBController.unmarshall();
+        } catch (JAXBException e) {
+            System.out.println("Something went wrong while loading your Character!");
+            scanner.nextLine();
+            return;
+        } catch (IOException e) {
+            System.out.println("Could not find savegame!");
+            scanner.nextLine();
+            return;
+        }
 
             // Extract real Items from "dummys"
             Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
@@ -195,14 +208,7 @@ public class Game {
 
             playerController.setPlayer(player);
             battleController.setPlayer(player);
-
             clearScreen();
             gameLoop();
-        } catch (JAXBException e) {
-            e.printStackTrace();
-            System.out.println("Something went wrong while loading your Character!");
-        } catch (IOException e) {
-            System.out.println("Could not find savegame!");
-        }
     }
 }

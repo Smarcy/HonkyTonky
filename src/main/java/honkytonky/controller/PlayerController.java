@@ -48,7 +48,6 @@ public class PlayerController {
 
         while (player == null) {
             clearScreen();
-
             System.out.println("Choose a weapon: ");
             System.out.println("1) One-Handed Sword");
             System.out.println("2) Two-Handed Sword");
