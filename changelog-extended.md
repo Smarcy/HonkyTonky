@@ -1,4 +1,5 @@
-<li>  (HEAD -> dev, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/8c8282d03e301d3e06ab4a7b11654a8a52026433">view commit &bull;</a> decided to provide full JavaDoc documents</li> 
+<li>  (HEAD -> dev, tag: v0.4.2, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/d9a1c3f40b1aade78665e7c893d7da7e93780045">view commit &bull;</a> added Developer Cheats & refined checkForLevelUp()</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/8c8282d03e301d3e06ab4a7b11654a8a52026433">view commit &bull;</a> decided to provide full JavaDoc documents</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/51f57bde57a8bb00c5758e1bdec5b669a8bdab28">view commit &bull;</a> Huge load of JavaDoc for all Classes</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/86b02deeb51e155e27f19c8367819b8a7cbdd48c">view commit &bull;</a> update changelog</li> 
 <li>  (tag: v0.4.1) <a href="http://github.com/Smarcy/HonkyTonky/commit/f2ee4fbe397dfcaca2852d5c4673f4856bd262e3">view commit &bull;</a> added reward for killing a Merchant</li> 

@@ -243,7 +243,7 @@ public class BattleController {
     }
 
     /**
-     * Is called when the Player is in a battle and chooses to flee from the fight
+     * Is called when the Player is in a battle and tries to flee from the fight
      */
     private void playerFlees() {
         clearScreen();

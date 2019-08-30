@@ -108,7 +108,7 @@ public class MerchantController {
      *
      * @param choice ID of Item in Merchants inventory (+1)
      */
-    void tradeWithMerchant(int choice) { // FIXME: activateScanner just for testing purposes
+    void tradeWithMerchant(int choice) {
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
 
         if (player.getGold() >= itemToBuy.getValue()) {     // does Player have enough gold?

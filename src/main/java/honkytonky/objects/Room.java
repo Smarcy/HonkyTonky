@@ -127,6 +127,7 @@ public class Room {
 
         int i = 1;
 
+        assert doors != null;
         for (Door door : doors) {
             System.out.println(i + ") " + door.getTargetRoom());
             i++;
