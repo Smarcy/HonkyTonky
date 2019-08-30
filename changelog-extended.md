@@ -1,4 +1,14 @@
-<li>  (HEAD -> dev, tag: v0.4.2, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/d9a1c3f40b1aade78665e7c893d7da7e93780045">view commit &bull;</a> added Developer Cheats & refined checkForLevelUp()</li> 
+<li>  (HEAD -> dev, tag: v0.5.0, origin/master, origin/dev, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/2d9787e9b5c3a59e625303d3a83f1d7007dca7ae">view commit &bull;</a> Player now loots all Items if he kills a Merchant</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/45d719ebe6ebdab6107059120ca82f9ef9263f1a">view commit &bull;</a> saving Rooms works - dead Monster/Merchant stays dead</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/f8922e99dc7fdccd8fa6b5b314678eb01e6f743a">view commit &bull;</a> better solution: after death return to intro menu</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/25614c26b45a5aa96ea782d306ba1bf075d9b28f">view commit &bull;</a> Bugfix: Dying now ends game && some formatting</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/04e4343935f5b0a348df959b03c873a926263ce7">view commit &bull;</a> tidying up Game.java a little</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/e67097fc5fe9d636db39d8e1689e29143ece4fea">view commit &bull;</a> add new static class to populate World - tidy up Game.java</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/ad8371d0284f73231b26f78caf06b5733db2d999">view commit &bull;</a> Merge branch 'dev' of https://github.com/Smarcy/HonkyTonky into dev</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/a492c7986c60f97a87ea5317956638928b681241">view commit &bull;</a> small fixes</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/5ef648c728fae14802ae59a6f298df60f8f8819c">view commit &bull;</a> Boolean -> boolean</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/e8c526f301a541f067a3f624addb72fa45a081d5">view commit &bull;</a> fix Tests</li> 
+<li>  (tag: v0.4.2) <a href="http://github.com/Smarcy/HonkyTonky/commit/d9a1c3f40b1aade78665e7c893d7da7e93780045">view commit &bull;</a> added Developer Cheats & refined checkForLevelUp()</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/8c8282d03e301d3e06ab4a7b11654a8a52026433">view commit &bull;</a> decided to provide full JavaDoc documents</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/51f57bde57a8bb00c5758e1bdec5b669a8bdab28">view commit &bull;</a> Huge load of JavaDoc for all Classes</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/86b02deeb51e155e27f19c8367819b8a7cbdd48c">view commit &bull;</a> update changelog</li> 

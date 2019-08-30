@@ -53,7 +53,7 @@ public class CharacterInfoPattern {
     private void printWeaponInfo() {
         System.out.println(
           "Weapon: " + ANSI_YELLOW + String.format("%c[%d;%df", 0x1B, 6, 15)
-            + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + ANSI_RESET);
+            + player.getWeapon() + " (" + player.getWeapon().getDamage() + " Damage)" + " (" + player.getWeapon().getDurability() + " Durability)" + ANSI_RESET);
     }
 
     /**

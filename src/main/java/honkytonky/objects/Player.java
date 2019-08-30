@@ -141,7 +141,7 @@ public class Player extends Actor {
         while (ExpTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
 
-            System.out.println("\nYou have leveled up!\n");
+            System.out.println("\nYou have leveled up!");
             System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel() + ANSI_RESET);
 
         }

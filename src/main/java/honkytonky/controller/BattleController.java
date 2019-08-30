@@ -1,5 +1,6 @@
 package honkytonky.controller;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
@@ -67,6 +68,7 @@ public class BattleController {
 
         boolean enemyAlive = true;
         this.enemy = enemy;
+        int durabilityLoss = 0;
 
         System.out.println("You encountered " + ANSI_RED + enemy + ANSI_RESET + "!\n");
 
@@ -81,6 +83,7 @@ public class BattleController {
             try {
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
+                        durabilityLoss += player.getWeapon().getDurability() * 0.02;
                         enemyAlive = playerAttacks();
                         break;
                     case 2:
@@ -103,6 +106,10 @@ public class BattleController {
                 break;
             }
             if (enemyAttacks(enemyAlive) && !playerFled) {
+                player.getWeapon().setDurability(player.getWeapon().getDurability() - durabilityLoss);
+                System.out.println("\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
+                scanner.nextLine();
+                clearScreen();
                 break;
             }
         }
@@ -169,8 +176,6 @@ public class BattleController {
                 player.getCurrentRoom().setPresentMerchant(null);   // remove Merchant from the Room after he was killed
                 return true;
             }
-            scanner.nextLine();
-            clearScreen();
             return true;
         }
     }
@@ -213,7 +218,7 @@ public class BattleController {
 
         System.out
           .println(
-            "\n\nYou received " + ANSI_GREEN + xpReward + " Experience Points" + ANSI_RESET +
+            "\nYou received " + ANSI_GREEN + xpReward + " Experience Points" + ANSI_RESET +
               " and " + ANSI_GREEN + monster.getGoldDropped() + " Gold!" + ANSI_RESET);
 
         player.giveGold(monster.getGoldDropped());
