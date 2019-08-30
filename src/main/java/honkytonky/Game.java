@@ -10,11 +10,11 @@ import honkytonky.controller.MerchantController;
 import honkytonky.controller.PlayerController;
 import honkytonky.controller.PlayerDialogController;
 import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.CreateWorld;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.misc.Cheats;
-import honkytonky.factories.CreateWorld;
 import honkytonky.misc.ExpTable;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Item;
@@ -164,6 +164,10 @@ public class Game {
         }
     }
 
+    /**
+     * Loads Rooms from most recent savestate and adjusts all rooms that are already in the game according to this information The savestate contains
+     * info about hasMonster and hasMerchant, so Monsters and Merchants don't respawn after reload
+     */
     private void loadRooms() {
         RoomFactory tmpRoomFactory;
         try {
@@ -178,13 +182,16 @@ public class Game {
             return;
         }
 
-        for(Room room : tmpRoomFactory.getRooms()) {
+        for (Room room : tmpRoomFactory.getRooms()) {
             Room realRoom = roomFactory.getRoomByName(room.getName());
             realRoom.setHasMerchant(room.isHasMerchant());
             realRoom.setHasLivingMonster(room.isHasLivingMonster());
         }
     }
 
+    /**
+     * Loads Player from most recent savestate and prepares a fully compatible Player object
+     */
     private void loadPlayer() {
 
         Player dummy;

@@ -8,9 +8,11 @@ import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.Game;
 import honkytonky.objects.Actor;
+import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -187,6 +189,18 @@ public class BattleController {
 
         player.giveGold(enemyMerchant.getGrantedGold());
         player.checkForLevelUp();
+
+        System.out.println(ANSI_YELLOW + "\nLoot:" + ANSI_RESET);
+
+        for(Item item : enemyMerchant.getItemsForSell()) {
+            System.out.println(item.getName());
+
+            player.getInventory().add(item);
+
+            if(item instanceof Potion) {
+                player.getPlayersPotions().put((Potion) item, player.getPlayersPotions().get(item) + 1);
+            }
+        }
     }
 
     /**
@@ -223,7 +237,8 @@ public class BattleController {
             clearScreen();
             System.out
               .println(String.format("%c[%d;%df", 0x1B, 15, 53) + ANSI_RED + "YOU DIED!" + ANSI_RESET);
-            System.out.println(String.format("%c[%d;%df", 0x1B, 16, 10) + "Since this Game is in 'Hardcore Mode', the last time you saved will be your latest respawn point.");
+            System.out.println(String.format("%c[%d;%df", 0x1B, 16,
+              10) + "Since this Game is in 'Hardcore Mode', the last time you saved will be your latest respawn point.");
             System.out.println(String.format("%c[%d;%df", 0x1B, 17, 10) + "If you want to go on load your last savestate or create a new Character!");
             scanner.nextLine();
             player = null;      // After death the character is lost
