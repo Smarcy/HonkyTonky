@@ -1,7 +1,18 @@
 package honkytonky.controller;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
+
+import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
+import honkytonky.factories.WeaponFactory;
+import honkytonky.objects.Armor;
+import honkytonky.objects.Item;
 import honkytonky.objects.Player;
+import honkytonky.objects.Potion;
+import honkytonky.objects.Room;
+import honkytonky.objects.Weapon;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -59,4 +70,62 @@ public class JAXBController {
           .unmarshal(new FileReader("./rooms.xml"));
     }
 
+    /**
+     * Loads Rooms from most recent savestate and adjusts all rooms that are already in the game according to this information The savestate contains
+     * info about hasMonster and hasMerchant, so Monsters and Merchants don't respawn after reload
+     */
+    public static RoomFactory loadRooms(RoomFactory roomFactory) throws IOException, JAXBException {
+        RoomFactory tmpRoomFactory;
+
+        tmpRoomFactory = JAXBController.unmarshallRooms();
+
+        for (Room room : tmpRoomFactory.getRooms()) {
+            Room realRoom = roomFactory.getRoomByName(room.getName());
+            realRoom.setHasMerchant(room.isHasMerchant());
+            realRoom.setHasLivingMonster(room.isHasLivingMonster());
+        }
+        System.out.println(ANSI_CYAN + "\nRooms succesfully loaded!" + ANSI_RESET);
+        return roomFactory;
+    }
+
+    /**
+     * Loads Player from most recent savestate and prepares a fully compatible Player object
+     */
+    public static Player loadPlayer(WeaponFactory weaponFactory, ArmorFactory armorFactory, RoomFactory roomFactory, PotionFactory potionFactory,
+      PlayerController playerController, BattleController battleController) throws JAXBException, IOException {
+
+        Player dummy  = JAXBController.unmarshallPlayer();
+
+        // Extract real Items from "dummys"
+        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
+        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
+        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
+
+        Player player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
+        player.setHp(dummy.getHp());
+        player.setExperience(dummy.getExperience());
+        player.setLevel(dummy.getLevel());
+        player.setGold(dummy.getGold());
+        player.setDamage(dummy.getDamage());
+
+        // Retrieve Potions
+        int i = 0;
+        for (Item item : dummy.getInventory()) {
+            if (item instanceof Potion) {
+                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
+                Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
+                player.getInventory().add(dummyPotion);
+                player.getPlayersPotions().put(dummyPotion, potionValue);
+            } else if (!(item.equals(dummy.getArmor())) && !(item.equals(dummy.getWeapon()))) {
+                player.getInventory().add(item);
+            }
+            i++;
+        }
+
+        playerController.setPlayer(player);
+        battleController.setPlayer(player);
+
+        System.out.print(ANSI_CYAN + "Player succesfully loaded!" + ANSI_RESET);
+        return player;
+    }
 }

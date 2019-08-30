@@ -107,7 +107,8 @@ public class BattleController {
             }
             if (enemyAttacks(enemyAlive) && !playerFled) {
                 player.getWeapon().setDurability(player.getWeapon().getDurability() - durabilityLoss);
-                System.out.println("\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
+                System.out.println(             // Your Weapon lost X Durability
+                  "\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
                 scanner.nextLine();
                 clearScreen();
                 break;
@@ -197,12 +198,12 @@ public class BattleController {
 
         System.out.println(ANSI_YELLOW + "\nLoot:" + ANSI_RESET);
 
-        for(Item item : enemyMerchant.getItemsForSell()) {
+        for (Item item : enemyMerchant.getItemsForSell()) {
             System.out.println(item.getName());
 
             player.getInventory().add(item);
 
-            if(item instanceof Potion) {
+            if (item instanceof Potion) {
                 player.getPlayersPotions().put((Potion) item, player.getPlayersPotions().get(item) + 1);
             }
         }

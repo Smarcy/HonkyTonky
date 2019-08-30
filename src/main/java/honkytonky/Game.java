@@ -1,5 +1,6 @@
 package honkytonky;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
@@ -16,12 +17,7 @@ import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
 import honkytonky.misc.Cheats;
 import honkytonky.misc.ExpTable;
-import honkytonky.objects.Armor;
-import honkytonky.objects.Item;
 import honkytonky.objects.Player;
-import honkytonky.objects.Potion;
-import honkytonky.objects.Room;
-import honkytonky.objects.Weapon;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -34,11 +30,11 @@ public class Game {
     private final WeaponFactory weaponFactory                       = new WeaponFactory();
     private final ArmorFactory armorFactory                         = new ArmorFactory();
     private final PotionFactory potionFactory                       = new PotionFactory();
-    private final RoomFactory roomFactory                           = new RoomFactory();
     private final PlayerDialogController playerDialogController     = new PlayerDialogController();
     private final MerchantController merchantController             = new MerchantController();
     private final BattleController battleController                 = new BattleController();
     private final PlayerController playerController                 = new PlayerController();
+    private RoomFactory roomFactory                                 = new RoomFactory();
     private Player player                                           = null;
     // @formatter:on
 
@@ -94,8 +90,29 @@ public class Game {
                         player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                     case 3:
-                        loadRooms();
-                        loadPlayer();
+                        boolean playerSuccess = false;
+                        boolean roomsSuccess = false;
+                        try {
+                            roomFactory = JAXBController.loadRooms(roomFactory);    // load present Monsters/Merchants (killed) from CSV
+                            roomsSuccess = true;
+                        } catch (IOException | JAXBException e) {
+                            System.err.println(ANSI_RED + "\nCould not find rooms.xml savestate!" + ANSI_RESET);
+                        }
+                        try {
+                            player = JAXBController                                 // load Player from CSV savestate
+                              .loadPlayer(weaponFactory, armorFactory, roomFactory, potionFactory, playerController, battleController);
+                            playerSuccess = true;
+                            scanner.nextLine();
+                        } catch (IOException | JAXBException e) {
+                            System.err.println(ANSI_RED + "Could not find player.xml savestate!" + ANSI_RESET);
+                            scanner.nextLine();
+                        }
+                        if (roomsSuccess && playerSuccess) {
+                            clearScreen();
+                            gameLoop();
+                        } else {
+                            player = null;      // if at least one of the files could not be loaded, the player shouldn't be able to start the game
+                        }
                         break;
                 }
             } catch (NumberFormatException e) {
@@ -162,82 +179,5 @@ public class Game {
             }
             clearScreen();
         }
-    }
-
-    /**
-     * Loads Rooms from most recent savestate and adjusts all rooms that are already in the game according to this information The savestate contains
-     * info about hasMonster and hasMerchant, so Monsters and Merchants don't respawn after reload
-     */
-    private void loadRooms() {
-        RoomFactory tmpRoomFactory;
-        try {
-            tmpRoomFactory = JAXBController.unmarshallRooms();
-        } catch (JAXBException e) {
-            System.out.println("Something went wrong while loading the Rooms!");
-            scanner.nextLine();
-            return;
-        } catch (IOException e) {
-            System.out.println("Could not find savegame!");
-            scanner.nextLine();
-            return;
-        }
-
-        for (Room room : tmpRoomFactory.getRooms()) {
-            Room realRoom = roomFactory.getRoomByName(room.getName());
-            realRoom.setHasMerchant(room.isHasMerchant());
-            realRoom.setHasLivingMonster(room.isHasLivingMonster());
-        }
-    }
-
-    /**
-     * Loads Player from most recent savestate and prepares a fully compatible Player object
-     */
-    private void loadPlayer() {
-
-        Player dummy;
-        try {
-            dummy = JAXBController.unmarshallPlayer();
-        } catch (JAXBException e) {
-            System.out.println("Something went wrong while loading your Character!");
-            scanner.nextLine();
-            return;
-        } catch (IOException e) {
-            System.out.println("Could not find savegame!");
-            scanner.nextLine();
-            return;
-        }
-
-        // Extract real Items from "dummys"
-        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
-        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
-        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
-
-        player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
-
-        player.getCurrentRoom().setHasLivingMonster(dummy.getCurrentRoom().hasLivingMonster());
-        player.setHp(dummy.getHp());
-        player.setExperience(dummy.getExperience());
-        player.setLevel(dummy.getLevel());
-        player.setGold(dummy.getGold());
-        player.setDamage(dummy.getDamage());
-
-        // Retrieve Potions
-        int i = 0;
-        for (Item item : dummy.getInventory()) {
-            if (item instanceof Potion) {
-                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
-                Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
-                player.getInventory().add(dummyPotion);
-                player.getPlayersPotions().put(dummyPotion, potionValue);
-            } else if (!(item.equals(dummy.getArmor())) && !(item.equals(dummy.getWeapon()))) {
-                player.getInventory().add(item);
-            }
-            i++;
-        }
-
-        playerController.setPlayer(player);
-        battleController.setPlayer(player);
-        clearScreen();
-        gameLoop();
     }
 }
