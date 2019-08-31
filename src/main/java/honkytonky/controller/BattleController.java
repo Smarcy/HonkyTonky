@@ -250,6 +250,9 @@ public class BattleController {
         return monster.getGrantedExperience();
     }
 
+    /**
+     * Check whether the Player's Weapons Durability is <= 0 . if yes, it breaks and gets deleted from his inventory.
+     */
     void checkWeaponDurability() {
         if(player.getWeapon().getDurability() <= 0) {
             System.out.println("Your " + ANSI_RED + player.getWeapon() + ANSI_RESET + " broke!");

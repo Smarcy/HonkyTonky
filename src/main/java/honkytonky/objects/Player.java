@@ -147,9 +147,12 @@ public class Player extends Actor {
         while (ExpTable.hasLevelUp(this.getLevel(), this.experience)) {
             this.setLevel(getLevel() + 1);
 
+            this.setMaxHP(this.getMaxHP() + 5);
+            this.healPlayer(this.getMaxHP());
+
             System.out.println("\nYou have leveled up!");
             System.out.println("Your new Level is: " + ANSI_GREEN + this.getLevel() + ANSI_RESET);
-
+            System.out.println("Your maximal Health Points were increased by " + ANSI_GREEN + "5" + ANSI_RESET + "!");
         }
     }
 
