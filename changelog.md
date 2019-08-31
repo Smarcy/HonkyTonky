@@ -1,4 +1,5 @@
-<li>  (HEAD -> dev, tag: v0.7.0, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
+<li>  (HEAD -> dev, tag: v0.8.0, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/441958c349bca4724480729c21c83d3821abde94">view commit &bull;</a> Player gets rewarded for LevelUp with extra MaxHP</li> 
+<li>  (tag: v0.7.0, origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
 <li>  (tag: v0.6.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/35a7ed1a98f93e0e73af59188ae70f7a4c3062c4">view commit &bull;</a> Two-Handed Weapons now have slightly higher Durability loss than One-Handed</li> 
 <li>  (tag: v0.5.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/2d9787e9b5c3a59e625303d3a83f1d7007dca7ae">view commit &bull;</a> Player now loots all Items if he kills a Merchant</li> 
 <li>  (tag: v0.4.2) <a href="http://github.com/Smarcy/HonkyTonky/commit/d9a1c3f40b1aade78665e7c893d7da7e93780045">view commit &bull;</a> added Developer Cheats & refined checkForLevelUp()</li> 

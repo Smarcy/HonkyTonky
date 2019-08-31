@@ -1,7 +1,9 @@
-<li>  (HEAD -> dev, tag: v0.7.0, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
+<li>  (HEAD -> dev, tag: v0.8.0, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/441958c349bca4724480729c21c83d3821abde94">view commit &bull;</a> Player gets rewarded for LevelUp with extra MaxHP</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/6802dbb249ba93f1ba2c29d4cc3fd85ed9a71804">view commit &bull;</a> Weapons may now broke && durabilityLoss adjustment</li> 
+<li>  (tag: v0.7.0, origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/32df2809d6cbecee96f05d7b464d6481728b515b">view commit &bull;</a> added option to let all Monsters/Merchants respawn</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/0860ebbf8d64660ed651a28c0349e8534eb86fbf">view commit &bull;</a> Merchant now doesn't display directly when entering room</li> 
-<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/bbbc62f8fde65efd06b9b68a25584b040212640f">view commit &bull;</a> Player is now able to equip different Weapon and Armor</li> 
+<li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/bbbc62f8fde65efd06b9b68a25584b040212640f">view commit &bull;</a> Player is now able to equip different Weapon and Armor</li> 
 <li>  (tag: v0.6.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/35a7ed1a98f93e0e73af59188ae70f7a4c3062c4">view commit &bull;</a> Two-Handed Weapons now have slightly higher Durability loss than One-Handed</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/382918260cdcbad619f6bdbf8ca3c15c88c90985">view commit &bull;</a> extract loadPlayer & loadRoom + some design</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/9149d687393e0f4140068ec24c8279f798f7fbea">view commit &bull;</a> Weapons now lose Durability from fighting</li> 
