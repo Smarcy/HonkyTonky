@@ -150,7 +150,7 @@ public class Game {
                     case 1:
                         playerController.move(scanner, roomFactory);
                         battleController.checkRoomForMonster();
-                        battleController.checkRoomForMerchant(merchantController);
+                       // battleController.checkRoomForMerchant(merchantController);    // if activated - show merchant directly when entering room
                         break;
                     case 2:
                         playerDialogController.printUsePotionDialog(playerController);
