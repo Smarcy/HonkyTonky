@@ -63,7 +63,6 @@ public class MerchantController {
                 case 3:
                     battleController.startBattle(merchant);
                     run = false;
-                    scanner.nextLine();
                     break;
                 case 4:
                     run = false;

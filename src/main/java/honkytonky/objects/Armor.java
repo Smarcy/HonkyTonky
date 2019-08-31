@@ -4,7 +4,6 @@ import honkytonky.enumtypes.ArmorType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,7 +15,7 @@ public class Armor extends Item {
     /**
      * Damage absorption of the Armor
      */
-    @XmlTransient
+    @XmlElement
     private final int armorPoints;
     /**
      * current durability of the Armor
@@ -26,12 +25,12 @@ public class Armor extends Item {
     /**
      * maximum durability of the Armor
      */
-    @XmlTransient
+    @XmlElement
     private final int maxDurability;
     /**
      * Type of the Armor
      */
-    @XmlTransient
+    @XmlElement
     private final ArmorType armorType;
 
     //Needed for JAXB
@@ -62,6 +61,8 @@ public class Armor extends Item {
         this.armorType      = armorType;
         //@formatter:on
     }
+
+
 
     @Override
     public String toString() {

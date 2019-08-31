@@ -83,12 +83,13 @@ public class BattleController {
             try {
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
-                        durabilityLoss += (player.getWeapon().isTwoHanded()) ? (player.getWeapon().getDurability() * 0.07)
-                          : (player.getWeapon().getDurability() * 0.05); // Two-Handed Weapon have slightly higher durability loss (for doing more dmg)
+                        durabilityLoss += (player.getWeapon().isTwoHanded())    // cumulate durability loss during a fight and decrease after fight all at once
+                          ? (player.getWeapon().getDurability() * 0.07)    // Two-Handed Weapon have slightly higher durability loss (for doing more dmg)
+                          : (player.getWeapon().getDurability() * 0.05);   // One-Handed Weapon have slightly lower durability loss (for doing less dmg)
                         enemyAlive = playerAttacks();
                         break;
                     case 2:
-                        playerDefends();
+                        playerDefends();    // player gets temporary def boost for one round
                         clearScreen();
                         break;
                     case 3:
@@ -152,7 +153,7 @@ public class BattleController {
         if (monsterAlive) {
             int rng = enemy.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
-              .getTemporaryDefBoost();
+                  .getTemporaryDefBoost();
 
             monsterDamage = Math.max(monsterDamage, 0);
 

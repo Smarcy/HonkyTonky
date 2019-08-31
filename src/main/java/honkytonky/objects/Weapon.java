@@ -4,7 +4,6 @@ import honkytonky.enumtypes.WeaponType;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -18,7 +17,7 @@ public class Weapon extends Item {
     /**
      * Damage done by the Weapon
      */
-    @XmlTransient
+    @XmlElement
     private int damage;
     /**
      * current durability of the Weapon
@@ -28,17 +27,17 @@ public class Weapon extends Item {
     /**
      * maximum durability of the Weapon
      */
-    @XmlTransient
+    @XmlElement
     private int maxDurability;
     /**
      * true if the Weapon is Two-Handed, false if One-Handed
      */
-    @XmlTransient
+    @XmlElement
     private boolean twoHanded; // false = onehanded, true = twohanded
     /**
      * Type of the Weapon
      */
-    @XmlTransient
+    @XmlElement
     private WeaponType weaponType;
 
     /**

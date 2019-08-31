@@ -1,14 +1,17 @@
 package honkytonky.controller;
 
+import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.misc.CharacterInfoPattern;
+import honkytonky.objects.Armor;
 import honkytonky.objects.Player;
 import honkytonky.objects.Potion;
-import java.util.InputMismatchException;
+import honkytonky.objects.Weapon;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,43 +69,67 @@ public class PlayerDialogController {
      */
     public void printInventoryDialog(PlayerController playerController) {
         clearScreen();
+        System.out.println(ANSI_RED + "Weapons:" + ANSI_RESET);
+        playerController.showInventory("weapons");
+        System.out.println(ANSI_CYAN + "w) Equip another Weapon" + ANSI_RESET);
 
-        if (player.getInventory().size() < 30) {
-            System.out.println(ANSI_RED + "Weapons:" + ANSI_RESET);
-            playerController.showInventory("weapons");
-            System.out.println(ANSI_RED + "\nArmors:" + ANSI_RESET);
-            playerController.showInventory("armors");
-            System.out.println(ANSI_RED + "\nPotions:" + ANSI_RESET);
-            playerController.showInventory("potions");
-        } else {
-            System.out.println("What kind of items would you like to see?\n");
-            System.out.println("1) Weapons");
-            System.out.println("2) Armors");
-            System.out.println("3) Potions");
+        System.out.println(ANSI_RED + "\nArmors:" + ANSI_RESET);
+        playerController.showInventory("armors");
+        System.out.println(ANSI_CYAN + "a) Equip another Armor" + ANSI_RESET);
 
-            try {
-                int option = Integer.parseInt(scanner.nextLine());
-                clearScreen();
+        System.out.println(ANSI_RED + "\nPotions:" + ANSI_RESET);
+        playerController.showInventory("potions");
 
-                switch (option) {
-                    case 1:
-                        playerController.showInventory("weapons");
-                        break;
-                    case 2:
-                        playerController.showInventory("armors");
-                        break;
-                    case 3:
-                        playerController.showInventory("potions");
-                        break;
-                    default:
-                        printInventoryDialog(playerController);
-                        break;
-                }
-            } catch (InputMismatchException | NumberFormatException e) {
-                printInventoryDialog(playerController);
+        switch (scanner.nextLine()) {
+            case "w":
+                equipOtherWeapon();
+                break;
+            case "a":
+                equipOtherArmor();
+                break;
+        }
+    }
+
+    /**
+     * shows all Armors in Players inventory and lets him choose one to equip
+     */
+    private void equipOtherArmor() {
+        clearScreen();
+        int option = 1;
+        List<Armor> tmpArmorList = new ArrayList<>();       // needed for counting correct later
+
+        System.out.println("Which Armor would you like to equip?\n");
+
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            if (player.getInventory().get(i) instanceof Armor) {
+                tmpArmorList.add((Armor) player.getInventory().get(i));
+                System.out.println(option + ") " + player.getInventory().get(i));
+                option++;
             }
         }
-        scanner.nextLine();
+        option = Integer.parseInt(scanner.nextLine());
+        player.setArmor(tmpArmorList.get(option - 1));
+    }
+
+    /**
+     * lets the Player choose from all his weapons and choose one to equip
+     */
+    private void equipOtherWeapon() {
+        clearScreen();
+        int option = 1;
+        List<Weapon> tmpWeaponList = new ArrayList<>();     // needed for counting correct later
+
+        System.out.println("Which Weapon would you like to equip?\n");
+
+        for (int i = 0; i < player.getInventory().size(); i++) {
+            if (player.getInventory().get(i) instanceof Weapon) {
+                tmpWeaponList.add((Weapon) player.getInventory().get(i));
+                System.out.println(option + ") " + player.getInventory().get(i));
+                option++;
+            }
+        }
+        option = Integer.parseInt(scanner.nextLine());
+        player.setWeapon(tmpWeaponList.get(option - 1));
     }
 
     /**

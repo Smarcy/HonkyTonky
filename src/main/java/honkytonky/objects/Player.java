@@ -118,6 +118,11 @@ public class Player extends Actor {
         }
     }
 
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+        this.setDamage(this.weapon.getDamage());
+    }
+
     /**
      * reset the temporary armor points boost
      */
