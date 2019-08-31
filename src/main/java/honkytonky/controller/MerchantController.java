@@ -136,6 +136,11 @@ public class MerchantController {
         }
     }
 
+    /**
+     * Remove Item from Players Inventory and raise his Gold by the Amount of the sold item
+     *
+     * @param choice which Item the Player chose to sell
+     */
     void sellToMerchant(int choice) {
         List<Item> sellableItems = new ArrayList<>();
 
@@ -151,7 +156,6 @@ public class MerchantController {
             int currentAmountOfPotion = player.getPlayersPotions().get(itemToSell);
             player.getPlayersPotions().put((Potion) itemToSell, currentAmountOfPotion - 1);
         }
-
         player.setGold(player.getGold() + itemToSell.getValue());   // raise players gold
 
         System.out.println("You successfully sold " + ANSI_PURPLE + itemToSell + ANSI_RESET + " and received " + ANSI_PURPLE + itemToSell

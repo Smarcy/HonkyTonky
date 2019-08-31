@@ -14,6 +14,7 @@ import honkytonky.objects.Merchant;
 import honkytonky.objects.Monster;
 import honkytonky.objects.Player;
 import honkytonky.objects.Potion;
+import honkytonky.objects.Weapon;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -69,6 +70,7 @@ public class BattleController {
         boolean enemyAlive = true;
         this.enemy = enemy;
         int durabilityLoss = 0;
+        double currentRoundDurabilityLoss = 0;
 
         System.out.println("You encountered " + ANSI_RED + enemy + ANSI_RESET + "!\n");
 
@@ -83,9 +85,19 @@ public class BattleController {
             try {
                 switch (Integer.parseInt(scanner.nextLine())) {
                     case 1:
-                        durabilityLoss += (player.getWeapon().isTwoHanded())    // cumulate durability loss during a fight and decrease after fight all at once
-                          ? (player.getWeapon().getDurability() * 0.07)    // Two-Handed Weapon have slightly higher durability loss (for doing more dmg)
-                          : (player.getWeapon().getDurability() * 0.05);   // One-Handed Weapon have slightly lower durability loss (for doing less dmg)
+                        currentRoundDurabilityLoss =
+                          (player.getWeapon().isTwoHanded())    // cumulate durability loss during a fight and decrease after fight all at once
+                            ? (player.getWeapon().getMaxDurability() * 0.02)
+                            // Two-Handed Weapon have slightly higher durability loss (for doing more dmg)
+                            : (player.getWeapon()
+                              .getMaxDurability() * 0.01);   // One-Handed Weapon have slightly lower durability loss (for doing less dmg)
+
+                        if(!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
+                            player.getWeapon().setDurability(player.getWeapon().getDurability() - (int) currentRoundDurabilityLoss);
+                        }
+
+                        durabilityLoss += currentRoundDurabilityLoss;
+                        checkWeaponDurability();
                         enemyAlive = playerAttacks();
                         break;
                     case 2:
@@ -108,9 +120,10 @@ public class BattleController {
                 break;
             }
             if (enemyAttacks(enemyAlive) && !playerFled) {
-                player.getWeapon().setDurability(player.getWeapon().getDurability() - durabilityLoss);
-                System.out.println(             // Your Weapon lost X Durability
-                  "\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
+                if(!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
+                    System.out.println(             // Your Weapon lost X Durability
+                      "\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
+                }
                 scanner.nextLine();
                 clearScreen();
                 break;
@@ -126,7 +139,7 @@ public class BattleController {
     private boolean playerAttacks() {
         clearScreen();
 
-        int wepDMG = player.getWeapon().getDamage();
+        int wepDMG = player.getDamage();
         int rng = rnd.nextInt(wepDMG + 2) + 1;
         int dmg = wepDMG + rng;
 
@@ -153,7 +166,7 @@ public class BattleController {
         if (monsterAlive) {
             int rng = enemy.getDamage() + (rnd.nextInt(2) + 1);
             int monsterDamage = rng - player.getArmor().getArmorPoints() - player
-                  .getTemporaryDefBoost();
+              .getTemporaryDefBoost();
 
             monsterDamage = Math.max(monsterDamage, 0);
 
@@ -235,6 +248,16 @@ public class BattleController {
      */
     private int calculateExperienceReward() {
         return monster.getGrantedExperience();
+    }
+
+    void checkWeaponDurability() {
+        if(player.getWeapon().getDurability() <= 0) {
+            System.out.println("Your " + ANSI_RED + player.getWeapon() + ANSI_RESET + " broke!");
+            player.getInventory().remove(player.getWeapon());
+            player.setWeapon(new Weapon(1337, "Fist", null, 1, 1, 1, 0, false));
+
+            scanner.nextLine();
+        }
     }
 
     /**
