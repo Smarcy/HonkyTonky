@@ -10,6 +10,8 @@ import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;
 import honkytonky.objects.Potion;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class MerchantController {
@@ -33,7 +35,7 @@ public class MerchantController {
      * @param player the player object
      * @param battleController instance of BattleController (needed if the player chooses to fight the merchant)
      */
-    void printMerchantDialog(Player player, BattleController battleController) {
+    void printMerchantDialog(Player player, BattleController battleController, PlayerController playerController) {
         this.player = player;
         boolean run = true;
 
@@ -43,9 +45,10 @@ public class MerchantController {
 
             System.out.println("Hello, my name is " + ANSI_YELLOW + merchant + ANSI_RESET + "\n");
             System.out.println("1) Talk to " + ANSI_YELLOW + merchant + ANSI_RESET);
-            System.out.println("2) Trade with " + ANSI_YELLOW + merchant + ANSI_RESET);
-            System.out.println("3) Attack " + ANSI_YELLOW + merchant + ANSI_RESET);
-            System.out.println("4) Leave " + ANSI_YELLOW + merchant + ANSI_RESET + " alone");
+            System.out.println("2) Buy from " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("3) Sell to " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("4) Attack " + ANSI_YELLOW + merchant + ANSI_RESET);
+            System.out.println("5) Leave " + ANSI_YELLOW + merchant + ANSI_RESET + " alone");
 
             switch (Integer.parseInt(scanner.nextLine())) {
                 case 1:
@@ -56,15 +59,22 @@ public class MerchantController {
                 case 2:
                     int choice = printItemsForSell(merchant);
                     if (choice != -1) {
-                        tradeWithMerchant(choice);
+                        buyFromMerchant(choice);
                         scanner.nextLine();
                     }
                     break;
                 case 3:
+                    int sellChoice = playerController.listSellableItems();
+                    if (sellChoice != -1) {
+                        sellToMerchant(sellChoice);
+                        scanner.nextLine();
+                    }
+                    break;
+                case 4:
                     battleController.startBattle(merchant);
                     run = false;
                     break;
-                case 4:
+                case 5:
                     run = false;
                     break;
             }
@@ -107,14 +117,14 @@ public class MerchantController {
      *
      * @param choice ID of Item in Merchants inventory (+1)
      */
-    void tradeWithMerchant(int choice) {
+    void buyFromMerchant(int choice) {
         Item itemToBuy = merchant.getItemsForSell().get(choice - 1);
 
         if (player.getGold() >= itemToBuy.getValue()) {     // does Player have enough gold?
             player.getInventory().add(itemToBuy);           // add Item to inventory
             merchant.removeItemFromShop(itemToBuy);         // remove from Merchants shop
             player.giveGold(-itemToBuy.getValue());         // "giveGold" with a negative amount = reduce players gold
-            System.out.println("You succesfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
+            System.out.println("You successfully purchased " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
 
             if (itemToBuy instanceof Potion) {   // If player is buying a potion, additionally add it to players potionmap
                 if (player.getPlayersPotions().containsKey(itemToBuy)) {
@@ -124,5 +134,31 @@ public class MerchantController {
         } else {
             System.out.println("You don't have enough gold to purchase " + ANSI_PURPLE + itemToBuy.getName() + ANSI_RESET + "!");
         }
+    }
+
+    void sellToMerchant(int choice) {
+        List<Item> sellableItems = new ArrayList<>();
+
+        for (Item i : player.getInventory()) {
+            if ((!i.equals(player.getWeapon())) && (!i.equals(player.getArmor()))) {    // Don't add equipped Items
+                sellableItems.add(i);
+            }
+        }
+        Item itemToSell = sellableItems.get(choice - 1);
+        player.getInventory().remove(itemToSell);
+
+        if (itemToSell instanceof Potion) {     // If Item is a Potion it needs to be added to PlayersPotion as well
+            int currentAmountOfPotion = player.getPlayersPotions().get(itemToSell);
+            player.getPlayersPotions().put((Potion) itemToSell, currentAmountOfPotion - 1);
+        }
+
+        player.setGold(player.getGold() + itemToSell.getValue());   // raise players gold
+
+        System.out.println("You successfully sold " + ANSI_PURPLE + itemToSell + ANSI_RESET + " and received " + ANSI_PURPLE + itemToSell
+          .getValue() + " Gold!" + ANSI_RESET);
+
+        itemToSell.setValue(itemToSell.getValue() + 10);    // raise price and
+        merchant.addItemToShop(itemToSell);                 // add Item to Merchant Shop
+
     }
 }

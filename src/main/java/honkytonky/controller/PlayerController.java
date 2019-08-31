@@ -129,6 +129,28 @@ public class PlayerController {
         }
     }
 
+    int listSellableItems() {
+        clearScreen();
+        int option = 1;
+        System.out.println("Which Item would you like to sell? \n");
+        for (Item i : player.getInventory()) {
+            if ((!i.equals(player.getWeapon())) && (!i.equals(player.getArmor()))) {    // Don't display equipped Items
+                System.out.println(option + ") " + i.getName() + " (" + i.getValue() + " Gold)");
+            }
+        }
+        System.out.println((option + 1) + ") Sell None");
+
+        int choice = Integer.parseInt(scanner.nextLine());
+        if (choice == option + 1) {                        // chose to Sell None
+            return -1;
+        } else if (choice > 0 && choice <= option) {    // choice matches an Item
+            return choice;
+        } else {                                        // no match -> show again
+            listSellableItems();
+        }
+        return choice;
+    }
+
     /**
      * Count how many Potions player has of each
      *

@@ -168,7 +168,7 @@ public class Game {
                         JAXBController.RoomsToXML(roomFactory);
                         System.exit(0);
                     case 6:
-                        battleController.checkRoomForMerchant(merchantController);
+                        battleController.checkRoomForMerchant(merchantController, playerController);
                         break;
                     case 0:
                         CreateWorld.wipeWorld();

@@ -292,9 +292,9 @@ public class BattleController {
      *
      * @param merchantController instance of MerchantController
      */
-    public void checkRoomForMerchant(MerchantController merchantController) {
+    public void checkRoomForMerchant(MerchantController merchantController, PlayerController playerController) {
         if (player.getCurrentRoom().hasMerchant()) {
-            merchantController.printMerchantDialog(player, this);
+            merchantController.printMerchantDialog(player, this, playerController);
         }
     }
 }
