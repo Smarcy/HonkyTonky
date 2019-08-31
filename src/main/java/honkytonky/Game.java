@@ -138,8 +138,10 @@ public class Game {
             System.out.println("4) Show Inventory");
             System.out.println("5) Save & Exit");
             if (player.getCurrentRoom().hasMerchant()) {
-                System.out.println("6) Talk to " + ANSI_YELLOW + player.getCurrentRoom()
+                System.out.println("6) Talk to " + ANSI_YELLOW + player.getCurrentRoom()    // If Merchant is present, offer option to talk to him
                   .getPresentMerchant() + ANSI_RESET);
+            } else if(player.getCurrentRoom().getName().equals("Living Room")) {        // Living Room gives option to respawn all Merchants/Monsters
+                System.out.println("0) Let all Monsters and Merchants respawn");
             }
             System.out.print("\n> ");
 
@@ -168,10 +170,16 @@ public class Game {
                     case 6:
                         battleController.checkRoomForMerchant(merchantController);
                         break;
+                    case 0:
+                        CreateWorld.wipeWorld();
+                        roomFactory = new RoomFactory();        // Rooms gotta be present to read all other files!
+                        CreateWorld.populateWorld(roomFactory);
+                        break;
                     case 1337:
                         Cheats.increaseGold(player);
                         Cheats.increaseExperience(player);
                         Cheats.increaseDamage(player);
+                        break;
                 }
             } catch (InputMismatchException | NumberFormatException | JAXBException e) {
                 clearScreen();

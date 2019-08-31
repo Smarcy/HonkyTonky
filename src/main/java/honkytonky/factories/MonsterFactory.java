@@ -15,7 +15,7 @@ public class MonsterFactory {
     /**
      * List that contains every Monster in the game
      */
-    private final List<Monster> monsterList = new ArrayList<>();
+    private List<Monster> monsterList = new ArrayList<>();
     /**
      * Needed to attach a Monster to a specific Room
      */
@@ -73,5 +73,9 @@ public class MonsterFactory {
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei monsters!");
         }
+    }
+
+    public void wipeMonsters() {
+        monsterList = new ArrayList<>();
     }
 }

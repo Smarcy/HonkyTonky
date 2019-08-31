@@ -15,7 +15,7 @@ public class MerchantFactory {
     /**
      * List that contains every Merchant in the game
      */
-    private final List<Merchant> merchants = new ArrayList<>();
+    private List<Merchant> merchants = new ArrayList<>();
     /**
      * Instance of RoomFactory to attach a Merchant to a specific Room
      */
@@ -106,5 +106,9 @@ public class MerchantFactory {
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchantitems!");
         }
+    }
+
+    public void wipeMerchants() {
+        merchants = new ArrayList<>();
     }
 }

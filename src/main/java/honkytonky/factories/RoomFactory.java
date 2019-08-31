@@ -23,7 +23,7 @@ public class RoomFactory {
      */
     @XmlElementWrapper(name = "rooms")
     @XmlElement(name = "room")
-    private final List<Room> rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
 
     /**
      * read all Rooms from CSV-File
@@ -70,5 +70,9 @@ public class RoomFactory {
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei rooms!");
         }
+    }
+
+    public void wipeRooms() {
+        rooms = new ArrayList<>();
     }
 }

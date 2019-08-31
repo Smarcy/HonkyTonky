@@ -14,7 +14,7 @@ public class DoorFactory {
     /**
      * List that contains every Door in the game
      */
-    private final List<Door> doors = new ArrayList<>();
+    private List<Door> doors = new ArrayList<>();
     /**
      * Needed to attach a Door to a specific Room
      */
@@ -69,5 +69,9 @@ public class DoorFactory {
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei doors!");
         }
+    }
+
+    public void wipeDoors() {
+        doors = new ArrayList<>();
     }
 }
