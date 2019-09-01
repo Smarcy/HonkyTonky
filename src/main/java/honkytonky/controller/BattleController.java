@@ -92,7 +92,7 @@ public class BattleController {
                             : (player.getWeapon()
                               .getMaxDurability() * 0.01);   // One-Handed Weapon have slightly lower durability loss (for doing less dmg)
 
-                        if(!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
+                        if (!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
                             player.getWeapon().setDurability(player.getWeapon().getDurability() - (int) currentRoundDurabilityLoss);
                         }
 
@@ -120,7 +120,7 @@ public class BattleController {
                 break;
             }
             if (enemyAttacks(enemyAlive) && !playerFled) {
-                if(!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
+                if (!player.getWeapon().getName().equals("Fist")) {      // Fist does not lose durability
                     System.out.println(             // Your Weapon lost X Durability
                       "\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
                 }
@@ -254,7 +254,7 @@ public class BattleController {
      * Check whether the Player's Weapons Durability is <= 0 . if yes, it breaks and gets deleted from his inventory.
      */
     void checkWeaponDurability() {
-        if(player.getWeapon().getDurability() <= 0) {
+        if (player.getWeapon().getDurability() <= 0) {
             System.out.println("Your " + ANSI_RED + player.getWeapon() + ANSI_RESET + " broke!");
             player.getInventory().remove(player.getWeapon());
             player.setWeapon(new Weapon(1337, "Fist", null, 1, 1, 1, 0, false));

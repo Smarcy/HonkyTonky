@@ -25,18 +25,16 @@ import javax.xml.bind.JAXBException;
 
 public class Game {
 
-    // @formatter:off
-    private final Scanner scanner                                   = new Scanner(System.in);
-    private final WeaponFactory weaponFactory                       = new WeaponFactory();
-    private final ArmorFactory armorFactory                         = new ArmorFactory();
-    private final PotionFactory potionFactory                       = new PotionFactory();
-    private final PlayerDialogController playerDialogController     = new PlayerDialogController();
-    private final MerchantController merchantController             = new MerchantController();
-    private final BattleController battleController                 = new BattleController();
-    private final PlayerController playerController                 = new PlayerController();
-    private RoomFactory roomFactory                                 = new RoomFactory();
-    private Player player                                           = null;
-    // @formatter:on
+    private final Scanner scanner = new Scanner(System.in);
+    private WeaponFactory weaponFactory;
+    private ArmorFactory armorFactory;
+    private PotionFactory potionFactory;
+    private PlayerDialogController playerDialogController;
+    private MerchantController merchantController;
+    private BattleController battleController;
+    private PlayerController playerController;
+    private RoomFactory roomFactory;
+    private Player player = null;
 
     public static void main(String[] args) {
         Game game = new Game();
@@ -44,9 +42,22 @@ public class Game {
         game.showIntro();
     }
 
+    /**
+     * Create all the Factories that build up the World - just plain everything gets created!
+     */
     private void setUpWorld() {
+        //@formatter:off
         ExpTable.createLevels();                // create levels with gradually increasing needed Exp
-        CreateWorld.populateWorld(roomFactory); // create all needed Factories / read CSV files
+        CreateWorld.populateWorld(); // create all needed Factories / read CSV files
+        weaponFactory          = CreateWorld.getWeaponFactory();
+        armorFactory           = CreateWorld.getArmorFactory();
+        potionFactory          = CreateWorld.getPotionFactory();
+        playerDialogController = CreateWorld.getPlayerDialogController();
+        merchantController     = CreateWorld.getMerchantController();
+        battleController       = CreateWorld.getBattleController();
+        playerController       = CreateWorld.getPlayerController();
+        roomFactory            = CreateWorld.getRoomFactory();
+        //@formaatter:on
     }
 
     /**
@@ -140,7 +151,7 @@ public class Game {
             if (player.getCurrentRoom().hasMerchant()) {
                 System.out.println("6) Talk to " + ANSI_YELLOW + player.getCurrentRoom()    // If Merchant is present, offer option to talk to him
                   .getPresentMerchant() + ANSI_RESET);
-            } else if(player.getCurrentRoom().getName().equals("Living Room")) {        // Living Room gives option to respawn all Merchants/Monsters
+            } else if (player.getCurrentRoom().getName().equals("Living Room")) {        // Living Room gives option to respawn all Merchants/Monsters
                 System.out.println("0) Let all Monsters and Merchants respawn");
             }
             System.out.print("\n> ");
@@ -152,7 +163,7 @@ public class Game {
                     case 1:
                         playerController.move(scanner, roomFactory);
                         battleController.checkRoomForMonster();
-                       // battleController.checkRoomForMerchant(merchantController);    // if activated - show merchant directly when entering room
+                        // battleController.checkRoomForMerchant(merchantController);    // if activated - show merchant directly when entering room
                         break;
                     case 2:
                         playerDialogController.printUsePotionDialog(playerController);
@@ -173,7 +184,7 @@ public class Game {
                     case 0:
                         CreateWorld.wipeWorld();
                         roomFactory = new RoomFactory();        // Rooms gotta be present to read all other files!
-                        CreateWorld.populateWorld(roomFactory);
+                        CreateWorld.populateWorld();
                         break;
                     case 1337:
                         Cheats.increaseGold(player);
