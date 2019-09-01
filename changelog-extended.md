@@ -1,6 +1,8 @@
-<li>  (HEAD -> dev, tag: v0.8.0, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/441958c349bca4724480729c21c83d3821abde94">view commit &bull;</a> Player gets rewarded for LevelUp with extra MaxHP</li> 
+<li>  (HEAD -> dev, origin/dev) <a href="http://github.com/Smarcy/HonkyTonky/commit/68208f3d8c184ef23f9f8c5f4e438ced3624934a">view commit &bull;</a> some design choices</li> 
+<li>  (origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/7b34850fbd178fd67f598073e0f58e65e65e7edd">view commit &bull;</a> update changelog</li> 
+<li>  (tag: v0.8.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/441958c349bca4724480729c21c83d3821abde94">view commit &bull;</a> Player gets rewarded for LevelUp with extra MaxHP</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/6802dbb249ba93f1ba2c29d4cc3fd85ed9a71804">view commit &bull;</a> Weapons may now broke && durabilityLoss adjustment</li> 
-<li>  (tag: v0.7.0, origin/master, origin/HEAD, master) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
+<li>  (tag: v0.7.0) <a href="http://github.com/Smarcy/HonkyTonky/commit/0a53e828f3a3d903db6835694cd271039186eca9">view commit &bull;</a> Player is now able to sell Items to Merchants</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/32df2809d6cbecee96f05d7b464d6481728b515b">view commit &bull;</a> added option to let all Monsters/Merchants respawn</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/0860ebbf8d64660ed651a28c0349e8534eb86fbf">view commit &bull;</a> Merchant now doesn't display directly when entering room</li> 
 <li>  <a href="http://github.com/Smarcy/HonkyTonky/commit/bbbc62f8fde65efd06b9b68a25584b040212640f">view commit &bull;</a> Player is now able to equip different Weapon and Armor</li> 

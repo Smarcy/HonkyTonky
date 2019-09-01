@@ -39,6 +39,9 @@ public class CreateWorld {
         //@formatter:on
     }
 
+    /**
+     * delete everything in the world - only useable if the very next methodcall is 'populateWorld()' !!!
+     */
     public static void wipeWorld() {
         doorFactory.wipeDoors();
         monsterFactory.wipeMonsters();
