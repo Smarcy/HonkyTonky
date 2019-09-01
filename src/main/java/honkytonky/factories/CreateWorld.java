@@ -20,6 +20,10 @@ public class CreateWorld {
     private static BattleController battleController;
     private static PlayerController playerController;
 
+    public static void setRoomFactory(RoomFactory roomFactory) {
+        CreateWorld.roomFactory = roomFactory;
+    }
+
     /**
      * reads all needed CSV files to populate the World with Monsters, Doors, Merchants
      */

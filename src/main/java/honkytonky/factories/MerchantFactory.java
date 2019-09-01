@@ -17,16 +17,10 @@ public class MerchantFactory {
      */
     private List<Merchant> merchants = new ArrayList<>();
     /**
-     * Instance of RoomFactory to attach a Merchant to a specific Room
-     */
-    private final RoomFactory roomFactory;
-
-    /**
      * read all Merchants from CSV-File
      *
      */
     public MerchantFactory() {
-        this.roomFactory = CreateWorld.getRoomFactory();
         createMerchantsFromFile();
         addItemsFromFileToMerchant();
     }
@@ -68,7 +62,7 @@ public class MerchantFactory {
                   Integer.parseInt(nextRecord[5]),   // grantedGold
                   nextRecord[7]                     // smalltalk
                 ));
-                roomFactory.getRoomByName(nextRecord[6]).addMerchant(currMerchant);
+                CreateWorld.getRoomFactory().getRoomByName(nextRecord[6]).addMerchant(currMerchant);
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchants!");

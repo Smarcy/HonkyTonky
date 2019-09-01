@@ -1,20 +1,20 @@
 package honkytonky;
 
+import static honkytonky.factories.CreateWorld.getBattleController;
+import static honkytonky.factories.CreateWorld.getPlayerController;
+import static honkytonky.factories.CreateWorld.getPlayerDialogController;
+import static honkytonky.factories.CreateWorld.getPotionFactory;
+import static honkytonky.factories.CreateWorld.getRoomFactory;
+import static honkytonky.factories.CreateWorld.populateWorld;
+import static honkytonky.factories.CreateWorld.setRoomFactory;
+import static honkytonky.factories.CreateWorld.wipeWorld;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
-import honkytonky.controller.BattleController;
 import honkytonky.controller.JAXBController;
-import honkytonky.controller.MerchantController;
-import honkytonky.controller.PlayerController;
-import honkytonky.controller.PlayerDialogController;
-import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.CreateWorld;
-import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
-import honkytonky.factories.WeaponFactory;
 import honkytonky.misc.Cheats;
 import honkytonky.misc.ExpTable;
 import honkytonky.objects.Player;
@@ -26,11 +26,6 @@ import javax.xml.bind.JAXBException;
 public class Game {
 
     private final Scanner scanner = new Scanner(System.in);
-    private PotionFactory potionFactory;
-    private PlayerDialogController playerDialogController;
-    private BattleController battleController;
-    private PlayerController playerController;
-    private RoomFactory roomFactory;
     private Player player = null;
 
     public static void main(String[] args) {
@@ -44,13 +39,8 @@ public class Game {
      */
     private void setUpWorld() {
         //@formatter:off
-        ExpTable.createLevels();                // create levels with gradually increasing needed Exp
-        CreateWorld.populateWorld(); // create all needed Factories / read CSV files
-        potionFactory          = CreateWorld.getPotionFactory();
-        playerDialogController = CreateWorld.getPlayerDialogController();
-        battleController       = CreateWorld.getBattleController();
-        playerController       = CreateWorld.getPlayerController();
-        roomFactory            = CreateWorld.getRoomFactory();
+        ExpTable.createLevels();   // create levels with gradually increasing needed Exp
+        populateWorld();           // create all needed Factories / read CSV files
         //@formaatter:on
     }
 
@@ -86,18 +76,18 @@ public class Game {
                         }
                         break;
                     case 2:
-                        player = playerController
+                        player = getPlayerController()
                           .createPlayer();
 
-                        player.getInventory().add(potionFactory.getPotionByName("Small Health Potion")); // give Player startPotion
-                        player.getPlayersPotions().put(potionFactory.getPotionByName("Small Health Potion"), 1);
-                        player.setCurrentRoom(roomFactory.getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
+                        player.getInventory().add(getPotionFactory().getPotionByName("Small Health Potion")); // give Player startPotion
+                        player.getPlayersPotions().put(getPotionFactory().getPotionByName("Small Health Potion"), 1);
+                        player.setCurrentRoom(getRoomFactory().getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                     case 3:
                         boolean playerSuccess = false;
                         boolean roomsSuccess = false;
                         try {
-                            roomFactory = JAXBController.loadRooms();    // load present Monsters/Merchants (killed) from CSV
+                            JAXBController.loadRooms();    // load present Monsters/Merchants (killed) from CSV
                             roomsSuccess = true;
                         } catch (IOException | JAXBException e) {
                             System.err.println(ANSI_RED + "\nCould not find rooms.xml savestate!" + ANSI_RESET);
@@ -130,10 +120,10 @@ public class Game {
      */
     private void gameLoop() {
 
-        playerDialogController.setPlayer(player);
+        getPlayerDialogController().setPlayer(player);
 
         while (true) {
-            playerDialogController.printCurrentLocation();
+            getPlayerDialogController().printCurrentLocation();
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
@@ -154,30 +144,30 @@ public class Game {
 
                 switch (option) {
                     case 1:
-                        playerController.move(scanner);
-                        battleController.checkRoomForMonster();
+                        getPlayerController().move(scanner);
+                        getBattleController().checkRoomForMonster();
                         // battleController.checkRoomForMerchant(merchantController);    // if activated - show merchant directly when entering room
                         break;
                     case 2:
-                        playerDialogController.printUsePotionDialog();
+                        getPlayerDialogController().printUsePotionDialog();
                         break;
                     case 3:
-                        playerDialogController.printCharacterInfo();
+                        getPlayerDialogController().printCharacterInfo();
                         break;
                     case 4:
-                        playerDialogController.printInventoryDialog();
+                        getPlayerDialogController().printInventoryDialog();
                         break;
                     case 5:
                         JAXBController.PlayerToXML(player);
                         JAXBController.RoomsToXML();
                         System.exit(0);
                     case 6:
-                        battleController.checkRoomForMerchant();
+                        getBattleController().checkRoomForMerchant();
                         break;
                     case 0:
-                        CreateWorld.wipeWorld();
-                        roomFactory = new RoomFactory();        // Rooms gotta be present to read all other files!
-                        CreateWorld.populateWorld();
+                        wipeWorld();
+                        setRoomFactory(new RoomFactory());        // Rooms gotta be present to read all other files!
+                        populateWorld();
                         break;
                     case 1337:
                         Cheats.increaseGold(player);

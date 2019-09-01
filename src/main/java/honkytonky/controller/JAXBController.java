@@ -1,13 +1,15 @@
 package honkytonky.controller;
 
+import static honkytonky.factories.CreateWorld.getArmorFactory;
+import static honkytonky.factories.CreateWorld.getBattleController;
+import static honkytonky.factories.CreateWorld.getPlayerController;
+import static honkytonky.factories.CreateWorld.getPotionFactory;
+import static honkytonky.factories.CreateWorld.getRoomFactory;
+import static honkytonky.factories.CreateWorld.getWeaponFactory;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
-import honkytonky.factories.ArmorFactory;
-import honkytonky.factories.CreateWorld;
-import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
-import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Item;
 import honkytonky.objects.Player;
@@ -39,7 +41,7 @@ public class JAXBController {
      * save the current state of all Rooms to XML
      */
     public static void RoomsToXML() throws JAXBException {
-        RoomFactory roomFactory = CreateWorld.getRoomFactory();
+        RoomFactory roomFactory = getRoomFactory();
         JAXBContext context = JAXBContext.newInstance(RoomFactory.class);
         Marshaller mar = context.createMarshaller();
         mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -74,38 +76,29 @@ public class JAXBController {
      * Loads Rooms from most recent savestate and adjusts all rooms that are already in the game according to this information The savestate contains
      * info about hasMonster and hasMerchant, so Monsters and Merchants don't respawn after reload
      */
-    public static RoomFactory loadRooms() throws IOException, JAXBException {
-        RoomFactory roomFactory = CreateWorld.getRoomFactory();
+    public static void loadRooms() throws IOException, JAXBException {
         RoomFactory tmpRoomFactory;
 
         tmpRoomFactory = JAXBController.unmarshallRooms();
 
         for (Room room : tmpRoomFactory.getRooms()) {
-            Room realRoom = roomFactory.getRoomByName(room.getName());
+            Room realRoom = getRoomFactory().getRoomByName(room.getName());
             realRoom.setHasMerchant(room.isHasMerchant());
             realRoom.setHasLivingMonster(room.isHasLivingMonster());
         }
         System.out.println(ANSI_CYAN + "\nRooms succesfully loaded!" + ANSI_RESET);
-        return roomFactory;
     }
 
     /**
      * Loads Player from most recent savestate and prepares a fully compatible Player object
      */
     public static Player loadPlayer() throws JAXBException, IOException {
-        WeaponFactory weaponFactory = CreateWorld.getWeaponFactory();
-        ArmorFactory armorFactory = CreateWorld.getArmorFactory();
-        RoomFactory roomFactory = CreateWorld.getRoomFactory();
-        PotionFactory potionFactory = CreateWorld.getPotionFactory();
-        PlayerController playerController = CreateWorld.getPlayerController();
-        BattleController battleController = CreateWorld.getBattleController();
-
         Player dummy = JAXBController.unmarshallPlayer();
 
         // Extract real Items from "dummys"
-        Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());
-        Armor dummyArmor = armorFactory.getArmorByName(dummy.getArmor().getName());
-        Room dummyRoom = roomFactory.getRoomByName(dummy.getCurrentRoom().getName());
+        Weapon dummyWeapon = getWeaponFactory().getWeaponByName(dummy.getWeapon().getName());
+        Armor dummyArmor = getArmorFactory().getArmorByName(dummy.getArmor().getName());
+        Room dummyRoom = getRoomFactory().getRoomByName(dummy.getCurrentRoom().getName());
 
         Player player = new Player(dummy.getName(), dummy.getMaxHP(), dummyWeapon, dummyArmor, dummyRoom);
         player.setHp(dummy.getHp());
@@ -118,7 +111,7 @@ public class JAXBController {
         int i = 0;
         for (Item item : dummy.getInventory()) {
             if (item instanceof Potion) {
-                Potion dummyPotion = potionFactory.getPotionByName(item.getName());
+                Potion dummyPotion = getPotionFactory().getPotionByName(item.getName());
                 Integer potionValue = dummy.getPlayersPotions().get(dummy.getInventory().get(i));
                 player.getInventory().add(dummyPotion);
                 player.getPlayersPotions().put(dummyPotion, potionValue);
@@ -128,8 +121,8 @@ public class JAXBController {
             i++;
         }
 
-        playerController.setPlayer(player);
-        battleController.setPlayer(player);
+        getPlayerController().setPlayer(player);
+        getBattleController().setPlayer(player);
 
         System.out.print(ANSI_CYAN + "Player succesfully loaded!" + ANSI_RESET);
         return player;

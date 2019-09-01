@@ -1,5 +1,7 @@
 package honkytonky.factories;
 
+import static honkytonky.factories.CreateWorld.*;
+
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import honkytonky.objects.Door;
@@ -16,16 +18,10 @@ public class DoorFactory {
      */
     private List<Door> doors = new ArrayList<>();
     /**
-     * Needed to attach a Door to a specific Room
-     */
-    private final RoomFactory roomFactory;
-
-    /**
      * read all Doors from CSV-File
      *
      */
     public DoorFactory() {
-        this.roomFactory = CreateWorld.getRoomFactory();
         createDoorsFromFile();
     }
 
@@ -60,8 +56,8 @@ public class DoorFactory {
                 doors.add(currDoor = new Door(
                   Integer.parseInt(nextRecord[0]),          // id
                   nextRecord[1],                            // doorName
-                  roomFactory.getRoomByName(nextRecord[2]), // sourceRoom
-                  roomFactory.getRoomByName(nextRecord[3])  // targetroom
+                  getRoomFactory().getRoomByName(nextRecord[2]), // sourceRoom
+                  getRoomFactory().getRoomByName(nextRecord[3])  // targetroom
                 ));
                 currDoor.getSourceRoom().addDoor(getDoorByName(currDoor.getName()));
             }

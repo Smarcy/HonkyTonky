@@ -1,11 +1,12 @@
 package honkytonky.controller;
 
+import static honkytonky.factories.CreateWorld.getBattleController;
+import static honkytonky.factories.CreateWorld.getPlayerController;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_PURPLE;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
-import honkytonky.factories.CreateWorld;
 import honkytonky.misc.ClearScreen;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
@@ -36,9 +37,6 @@ public class MerchantController {
      * @param player the player object
      */
     void printMerchantDialog(Player player) {
-        BattleController battleController = CreateWorld.getBattleController();
-        PlayerController playerController = CreateWorld.getPlayerController();
-
         this.player = player;
         boolean run = true;
 
@@ -67,14 +65,14 @@ public class MerchantController {
                     }
                     break;
                 case 3:
-                    int sellChoice = playerController.listSellableItems();
+                    int sellChoice = getPlayerController().listSellableItems();
                     if (sellChoice != -1) {
                         sellToMerchant(sellChoice);
                         scanner.nextLine();
                     }
                     break;
                 case 4:
-                    battleController.startBattle(merchant);
+                    getBattleController().startBattle(merchant);
                     run = false;
                     break;
                 case 5:
