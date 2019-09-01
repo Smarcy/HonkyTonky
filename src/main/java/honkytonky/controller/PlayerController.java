@@ -3,6 +3,7 @@ package honkytonky.controller;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.CreateWorld;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -33,9 +34,11 @@ public class PlayerController {
     /**
      * Lets the user create a Player Object
      */
-    public Player createPlayer(ArmorFactory armorFactory,
-      WeaponFactory weaponFactory, BattleController battleController,
-      List<Room> rooms) {
+    public Player createPlayer() {
+        ArmorFactory armorFactory = CreateWorld.getArmorFactory();
+        WeaponFactory weaponFactory = CreateWorld.getWeaponFactory();
+        BattleController battleController = CreateWorld.getBattleController();
+        List<Room> rooms = CreateWorld.getRoomFactory().getRooms();
         clearScreen();
 
         System.out.println("Enter your name: ");
@@ -76,7 +79,8 @@ public class PlayerController {
     /**
      * Lets the player move to a requested direction
      */
-    public void move(Scanner scanner, RoomFactory roomFactory) {    // scanner necessary because of Mockito Tests
+    public void move(Scanner scanner) {    // scanner necessary because of Mockito Tests
+        RoomFactory roomFactory = CreateWorld.getRoomFactory();
         clearScreen();
 
         player.getCurrentRoom().listDoorOptions();
@@ -89,7 +93,7 @@ public class PlayerController {
 
             player.setCurrentRoom(targetRoom);
         } catch (IndexOutOfBoundsException e) {
-            move(scanner, roomFactory);
+            move(scanner);
         }
         clearScreen();
     }

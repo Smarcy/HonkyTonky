@@ -8,6 +8,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.Game;
+import honkytonky.factories.CreateWorld;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
@@ -316,11 +317,10 @@ public class BattleController {
     /**
      * check if there is a merchant in the players current room to interact with
      *
-     * @param merchantController instance of MerchantController
      */
-    public void checkRoomForMerchant(MerchantController merchantController, PlayerController playerController) {
+    public void checkRoomForMerchant() {
         if (player.getCurrentRoom().hasMerchant()) {
-            merchantController.printMerchantDialog(player, this, playerController);
+            CreateWorld.getMerchantController().printMerchantDialog(player);
         }
     }
 }

@@ -4,6 +4,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 
 import honkytonky.factories.ArmorFactory;
+import honkytonky.factories.CreateWorld;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.factories.WeaponFactory;
@@ -36,10 +37,9 @@ public class JAXBController {
 
     /**
      * save the current state of all Rooms to XML
-     *
-     * @param roomFactory roomfactory containing all rooms with Merchant/Monster Info
      */
-    public static void RoomsToXML(RoomFactory roomFactory) throws JAXBException {
+    public static void RoomsToXML() throws JAXBException {
+        RoomFactory roomFactory = CreateWorld.getRoomFactory();
         JAXBContext context = JAXBContext.newInstance(RoomFactory.class);
         Marshaller mar = context.createMarshaller();
         mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
@@ -74,7 +74,8 @@ public class JAXBController {
      * Loads Rooms from most recent savestate and adjusts all rooms that are already in the game according to this information The savestate contains
      * info about hasMonster and hasMerchant, so Monsters and Merchants don't respawn after reload
      */
-    public static RoomFactory loadRooms(RoomFactory roomFactory) throws IOException, JAXBException {
+    public static RoomFactory loadRooms() throws IOException, JAXBException {
+        RoomFactory roomFactory = CreateWorld.getRoomFactory();
         RoomFactory tmpRoomFactory;
 
         tmpRoomFactory = JAXBController.unmarshallRooms();
@@ -91,10 +92,15 @@ public class JAXBController {
     /**
      * Loads Player from most recent savestate and prepares a fully compatible Player object
      */
-    public static Player loadPlayer(WeaponFactory weaponFactory, ArmorFactory armorFactory, RoomFactory roomFactory, PotionFactory potionFactory,
-      PlayerController playerController, BattleController battleController) throws JAXBException, IOException {
+    public static Player loadPlayer() throws JAXBException, IOException {
+        WeaponFactory weaponFactory = CreateWorld.getWeaponFactory();
+        ArmorFactory armorFactory = CreateWorld.getArmorFactory();
+        RoomFactory roomFactory = CreateWorld.getRoomFactory();
+        PotionFactory potionFactory = CreateWorld.getPotionFactory();
+        PlayerController playerController = CreateWorld.getPlayerController();
+        BattleController battleController = CreateWorld.getBattleController();
 
-        Player dummy  = JAXBController.unmarshallPlayer();
+        Player dummy = JAXBController.unmarshallPlayer();
 
         // Extract real Items from "dummys"
         Weapon dummyWeapon = weaponFactory.getWeaponByName(dummy.getWeapon().getName());

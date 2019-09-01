@@ -23,10 +23,9 @@ public class DoorFactory {
     /**
      * read all Doors from CSV-File
      *
-     * @param roomFactory roomfactory instance
      */
-    public DoorFactory(RoomFactory roomFactory) {
-        this.roomFactory = roomFactory;
+    public DoorFactory() {
+        this.roomFactory = CreateWorld.getRoomFactory();
         createDoorsFromFile();
     }
 

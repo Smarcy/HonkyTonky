@@ -5,6 +5,7 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.factories.CreateWorld;
 import honkytonky.misc.ClearScreen;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
@@ -33,9 +34,11 @@ public class MerchantController {
      * If the player encounters a merchant, print this dialog
      *
      * @param player the player object
-     * @param battleController instance of BattleController (needed if the player chooses to fight the merchant)
      */
-    void printMerchantDialog(Player player, BattleController battleController, PlayerController playerController) {
+    void printMerchantDialog(Player player) {
+        BattleController battleController = CreateWorld.getBattleController();
+        PlayerController playerController = CreateWorld.getPlayerController();
+
         this.player = player;
         boolean run = true;
 

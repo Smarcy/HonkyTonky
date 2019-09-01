@@ -26,9 +26,9 @@ public class CreateWorld {
     public static void populateWorld() {
         //@formatter:off
         roomFactory            = new RoomFactory();
-        doorFactory            = new DoorFactory(roomFactory);
-        monsterFactory         = new MonsterFactory(roomFactory);
-        merchantFactory        = new MerchantFactory(roomFactory);
+        doorFactory            = new DoorFactory();
+        monsterFactory         = new MonsterFactory();
+        merchantFactory        = new MerchantFactory();
         weaponFactory          = new WeaponFactory();
         armorFactory           = new ArmorFactory();
         potionFactory          = new PotionFactory();

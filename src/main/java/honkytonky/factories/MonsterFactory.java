@@ -24,10 +24,9 @@ public class MonsterFactory {
     /**
      * read all Monsters from CSV-File
      *
-     * @param roomFactory roomfactory instance
      */
-    public MonsterFactory(RoomFactory roomFactory) {
-        this.roomFactory = roomFactory;
+    public MonsterFactory() {
+        this.roomFactory = CreateWorld.getRoomFactory();
         createMonstersFromFile();
     }
 

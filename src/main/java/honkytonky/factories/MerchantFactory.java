@@ -24,10 +24,9 @@ public class MerchantFactory {
     /**
      * read all Merchants from CSV-File
      *
-     * @param roomFactory roomfactory instance
      */
-    public MerchantFactory(RoomFactory roomFactory) {
-        this.roomFactory = roomFactory;
+    public MerchantFactory() {
+        this.roomFactory = CreateWorld.getRoomFactory();
         createMerchantsFromFile();
         addItemsFromFileToMerchant();
     }
