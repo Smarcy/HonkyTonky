@@ -17,12 +17,24 @@ public class WeaponFactory {
      * List that contains every Weapon in the game
      */
     private final List<Weapon> weaponList = new ArrayList<>();
+    /**
+     * Unique Instance of WeaponFactory
+     */
+    private static WeaponFactory instance;
 
-    private static final WeaponFactory instance = new WeaponFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private WeaponFactory() {}
 
-    public static WeaponFactory getInstance() {
+    /**
+     * Only Way to retrieve the unique Instance
+     * @return Instance of WeaponFactory
+     */
+    public static synchronized WeaponFactory getInstance() {
+        if (instance == null) {
+            instance = new WeaponFactory();
+        }
         return instance;
     }
 

@@ -16,12 +16,24 @@ public class PotionFactory {
      * List that contains every Potion in the game
      */
     private List<Potion> potionList = new ArrayList<>();
+    /**
+     * Unique Instance of PotionFactory
+     */
+    private static PotionFactory instance;
 
-    private static final PotionFactory instance = new PotionFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private PotionFactory() {}
 
-    public static PotionFactory getInstance() {
+    /**
+     * Only Way to retrieve the unique Instance
+     * @return Instance of PotionFactory
+     */
+    public static synchronized PotionFactory getInstance() {
+        if(instance == null) {
+            instance = new PotionFactory();
+        }
         return instance;
     }
 

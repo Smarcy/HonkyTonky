@@ -17,12 +17,24 @@ public class ArmorFactory {
      * List that contains every Armor in the game
      */
     private final List<Armor> armors = new ArrayList<>();
+    /**
+     * Unique Instance of ArmorFactory
+     */
+    private static ArmorFactory instance;
 
-    private static final ArmorFactory instance = new ArmorFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private ArmorFactory() {}
 
-    public static ArmorFactory getInstance() {
+    /**
+     * Only Way to retrieve the unique Instance
+     * @return Instance of ArmorFactory
+     */
+    public static synchronized ArmorFactory getInstance() {
+        if (instance == null) {
+            instance = new ArmorFactory();
+        }
         return instance;
     }
 

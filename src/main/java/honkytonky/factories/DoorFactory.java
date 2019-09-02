@@ -18,11 +18,17 @@ public class DoorFactory {
     /**
      * Unique Instance of DoorFactory
      */
-    private static DoorFactory instance = new DoorFactory();
+    private static DoorFactory instance;
 
+    /**
+     * Private Singleton Contructor
+     */
     private DoorFactory() {}
 
-    public static DoorFactory getInstance() {
+    public static synchronized DoorFactory getInstance() {
+        if (instance == null) {
+            instance = new DoorFactory();
+        }
         return instance;
     }
 

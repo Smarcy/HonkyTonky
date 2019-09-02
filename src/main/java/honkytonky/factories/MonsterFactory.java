@@ -16,12 +16,24 @@ public class MonsterFactory {
      * List that contains every Monster in the game
      */
     private List<Monster> monsterList = new ArrayList<>();
+    /**
+     * Unique Instance of MonsterFactory
+     */
+    private static MonsterFactory instance;
 
-    private static MonsterFactory instance = new MonsterFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private MonsterFactory() {}
 
-    public static MonsterFactory getInstance() {
+    /**
+     * Only Way to retrieve the unique Instance
+     * @return Instance of MonsterFactory
+     */
+    public static synchronized MonsterFactory getInstance() {
+        if(instance == null) {
+            instance = new MonsterFactory();
+        }
         return instance;
     }
     /**

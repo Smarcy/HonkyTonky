@@ -24,12 +24,24 @@ public class RoomFactory {
     @XmlElementWrapper(name = "rooms")
     @XmlElement(name = "room")
     private List<Room> rooms = new ArrayList<>();
+    /**
+     * Unique Instance of RoomFactory
+     */
+    private static RoomFactory instance;
 
-    private static final RoomFactory instance = new RoomFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private RoomFactory() {}
 
-    public static RoomFactory getInstance() {
+    /**
+     * Only way to retrieve the unique Instance
+     * @return Instance of RoomFactory
+     */
+    public static synchronized RoomFactory getInstance() {
+        if (instance == null) {
+            instance = new RoomFactory();
+        }
         return instance;
     }
 

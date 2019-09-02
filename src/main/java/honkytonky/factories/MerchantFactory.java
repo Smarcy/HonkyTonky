@@ -16,12 +16,24 @@ public class MerchantFactory {
      * List that contains every Merchant in the game
      */
     private List<Merchant> merchants = new ArrayList<>();
+    /**
+     * Unique Instance of MerchantFactory
+     */
+    private static MerchantFactory instance;
 
-    private static final MerchantFactory instance = new MerchantFactory();
-
+    /**
+     * Private Singleton Contructor
+     */
     private MerchantFactory() {}
 
-    public static MerchantFactory getInstance() {
+    /**
+     * Only Way to retrieve the unique Instance
+     * @return Instance of MerchantFactory
+     */
+    public static synchronized MerchantFactory getInstance() {
+        if(instance == null) {
+            instance = new MerchantFactory();
+        }
         return instance;
     }
     /**
