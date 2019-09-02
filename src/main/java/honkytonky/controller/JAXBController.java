@@ -41,11 +41,10 @@ public class JAXBController {
      * save the current state of all Rooms to XML
      */
     public static void RoomsToXML() throws JAXBException {
-        RoomFactory roomFactory = getRoomFactory();
         JAXBContext context = JAXBContext.newInstance(RoomFactory.class);
         Marshaller mar = context.createMarshaller();
         mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-        mar.marshal(roomFactory, new File("./rooms.xml"));
+        mar.marshal(getRoomFactory(), new File("./rooms.xml"));
     }
 
     /**
