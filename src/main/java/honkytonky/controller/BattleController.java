@@ -145,7 +145,6 @@ public class BattleController {
                       "\nYour " + ANSI_CYAN + player.getWeapon() + ANSI_RESET + " lost " + ANSI_RED + durabilityLoss + ANSI_RESET + " Durability!");
                 }
                 scanner.nextLine();
-                clearScreen();
                 break;
             }
         }

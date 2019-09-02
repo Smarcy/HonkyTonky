@@ -11,11 +11,16 @@ import honkytonky.objects.Merchant;
 import honkytonky.objects.Player;
 import honkytonky.objects.Potion;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
 public class MerchantController {
 
+    /**
+     * Unique instance of MerchantController
+     */
+    private static MerchantController instance;
     /**
      * Scanner for reading Player Inputs
      */
@@ -28,22 +33,20 @@ public class MerchantController {
      * The Merchant the Player encountered
      */
     private Merchant merchant;
-    /**
-     * Unique instance of MerchantController
-     */
-    private static MerchantController instance;
 
     /**
      * Default Constructor - private
      */
-    private MerchantController() {}
+    private MerchantController() {
+    }
 
     /**
      * Only way to get the unique instance of MerchantController
+     *
      * @return instance of MerchantController
      */
     public static MerchantController getInstance() {
-        if(instance == null) {
+        if (instance == null) {
             instance = new MerchantController();
         }
         return instance;
@@ -77,7 +80,7 @@ public class MerchantController {
                     break;
                 case 2:
                     int choice = printItemsForSell(merchant);
-                    if (choice != -1) {
+                    if(choice != -1) {
                         buyFromMerchant(choice);
                         scanner.nextLine();
                     }
@@ -118,15 +121,18 @@ public class MerchantController {
         }
 
         System.out.println(i + ") Don't trade \n");
-        final int choice = Integer.parseInt(scanner.nextLine());
+        try {
+            final int choice = Integer.parseInt(scanner.nextLine());
 
-        // Can't use variable in switch-Statement, therefore a specialcase for choosing item
-        if (choice == i) {   // choose "Dont trade"
+            if (choice < i && choice > 0) {     // choice does match an option
+                return choice;
+            } else if (choice == i) {           // "Don't trade"
+                return -1;
+            } else {
+                printItemsForSell(merchant);
+            }
+        } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
             return -1;
-        } else if (choice < i && choice > 0) {     // choice does match an option
-            return choice;
-        } else {    // choice does not match any option -> print Dialog again
-            this.printItemsForSell(merchant);
         }
         return -1;
     }

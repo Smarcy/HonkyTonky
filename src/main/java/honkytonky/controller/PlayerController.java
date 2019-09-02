@@ -149,15 +149,17 @@ public class PlayerController {
         }
         System.out.println((option + 1) + ") Sell None");
 
-        int choice = Integer.parseInt(scanner.nextLine());
-        if (choice == option + 1) {                        // chose to Sell None
-            return -1;
-        } else if (choice > 0 && choice <= option) {    // choice matches an Item
-            return choice;
-        } else {                                        // no match -> show again
-            listSellableItems();
-        }
-        return choice;
+        try {
+            int choice = Integer.parseInt(scanner.nextLine());
+            if (choice == option + 1) {                        // chose to Sell None
+                return -1;
+            } else if (choice > 0 && choice <= option) {    // choice matches an Item
+                return choice;
+            }
+        } catch(NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
+                return -1;
+            }
+        return -1;
     }
 
     /**
