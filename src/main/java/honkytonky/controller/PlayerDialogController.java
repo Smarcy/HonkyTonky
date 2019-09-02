@@ -1,6 +1,5 @@
 package honkytonky.controller;
 
-import static honkytonky.factories.CreateWorld.getPlayerController;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_CYAN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_GREEN;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
@@ -30,6 +29,19 @@ public class PlayerDialogController {
      * The Player Object
      */
     private Player player;
+    /**
+     * Unique Instance of PlayerDialogController
+     */
+    private static PlayerDialogController instance;
+
+    private PlayerDialogController() {}
+
+    public static PlayerDialogController getInstance() {
+        if(instance == null) {
+            instance = new PlayerDialogController();
+        }
+        return instance;
+    }
 
     /**
      * set the attribute Player to corrrespond to the real object to save a bunch of parameters
@@ -48,7 +60,7 @@ public class PlayerDialogController {
 
         System.out.println("You have got the following Potions:\n");
 
-        Object[] tmpData = getPlayerController().countAndPrintPlayerPotions(true);        // pretty hacky solution, maybe FIXME later ..
+        Object[] tmpData = PlayerController.getInstance().countAndPrintPlayerPotions(true);        // pretty hacky solution, maybe FIXME later ..
         int option = (int) tmpData[0];
         List tmpPotions = (List) tmpData[1];
 
@@ -69,7 +81,7 @@ public class PlayerDialogController {
      * prints all items the player has in his inventory (sorted)
      */
     public void printInventoryDialog() {
-        PlayerController playerController = getPlayerController();
+        PlayerController playerController = PlayerController.getInstance();
         clearScreen();
         System.out.println(ANSI_RED + "Weapons:" + ANSI_RESET);
         playerController.showInventory("weapons");

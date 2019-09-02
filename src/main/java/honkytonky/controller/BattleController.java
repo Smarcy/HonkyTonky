@@ -8,7 +8,6 @@ import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
 import honkytonky.Game;
-import honkytonky.factories.CreateWorld;
 import honkytonky.objects.Actor;
 import honkytonky.objects.Item;
 import honkytonky.objects.Merchant;
@@ -50,6 +49,26 @@ public class BattleController {
      * true is the Player managed to flee from a fight
      */
     private boolean playerFled = false;
+    /**
+     * Unique Instance of BattleController
+     */
+    private static BattleController instance;
+
+    /**
+     * Default Contructor - private
+     */
+    private BattleController() {}
+
+    /**
+     * Only way to get the unique Instance of BattleController
+     * @return instance of BattleController
+     */
+    public static BattleController getInstance() {
+        if(instance == null) {
+            instance = new BattleController();
+        }
+        return instance;
+    }
 
     /**
      * set the player for this instance of BattleController
@@ -320,7 +339,7 @@ public class BattleController {
      */
     public void checkRoomForMerchant() {
         if (player.getCurrentRoom().hasMerchant()) {
-            CreateWorld.getMerchantController().printMerchantDialog(player);
+            MerchantController.getInstance().printMerchantDialog(player);
         }
     }
 }

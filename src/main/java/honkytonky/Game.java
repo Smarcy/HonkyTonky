@@ -1,19 +1,17 @@
 package honkytonky;
 
-import static honkytonky.factories.CreateWorld.getBattleController;
-import static honkytonky.factories.CreateWorld.getPlayerController;
-import static honkytonky.factories.CreateWorld.getPlayerDialogController;
-import static honkytonky.factories.CreateWorld.getPotionFactory;
-import static honkytonky.factories.CreateWorld.getRoomFactory;
 import static honkytonky.factories.CreateWorld.populateWorld;
-import static honkytonky.factories.CreateWorld.setRoomFactory;
 import static honkytonky.factories.CreateWorld.wipeWorld;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RED;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.controller.BattleController;
 import honkytonky.controller.JAXBController;
+import honkytonky.controller.PlayerController;
+import honkytonky.controller.PlayerDialogController;
+import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
 import honkytonky.misc.Cheats;
 import honkytonky.misc.ExpTable;
@@ -76,12 +74,11 @@ public class Game {
                         }
                         break;
                     case 2:
-                        player = getPlayerController()
-                          .createPlayer();
+                        player = PlayerController.getInstance().createPlayer();
 
-                        player.getInventory().add(getPotionFactory().getPotionByName("Small Health Potion")); // give Player startPotion
-                        player.getPlayersPotions().put(getPotionFactory().getPotionByName("Small Health Potion"), 1);
-                        player.setCurrentRoom(getRoomFactory().getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
+                        player.getInventory().add(PotionFactory.getInstance().getPotionByName("Small Health Potion")); // give Player startPotion
+                        player.getPlayersPotions().put(PotionFactory.getInstance().getPotionByName("Small Health Potion"), 1);
+                        player.setCurrentRoom(RoomFactory.getInstance().getRoomByName("Town Square"));        // !!!DELETEME - TESTING PURPOSES!!!
                         break;
                     case 3:
                         boolean playerSuccess = false;
@@ -120,10 +117,10 @@ public class Game {
      */
     private void gameLoop() {
 
-        getPlayerDialogController().setPlayer(player);
+        PlayerDialogController.getInstance().setPlayer(player);
 
         while (true) {
-            getPlayerDialogController().printCurrentLocation();
+            PlayerDialogController.getInstance().printCurrentLocation();
 
             System.out.println("\nChoose an option:\n");
             System.out.println("1) Move");
@@ -144,29 +141,28 @@ public class Game {
 
                 switch (option) {
                     case 1:
-                        getPlayerController().move(scanner);
-                        getBattleController().checkRoomForMonster();
+                        PlayerController.getInstance().move(scanner);
+                        BattleController.getInstance().checkRoomForMonster();
                         // battleController.checkRoomForMerchant(merchantController);    // if activated - show merchant directly when entering room
                         break;
                     case 2:
-                        getPlayerDialogController().printUsePotionDialog();
+                        PlayerDialogController.getInstance().printUsePotionDialog();
                         break;
                     case 3:
-                        getPlayerDialogController().printCharacterInfo();
+                        PlayerDialogController.getInstance().printCharacterInfo();
                         break;
                     case 4:
-                        getPlayerDialogController().printInventoryDialog();
+                        PlayerDialogController.getInstance().printInventoryDialog();
                         break;
                     case 5:
                         JAXBController.PlayerToXML(player);
                         JAXBController.RoomsToXML();
                         System.exit(0);
                     case 6:
-                        getBattleController().checkRoomForMerchant();
+                        BattleController.getInstance().checkRoomForMerchant();
                         break;
                     case 0:
                         wipeWorld();
-                        setRoomFactory(new RoomFactory());        // Rooms gotta be present to read all other files!
                         populateWorld();
                         break;
                     case 1337:

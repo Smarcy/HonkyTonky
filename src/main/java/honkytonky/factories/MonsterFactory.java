@@ -1,7 +1,5 @@
 package honkytonky.factories;
 
-import static honkytonky.factories.CreateWorld.*;
-
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import honkytonky.enumtypes.MonsterType;
@@ -18,11 +16,19 @@ public class MonsterFactory {
      * List that contains every Monster in the game
      */
     private List<Monster> monsterList = new ArrayList<>();
+
+    private static MonsterFactory instance = new MonsterFactory();
+
+    private MonsterFactory() {}
+
+    public static MonsterFactory getInstance() {
+        return instance;
+    }
     /**
      * read all Monsters from CSV-File
      *
      */
-    public MonsterFactory() {
+    public void createMonsters() {
         createMonstersFromFile();
     }
 
@@ -63,7 +69,7 @@ public class MonsterFactory {
                   Integer.parseInt(nextRecord[5]),      // goldDropped
                   MonsterType.valueOf(nextRecord[6])    // MonsterType
                 ));
-                getRoomFactory().getRoomByName(nextRecord[7]).addMonster(currMonster);
+                RoomFactory.getInstance().getRoomByName(nextRecord[7]).addMonster(currMonster);
             }
         } catch (Exception IOException) {
             System.err.println("Fehler beim Lesen der Datei monsters!");

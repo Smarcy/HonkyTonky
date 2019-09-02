@@ -16,11 +16,19 @@ public class MerchantFactory {
      * List that contains every Merchant in the game
      */
     private List<Merchant> merchants = new ArrayList<>();
+
+    private static final MerchantFactory instance = new MerchantFactory();
+
+    private MerchantFactory() {}
+
+    public static MerchantFactory getInstance() {
+        return instance;
+    }
     /**
      * read all Merchants from CSV-File
      *
      */
-    public MerchantFactory() {
+    public void createMerchants() {
         createMerchantsFromFile();
         addItemsFromFileToMerchant();
     }
@@ -62,7 +70,7 @@ public class MerchantFactory {
                   Integer.parseInt(nextRecord[5]),   // grantedGold
                   nextRecord[7]                     // smalltalk
                 ));
-                CreateWorld.getRoomFactory().getRoomByName(nextRecord[6]).addMerchant(currMerchant);
+                RoomFactory.getInstance().getRoomByName(nextRecord[6]).addMerchant(currMerchant);
             }
         } catch (IOException | IllegalArgumentException e) {
             throw new IllegalArgumentException("Fehler beim Lesen der Datei merchants!");
@@ -86,13 +94,13 @@ public class MerchantFactory {
 
                 switch (nextRecord[2]) {
                     case "Potion":
-                        currMerchant.addItemToShop(new PotionFactory().getPotionByName(itemToGive));
+                        currMerchant.addItemToShop(PotionFactory.getInstance().getPotionByName(itemToGive));
                         break;
                     case "Weapon":
-                        currMerchant.addItemToShop(new WeaponFactory().getWeaponByName(itemToGive));
+                        currMerchant.addItemToShop(WeaponFactory.getInstance().getWeaponByName(itemToGive));
                         break;
                     case "Armor":
-                        currMerchant.addItemToShop(new ArmorFactory().getArmorByName(itemToGive));
+                        currMerchant.addItemToShop(ArmorFactory.getInstance().getArmorByName(itemToGive));
                         break;
                 }
             }

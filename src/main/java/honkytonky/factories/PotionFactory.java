@@ -17,10 +17,18 @@ public class PotionFactory {
      */
     private List<Potion> potionList = new ArrayList<>();
 
+    private static final PotionFactory instance = new PotionFactory();
+
+    private PotionFactory() {}
+
+    public static PotionFactory getInstance() {
+        return instance;
+    }
+
     /**
      * read all Potions from CSV-File
      */
-    public PotionFactory() {
+    public void createPotions() {
         createPotionsFromFile();
     }
 

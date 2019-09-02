@@ -18,10 +18,18 @@ public class WeaponFactory {
      */
     private final List<Weapon> weaponList = new ArrayList<>();
 
+    private static final WeaponFactory instance = new WeaponFactory();
+
+    private WeaponFactory() {}
+
+    public static WeaponFactory getInstance() {
+        return instance;
+    }
+
     /**
      * read all weapons from CSV-File
      */
-    public WeaponFactory() {
+    public void createWeapons() {
         createWeaponsFromFile();
     }
 

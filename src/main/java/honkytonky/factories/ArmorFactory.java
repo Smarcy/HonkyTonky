@@ -18,10 +18,18 @@ public class ArmorFactory {
      */
     private final List<Armor> armors = new ArrayList<>();
 
+    private static final ArmorFactory instance = new ArmorFactory();
+
+    private ArmorFactory() {}
+
+    public static ArmorFactory getInstance() {
+        return instance;
+    }
+
     /**
      * read all Armors from CSV-File
      */
-    public ArmorFactory() {
+    public void createArmors() {
         createArmorsFromFile();
     }
 

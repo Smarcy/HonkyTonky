@@ -25,10 +25,18 @@ public class RoomFactory {
     @XmlElement(name = "room")
     private List<Room> rooms = new ArrayList<>();
 
+    private static final RoomFactory instance = new RoomFactory();
+
+    private RoomFactory() {}
+
+    public static RoomFactory getInstance() {
+        return instance;
+    }
+
     /**
      * read all Rooms from CSV-File
      */
-    public RoomFactory() {
+    public void createRooms() {
         createRoomsFromFile();
     }
 

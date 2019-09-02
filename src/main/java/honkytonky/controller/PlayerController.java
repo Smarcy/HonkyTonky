@@ -1,13 +1,11 @@
 package honkytonky.controller;
 
-import static honkytonky.factories.CreateWorld.getArmorFactory;
-import static honkytonky.factories.CreateWorld.getBattleController;
-import static honkytonky.factories.CreateWorld.getRoomFactory;
-import static honkytonky.factories.CreateWorld.getWeaponFactory;
 import static honkytonky.misc.ClearScreen.clearScreen;
 
+import honkytonky.factories.ArmorFactory;
 import honkytonky.factories.PotionFactory;
 import honkytonky.factories.RoomFactory;
+import honkytonky.factories.WeaponFactory;
 import honkytonky.objects.Armor;
 import honkytonky.objects.Door;
 import honkytonky.objects.Item;
@@ -31,6 +29,17 @@ public class PlayerController {
      * The Player Object
      */
     private Player player;
+
+    private static PlayerController instance;
+
+    private PlayerController() {}
+
+    public static PlayerController getInstance() {
+        if(instance == null) {
+            instance = new PlayerController();
+        }
+        return instance;
+    }
 
     /**
      * Lets the user create a Player Object
@@ -57,12 +66,12 @@ public class PlayerController {
             try {
                 int weapon = Integer.parseInt(scanner.nextLine());
 
-                Weapon startWeapon = getWeaponFactory().getWeaponList().get(weapon - 1);
+                Weapon startWeapon = WeaponFactory.getInstance().getWeaponList().get(weapon - 1);
 
                 if (weapon <= 4) {
                     player = new Player(name, 20, startWeapon,
-                      getArmorFactory().getArmorByName("Leather Armor"), getRoomFactory().getRooms().get(0));
-                    getBattleController().setPlayer(player);
+                      ArmorFactory.getInstance().getArmorByName("Leather Armor"), RoomFactory.getInstance().getRooms().get(0));
+                    BattleController.getInstance().setPlayer(player);
                     return player;
                 }
             } catch (NumberFormatException | InputMismatchException | IndexOutOfBoundsException e) {
@@ -77,7 +86,6 @@ public class PlayerController {
      * Lets the player move to a requested direction
      */
     public void move(Scanner scanner) {    // scanner necessary because of Mockito Tests
-        RoomFactory roomFactory = getRoomFactory();
         clearScreen();
 
         player.getCurrentRoom().listDoorOptions();
@@ -86,7 +94,7 @@ public class PlayerController {
             int option = Integer.parseInt(scanner.nextLine());
 
             Door targetDoor = player.getCurrentRoom().getDoors().get(option - 1);
-            Room targetRoom = roomFactory.getRoomByName(targetDoor.getTargetRoom().getName());
+            Room targetRoom =RoomFactory.getInstance().getRoomByName(targetDoor.getTargetRoom().getName());
 
             player.setCurrentRoom(targetRoom);
         } catch (IndexOutOfBoundsException e) {
@@ -172,7 +180,7 @@ public class PlayerController {
                 } else {
                     System.out.println(potion.getName() + " (" + playersPotions.get(potion) + "x)");                 // without option numbers
                 }
-                tmpPotions.add(new PotionFactory().getPotionByName(potion.getName()));
+                tmpPotions.add(PotionFactory.getInstance().getPotionByName(potion.getName()));
             }
         }
         return new Object[]{option, tmpPotions};

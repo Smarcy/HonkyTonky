@@ -1,7 +1,5 @@
 package honkytonky.controller;
 
-import static honkytonky.factories.CreateWorld.getBattleController;
-import static honkytonky.factories.CreateWorld.getPlayerController;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_PURPLE;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_RESET;
 import static honkytonky.misc.ANSI_Color_Codes.ANSI_YELLOW;
@@ -30,6 +28,26 @@ public class MerchantController {
      * The Merchant the Player encountered
      */
     private Merchant merchant;
+    /**
+     * Unique instance of MerchantController
+     */
+    private static MerchantController instance;
+
+    /**
+     * Default Constructor - private
+     */
+    private MerchantController() {}
+
+    /**
+     * Only way to get the unique instance of MerchantController
+     * @return instance of MerchantController
+     */
+    public static MerchantController getInstance() {
+        if(instance == null) {
+            instance = new MerchantController();
+        }
+        return instance;
+    }
 
     /**
      * If the player encounters a merchant, print this dialog
@@ -65,14 +83,14 @@ public class MerchantController {
                     }
                     break;
                 case 3:
-                    int sellChoice = getPlayerController().listSellableItems();
+                    int sellChoice = PlayerController.getInstance().listSellableItems();
                     if (sellChoice != -1) {
                         sellToMerchant(sellChoice);
                         scanner.nextLine();
                     }
                     break;
                 case 4:
-                    getBattleController().startBattle(merchant);
+                    BattleController.getInstance().startBattle(merchant);
                     run = false;
                     break;
                 case 5:
